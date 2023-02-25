@@ -29,7 +29,7 @@ for a in $(
 )
 do
     ffmpeg -hide_banner -i $a -map_metadata -1 \
-        $a -c:a libmp3lame -ac 2 -b:a 192k $(
+        -c:a libmp3lame -ac 2 -b:a 192k $(
             echo $a | sed 's/aac/mp3/'
         )
 done
