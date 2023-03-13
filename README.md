@@ -1,7 +1,8 @@
 # Notes And Info
 
-This is my own notebook of information and procedures but formatted like a blog
-in the hope that it's of interest to others too.
+This is my own notebook of information and procedures
+but formatted like a blog in the hope that it's of
+interest to others too.
 
 ## Microcontroller Programming
 
@@ -21,3 +22,6 @@ in the hope that it's of interest to others too.
 
 * [FFMPEG Recipes](ffmpeg-recipes.md)
 
+## Code Aesthetics
+
+* [Why Indenting With Tabs is "Wrong"](tab-indent.md)
