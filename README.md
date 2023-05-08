@@ -18,10 +18,11 @@ interest to others too.
 
 * [Running GUI Apps as a non root user](docker-gui-non-root.md)
 
-## Multimedia
-
-* [FFMPEG Recipes](ffmpeg-recipes.md)
-
 ## Code Aesthetics
 
 * [Why Indenting With Tabs is "Wrong"](tab-indent.md)
+
+## Shell Miscellany
+
+* [FFMPEG Recipes](ffmpeg-recipes.md)
+* [optimal dd disk erasure](optimal-dd.md)
