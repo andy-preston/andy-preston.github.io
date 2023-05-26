@@ -25,20 +25,20 @@
                 margin-right: 2em;
                 display: block;
             }
-            
+
             a:link, a:visited {
                 color: #8f8;
             }
             a:focus, a:hover, a:active {
                 color: #fff;
-            } 
+            }
             .text-block {
                 margin-top: 3lh;
             }
             #introduction {
-                display: flex;￼
-￼               justify-content: space-between;
-￼               align-items: flex-start;
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
             }
             #short-article > div {
                 column-gap: 10em;
@@ -62,25 +62,26 @@
         </style>
         <script>
             "use strict";
-            
-            const randomElement = (list) => 
+
+            const randomElement = (list) =>
                 list[Math.floor(Math.random() * list.length)];
-            
+
             addEventListener("load", (event) => {
                 document.getElementById("intro-pic").src = randomElement([
                     "https://i.imgur.com/vZm1doT.jpg",
                     "https://i.imgur.com/yTkyo8Z.jpg",
                     "https://i.imgur.com/iPLBmtB.jpg"
                 ]);
-            });    
+            });
         </script>
     </head>
     <body>
         <div id="introduction">
             <img id="intro-pic">
             <div>
-                <h1>Andy Preston</h1>
-                <p>Computer programmer &amp; barely competent electronics einginier.</p>
+                <h1>Andy Preston (Edge Effect)</h1>
+                <p>Computer programmer &amp; barely competent electronics engineer.</p>
+                <p>Swindon, UK</p>
                 <div class="text-block">
                     <p><a href="https://github.com/andy-preston/">github.com/andy-preston</a></p>
                     <p><a href="https://www.youtube.com/@edgeeffect">youtube.com/@edgeeffect</a></p>
@@ -116,7 +117,7 @@
                     years ago when I had that impostor syndrome because my Waterfall
                     was crap...
                </p>
-               <p> 
+               <p>
                    Turns out, it's actually Waterfall itself that was being the
                    impostor.
                </p>
