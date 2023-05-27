@@ -2,81 +2,14 @@
 <html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <title>Andy Preston</title>
-        <style>
-            body {
-                margin-top: 2lh;
-      	        margin-left: 10%;
-      	        margin-right: 10%;
-      	        font-family: sans-serif;
-      	        background-color: #000;
-      	        color: #8f8;
-            }
-            h1, p {
-                margin-top: 0;
-            }
-            p {
-                margin-bottom: 1lh;
-            }
-            #intro-pic {
-                object-fit: scale-down;
-                max-width: 40em;
-                width: 609px;
-                margin-right: 2em;
-                display: block;
-                margin-bottom: 2lh;
-                margin-right: 10em;
-            }
-            a:link, a:visited {
-                color: #8f8;
-            }
-            a:focus, a:hover, a:active {
-                color: #fff;
-            }
-            .text-block {
-                margin-top: 2lh;
-            }
-            #introduction {
-                display: flex;
-                align-items: flex-start;
-            }
-            #short-article > div {
-                column-gap: 10em;
-                column-count: 4;
-            }
-            @media (max-width: 120em) {
-                #short-article > div {
-                    column-count: 3;
-                }
-            }
-            @media (max-width: 75em) {
-                #short-article > div {
-                    column-count: 2;
-                }
-            }
-            @media (max-width: 45em) {
-                #short-article > div {
-                    column-count: 1;
-                }
-            }
-        </style>
-        <script>
-            "use strict";
-
-            const randomElement = (list) =>
-                list[Math.floor(Math.random() * list.length)];
-
-            addEventListener("load", (event) => {
-                document.getElementById("intro-pic").src = randomElement([
-                    "https://i.imgur.com/vZm1doT.jpg",
-                    "https://i.imgur.com/yTkyo8Z.jpg",
-                    "https://i.imgur.com/iPLBmtB.jpg"
-                ]);
-            });
-        </script>
+        <title>Andy Preston (Edge Effect)</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="main.css">
+        <link rel="stylesheet" href="index.css">
+        <script src="index.js"></script>
     </head>
     <body>
-        <div id="introduction">
+        <div id="introductions-articles">
             <div>
                 <img id="intro-pic">
                 <h1>
@@ -100,7 +33,7 @@
                     </p>
                 </div>
             </div>
-            <div>
+            <div id="articles">
                 <h2>
                     Microcontroller Programming
                 </h2>
@@ -112,10 +45,10 @@
                     PHP
                 </h2>
                 <p>
-                    <a href="accessing-doctrine-models-as-arrays.md">Accessing Doctrine Models as Arrays</a>
+                    <a href="accessing-doctrine-models-as-arrays.html">Accessing Doctrine Models as Arrays</a>
                 </p>
                 <p>
-                    <a href="exceptions-for-php-errors.md">Exceptions for all PHP Errors</a>
+                    <a href="exceptions-for-php-errors.html">Exceptions for all PHP Errors</a>
                 </p>
                 <p>
                     <a href="null-transport.md">Debugging and Testing with Symfony's Mailer Component</a>
@@ -136,7 +69,7 @@
                     Docker
                 </h2>
                 <p>
-                    <a href="docker-gui-non-root.md">Running GUI Apps as a non root user</a>
+                    <a href="docker-gui-non-root.html">Running GUI Apps as a non root user</a>
                 </p>
                 <h2>
                     Code Aesthetics

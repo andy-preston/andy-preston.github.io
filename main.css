@@ -1,0 +1,28 @@
+body {
+    margin-top: 2lh;
+    margin-left: 10%;
+    margin-right: 10%;
+    font-family: sans-serif;
+    background-color: #000;
+    color: #8f8;
+}
+
+h1, p {
+    margin-top: 0;
+}
+
+p {
+    margin-bottom: 1lh;
+}
+
+a:link, a:visited {
+    color: #5ee;
+}
+
+a:focus, a:hover, a:active {
+    color: #fff;
+}
+
+.text-block {
+    margin-top: 2lh;
+}

@@ -1,0 +1,91 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Andy Preston - Running GUI Apps in Docker as a non root user</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="main.css">
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/xt256.min.css"
+    integrity="sha512-fhvZU0PRhieZyHjHD1sG4Zvo5EJjsnx90draikv9gBEFre1UXo4Neg3nT4xZ71TEdOLXif1C5llTy0Ughy+xSQ=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+>
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"
+    integrity="sha512-rdhY3cbXURo13l/WU9VlaRyaIYeJ/KBakckXIvJNAQde8DgpOmE+eZf7ha4vdqVjTtwQt69bD2wH2LXob/LB7Q=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+></script>
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/bash.min.js"
+    integrity="sha512-10MAbvV683nchyNnutInZDUUmwsAF8IpMc8V+qUNPv9wb26Bv9inyKzAdMfmbFdSIgxxjQhBsZq6sEP+UgsqWg=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+></script>
+<script>hljs.highlightAll();</script>
+</head><body>
+
+<h1>Running GUI Apps in Docker as a non root user</h1>
+
+<p>I Wanted to run The NSA's brilliant
+<a href="https://ghidra-sre.org/">Ghidra</a> without &quot;polluting&quot; my
+system with a Java runtime.</p>
+
+<p>There's a nice Docker image to do just that at
+<a href="https://github.com/blacktop/docker-ghidra">blacktop/docker-ghidra</a>
+but their docs seem to be a bit Mac. focussed and I had to jump through a few
+extra hoops to get things working on Linux.</p>
+
+<p>My script runs something like this:</p>
+
+<pre><code class="language-bash">
+#!/bin/bash
+
+xhost +
+
+HOME_DIR=/home/$(id --user --name)/Documents/ghidra
+
+mkdir -p ${HOME_DIR}
+
+docker run --init --interactive --tty --rm --name ghidra \
+    --user $(id --user):$(id --group) \
+    --volume ${HOME_DIR}:/home/$(id --user --name) \
+    --volume="/etc/group:/etc/group:ro" \
+    --volume="/etc/passwd:/etc/passwd:ro" \
+    --volume="/etc/shadow:/etc/shadow:ro" \
+    --env DISPLAY=:0.0 \
+    --net=host \
+    blacktop/ghidra
+</code></pre>
+
+<p>First, I used <code>xhost +</code> to allow X11 connections from anywhere.
+This command isn't very selective and may even be unnecessary. Some more
+experimentation is required.</p>
+
+<p>Then I created a directory to be shared between the container and the host
+and made sure it really was created. If left to the docker run command to
+create it, it'll be owned by root and part of the point of all of this is to
+not have files owned by root in my home directory.</p>
+
+<p>Then we run blacktop's container, passing in my UID and GID to ensure I'm
+the owner of any files we create in the shared directory.</p>
+
+<p>Sometimes when I've used <code>--user</code> the programs in the container
+don't care that this UID has no name within the container. But in the case of
+Ghidra and/or Java, it did. So I pass in the host system's password and group
+files as read only volumes. They will overwrite the files already in the
+container's file system and in some cases may cause problems with users that
+should exist in the container vanishing. But it worked for me this time
+round.</p>
+
+<p><code>--env DISPLAY=:0.0</code> was required to start Ghidra &amp;/or Java.
+This was kinda odd as if it's not present Ghidra &amp;/or Java complains that
+it can't write to display <code>:0.0</code>... and if you say don't use the
+default (<code>:0.0</code>) use <code>:0.0</code> instead... everything works.
+My head is still spinning on that one.</p>
+
+<p>We also need <code>--net=host</code> so that Java will access the X11
+display using it's host network address rather than Docker's virtual network.
+(better explanation to follow).</p>
+
+</body></html>

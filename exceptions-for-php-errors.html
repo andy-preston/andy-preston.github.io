@@ -1,0 +1,64 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Andy Preston - Exceptions for all PHP Errors</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="main.css">
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/xt256.min.css"
+    integrity="sha512-fhvZU0PRhieZyHjHD1sG4Zvo5EJjsnx90draikv9gBEFre1UXo4Neg3nT4xZ71TEdOLXif1C5llTy0Ughy+xSQ=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+>
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"
+    integrity="sha512-rdhY3cbXURo13l/WU9VlaRyaIYeJ/KBakckXIvJNAQde8DgpOmE+eZf7ha4vdqVjTtwQt69bD2wH2LXob/LB7Q=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+></script>
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/php.min.js"
+    integrity="sha512-LXJ0dCEH9OzHP1yk2uLXzeouoZHyATDxGyrW62VHcwD3B1JptYd4LvjDPOJxawmqUbRSXrf+tmitQLFq3flRUg=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+></script>
+<script>hljs.highlightAll();</script>
+</head><body>
+
+<h1>Exceptions for all PHP Errors</h1>
+
+<p>PHP has many issues with backward compatibility. It traces it's lineage back
+to a simple templating engine and over the years has gained many features
+to try and turn it into a multi-paradigm programming language. All this whilst
+trying to maintain full backward compatibility.</p>
+
+<p>Something has got to break.</p>
+
+<p>One element of this backward compatibility is that some errors don't throw
+handleable exceptions instead they rely on an older mechanism that takes me
+back to my days of programming in BASIC
+(that's a long, long, long, long time ago).</p>
+
+<p>And even if we wrap all this up in a nice "&quot;modern&quot; lambda
+function, it's still hard to deal with the errors:</p>
+
+<pre><code class="language-php">
+set_error_handler(function($severity, $message, $file, $line) {
+    if (!(error_reporting() & $severity)) {
+        echo "Setting a flag to ignore errors in any language in";
+        echo " any environment is repugnant! Don't do it!\n";
+        return;
+    }
+    // Try to handle the error here and recover with dignity!
+});
+</code></pre>
+
+<p>But this error handling mechanism does give us a simple way to generate
+exceptions that can be handled with <code>catch</code>.</p>
+
+<pre><code class="language-php">
+set_error_handler(function($severity, $message, $file, $line) {
+    throw new ErrorException($message, 0, $severity, $file, $line);
+});
+</code></pre>
+</body></html>
