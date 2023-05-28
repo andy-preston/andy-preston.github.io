@@ -3,6 +3,7 @@
 <title>Andy Preston - Accessing Doctrine Models as Arrays</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="main.css">
+<link rel="stylesheet" href="article.css">
 <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/xt256.min.css"
@@ -27,6 +28,7 @@
 
 <h1>Accessing Doctrine Models as Arrays</h1>
 
+<div class="main-text">
 <p>A few years ago, I was working on a Symfony project that contained some
 fairly torturous business logic and, as this logic was required in various
 parts of the application, we kept it in some helper classes that could be used
@@ -42,7 +44,7 @@ tolerable. The answer is to hydrate data for big reports as arrays.</p>
 <p>But what if those reports require the use of the business logic helpers?
 Helpers that are full of constructs like:</p>
 
-<pre><code class="language-php">$order->getLines()[5]->getPrice()</code></pre>
+<pre><code class="language-php">$order-&gt;getLines()[5]-&gt;getPrice()</code></pre>
 
 <p>After much wailing and gnashing of teeth and wishing PHP couldn't be more
 like some of my preferred languages and let you access objects as though they
@@ -52,8 +54,7 @@ came to my rescue.</p>
 
 <p>Each of out Doctrine models could inherit from this base class:</p>
 
-<pre><code class="language-php">
-abstract class objectOrArray implements \ArrayAccess {
+<pre><code class="language-php">abstract class objectOrArray implements \ArrayAccess {
     private static function getter(string $offset) {
         return 'get' . ucfirst($offset);
     }
@@ -74,23 +75,21 @@ abstract class objectOrArray implements \ArrayAccess {
 
     public function offsetGet($offset) {
         $getter = self::getter($offset);
-        return method_exists($this, $getter) ? $this->$getter() : null;
+        return method_exists($this, $getter) ? $this-&gt;$getter() : null;
     }
-}
-</code></pre>
+}</code></pre>
 
 <p>And our actual objects didn't need to change any more than that</p>
 
-<pre><code class="language-php">
-class orderLine extends objectOrArray {
+<pre><code class="language-php">class orderLine extends objectOrArray {
     private $price;
 
     public function getPrice() : int {
-        return $this->price;
+        return $this-&gt;price;
     }
 
     public function setPrice(int $price) : self {
-        $this->price = $price;
+        $this-&gt;price = $price;
         return $this;
     }
 }
@@ -101,24 +100,23 @@ class order extends objectOrArray {
     private $customer;
 
     public function getLines() : array {
-        return $this->lines;
+        return $this-&gt;lines;
     }
 
     public function setLines(array $lines) : self  {
-        $this->lines = $lines;
+        $this-&gt;lines = $lines;
         return $this;
     }
 
     public function getCustomer() : int {
-        return $this->customer;
+        return $this-&gt;customer;
     }
 
     public function setCustomer(int $customer) : self {
-        $this->customer = $customer;
+        $this-&gt;customer = $customer;
         return $this;
     }
-}
-</code></pre>
+}</code></pre>
 
 <p>Then it was simply a matter of reimplementing this business logic (as per
 the example above) to use:</p>
@@ -129,4 +127,4 @@ the example above) to use:</p>
 code <strong>and</strong> it'd also allow us to fetch partial results from the
 database and hydrate as arrays for those long and tortuous reports.</p>
 
-</body></html>
+</div></body></html>

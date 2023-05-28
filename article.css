@@ -1,0 +1,26 @@
+pre code {
+    border-width: 1px;
+    border-style: solid;
+    border-color: #8f8;
+    width: fit-content;
+    /* Copied from highlight.js to make my non highlighted blocks compatible */
+    display: block;
+    overflow-x: auto;
+    padding: 1em;
+}
+
+code:not([class]) {
+    color: #fff;
+}
+
+.main-text {
+    column-gap: 10em;
+    column-count: 2;
+}
+
+@media (max-width: 75em) {
+    .main-text {
+        column-count: 1;
+        column-gap: 0;
+    }
+}

@@ -3,6 +3,7 @@
 <title>Andy Preston - Running GUI Apps in Docker as a non root user</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="main.css">
+<link rel="stylesheet" href="article.css">
 <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/xt256.min.css"
@@ -27,6 +28,7 @@
 
 <h1>Running GUI Apps in Docker as a non root user</h1>
 
+<div class="main-text">
 <p>I Wanted to run The NSA's brilliant
 <a href="https://ghidra-sre.org/">Ghidra</a> without &quot;polluting&quot; my
 system with a Java runtime.</p>
@@ -38,8 +40,7 @@ extra hoops to get things working on Linux.</p>
 
 <p>My script runs something like this:</p>
 
-<pre><code class="language-bash">
-#!/bin/bash
+<pre><code class="language-bash">#!/bin/bash
 
 xhost +
 
@@ -55,8 +56,7 @@ docker run --init --interactive --tty --rm --name ghidra \
     --volume="/etc/shadow:/etc/shadow:ro" \
     --env DISPLAY=:0.0 \
     --net=host \
-    blacktop/ghidra
-</code></pre>
+    blacktop/ghidra</code></pre>
 
 <p>First, I used <code>xhost +</code> to allow X11 connections from anywhere.
 This command isn't very selective and may even be unnecessary. Some more
@@ -88,4 +88,4 @@ My head is still spinning on that one.</p>
 display using it's host network address rather than Docker's virtual network.
 (better explanation to follow).</p>
 
-</body></html>
+</div></body></html>
