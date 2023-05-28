@@ -4,19 +4,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="main.css">
 <link rel="stylesheet" href="article.css">
-</head><body>
+</head><body><div class="article">
 
 <h1>Why Indenting With Tab is &quot;Wrong&quot;</h1>
-
-<div class="main-text">
 
 <p>I've tried numerous indenting schemes over the years.</p>
 
 <h2>In olden times</h2>
 
-<p>In olden times, TAB seemed like a good idea because it was only one keystroke.
-But all of our code editors, these days, allow you to to press TAB and have the
-editor convert that into whatever number of spaces are required.</p>
+<p>In olden times, TAB seemed like a good idea because it was only one
+keystroke. But all of our code editors, these days, allow you to to press TAB
+and have the editor convert that into whatever number of spaces are
+required.</p>
 
 <h2>&quot;TWO spaces, are you insane?&quot; - Yes, quite probably.</h2>
 
@@ -27,22 +26,27 @@ But that was long ago and since that time I've become a
 
 <h2>More madness from my youth</h2>
 
-<p>In BASIC (now that's going back) I even did 4 spaces after a
+<p>In BASIC (now that IS going back) I even did 4 spaces after a
 <code>DEF</code> or a <code>FOR</code>, 7 spaces after a <code>REPEAT</code>,
 6 after a <code>WHILE</code>... it made sense (at least to me) at the time.</p>
 
 <pre><code>40 DEF PROCplot(x, y)
-50     PLOT 85, x, y
-60 ENDPROC</code></pre>
+50     GCOL 3, RND(7)
+60     PLOT 85, x, y
+70 ENDPROC</code></pre>
 
-<pre><code>70 REPEAT x = x + 1
-80        y = y - 1
+<pre><code>60 REPEAT x = x + 1
+70        y = y - 1
+80        d = x + y
 90 UNTIL x &gt; 23</code></pre>
 
 <h2>Coding standards</h2>
 
-<p>But now we have coding standards and PSR-12 says 4 spaces, PEP-8 says 4
-spaces, the Rust style guide says 4 spaces.</p>
+<p>But now we have coding standards and
+<a href="https://www.php-fig.org/psr/psr-12/">PSR-12</a> says 4 spaces,
+<a href="https://peps.python.org/pep-0008/">PEP-8</a> says 4 spaces,
+<a href="https://github.com/rust-lang/style-team/blob/master/guide/guide.md">The Rust Style Guide</a>
+says 4 spaces.</p>
 
 <p>Wouldn't it be nice if we could start to move towards a
 &quot;base class&quot; for all coding standards for all languages. I think 4
@@ -52,20 +56,25 @@ Golang!</p>
 
 <h2>But why though?</h2>
 
+<h3>Tab Completion</h3>
+
 <p>Since working on a PHP codebase with an in-house style-guide that specifies
-TAB, I've become come across this little frustration that drives me mad
-every single day.</p>
+TAB, I've come across this little frustration that drives me a mad every single
+day.</p>
 
 <p>Let's say you've got a REPL or two in your development environment. There's a
-strong possibility that that REPL will use TAB completion. And now imagine you
-need to cut and paste code from your editor into that REPL to try things out...
-that's what REPLs are for, right? You cut the code from your editor and your
-REPL try's to TAB-complete each and every start of line and throws a fit. So
-you need to cut and paste your code from one editor into another editor that
-still permits space indenting, edit all the ode indenting, and then, finally,
-you get to paste it into your REPL.</p>
+strong possibility that that REPL will use TAB completion.</p>
 
-<h2>Code example on the web</h2>
+<p>And now imagine you need to cut and paste code from your editor into that
+REPL to try things out... that's what REPLs are for, right? You cut the code
+from your editor and your REPL tries to TAB-complete each and every start of
+line and throws a fit.</p>
+
+<p>So you need to cut and paste your code from one editor into another editor
+that still permits space indenting, edit all the code indenting, and then,
+finally, you get to paste it into your REPL.</p>
+
+<h3>Code example on the web</h3>
 
 <p>Spending all day at work with the hated TAB based coding standard has given
 me bad habits.</p>
@@ -75,13 +84,14 @@ work but someone's got to do it) and a lot of that time is spent editing
 questions so that the poorly formatted code is at least readable.</p>
 
 <p>You know, where I'm going with this. What does pressing TAB on a web form
-mean? Yes, &quot;jump to the next field&quot;. Gah! I hate you TAB, get out of
-my code formatting habits!</p>
+do? Yes, jump to the next field, out of the code editor onto the button under
+it. Gah! I hate you TAB, get out of my code formatting habits!</p>
 
-<h2>That key you keep using, I don't think it does what you think it does (any more)</h2>
+<h2>That key you keep using,
+I don't think it does what you think it does (any more)</h2>
 
 <p>In the last 30 years or so, the TAB key has changed from the days when it
-was used to TABulate stuff on an typewriter, and no matter how much we may
+was used to TABulate stuff on a typewriter, and no matter how much we may
 long for those far-off days, things change.</p>
 
 <p>And TABulating brings me to my final point.</p>
@@ -99,12 +109,12 @@ Operands, TAB, Comment</p>
         OR A            ; Compare A to 0 - NULL terminator
         RET Z
         CP 255          ; 255 means "goto the verse specified after the 255"
-        JR Z, Previous</code></pre>
+        JR Z, previous</code></pre>
 
 <p>Except, hang on, that's sometimes Label, TAB, Mnemonic, Operands, TAB, TAB,
 Comment.</p>
 
-<p>Except when it's only one after the operands.</p>
+<p>Except when it's Label, TAB, TAB, Mnemonic, Operands, TAB, Comment.</p>
 
 <p>And what if we want meaningful labels, How many tabs before the Mnemonic,
 then?</p>
@@ -112,9 +122,9 @@ then?</p>
 <p>Enough of this madness, let's just use a 4-space indent and sanity
 returns.</p>
 
-<pre><code>    cpi _digit, 10         ; if it's not 10 pulses ("0" digit)
-    brne digitFound        ; ... it's just an ordinary digit
-    clr _digit             ; ... otherwise use a zero
+<pre><code>    cpi _digit, 10  ; if it's not 10 pulses ("0" digit)
+    brne digitFound ; ... it's just an ordinary digit
+    clr _digit      ; ... otherwise use a zero
 digitFound:
     add _digit, _asciiZero ; convert integer to ASCII char</code></pre>
 

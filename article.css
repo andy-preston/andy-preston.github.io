@@ -13,14 +13,36 @@ code:not([class]) {
     color: #fff;
 }
 
-.main-text {
-    column-gap: 10em;
-    column-count: 2;
+table {
+    border-collapse: collapse;
 }
 
-@media (max-width: 75em) {
-    .main-text {
-        column-count: 1;
-        column-gap: 0;
+td, th {
+    text-align: left;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #8f8;
+    padding: 5px;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.article {
+    max-width: 40em;
+}
+
+@media (max-width: 45em) {
+    body {
+        display: block;
+        align-items: normal;
+        justify-content: left;
+    }
+
+    .article {
+        max-width: 100%;
     }
 }

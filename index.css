@@ -8,6 +8,10 @@
     margin-right: 10em;
 }
 
+h1 span {
+    display: inline-block;
+}
+
 #introductions-articles {
     display: flex;
     align-items: flex-start;
