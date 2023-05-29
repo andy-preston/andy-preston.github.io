@@ -1,14 +1,4 @@
-#intro-pic {
-    object-fit: scale-down;
-    max-width: 40em;
-    width: 609px;
-    margin-right: 2em;
-    display: block;
-    margin-bottom: 2lh;
-    margin-right: 10em;
-}
-
-h1 span {
+h1 span, p.tag-line span {
     display: inline-block;
 }
 

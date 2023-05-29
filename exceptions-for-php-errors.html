@@ -24,7 +24,7 @@
     referrerpolicy="no-referrer"
 ></script>
 <script>hljs.highlightAll();</script>
-</head><body><div class="article">
+</head><body><div id="article">
 
 <h1>Exceptions for all PHP Errors</h1>
 
@@ -40,14 +40,14 @@ handleable exceptions instead they rely on an older mechanism that takes me
 back to my days of programming in BASIC
 (that's a long, long, long, long time ago).</p>
 
-<p>And even if we wrap all this up in a nice "&quot;modern&quot; lambda
+<p>And even if we wrap all this up in a nice &quot;modern&quot; lambda
 function, it's still hard to deal with the errors:</p>
 
 <pre><code class="language-php">set_error_handler(
     function($severity, $message, $file, $line) {
-        if (!(error_reporting() & $severity)) {
-            echo "Setting a flag to ignore errors in any language in";
-            echo " any environment is repugnant! Don't do it!\n";
+        if (!(error_reporting() &amp; $severity)) {
+            echo &quot;Setting a flag to ignore errors in any language in&quot;;
+            echo &quot; any environment is repugnant! Don't do it!\n&quot;
             return;
         }
         // Try to handle the error here and recover with dignity!

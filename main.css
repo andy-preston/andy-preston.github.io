@@ -7,11 +7,11 @@ body {
     color: #8f8;
 }
 
-h1, p {
+h1, p, table {
     margin-top: 0;
 }
 
-p {
+p, table {
     margin-bottom: 1lh;
 }
 
@@ -25,4 +25,14 @@ a:focus, a:hover, a:active {
 
 .text-block {
     margin-top: 2lh;
+}
+
+img {
+    object-fit: scale-down;
+    max-width: 40em;
+    width: 609px;
+    margin-right: 2em;
+    display: block;
+    margin-bottom: 2lh;
+    margin-right: 10em;
 }

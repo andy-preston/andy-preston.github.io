@@ -30,7 +30,7 @@ crossorigin="anonymous"
 referrerpolicy="no-referrer"
 ></script>
 <script>hljs.highlightAll();</script>
-</head><body><div class="article">
+</head><body><div id="article">
 
 <h1>Debugging and Testing with Symfony's Mailer Component</h1>
 
@@ -51,8 +51,8 @@ this isn't so easy to do.</p>
 <pre><code class="language-bash">MAILER_URL=null://null</code></pre>
 
 <p>And then edit
-<code>vendor/symfony/mailer/Transport/NullTransport.php</code> and paste
-the following code into the <code>doSend</code> method:</p>
+<code>vendor/<wbr>symfony/<wbr>mailer/<wbr>Transport/<wbr>NullTransport.php</code>
+and paste the following code into the <code>doSend</code> method:</p>
 
 <pre><code class="language-php">protected function doSend(SentMessage $message): void {
     $now = new \DateTime();

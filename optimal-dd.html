@@ -60,7 +60,7 @@ do
     if [ $PASS == 1 ]
     then
         TEST_SIZE=134217728
-        BLOCK_SIZES="512 1024 2048 4096 8192 16384 32768 65536 131072 262144 524288 1048576 2097152 4194304 8388608 16777216 33554432 67108864"
+        BLOCK_SIZES=&quot;512 1024 2048 4096 8192 16384 32768 65536 131072 262144 524288 1048576 2097152 4194304 8388608 16777216 33554432 67108864&quot;
     else
         TEST_SIZE=2972450816
         BLOCK_SIZES=$(tail -n 4 /tmp/dd-random-results | awk '{ print $3 }')
@@ -71,7 +71,7 @@ do
         REQUIRED_BLOCKS=$(($TEST_SIZE / $BLOCK_SIZE))
         if [ $REQUIRED_BLOCKS -le 0 ]
         then
-            echo "Block size: $BLOCK_SIZE requires $REQUIRED_BLOCKS blocks"
+            echo &quot;Block size: $BLOCK_SIZE requires $REQUIRED_BLOCKS blocks&quot;
         else
             sync
             DD_RESULT=$(
@@ -82,8 +82,8 @@ do
                 echo $DD_RESULT | \
                 grep --only-matching -E '[0-9.]+ ([MGk]?B|bytes)/s(ec)?'
             )
-            echo "$TRANSFER_RATE $BLOCK_SIZE"
-            echo "$TRANSFER_RATE $BLOCK_SIZE" &gt;&gt; /tmp/dd-random
+            echo &quot;$TRANSFER_RATE $BLOCK_SIZE&quot;
+            echo &quot;$TRANSFER_RATE $BLOCK_SIZE&quot; &gt;&gt; /tmp/dd-random
         fi
     done
     sort -n /tmp/dd-random &gt; /tmp/dd-random-results

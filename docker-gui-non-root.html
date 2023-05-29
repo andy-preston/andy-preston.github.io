@@ -24,11 +24,10 @@
     referrerpolicy="no-referrer"
 ></script>
 <script>hljs.highlightAll();</script>
-</head><body>
+</head><body><div id="article">
 
 <h1>Running GUI Apps in Docker as a non root user</h1>
 
-<div class="article">
 <p>I Wanted to run The NSA's brilliant
 <a href="https://ghidra-sre.org/">Ghidra</a> without &quot;polluting&quot; my
 system with a Java runtime.</p>
@@ -51,9 +50,9 @@ mkdir -p ${HOME_DIR}
 docker run --init --interactive --tty --rm --name ghidra \
     --user $(id --user):$(id --group) \
     --volume ${HOME_DIR}:/home/$(id --user --name) \
-    --volume="/etc/group:/etc/group:ro" \
-    --volume="/etc/passwd:/etc/passwd:ro" \
-    --volume="/etc/shadow:/etc/shadow:ro" \
+    --volume=&quot;/etc/group:/etc/group:ro&quot; \
+    --volume=&quot;/etc/passwd:/etc/passwd:ro&quot; \
+    --volume=&quot;/etc/shadow:/etc/shadow:ro&quot; \
     --env DISPLAY=:0.0 \
     --net=host \
     blacktop/ghidra</code></pre>

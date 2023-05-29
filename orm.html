@@ -1,0 +1,184 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Andy Preston - A Sceptic's Guide to ORM</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="main.css">
+<link rel="stylesheet" href="article.css">
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/xt256.min.css"
+    integrity="sha512-fhvZU0PRhieZyHjHD1sG4Zvo5EJjsnx90draikv9gBEFre1UXo4Neg3nT4xZ71TEdOLXif1C5llTy0Ughy+xSQ=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+>
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"
+    integrity="sha512-rdhY3cbXURo13l/WU9VlaRyaIYeJ/KBakckXIvJNAQde8DgpOmE+eZf7ha4vdqVjTtwQt69bD2wH2LXob/LB7Q=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+></script>
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/json.min.js"
+    integrity="sha512-hvC/ByqSWukSREyVyHBARP6ikFgmevNdPr1yPz+ik58Y1MPJzfsLwu2NUQYTYZ3zj9EzpYyZmrISJZjUMeaWPg=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+></script>
+<script>hljs.highlightAll();</script>
+</head><body><div id="article">
+
+<h1>A Sceptic's Guide to ORM</h1>
+
+<p>I'm not really what you could an ORM Sceptic but I'm certainly not an
+enthusiast either, I suppose you could say I'm &quot;agnostic&quot.
+Over the years, I've cursed whatever ORM I'm using many times, but a recent
+task at work has &quot;crystallised&quot; my thoughts and I feel I've now
+replaced most of my previously held opinions with something approaching the
+facts about this surprisingly difficult subject.</p>
+
+<h2>What is ORM?</h2>
+<p>ORM is both a noun and a verb. We have a pattern called
+&quot;Object Relational Mapping&quot; and many software libraries known
+collectively as &quot;Object Relational Mappers&quot;. But rather than
+immediately define what a Mapper is here, perhaps it's easier to start with what
+it's not.</p>
+
+<h3>Not (Just) SQL Abstraction</h3>
+<p>It's often thought that ORM libraries are there to provide an abstraction
+over SQL, that the query builders they do often provide give a simplified API
+to the complexities of SQL, and that they allow an easy path to move between
+the various different implementations and dialects of SQL. This is not the
+real purpose of ORMs.</p>
+
+<h3>Not (Necessarily) Classical OOP</h3>
+<p>Because ORM has &quot;object&quot; in it's name, it's easy to assume that
+what we're discussing is an object in the terms of classes and strict OOP.
+Although many ORMs do treat data objects as &quot;OOP objects&quot; there's
+another way to view objects, without classes and methods, just simple JSON
+(or a PHP associative array, etc):</p>
+<pre><code class="language-json">{
+    "orders": [{
+        "customer": {
+            "name": "Tim Tester",
+            "delivery_address": {...},
+            "billing_address": {...}
+        },
+        "items": [{
+            "Description": "Hacking Flange",
+            "Price": 4.18
+        }, {
+            "Description": "Strong Glue",
+            "Price": 5.28
+        }]
+    }]
+}</code></pre>
+
+<h2>SQL Result Sets</h2>
+<p>Looking at the mapping from the other side, in SQL everything is a table.
+This, at the time, was considered the great strength of SQL. If a view looks
+like a table, if a stored procedure yields a table, if a sub-query is basically
+just another table, then all of these things can be joined in a bigger query as
+though they were all tables.</p>
+
+<p><table><thead><tr>
+    <th>cid</th>
+    <th>name</th>
+    <th>atype</th>
+    <th>aid</th>
+    <th>address</th>
+    <th>iid</th>
+    <th>description</th>
+    <th>price</th>
+</tr></thead><tbody><tr>
+    <td>23</td>
+    <td>Tim Tester</td>
+    <td>Delivery</td>
+    <td>39</td>
+    <td>...</td>
+    <td>57</td>
+    <td>Hacking Flange</td>
+    <td>4.18</td>
+</tr><tr>
+    <td>23</td>
+    <td>Tim Tester</td>
+    <td>Delivery</td>
+    <td>39</td>
+    <td>...</td>
+    <td>75</td>
+    <td>Strong Glue</td>
+    <td>5.28</td>
+</tr><tr>
+    <td>23</td>
+    <td>Tim Tester</td>
+    <td>Billing</td>
+    <td>93</td>
+    <td>...</td>
+    <td>57</td>
+    <td>Hacking Flange</td>
+    <td>4.18</td>
+</tr><tr>
+    <td>23</td>
+    <td>Tim Tester</td>
+    <td>Billing</td>
+    <td>93</td>
+    <td>...</td>
+    <td>75</td>
+    <td>Strong Glue</td>
+    <td>5.28</td>
+</tr></tbody></table></p>
+
+<p>On receiving this table into our application code, the obvious disparity
+between the result set and the format of the data we need becomes apparent
+and, in a simple example like this, mapping this result into the objects that
+out hypothetical API has to deliver in JSON can be achieved with a simple
+iteration.</p>
+
+<p>But as the complexity of the queried data increases so does the complexity
+of the code required to map it.</p>
+
+<p>I've recently been working on a fix which came down to doing the mapping
+&quot;by hand&quot; for a query containing around 5 joins and the resulting
+code ended up being over 100 lines. This is where using an ORM library comes
+into it's own, it's simply a matter of &quot;pumping the query into one end
+and getting a nicely mapped result set out of the other&quot;... or is it?
+The fix I was applying was to overcome memory usage issues with that very ORM
+library.</p>
+
+<h2>Your Mileage May Vary</h2>
+<p>The application I'm working on may be a special case, it's legacy code with
+a database that was designed before ORM libraries were &quot;a thing&quot;,
+it's &quot;stuck&quot; on an obsolete version of PHP, and it's using a
+heavily modified version of an equally obsolete ORM. I say it might be a
+special case but I'm sure many of you have also had to work on something very
+similar at some point in your careers.</p>
+
+<h2>Who's Schema Is It Anyway?</h2>
+<p>All of the ORMs that I've used (something like 3 for PHP, 1 for Ruby and 1
+for Python) &quot;want to&quot; own the database schema. The classic pattern
+is that you design the objects that are to be used in your application and the
+ORM creates the database schema to suit those objects which is more or less
+fine for green field projects but not so great for legacy applications. There
+are many patterns which work fine in your chosen database but are difficult
+to shoe-horn into your ORM or maybe just impossible to use. It might be a
+simple as the ORM does not support ENUM fields or you may have pivot-tables
+that also contain data of their own. Sometimes you can fix these issues by
+redesigning the database, sometimes by inserting horrible kludges into your
+ORM code. But neither of these solutions yield anything that could be
+described as &quot;clean code&quot;.</p>
+
+<h2>Memory Usage and The Active Record Pattern</h2>
+<p>Let's return to my fixing memory usage bugs by doing the mapping
+&quot;by hand&quot... ... ... I find myself asking &quot;who the hell do I
+think I am arguing with Martin Fowler?&quot; but I can maybe justify myself by
+saying I'm from the future and the Martin Fowler I'm arguing with is from 20
+years ago.</p>
+
+<h2>Further Reading</h2>
+<p>Cal Paterson - The Troublesome Active Record Pattern (March 2020)
+https://medium.com/r/?url=https%3A%2F%2Fcalpaterson.com%2Factiverecord.html
+Matthias Noback - Active Record Versus Data Mapper (August 2022)
+https://medium.com/r/?url=https%3A%2F%2Fmatthiasnoback.nl%2F2022%2F08%2Fsimple-solutions-1-active-record-versus-data-mapper%2F
+Mehdi Khalili - ORM Anti Patterns, Active Record (December 2010)
+https://medium.com/r/?url=https%3A%2F%2Fwww.mehdi-khalili.com%2Form-anti-patterns-part-1-active-record
+</p>
+
+</div></body></html>

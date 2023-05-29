@@ -1,15 +1,18 @@
 pre code {
-    border-width: 1px;
-    border-style: solid;
-    border-color: #8f8;
     width: fit-content;
     /* Copied from highlight.js to make my non highlighted blocks compatible */
     display: block;
     overflow-x: auto;
+}
+
+pre code, p.boxed {
+    border-width: 1px;
+    border-style: solid;
+    border-color: #8f8;
     padding: 1em;
 }
 
-code:not([class]) {
+code:not([class]), strong {
     color: #fff;
 }
 
@@ -25,13 +28,25 @@ td, th {
     padding: 5px;
 }
 
+img#big-image {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    object-fit: none;
+    max-width: 100%;
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-right: 0;
+}
+
 body {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.article {
+div#article {
     max-width: 40em;
 }
 
@@ -42,7 +57,7 @@ body {
         justify-content: left;
     }
 
-    .article {
+    div#article {
         max-width: 100%;
     }
 }
