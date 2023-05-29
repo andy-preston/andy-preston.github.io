@@ -12,7 +12,7 @@ pre code, p.boxed {
     padding: 1em;
 }
 
-code:not([class]), strong {
+code:not([class]), strong, th, td {
     color: #fff;
 }
 
