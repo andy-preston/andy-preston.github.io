@@ -34,7 +34,7 @@ jobs:
       - name: Cache Masher
         uses: cschleiden/replace-tokens@v1
         with:
-          files: '["**/*.html"]'
+          files: '["*.html"]'
         env:
           SHA: ${{ github.sha }}
       - name: Setup Pages
