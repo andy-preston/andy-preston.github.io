@@ -34,9 +34,9 @@ jobs:
       - name: Cache Masher
         uses: cschleiden/replace-tokens@v1
         with:
-          files: '["*.html"]'
+          files: '["**/*.html"]'
         env:
-          SHA: ${{ vars.GITHUB_SHA }}
+          SHA: ${{ github.sha }}
       - name: Setup Pages
         uses: actions/configure-pages@v3
       - name: Upload artifact
