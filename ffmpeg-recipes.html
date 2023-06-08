@@ -91,4 +91,12 @@ MPEG-4 stream</h2>
     -c:v libx264 -preset slow -crf 0 \
     -an ./processed.mp4</code></pre>
 
+<h2>Overlay two video camera streams on top of each other</h2>
+
+<pre><code class="language-bash">ffmpeg \
+    -f video4linux2 -r 30 -s 640x480 -i /dev/video0 \
+    -f video4linux2 -r 30 -s 640x480 -i /dev/video2 \
+    -filter_complex "[1]format=yuva444p,colorchannelmixer=aa=0.5[in2];[0][in2]overlay" \
+    -y overlaid.mp4</code></pre>
+
 </div></body></html>
