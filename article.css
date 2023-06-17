@@ -1,17 +1,3 @@
-pre code {
-    width: fit-content;
-    /* Copied from highlight.js to make my non highlighted blocks compatible */
-    display: block;
-    overflow-x: auto;
-}
-
-pre code, p.boxed {
-    border-width: 1px;
-    border-style: solid;
-    border-color: #8f8;
-    padding: 1em;
-}
-
 code:not([class]), strong, th, td {
     color: #fff;
 }
@@ -22,10 +8,20 @@ table {
 
 td, th {
     text-align: left;
+}
+
+td, th, pre code, p.boxed {
     border-width: 1px;
     border-style: solid;
     border-color: #8f8;
     padding: 5px;
+}
+
+pre code {
+    width: fit-content;
+    /* Copied from highlight.js to make my non highlighted blocks compatible */
+    display: block;
+    overflow-x: auto;
 }
 
 img#big-image {
@@ -40,24 +36,55 @@ img#big-image {
     margin-right: 0;
 }
 
-body {
+h2 {
+    margin-top: 0;
+    margin-bottom: 0.5lh;
+}
+
+section {
+    margin-top: 1lh;
+    margin-bottom: 1lh;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-start;
+    justify-content: left;
 }
 
-div#article {
-    max-width: 40em;
+section:has(> aside.bottom) {
+    align-items: flex-end;
 }
 
-@media (max-width: 45em) {
-    body {
+section > article, aside {
+    width: 50%;
+    max-width: 45em;
+}
+
+aside.small-examples {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+aside > * {
+    display: block;
+    margin-left: 10%;
+    max-width: 100%;
+}
+
+@media (max-width: 70em) {
+    section {
         display: block;
         align-items: normal;
-        justify-content: left;
     }
 
-    div#article {
-        max-width: 100%;
+    section > article, aside {
+        width: 100%;
+    }
+
+    aside > * {
+        margin-left: 0;
+    }
+
+    aside.small-examples {
+        justify-content: space-evenly;
     }
 }

@@ -24,15 +24,23 @@
     referrerpolicy="no-referrer"
 ></script>
 <script>hljs.highlightAll();</script>
-</head><body><div id="article">
+</head><body>
 
-<h1>A Sceptic's Guide to ORM</h1>
+<article><h1>A Sceptic's Guide to ORM</h1>
 
+<section>
+
+<article>
 <p><strong>This is an early draft.</strong>
-I've started well but the article peters out and the ending is a massive
-disappointment. I'll finish it soon but, in the meantime,
-&quot;you have been warned&quot;.</p>
+I've started well... but the article peters out and the ending is a massive
+disappointment.</p>
 
+<p>I'll finish it soon but, in the meantime, &quot;you have been warned&quot;.</p>
+</article>
+
+</section><section>
+
+<article>
 <p>I'm not really what you could an ORM Sceptic but I'm certainly not an
 enthusiast either, I suppose you could say I'm &quot;agnostic&quot;.</p>
 
@@ -40,16 +48,22 @@ enthusiast either, I suppose you could say I'm &quot;agnostic&quot;.</p>
 task at work has &quot;crystallised&quot; my thoughts and I feel I've now
 replaced most of my previously held opinions with something approaching the
 facts about this surprisingly difficult subject.</p>
+</article>
 
-<h2>What is ORM?</h2>
+</section><section>
+
+<article><h2>What is ORM?</h2>
 
 <p>The difficulty starts with the fact that ORM is both a noun and a verb.
 We have a pattern called &quot;Object Relational Mapping&quot; and many
 software libraries known collectively as &quot;Object Relational Mappers&quot;.
 So when we say &quot;ORM&quot;, it's not immediately obvious what we're
 talking about.</p>
+</article>
 
-<h2>What is a Mapper, then?</h2>
+</section><section>
+
+<article><h2>What is a Mapper, then?</h2>
 
 <p>Rather than immediately define what a Mapper is here, perhaps it's a lot
 easier to deal with some popular misconceptions and deal with what it's not.</p>
@@ -69,8 +83,9 @@ what we're discussing is an object in the terms of classes and strict OOP.
 Although many ORMs do treat data objects as &quot;OOP objects&quot; there's
 another way to view objects, without classes and methods, just simple JSON
 (or a PHP associative array or a Python dictionary...):</p>
+</article>
 
-<pre><code class="language-json">{
+<aside class="bottom"><pre><code class="language-json">{
     "orders": [{
         "customer": {
             "name": "Tim Tester",
@@ -85,9 +100,11 @@ another way to view objects, without classes and methods, just simple JSON
             "Price": 5.28
         }]
     }]
-}</code></pre>
+}</code></pre></aside>
 
-<h2>And, Here's Where The Mapping Comes in</h2>
+</section><section>
+
+<article><h2>And, Here's Where The Mapping Comes in</h2>
 
 <p>Looking at things from &quot;the other side of the fence&quot;, in SQL
 everything is a table.</p>
@@ -96,55 +113,58 @@ everything is a table.</p>
 If a view looks like a table, if a stored procedure yields a table, if a
 sub-query is basically just another table, then all of these things can be
 joined in a bigger query as though they were all tables.</p>
+</article>
 
-<table><thead><tr>
-    <th scope="col">cust_id</th>
-    <th scope="col">name</th>
-    <th scope="col">addr_type</th>
-    <th scope="col">addr_id</th>
-    <th scope="col">address</th>
-    <th scope="col">item_id</th>
-    <th scope="col">description</th>
-    <th scope="col">price</th>
+<aside><table><thead><tr>
+<th scope="col">cust_id</th>
+<th scope="col">name</th>
+<th scope="col">addr_type</th>
+<th scope="col">addr_id</th>
+<th scope="col">address</th>
+<th scope="col">item_id</th>
+<th scope="col">description</th>
+<th scope="col">price</th>
 </tr></thead><tbody><tr>
-    <td>23</td>
-    <td>Tim Tester</td>
-    <td>Delivery</td>
-    <td>39</td>
-    <td>...</td>
-    <td>57</td>
-    <td>Hacking Flange</td>
-    <td>4.18</td>
+<td>23</td>
+<td>Tim Tester</td>
+<td>Delivery</td>
+<td>39</td>
+<td>...</td>
+<td>57</td>
+<td>Hacking Flange</td>
+<td>4.18</td>
 </tr><tr>
-    <td>23</td>
-    <td>Tim Tester</td>
-    <td>Delivery</td>
-    <td>39</td>
-    <td>...</td>
-    <td>75</td>
-    <td>Strong Glue</td>
-    <td>5.28</td>
+<td>23</td>
+<td>Tim Tester</td>
+<td>Delivery</td>
+<td>39</td>
+<td>...</td>
+<td>75</td>
+<td>Strong Glue</td>
+<td>5.28</td>
 </tr><tr>
-    <td>23</td>
-    <td>Tim Tester</td>
-    <td>Billing</td>
-    <td>93</td>
-    <td>...</td>
-    <td>57</td>
-    <td>Hacking Flange</td>
-    <td>4.18</td>
+<td>23</td>
+<td>Tim Tester</td>
+<td>Billing</td>
+<td>93</td>
+<td>...</td>
+<td>57</td>
+<td>Hacking Flange</td>
+<td>4.18</td>
 </tr><tr>
-    <td>23</td>
-    <td>Tim Tester</td>
-    <td>Billing</td>
-    <td>93</td>
-    <td>...</td>
-    <td>75</td>
-    <td>Strong Glue</td>
-    <td>5.28</td>
-</tr></tbody></table>
+<td>23</td>
+<td>Tim Tester</td>
+<td>Billing</td>
+<td>93</td>
+<td>...</td>
+<td>75</td>
+<td>Strong Glue</td>
+<td>5.28</td>
+</tr></tbody></table></aside>
 
-<h2>But The Formats Don't Match</h2>
+</section><section>
+
+<article><h2>But The Formats Don't Match</h2>
 
 <p>On receiving this table into our application code, the obvious disparity
 between the result set and the format of the data we need becomes apparent
@@ -154,8 +174,11 @@ iteration.</p>
 
 <p>But as the complexity of the queried data increases so does the complexity
 of the code required to map it.</p>
+</article>
 
-<h2>It's not as simple as it seems</h2>
+</section><section>
+
+<article><h2>It's not as simple as it seems</h2>
 
 <p>I've recently been working on a fix which came down to doing the mapping
 &quot;by hand&quot; for a query containing around 5 joins and the resulting
@@ -167,8 +190,11 @@ out of the other&quot;... or is it?</p>
 
 <p>The reason why I was doing this fix was to overcome excessive memory usage
 issues our chosen ORM library.</p>
+</article>
 
-<h2>Your Mileage May Vary</h2>
+</section><section>
+
+<article><h2>Your Mileage May Vary</h2>
 
 <p>The application I'm working on may be a special case, it's legacy code with
 a database that was designed before ORM libraries were &quot;a thing&quot;,
@@ -176,8 +202,11 @@ it's &quot;stuck&quot; on an obsolete version of PHP, and it's using a
 heavily modified version of an equally obsolete ORM. I say it might be a
 special case but I'm sure many of you have also had to work on something very
 similar at some point in your careers.</p>
+</article>
 
-<h2>Who's Schema Is It Anyway?</h2>
+</section><section>
+
+<article><h2>Who's Schema Is It Anyway?</h2>
 
 <p>All of the ORMs that I've used (something like 3 for PHP, 1 for Ruby and 1
 for Python) &quot;want to&quot; own the database schema. The classic pattern
@@ -192,9 +221,13 @@ may have pivot-tables that also contain data of their own. Sometimes you can
 fix these issues by redesigning the database, sometimes by inserting
 horrible kludges into your ORM code. But neither of these solutions yield
 anything that could be described as &quot;elegant&quot;.</p>
+</article>
 
-<h2>Is There a Punchline?</h2>
+</section><section>
+
+<article><h2>Is There a Punchline?</h2>
 
 <p>No!</p>
+</article>
 
-</div></body></html>
+</section></article></body></html>

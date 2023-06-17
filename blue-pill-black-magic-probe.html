@@ -24,12 +24,13 @@
     referrerpolicy="no-referrer"
 ></script>
 <script>hljs.highlightAll();</script>
-<script src="article.js?v=#{SHA}#"></script>
-</head><body><div id="article">
+</head><body>
 
-<h1>Using a Blue Pill as a Black Magic Probe - The Easy Way</h1>
+<article><h1>Using a Blue Pill as a Black Magic Probe - The Easy Way</h1>
 
-<h2>The Right Kind of Blue Pill</h2>
+<section>
+
+<article><h2>The Right Kind of Blue Pill</h2>
 
 <p>To fit the software in flash you require a 128K Blue Pill
 rather than the 64K variety.</p>
@@ -40,8 +41,11 @@ struggle to find a 64K version.</p>
 
 <p>Any clarification of the 64K / 128K issue
 would be more than welcome.</p>
+</article>
 
-<h2>Obtaining the firmware</h2>
+</section><section>
+
+<article><h2>Obtaining the firmware</h2>
 
 <p>The Black Magic Probe project is hosted at:
 <a href="https://github.com/blacksphere/blackmagic">github.com/blacksphere/blackmagic</a>
@@ -56,8 +60,11 @@ your time-stream by checking
 <a href="https://github.com/blacksphere/blackmagic/tags">github.com/blacksphere/blackmagic/tags</a></p>
 
 <pre><code class="language-bash">git checkout v1.7.1</code></pre>
+</article>
 
-<h2>Build the Firmware</h2>
+</section><section>
+
+<article><h2>Build the Firmware</h2>
 
 <p>You'll find many instructions online saying use the
 <code>stlink</code> target and this does, indeed, work. But if
@@ -74,10 +81,11 @@ just disappears.</p>
 you'll need <code>libnewlib-arm-none-eabi</code> installed.</p>
 
 <pre><code class="language-bash">make clean &amp;&amp; make PROBE_HOST=swlink</code></pre>
+</article>
 
-<h2>Prepare to Upload</h2>
+</section><section>
 
-<p><img alt="Blue Pill serial upload" src="https://i.imgur.com/dKSzLko.jpg"></p>
+<article><h2>Prepare to Upload</h2>
 
 <p>Move the <strong>BOOT0</strong> jumper from <strong>0</strong> to
 <strong>1</strong> to use the serial flasher boot loader.</p>
@@ -94,8 +102,13 @@ you'll need <code>libnewlib-arm-none-eabi</code> installed.</p>
 </tbody></table>
 
 <p>Insert the USB/serial adapter in your computer.</p>
+</article>
 
-<h2>Upload the Firmware</h2>
+<aside><img alt="Blue Pill serial upload" src="https://i.imgur.com/dKSzLko.jpg"></aside>
+
+</section><section>
+
+<article><h2>Upload the Firmware</h2>
 
 <p class="boxed">I'm using
 <a href="https://packages.ubuntu.com/bionic/stm32flash">stm32flash</a>
@@ -115,8 +128,11 @@ stm32flash -w src/blackmagic.bin -v -S 0x08002000 /dev/ttyUSB0</code></pre>
 <p>I'm not sure if the <code>stm32flash -o</code> option is
 actually required (I'm a newbie myself) but it doesn't
 do any particular harm.</p>
+</article>
 
-<h2>Try it Out</h2>
+</section><section>
+
+<article><h2>Try it Out</h2>
 
 <p>Unplug and disconnect the USB/serial adaptor,
 put the <strong>BOOT0</strong> jumper back on <strong>0</strong>,
@@ -129,8 +145,6 @@ should show up <code>/dev/ttyACM0</code>
 <p>Unplug it and try connecting a second &quot;pill&quot;
 to the SWD port.</p>
 
-<p><img alt="Blue Pill BMP SWD" src="https://i.imgur.com/D0Xk3ND.jpg"></p>
-
 <p>The following should now give the expected results.</p>
 
 <pre><code>gdb-multiarch
@@ -139,24 +153,37 @@ monitor swdp
 attach 1
 info registers
 quit</code></pre>
+</article>
 
-<h2>Flashing script</h2>
+<aside><img alt="Blue Pill BMP SWD" src="https://i.imgur.com/D0Xk3ND.jpg"></aside>
+
+</section><section>
+
+<article><h2>Flashing script</h2>
 
 <p>We can use the BMP to flash an STM-32 dev board with
 <a href="https://github.com/andy-preston/avrnude/blob/master/scripts/bmp-flash">this script</a></p>
+</article>
 
-<h2>We're done</h2>
+
+</section><section>
+
+<article><h2>We're done</h2>
 
 <p>Right I'm off to try and learn how to debug
 embedded Rust. And you're off to do whatever it
 is you need to do... See you soon, maybe.</p>
+</article>
 
-<h2>Hang on, What about JTAG?</h2>
+</section><section>
 
-<p><img alt="Blue Pill BMP JTAG" src="https://i.imgur.com/c0yRLfN.jpg"></p>
+<article><h2>Hang on, What about JTAG?</h2>
 
 <p>Well, I'm not quite ready for JTAG just yet.
 But, with an extra header for the other 3 JTAG pins,
 it shouldn't be a problem.</p>
+</article>
 
-</div></body></html>
+<aside><img alt="Blue Pill BMP JTAG" src="https://i.imgur.com/c0yRLfN.jpg"></aside>
+
+</section></article></body></html>

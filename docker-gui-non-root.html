@@ -24,11 +24,13 @@
     referrerpolicy="no-referrer"
 ></script>
 <script>hljs.highlightAll();</script>
-</head><body><div id="article">
+</head><body>
 
-<h1>Running GUI Apps in Docker as a non root user</h1>
+<article><h1>Running GUI Apps in Docker as a non root user</h1>
 
-<p>I Wanted to run The NSA's brilliant
+<section>
+
+<article><p>I Wanted to run The NSA's brilliant
 <a href="https://ghidra-sre.org/">Ghidra</a> without &quot;polluting&quot; my
 system with a Java runtime.</p>
 
@@ -36,27 +38,11 @@ system with a Java runtime.</p>
 <a href="https://github.com/blacktop/docker-ghidra">blacktop/docker-ghidra</a>
 but their docs seem to be a bit Mac. focussed and I had to jump through a few
 extra hoops to get things working on Linux.</p>
+</article>
 
-<p>My script runs something like this:</p>
+</section><section>
 
-<pre><code class="language-bash">#!/bin/bash
-
-xhost +
-
-HOME_DIR=/home/$(id --user --name)/Documents/ghidra
-
-mkdir -p ${HOME_DIR}
-
-docker run --init --interactive --tty --rm --name ghidra \
-    --user $(id --user):$(id --group) \
-    --volume ${HOME_DIR}:/home/$(id --user --name) \
-    --volume=&quot;/etc/group:/etc/group:ro&quot; \
-    --volume=&quot;/etc/passwd:/etc/passwd:ro&quot; \
-    --volume=&quot;/etc/shadow:/etc/shadow:ro&quot; \
-    --env DISPLAY=:0.0 \
-    --net=host \
-    blacktop/ghidra</code></pre>
-
+<article>
 <p>First, I used <code>xhost +</code> to allow X11 connections from anywhere.
 This command isn't very selective and may even be unnecessary. Some more
 experimentation is required.</p>
@@ -86,5 +72,24 @@ My head is still spinning on that one.</p>
 <p>We also need <code>--net=host</code> so that Java will access the X11
 display using it's host network address rather than Docker's virtual network.
 (better explanation to follow).</p>
+</article>
 
-</div></body></html>
+<aside><pre><code class="language-bash">#!/bin/bash
+
+xhost +
+
+HOME_DIR=/home/$(id --user --name)/Documents/ghidra
+
+mkdir -p ${HOME_DIR}
+
+docker run --init --interactive --tty --rm --name ghidra \
+    --user $(id --user):$(id --group) \
+    --volume ${HOME_DIR}:/home/$(id --user --name) \
+    --volume=&quot;/etc/group:/etc/group:ro&quot; \
+    --volume=&quot;/etc/passwd:/etc/passwd:ro&quot; \
+    --volume=&quot;/etc/shadow:/etc/shadow:ro&quot; \
+    --env DISPLAY=:0.0 \
+    --net=host \
+    blacktop/ghidra</code></pre></aside>
+
+</section></article></body></html>
