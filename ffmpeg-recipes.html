@@ -119,4 +119,16 @@ MPEG-4 stream</h2>
     -filter_complex "[1]format=yuva444p,colorchannelmixer=aa=0.5[in2];[0][in2]overlay" \
     -y overlaid.mp4</code></pre></article>
 
+</section><section>
+
+<article><h2>Determine which (video) frames in a soundtrack contain peaks</h2>
+
+<pre><code class="language-bash">FPS=25
+ffmpeg \
+    -i ./soundtrack.wav \
+    -af astats=metadata=1:reset=$(
+        echo ${FPS} | awk '{ printf 1 / $1 }'
+    ),ametadata=print:key=lavfi.astats.Overall.Max_level:file=- \
+    -f null /dev/null</code></pre></article>
+
 </section></article></body></html>
