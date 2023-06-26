@@ -24,18 +24,6 @@ pre code {
     overflow-x: auto;
 }
 
-img#big-image {
-    position: fixed;
-    top: 0px;
-    left: 0px;
-    object-fit: none;
-    max-width: 100%;
-    width: 100%;
-    margin-right: 0;
-    margin-bottom: 0;
-    margin-right: 0;
-}
-
 h2 {
     margin-top: 0;
     margin-bottom: 0.5lh;
