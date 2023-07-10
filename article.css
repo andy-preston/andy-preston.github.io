@@ -1,39 +1,6 @@
-code:not([class]), strong, th, td {
-    color: #fff;
-}
-
-table {
-    border-collapse: collapse;
-}
-
-td, th {
-    text-align: left;
-}
-
-td, th, pre code, p.boxed {
-    border-width: 1px;
-    border-style: solid;
-    border-color: #8f8;
-    padding: 5px;
-}
-
-pre code {
-    width: fit-content;
-    /* Copied from highlight.js to make my non highlighted blocks compatible */
-    display: block;
-    overflow-x: auto;
-}
-
-h2 {
-    margin-top: 0;
-    margin-bottom: 0.5lh;
-}
-
 section {
     margin-top: 1lh;
     margin-bottom: 1lh;
-    display: flex;
-    align-items: flex-start;
     justify-content: left;
 }
 
@@ -59,11 +26,6 @@ aside > * {
 }
 
 @media (max-width: 70em) {
-    section {
-        display: block;
-        align-items: normal;
-    }
-
     section > article, aside {
         width: 100%;
     }

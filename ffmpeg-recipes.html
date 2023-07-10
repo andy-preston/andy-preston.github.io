@@ -27,39 +27,35 @@
 <script>hljs.highlightAll();</script>
 </head><body>
 
-<article><h1>FFMPEG Recipes</h1>
+<header>
+<h1>FFMPEG Recipes</h1>
+<time datetime="2023-06-26">26-June-2023</time>
+</header>
 
-<section>
-
-<article>
+<section><article>
 <p>Not exactly &quot;an FFMPEG cookbook&quot;,
 more like a collection of recipes scrawled on the back of old envelopes.</p>
-</article>
+</article></section>
 
-</section><section>
-
-<article><h2>Extract the audio from a bunch of MPEG-4 movies</h2>
-
-<pre><code class="language-bash">for a in *.mp4
+<section><article>
+<p>Extract the audio from a bunch of MPEG-4 movies</p>
+</article><aside><pre><code class="language-bash">for a in *.mp4
 do
     ffmpeg -i $a -map 0:1 -codec:a copy $(
         echo $a | sed -e 's/mp4/aac/g'
     )
-done</code></pre></article>
+done</code></pre></aside></section>
 
-</section><section>
-
-<article><h2>Extract audio from an MPEG-4 stream and re-encode it as MP3</h2>
-
-<pre><code class="language-bash">ffmpeg -hide_banner \
+<section><article>
+<p>Extract audio from an MPEG-4 stream and re-encode it as MP3</p>
+</article><aside><pre><code class="language-bash">ffmpeg -hide_banner \
     -i ./stream.mp4 \
-    -map_metadata -1 -vn ./audio.mp3</code></pre></article>
+    -map_metadata -1 -vn ./audio.mp3</code></pre>
+</aside></section>
 
-</section><section>
-
-<article><h2>Re-encode audio to MP3 with a selected bitrate</h2>
-
-<pre><code class="language-bash">for a in $(
+<section><article>
+<p>Re-encode audio to MP3 with a selected bitrate</p>
+</article><aside><pre><code class="language-bash">for a in $(
     find -name \*.aac
 )
 do
@@ -67,69 +63,55 @@ do
         -c:a libmp3lame -ac 2 -b:a 192k $(
             echo $a | sed 's/aac/mp3/'
         )
-done</code></pre></article>
+done</code></pre></aside></section>
 
-</section><section>
-
-<article><h2>Convert MPEG-4 AVI files to MPEG-4 streams</h2>
-
-<pre><code class="language-bash">for a in *.avi
+<section><article>
+<p>Convert MPEG-4 AVI files to MPEG-4 streams</p>
+</article><aside><pre><code class="language-bash">for a in *.avi
 do
     ffmpeg -hide_banner -i $a -map_metadata -1 \
         -codec:v copy -codec:a copy \
         $(echo $a | sed 's/avi/mp4/g')
-done</code></pre></article>
+done</code></pre></aside></section>
 
-</section><section>
-
-<article><h2>Concatenate 100% compatible videos that have already been split into
-parts</h2>
-
-<pre><code class="language-bash">echo file part1.mp4 &gt; list.txt
+<section><article>
+<p>Concatenate 100% compatible videos that have already been split into parts</p>
+</article><aside><pre><code class="language-bash">echo file part1.mp4 &gt; list.txt
 echo file part2.mp4 &gt;&gt; list.txt
 ffmpeg -f concat -safe 0 -i list.txt \
-    -c copy -y output.mp4</code></pre></article>
+    -c copy -y output.mp4</code></pre></aside></section>
 
-</section><section>
-
-<article><h2>Merge video and audio held into 2 MPEG-4 streams into a single
-MPEG-4 stream</h2>
-
-<pre><code class="language-bash">ffmpeg -hide_banner \
+<section><article>
+<p>Merge video and audio held into 2 MPEG-4 streams into a single MPEG-4 stream</p>
+</article><aside><pre><code class="language-bash">ffmpeg -hide_banner \
     -i ./video.mp4 -i ./audio.mp4 \
     -map_metadata -1 \
     -codec:v copy -codec:a copy \
-    ./merged.mp4</code></pre></article>
+    ./merged.mp4</code></pre></aside></section>
 
-</section><section>
-
-<article><h2>Deinterlace, rescale and encode as silent H264/MPEG-4</h2>
-
-<pre><code class="language-bash">ffmpeg -i ./original.mp4 \
+<section><article>
+<p>Deinterlace, rescale and encode as silent H264/MPEG-4</p>
+</article><aside><pre><code class="language-bash">ffmpeg -i ./original.mp4 \
     -vf yadif -vf scale=720:574 \
     -c:v libx264 -preset slow -crf 0 \
-    -an ./processed.mp4</code></pre></article>
+    -an ./processed.mp4</code></pre></aside></section>
 
-</section><section>
-
-<article><h2>Overlay two video camera streams on top of each other</h2>
-
-<pre><code class="language-bash">ffmpeg \
+<section><article>
+<p>Overlay two video camera streams on top of each other</p>
+</article><aside><pre><code class="language-bash">ffmpeg \
     -f video4linux2 -r 30 -s 640x480 -i /dev/video0 \
     -f video4linux2 -r 30 -s 640x480 -i /dev/video2 \
     -filter_complex "[1]format=yuva444p,colorchannelmixer=aa=0.5[in2];[0][in2]overlay" \
-    -y overlaid.mp4</code></pre></article>
+    -y overlaid.mp4</code></pre></aside></section>
 
-</section><section>
-
-<article><h2>Determine which (video) frames in a soundtrack contain peaks</h2>
-
-<pre><code class="language-bash">FPS=25
+<section><article>
+<p>Determine which (video) frames in a soundtrack contain peaks</p>
+</article><aside><pre><code class="language-bash">FPS=25
 ffmpeg \
     -i ./soundtrack.wav \
     -af astats=metadata=1:reset=$(
         echo ${FPS} | awk '{ printf 1 / $1 }'
     ),ametadata=print:key=lavfi.astats.Overall.Max_level:file=- \
-    -f null /dev/null</code></pre></article>
+    -f null /dev/null</code></pre></aside></section>
 
-</section></article></body></html>
+</body></html>

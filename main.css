@@ -7,12 +7,18 @@ body {
     color: #8f8;
 }
 
-h1, p, table {
-    margin-top: 0;
+time {
+    font-size: smaller;
 }
 
 p, table {
+    margin-top: 0;
     margin-bottom: 1lh;
+}
+
+h1 {
+    margin: 0;
+    font-size: 2.5em;
 }
 
 a:link, a:visited {
@@ -25,6 +31,18 @@ a:focus, a:hover, a:active {
 
 .text-block {
     margin-top: 2lh;
+}
+
+section {
+    display: flex;
+    align-items: flex-start;
+}
+
+@media (max-width: 75em) {
+    section {
+        display: block;
+        align-items: start;
+    }
 }
 
 hr {
@@ -41,4 +59,57 @@ img {
     display: block;
     margin-bottom: 2lh;
     margin-right: 10em;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+td, th {
+    text-align: left;
+}
+
+td, th, pre code, p.boxed {
+    border-width: 1px;
+    border-style: solid;
+    border-color: #8f8;
+    padding: 5px;
+}
+
+pre code {
+    width: fit-content;
+    /* Copied from highlight.js to make my non highlighted blocks compatible */
+    display: block;
+    overflow-x: auto;
+}
+
+code:not([class]), strong, th, td {
+    color: #fff;
+}
+
+h2 {
+    margin-top: 0;
+    margin-bottom: 0.5lh;
+}
+
+h1 span, p.tag-line span {
+    display: inline-block;
+}
+
+#introduction {
+    max-width: 50%;
+}
+
+#article-index {
+    margin-left: 10em;
+}
+
+@media (max-width: 75em) {
+    #intro-pic, #introduction {
+        max-width: 100%;
+    }
+
+    #article-index {
+        margin-left: 0;
+    }
 }
