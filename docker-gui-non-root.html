@@ -32,9 +32,7 @@
 <time datetime="2023-07-10">10-July-2023</time>
 </header>
 
-<article><section>
-
-<article><p>I Wanted to run The NSA's brilliant
+<section><article><p>I Wanted to run The NSA's brilliant
 <a href="https://ghidra-sre.org/">Ghidra</a> without &quot;polluting&quot; my
 system with a Java runtime.</p>
 
@@ -89,11 +87,12 @@ mkdir -p ${HOME_DIR}
 docker run --init --interactive --tty --rm --name ghidra \
     --user $(id --user):$(id --group) \
     --volume ${HOME_DIR}:/home/$(id --user --name) \
-    --volume=&quot;/etc/group:/etc/group:ro&quot; \
-    --volume=&quot;/etc/passwd:/etc/passwd:ro&quot; \
-    --volume=&quot;/etc/shadow:/etc/shadow:ro&quot; \
+    --volume=/etc/group:/etc/group:ro \
+    --volume=/etc/passwd:/etc/passwd:ro \
+    --volume=/etc/shadow:/etc/shadow:ro \
     --env DISPLAY=:0.0 \
     --net=host \
     blacktop/ghidra</code></pre></aside>
 
-</section></article></body></html>
+</section>
+</body></html>

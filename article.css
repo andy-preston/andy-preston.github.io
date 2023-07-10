@@ -25,7 +25,7 @@ aside > * {
     max-width: 100%;
 }
 
-@media (max-width: 70em) {
+@media (max-width: 75em) {
     section > article, aside {
         width: 100%;
     }
