@@ -4,7 +4,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
 <link rel="stylesheet" href="main.css?v=#{SHA}#">
-<link rel="stylesheet" href="article.css?v=#{SHA}#">
 <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/xt256.min.css"
@@ -29,7 +28,7 @@
 
 <header>
 <h1>Running GUI Apps in Docker as a non root user</h1>
-<time datetime="2023-07-10">10-July-2023</time>
+<time datetime="2023-07-11">11-July-2023</time>
 </header>
 
 <section><article><p>I Wanted to run The NSA's brilliant
@@ -40,59 +39,54 @@ system with a Java runtime.</p>
 <a href="https://github.com/blacktop/docker-ghidra">blacktop/docker-ghidra</a>
 but their docs seem to be a bit Mac. focussed and I had to jump through a few
 extra hoops to get things working on Linux.</p>
-</article>
+</article></section>
 
-</section><section>
+<section><article>
+<p>I created a shared directory to serve as a volume to hold project files.
+If left to the docker run command to create it, it'll be owned by root and part
+of the point of all of this is to not have files owned by root in my home
+directory.</p>
 
-<article>
-<p>First, I used <code>xhost +</code> to allow X11 connections from anywhere.
-This command isn't very selective and may even be unnecessary. Some more
-experimentation is required.</p>
-
-<p>Then I created a directory to be shared between the container and the host
-and made sure it really was created. If left to the docker run command to
-create it, it'll be owned by root and part of the point of all of this is to
-not have files owned by root in my home directory.</p>
-
-<p>Then we run blacktop's container, passing in my UID and GID to ensure I'm
+<p>Then I run blacktop's container, passing in my UID and GID to ensure I'm
 the owner of any files we create in the shared directory.</p>
 
-<p>Sometimes when I've used <code>--user</code> the programs in the container
-don't care that this UID has no name within the container. But in the case of
-Ghidra and/or Java, it did. So I pass in the host system's password and group
-files as read only volumes. They will overwrite the files already in the
-container's file system and in some cases may cause problems with users that
-should exist in the container vanishing. But it worked for me this time
-round.</p>
+<p>Normally when I've used <code>--user</code> the programs in the container
+don't care that this UID has no name within the container. But, in this case,
+it did - I got messages saying
+<code>User home directory does not exist</code> and
+<code>Failed to find a supported JDK</code>.
+The &quot;correct&quot; way to deal with this would be to create a matching
+user in the container but, here, it seemed a lot easier to hack it by
+passing the host system's password and group files as read only volumes.</p>
 
-<p><code>--env DISPLAY=:0.0</code> was required to start Ghidra &amp;/or Java.
-This was kinda odd as if it's not present Ghidra &amp;/or Java complains that
+<p>The host password and group files will overwrite those already in the
+container. In some cases may cause problems with users that should exist in the
+container vanishing. But it worked fine for me this time round.</p>
+
+<p><code>--env DISPLAY=:0.0</code> was required to start Java.
+This was kinda odd as if it's not present Java complains that
 it can't write to display <code>:0.0</code>... and if you say don't use the
 default (<code>:0.0</code>) use <code>:0.0</code> instead... everything works.
 My head is still spinning on that one.</p>
 
 <p>We also need <code>--net=host</code> so that Java will access the X11
 display using it's host network address rather than Docker's virtual network.
-(better explanation to follow).</p>
-</article>
+(better explanation to follow).</p></article>
 
 <aside><pre><code class="language-bash">#!/bin/bash
 
-xhost +
+HOME_DIR=/home/$(id --user --name)
+GHIDRA_HOME=${HOME_DIR}/Documents/ghidra
 
-HOME_DIR=/home/$(id --user --name)/Documents/ghidra
-
-mkdir -p ${HOME_DIR}
+mkdir -p ${GHIDRA_HOME}
 
 docker run --init --interactive --tty --rm --name ghidra \
     --user $(id --user):$(id --group) \
-    --volume ${HOME_DIR}:/home/$(id --user --name) \
-    --volume=/etc/group:/etc/group:ro \
-    --volume=/etc/passwd:/etc/passwd:ro \
-    --volume=/etc/shadow:/etc/shadow:ro \
+    --volume ${GHIDRA_HOME}:${HOME_DIR} \
+    --volume /etc/group:/etc/group:ro \
+    --volume /etc/passwd:/etc/passwd:ro \
     --env DISPLAY=:0.0 \
-    --net=host \
+    --net host \
     blacktop/ghidra</code></pre></aside>
-
 </section>
 </body></html>

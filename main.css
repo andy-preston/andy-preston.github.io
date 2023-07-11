@@ -1,5 +1,5 @@
 body {
-    margin-top: 2lh;
+    margin-top: 2em;
     margin-left: 10%;
     margin-right: 10%;
     font-family: sans-serif;
@@ -13,12 +13,25 @@ time {
 
 p, table {
     margin-top: 0;
-    margin-bottom: 1lh;
+    margin-bottom: 1em;
 }
 
 h1 {
     margin: 0;
     font-size: 2.5em;
+}
+
+h1 span, p.tag-line span {
+    display: inline-block;
+}
+
+h2 {
+    margin-top: 0;
+    margin-bottom: 1ex;
+}
+
+h1, h2, h3, h4 {
+    font-style: normal;
 }
 
 a:link, a:visited {
@@ -30,7 +43,7 @@ a:focus, a:hover, a:active {
 }
 
 .text-block {
-    margin-top: 2lh;
+    margin-top: 2em;
 }
 
 section {
@@ -38,10 +51,43 @@ section {
     align-items: flex-start;
 }
 
+section:not(.front-page) {
+    margin-top: 1em;
+    margin-bottom: 1em;
+    justify-content: left;
+}
+
 @media (max-width: 75em) {
     section {
         display: block;
         align-items: start;
+    }
+}
+
+section:has(> aside.bottom) {
+    align-items: flex-end;
+}
+
+article, aside {
+    width: 50%;
+    /* TODO: check resizing on exceptions-for-php-errors.html
+       There's a dodgy patch around half-width */
+    max-width: 36em;
+}
+
+aside > * {
+    display: block;
+    margin-left: 10%;
+    max-width: 100%;
+}
+
+@media (max-width: 75em) {
+    article, aside {
+        width: 100%;
+    }
+
+    aside > * {
+        margin-left: 0;
     }
 }
 
@@ -57,7 +103,7 @@ img {
     width: 609px;
     margin-right: 2em;
     display: block;
-    margin-bottom: 2lh;
+    margin-bottom: 2em;
     margin-right: 10em;
 }
 
@@ -87,16 +133,7 @@ code:not([class]), strong, th, td {
     color: #fff;
 }
 
-h2 {
-    margin-top: 0;
-    margin-bottom: 0.5lh;
-}
-
-h1 span, p.tag-line span {
-    display: inline-block;
-}
-
-#introduction {
+article#introduction {
     max-width: 50%;
 }
 
@@ -105,7 +142,7 @@ h1 span, p.tag-line span {
 }
 
 @media (max-width: 75em) {
-    #intro-pic, #introduction {
+    #intro-pic, article#introduction {
         max-width: 100%;
     }
 
