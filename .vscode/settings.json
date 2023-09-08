@@ -1,4 +1,7 @@
 {
+    "files.associations": {
+        "*.webc": "html"
+    },
     "cSpell.words": [
         "blackmagic",
         "blacksphere",
@@ -8,11 +11,13 @@
         "deinterlace",
         "eabi",
         "edgeeffect",
+        "eleventy",
         "endproc",
         "gcol",
         "ghidra",
         "gpio",
         "hackaday",
+        "imgur",
         "jtag",
         "libmp3lame",
         "libnewlib",
@@ -25,6 +30,7 @@
         "swlink",
         "symfony",
         "ucfirst",
+        "webc",
         "xhost",
         "yadif",
         "youtube"

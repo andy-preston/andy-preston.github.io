@@ -1,0 +1,10 @@
+<header>
+    <h1 @raw="title"></h1>
+    <time
+        :datetime="date"
+        @raw="new Date(date).toLocaleDateString('en-uk', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });"></time>
+</header>

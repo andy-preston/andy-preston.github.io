@@ -1,0 +1,5 @@
+<article id="article-index">
+    <article-index-links webc:for="(tag, section) in sections"
+        :collection="collections[tag]"
+        :section="section">
+</article>

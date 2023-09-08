@@ -1,16 +1,8 @@
-<!DOCTYPE html><html lang="en"><head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Andy Preston - Why Indenting With Tab is &quot;Wrong&quot;</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Permissions-Policy" content="interest-cohort=()">
-<link rel="stylesheet" href="main.css?v=#{SHA}#">
-</head><body>
-
-<header>
-<h1>Why Indenting With Tab is &quot;Wrong&quot;</h1>
-<time datetime="2023-07-10">10-July-2023</time>
-</header>
-
+---
+title: "Why Indenting With Tab is &quot;Wrong&quot;"
+tags: philosophy
+date: "2023-07-10"
+---
 <section><article>
 <p>This used to be long an complicated.
 With all manner of comparisons and discussion.</p>
@@ -33,4 +25,4 @@ line and throws a fit.</p>
 <p>So you need to cut and paste your code from one editor into another editor
 that still permits space indenting, edit all the code indenting, and then,
 finally, you get to paste it into your REPL.</p>
-</article></section></body></html>
+</article></section>

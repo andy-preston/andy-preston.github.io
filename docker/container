@@ -1,0 +1,24 @@
+#!/bin/bash
+
+case $1 in
+'shell')
+    COMMAND='sh'
+    ;;
+'install')
+    COMMAND='npm install'
+    ;;
+'test')
+    COMMAND='npm run test'
+    ;;
+*)
+    COMMAND='npm run build'
+    ;;
+esac
+
+docker run \
+    --rm --interactive --tty \
+    --volume=$(pwd):/eleventy \
+    --workdir=/eleventy \
+    --user=$(id -u):$(id -g) \
+    node:18.17.0-alpine3.18 \
+    ${COMMAND}

@@ -1,38 +1,9 @@
-<!DOCTYPE html><html lang="en"><head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Andy Preston - Using a Blue Pill as a Black Magic Probe - The Easy Way</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Permissions-Policy" content="interest-cohort=()">
-<link rel="stylesheet" href="main.css?v=#{SHA}#">
-<link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/xt256.min.css"
-    integrity="sha512-fhvZU0PRhieZyHjHD1sG4Zvo5EJjsnx90draikv9gBEFre1UXo4Neg3nT4xZ71TEdOLXif1C5llTy0Ughy+xSQ=="
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
->
-<script
-    src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"
-    integrity="sha512-rdhY3cbXURo13l/WU9VlaRyaIYeJ/KBakckXIvJNAQde8DgpOmE+eZf7ha4vdqVjTtwQt69bD2wH2LXob/LB7Q=="
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
-></script>
-<script
-    src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/bash.min.js"
-    integrity="sha512-10MAbvV683nchyNnutInZDUUmwsAF8IpMc8V+qUNPv9wb26Bv9inyKzAdMfmbFdSIgxxjQhBsZq6sEP+UgsqWg=="
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
-></script>
-<script>hljs.highlightAll();</script>
-</head><body>
-
-<header>
-<h1>Using a Blue Pill as a Black Magic Probe - The Easy Way</h1>
-<time datetime="2023-06-26">26-June-2023</time>
-</header>
-
-<section>
-<article><h2>The Right Kind of Blue Pill</h2>
+---
+title: "Using a Blue Pill as a Black Magic Probe - The Easy Way"
+tags: micro
+date: "2023-06-26"
+---
+<section><article><h2>The Right Kind of Blue Pill</h2>
 
 <p>To fit the software in flash you require a 128K Blue Pill
 rather than the 64K variety.</p>
@@ -42,31 +13,26 @@ variety are far more common now and you may have to
 struggle to find a 64K version.</p>
 
 <p>Any clarification of the 64K / 128K issue
-would be more than welcome.</p>
-</article>
+would be more than welcome.</p></article></section>
 
-</section><section>
-
-<article><h2>Obtaining the firmware</h2>
+<section><article><h2>Obtaining the firmware</h2>
 
 <p>The Black Magic Probe project is hosted at:
 <a href="https://github.com/blacksphere/blackmagic">github.com/blacksphere/blackmagic</a>
 and you can obtain the firmware with:</p>
 
-<pre><code class="language-bash">git clone git@github.com:blacksphere/blackmagic.git
-cd blackmagic</code></pre>
+<syntax-highlight language="bash">git clone git@github.com:blacksphere/blackmagic.git
+cd blackmagic</syntax-highlight>
 
 <p>At the time of writing, the current release is v1.7.1,
 but you can substitute this with the current release in
 your time-stream by checking
 <a href="https://github.com/blacksphere/blackmagic/tags">github.com/blacksphere/blackmagic/tags</a></p>
 
-<pre><code class="language-bash">git checkout v1.7.1</code></pre>
-</article>
+<syntax-highlight language="bash">git checkout v1.7.1</syntax-highlight>
+</article></section>
 
-</section><section>
-
-<article><h2>Build the Firmware</h2>
+<section><article><h2>Build the Firmware</h2>
 
 <p>You'll find many instructions online saying use the
 <code>stlink</code> target and this does, indeed, work. But if
@@ -82,12 +48,9 @@ just disappears.</p>
 <p>As well as <code>arm-none-eabi-gcc</code>,
 you'll need <code>libnewlib-arm-none-eabi</code> installed.</p>
 
-<pre><code class="language-bash">make clean &amp;&amp; make PROBE_HOST=swlink</code></pre>
-</article>
+<syntax-highlight language="bash">make clean && make PROBE_HOST=swlink</syntax-highlight></article></section>
 
-</section><section>
-
-<article><h2>Prepare to Upload</h2>
+<section><article><h2>Prepare to Upload</h2>
 
 <p>Move the <strong>BOOT0</strong> jumper from <strong>0</strong> to
 <strong>1</strong> to use the serial flasher boot loader.</p>
@@ -103,14 +66,11 @@ you'll need <code>libnewlib-arm-none-eabi</code> installed.</p>
 <tr><td>TX</td><td>A10(RX1)</td></tr>
 </tbody></table>
 
-<p>Insert the USB/serial adapter in your computer.</p>
-</article>
+<p>Insert the USB/serial adapter in your computer.</p></article>
 
-<aside><img alt="Blue Pill serial upload" src="https://i.imgur.com/dKSzLko.jpg"></aside>
+<aside><imgur title="Blue Pill serial upload" pic="dKSzLko"></imgur></aside></section>
 
-</section><section>
-
-<article><h2>Upload the Firmware</h2>
+<section><article><h2>Upload the Firmware</h2>
 
 <p class="boxed">I'm using
 <a href="https://packages.ubuntu.com/bionic/stm32flash">stm32flash</a>
@@ -123,18 +83,15 @@ But, even if you plan to never use DFU, you still
 need the bootloader to make the Blue Pill enumerate
 it's USB ports!</p>
 
-<pre><code class="language-bash">stm32flash -o /dev/ttyUSB0
+<syntax-highlight language="bash">stm32flash -o /dev/ttyUSB0
 stm32flash -w src/blackmagic_dfu.bin -v /dev/ttyUSB0
-stm32flash -w src/blackmagic.bin -v -S 0x08002000 /dev/ttyUSB0</code></pre>
+stm32flash -w src/blackmagic.bin -v -S 0x08002000 /dev/ttyUSB0</syntax-highlight>
 
 <p>I'm not sure if the <code>stm32flash -o</code> option is
 actually required (I'm a newbie myself) but it doesn't
-do any particular harm.</p>
-</article>
+do any particular harm.</p></article></section>
 
-</section><section>
-
-<article><h2>Try it Out</h2>
+<section><article><h2>Try it Out</h2>
 
 <p>Unplug and disconnect the USB/serial adaptor,
 put the <strong>BOOT0</strong> jumper back on <strong>0</strong>,
@@ -154,38 +111,26 @@ target extended-remote /dev/ttyACM0
 monitor swdp
 attach 1
 info registers
-quit</code></pre>
-</article>
+quit</code></pre></article>
 
-<aside><img alt="Blue Pill BMP SWD" src="https://i.imgur.com/D0Xk3ND.jpg"></aside>
+<aside><imgur title="Blue Pill BMP SWD" pic="D0Xk3ND"></imgur></aside></section>
 
-</section><section>
-
-<article><h2>Flashing script</h2>
+<section><article><h2>Flashing script</h2>
 
 <p>We can use the BMP to flash an STM-32 dev board with
 <a href="https://github.com/andy-preston/avrnude/blob/master/scripts/bmp-flash">this script</a></p>
-</article>
+</article></section>
 
+<section><article><h2>We're done</h2>
 
-</section><section>
+<p>Right I'm off to try and learn how to debug embedded Rust.
+And you're off to do whatever it is you need to do...
+See you soon, maybe.</p></article></section>
 
-<article><h2>We're done</h2>
-
-<p>Right I'm off to try and learn how to debug
-embedded Rust. And you're off to do whatever it
-is you need to do... See you soon, maybe.</p>
-</article>
-
-</section><section>
-
-<article><h2>Hang on, What about JTAG?</h2>
+<section><article><h2>Hang on, What about JTAG?</h2>
 
 <p>Well, I'm not quite ready for JTAG just yet.
 But, with an extra header for the other 3 JTAG pins,
-it shouldn't be a problem.</p>
-</article>
+it shouldn't be a problem.</p></article>
 
-<aside><img alt="Blue Pill BMP JTAG" src="https://i.imgur.com/c0yRLfN.jpg"></aside>
-
-</section></body></html>
+<aside><imgur title="Blue Pill BMP JTAG" pic="c0yRLfN"></imgur></aside></section>

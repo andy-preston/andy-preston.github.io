@@ -1,36 +1,9 @@
-<!DOCTYPE html><html lang="en"><head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Andy Preston - A Sceptic's Guide to ORM</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Permissions-Policy" content="interest-cohort=()">
-<link rel="stylesheet" href="main.css?v=#{SHA}#">
-<link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/xt256.min.css"
-    integrity="sha512-fhvZU0PRhieZyHjHD1sG4Zvo5EJjsnx90draikv9gBEFre1UXo4Neg3nT4xZ71TEdOLXif1C5llTy0Ughy+xSQ=="
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
->
-<script
-    src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"
-    integrity="sha512-rdhY3cbXURo13l/WU9VlaRyaIYeJ/KBakckXIvJNAQde8DgpOmE+eZf7ha4vdqVjTtwQt69bD2wH2LXob/LB7Q=="
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
-></script>
-<script
-    src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/json.min.js"
-    integrity="sha512-hvC/ByqSWukSREyVyHBARP6ikFgmevNdPr1yPz+ik58Y1MPJzfsLwu2NUQYTYZ3zj9EzpYyZmrISJZjUMeaWPg=="
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
-></script>
-<script>hljs.highlightAll();</script>
-</head><body>
-
-<header>
-<h1>A Sceptic's Guide to ORM</h1>
-<time datetime="2023-06-26">26-June-2023</time>
-</header>
-
+---
+title: "A Sceptic's Guide to ORM"
+draft: true
+tags: arch
+date: "2023-06-26"
+---
 <section><article>
 <p><strong>This is an early draft.</strong>
 I've started well... but the article peters out and the ending is a massive
@@ -78,7 +51,9 @@ what we're discussing is an object in the terms of classes and strict OOP.
 Although many ORMs do treat data objects as &quot;OOP objects&quot; there's
 another way to view objects, without classes and methods, just simple JSON
 (or a PHP associative array or a Python dictionary...):</p>
-</article><aside class="bottom"><pre><code class="language-json">{
+</article>
+
+<aside class="bottom"><syntax-highlight language="json">{
     "orders": [{
         "customer": {
             "name": "Tim Tester",
@@ -93,7 +68,7 @@ another way to view objects, without classes and methods, just simple JSON
             "Price": 5.28
         }]
     }]
-}</code></pre></aside></section>
+}</syntax-highlight></aside></section>
 
 <section><article>
 <h2>And, Here's Where The Mapping Comes in</h2>
@@ -208,5 +183,3 @@ anything that could be described as &quot;elegant&quot;.</p>
 <section><article><h2>Is There a Punchline?</h2>
 
 <p>No!</p></article></section>
-
-</body></html>

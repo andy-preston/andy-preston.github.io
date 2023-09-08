@@ -1,0 +1,46 @@
+.token.important,
+.token.bold {
+    font-weight: bold;
+}
+
+.token.italic {
+    font-style: italic;
+}
+
+.token.variable {
+    color: #0ff;
+}
+
+.token.string,
+.token.char,
+.token.number,
+.token.constant {
+    color: #bbf;
+}
+
+.token.function {
+    color: #fa0;
+}
+
+.token.keyword,
+.token.punctuation,
+.token.operator {
+    color: #ff0;
+}
+
+.token.property {
+    color: #bb4;
+}
+
+.token.class-name,
+.token.type-declaration {
+    color: #f0f;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata,
+.token.shebang {
+    color: #8f8; /* normal body colour */
+}

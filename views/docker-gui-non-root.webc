@@ -1,35 +1,10 @@
-<!DOCTYPE html><html lang="en"><head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Andy Preston - Running GUI Apps in Docker as a non root user</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Permissions-Policy" content="interest-cohort=()">
-<link rel="stylesheet" href="main.css?v=#{SHA}#">
-<link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/xt256.min.css"
-    integrity="sha512-fhvZU0PRhieZyHjHD1sG4Zvo5EJjsnx90draikv9gBEFre1UXo4Neg3nT4xZ71TEdOLXif1C5llTy0Ughy+xSQ=="
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
->
-<script
-    src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"
-    integrity="sha512-rdhY3cbXURo13l/WU9VlaRyaIYeJ/KBakckXIvJNAQde8DgpOmE+eZf7ha4vdqVjTtwQt69bD2wH2LXob/LB7Q=="
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
-></script>
-<script
-    src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/bash.min.js"
-    integrity="sha512-10MAbvV683nchyNnutInZDUUmwsAF8IpMc8V+qUNPv9wb26Bv9inyKzAdMfmbFdSIgxxjQhBsZq6sEP+UgsqWg=="
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
-></script>
-<script>hljs.highlightAll();</script>
-</head><body>
+---
+title: "Running GUI Apps in Docker as a non root user"
+tags: docker
+date: "2023-07-11"
+---
 
-<header>
-<h1>Running GUI Apps in Docker as a non root user</h1>
-<time datetime="2023-07-11">11-July-2023</time>
-</header>
+<h2>A Ready Made Image - Ghidra</h2>
 
 <section><article><p>I Wanted to run The NSA's brilliant
 <a href="https://ghidra-sre.org/">Ghidra</a> without &quot;polluting&quot; my
@@ -73,7 +48,7 @@ My head is still spinning on that one.</p>
 display using it's host network address rather than Docker's virtual network.
 (better explanation to follow).</p></article>
 
-<aside><pre><code class="language-bash">#!/bin/bash
+<aside><syntax-highlight language="bash">#!/bin/bash
 
 HOME_DIR=/home/$(id --user --name)
 GHIDRA_HOME=${HOME_DIR}/Documents/ghidra
@@ -87,6 +62,77 @@ docker run --init --interactive --tty --rm --name ghidra \
     --volume /etc/passwd:/etc/passwd:ro \
     --env DISPLAY=:0.0 \
     --net host \
-    blacktop/ghidra</code></pre></aside>
+    blacktop/ghidra</syntax-highlight></aside>
 </section>
-</body></html>
+
+<h2>No Dockerfile Available - DIY Layout Creator</h2>
+<p>Coming soon</p>
+
+<!---
+
+<section><article>
+<p>There seems to be a running theme here of using Docker to try to throw a rug
+over the fact that I'm using a JVM app. Because I've also got a container to
+run <a href="https://diy-fever.com/software/diylc/">DIY Layout Creator</a>.</p>
+
+</article></section>
+
+<section><article><p>The Dockerfile</p></article>
+
+<aside><syntax-highlight language="dockerfile">FROM ubuntu:focal AS unzipper
+ENV TERM=linux
+ENV DEBIAN_FRONTEND=noninteractive
+
+ADD https://github.com/bancika/diy-layout-creator/releases/download/v4.37.0/diylc-4.37.0.zip \
+    /diylc.zip
+
+RUN apt-get update && \
+    apt-get install --no-install-recommends -y \
+        locales unzip
+
+RUN locale-gen en_GB.UTF-8
+
+ENV LANG en_GB.UTF-8
+ENV LANGUAGE en_GB:en
+ENV LC_ALL en_GB.UTF-8
+
+RUN mkdir -p /opt/diylc && \
+    cd /opt/diylc && \
+    unzip /diylc.zip
+
+FROM ubuntu:focal
+ENV TERM=linux
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && \
+    apt-get install --no-install-recommends -y \
+        bash openjdk-17-jre && \
+    rm -rf \
+        /var/lib/apt/lists/* \
+        /tmp/* \
+        /var/tmp/* \
+        /usr/src/doc/*
+
+COPY --from=unzipper /opt/diylc /opt/diylc
+
+RUN chmod a+x /opt/diylc/run.sh
+
+WORKDIR /opt/diylc
+
+CMD [ "bash", "/opt/diylc/run.sh" ]</syntax-highlight></aside></section>
+
+<section><article><p>The Script</p></article>
+
+<aside><syntax-highlight language="bash">#!/bin/bash
+
+docker build --progress=plain --tag diylc .
+
+docker run \
+    --interactive --tty --rm \
+    --user $(id -u):$(id -g) \
+    --volume /home/$(id --user --name)/Documents:/opt/diylc/Documents \
+    --env DISPLAY=:0.0 \
+    --net=host \
+    diylc</syntax-highlight></aside></section>
+
+-->
