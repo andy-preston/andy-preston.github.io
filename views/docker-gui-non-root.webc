@@ -55,7 +55,9 @@ GHIDRA_HOME=${HOME_DIR}/Documents/ghidra
 
 mkdir -p ${GHIDRA_HOME}
 
-docker run --init --interactive --tty --rm --name ghidra \
+docker run --init --rm \
+    --interactive --tty \
+    --name ghidra \
     --user $(id --user):$(id --group) \
     --volume ${GHIDRA_HOME}:${HOME_DIR} \
     --volume /etc/group:/etc/group:ro \

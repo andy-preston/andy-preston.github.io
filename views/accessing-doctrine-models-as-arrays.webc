@@ -1,7 +1,6 @@
 ---
 title: "Accessing Doctrine Models as Arrays"
 tags: php
-date: ""
 ---
 <section><article>
 <p>A few years ago, I was working on a Symfony project that contained some

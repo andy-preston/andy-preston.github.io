@@ -78,7 +78,7 @@ td, th, pre code, p.boxed {
     border-color: #8f8;
 }
 
-h1, h2, a:link, a:visited {
+h1, h2, h3, a:link, a:visited {
     color: #5ea;
 }
 
@@ -197,7 +197,7 @@ article#introduction {
 }
 
 @media (max-width: 75em) {
-    #intro-pic, article#introduction {
+    article#introduction img, article#introduction {
         max-width: 100%;
     }
 }

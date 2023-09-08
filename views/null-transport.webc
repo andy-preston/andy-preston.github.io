@@ -1,7 +1,6 @@
 ---
 title: "Debugging and Testing with Symfony's Mailer Component"
 tags: php
-date: ""
 ---
 <section><article>
 <p>When SwiftMailer was the standard component for sending E. mail in Symfony,

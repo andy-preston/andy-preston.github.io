@@ -1,6 +1,7 @@
 <header>
     <h1 @raw="title"></h1>
     <time
+        webc:if="date"
         :datetime="date"
         @raw="new Date(date).toLocaleDateString('en-uk', {
             year: 'numeric',
