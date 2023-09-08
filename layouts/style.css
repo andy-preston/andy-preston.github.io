@@ -4,12 +4,16 @@ table, h1, h2 {
     margin-top: 0;
 }
 
-p {
-    margin-top: 1ex;
+p + h2 {
+    margin-top: 2ex;
 }
 
-body, .text-block {
-    margin-top: 2ex;
+.intro-block {
+    margin-top: 4ex;
+}
+
+p {
+    margin-top: 1ex;
 }
 
 h1, h2 {

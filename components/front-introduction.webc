@@ -2,9 +2,7 @@
     <template class="image-list" webc:for="pic of pics" :data-tag="pic[0]" :data-alt="pic[1]"></template>
     <h1><span webc:for="piece of title" @raw="piece"></span></h1>
     <p class="tag-line"><span webc:for="piece of tagLine" @raw="piece"></span></p>
-    <div class="block">
-        <p webc:for="link of links"><a :href="'https://' + link" @raw="link"></a></p>
-    </div>
+    <p webc:for="link of links"><a :href="'https://' + link" @raw="link"></a></p>
     <div class="intro-block"><slot></slot></div>
 </article>
 
