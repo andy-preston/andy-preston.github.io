@@ -31,7 +31,7 @@ jobs:
       - name: NPM CI
         run: npm ci --omit=dev
       - name: Eleventy Build
-        run: npm build
+        run: npm run build
       - name: Upload Artifact
         uses: actions/upload-pages-artifact@v1
         with:
