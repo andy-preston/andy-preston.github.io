@@ -1,5 +1,4 @@
 node_modules
 site
 old-stuff
-package-lock.json
 views/*.txt
