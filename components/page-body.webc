@@ -5,4 +5,5 @@
         :title="title"
         :date="date"></article-header>
     <article webc:nokeep @raw="content"></article>
+    <hr>
 </body>

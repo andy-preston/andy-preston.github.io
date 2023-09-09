@@ -5,20 +5,21 @@ case $1 in
     COMMAND='sh'
     ;;
 'install')
-    COMMAND='npm install'
+    COMMAND="npm ${@}"
     ;;
 'test')
     COMMAND='npm run test'
     ;;
 *)
+    rm -rf ./site/*
     COMMAND='npm run build'
     ;;
 esac
 
 docker run \
     --rm --interactive --tty \
-    --volume=$(pwd):/eleventy \
-    --workdir=/eleventy \
-    --user=$(id -u):$(id -g) \
-    node:18.17.0-alpine3.18 \
+    --volume="$(pwd):/eleventy" \
+    --workdir="/eleventy" \
+    --user="$(id -u):$(id -g)" \
+    'node:18.17.0-alpine3.18' \
     ${COMMAND}

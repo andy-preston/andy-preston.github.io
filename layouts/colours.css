@@ -1,12 +1,27 @@
-.token.important,
-.token.bold {
-    font-weight: bold;
+:root {
+    --background: #000;
+    --dark-but-visible: #023;
+    --bright: #fff;
+    --main-green: #8f8;
+    --main-blue-green: #4fc;
 }
 
-.token.italic {
-    font-style: italic;
+code:not([class]),
+strong,
+th,
+td,
+a:link,
+a:visited {
+    color: var(--main-blue-green);
 }
 
+a:focus,
+a:hover,
+a:active {
+    color: var(--bright);
+}
+
+.token.property,
 .token.variable {
     color: #0ff;
 }
@@ -28,10 +43,6 @@
     color: #ff0;
 }
 
-.token.property {
-    color: #bb4;
-}
-
 .token.class-name,
 .token.type-declaration {
     color: #f0f;
@@ -42,5 +53,5 @@
 .token.doctype,
 .token.cdata,
 .token.shebang {
-    color: #8f8; /* normal body colour */
+    color: var(--main-green)
 }

@@ -1,6 +1,6 @@
-const typescript = require("./builder/typescript.ts");
 const tidyHtml = require("./builder/tidy-html.ts");
-const tidyCss = require("./builder/tidy-css.ts");
+const tidy = require("./builder/cheap-and-nasty-tidy.ts");
+const typescript = require("./builder/typescript.ts");
 const webCPlugin = require("@11ty/eleventy-plugin-webc");
 const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 
@@ -20,7 +20,8 @@ module.exports = function(eleventyConfig) {
             "toFileDirectory": "",
             "transforms": [
                 function(content) {
-                    return this.type == "js" ? typescript(content) : tidyCss(content)
+                    return this.type == "js" ?
+                        tidy(typescript(content)) : tidy(content)
                 }
             ],
         }

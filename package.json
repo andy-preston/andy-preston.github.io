@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "description": "My GitHub Pages site",
     "scripts": {
-        "test": "node_modules/.bin/jest",
+        "test": "node_modules/.bin/jest ; npx stylelint layouts/*.css",
         "watch": "node_modules/.bin/ts-node node_modules/.bin/eleventy --watch",
         "build": "node_modules/.bin/ts-node node_modules/.bin/eleventy"
     },
@@ -17,6 +17,8 @@
     "devDependencies": {
         "@jest/globals": "^29.6.1",
         "jest": "^29.6.1",
+        "stylelint": "^15.10.3",
+        "stylelint-config-standard": "^34.0.0",
         "ts-jest": "^29.1.1"
     }
 }

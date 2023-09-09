@@ -1,212 +1,150 @@
-/* Margins and padding */
-
-table, h1, h2 {
-    margin-top: 0;
-}
-
-p + h2 {
-    margin-top: 2ex;
-}
-
-.intro-block {
-    margin-top: 4ex;
+body {
+    margin-left: 10%;
+    margin-right: 10%;
+    background-color: var(--background);
+    color: var(--main-green);
+    font-family: sans-serif;
 }
 
 p {
     margin-top: 1ex;
 }
 
-h1, h2 {
+h1,
+h2,
+h3,
+h4 {
+    margin-top: 0;
     margin-bottom: 0;
-}
-
-p, table, header, section:not(.front-page) {
-    margin-bottom: 1ex;
-}
-
-img {
-    margin-bottom: 2ex;
-}
-
-h1 {
-    margin-left: 0;
-    margin-right: 0;
-}
-
-body {
-    margin-left: 10%;
-    margin-right: 10%;
-}
-
-aside > * {
-    margin-left: 10%;
-}
-
-@media (max-width: 75em) {
-    aside > * {
-        margin-left: 0;
-    }
-}
-
-img {
-    margin-right: 2em;
-    margin-right: 10em;
-}
-
-#article-index {
-    margin-left: 10em;
-}
-
-@media (max-width: 75em) {
-    #article-index {
-        margin-left: 0;
-    }
-}
-
-td, th, pre code, p.boxed {
-    padding: 5px;
-}
-
-/* Colours */
-
-body {
-    background-color: #000;
-    color: #8f8;
-}
-
-td, th, pre code, p.boxed {
-    border-color: #8f8;
-}
-
-h1, h2, h3, a:link, a:visited {
-    color: #5ea;
-}
-
-a:focus, a:hover, a:active, code:not([class]), strong, th, td {
-    color: #fff;
-}
-
-hr {
-    border-color: #111;
-}
-
-/* Fonts */
-
-body {
-    font-family: sans-serif;
-}
-
-time {
-    font-size: smaller;
+    color: var(--main-blue-green);
+    font-style: normal;
 }
 
 h1 {
     font-size: 2.5em;
 }
 
-h1, h2, h3, h4 {
-    font-style: normal;
+h1 span,
+p.tag-line span {
+    display: inline-block;
 }
 
-/* Simple alignment */
-
-td, th {
-    text-align: left;
+p + h2 {
+    margin-top: 2ex;
 }
 
-/* Borders */
+time {
+    font-size: smaller;
+}
 
-hr {
-    border-style: solid;
+.important {
+    font-weight: bold;
 }
 
 table {
+    margin-top: 0;
     border-collapse: collapse;
 }
 
-td, th, pre code, p.boxed {
+th {
+    text-align: left;
+}
+
+td,
+th,
+pre code,
+p.boxed {
     border-width: 1px;
     border-style: solid;
+    padding: 5px;
+    border-color: var(--main-green);
 }
 
-hr {
-    width: 50%;
+p,
+table,
+header {
+    margin-bottom: 1ex;
 }
-
-/* images */
 
 img {
+    margin-bottom: 2ex;
+    margin-right: 10em;
     object-fit: scale-down;
     max-width: 40em;
     width: 609px;
     display: block;
 }
 
-/* Line breaking */
-
-h1 span, p.tag-line span {
-    display: inline-block;
+hr {
+    margin-top: 2lh;
+    margin-bottom: 2lh;
+    border-style: solid;
+    border-color: var(--dark-but-visible);
 }
-
-/* Sections */
 
 section {
     display: flex;
-    align-items: flex-start;
 }
 
 section:not(.front-page) {
-    justify-content: left;
-}
-
-@media (max-width: 75em) {
-    section {
-        display: block;
-        align-items: start;
-    }
+    margin-bottom: 1ex;
 }
 
 section:has(> aside.bottom) {
     align-items: flex-end;
 }
 
-/* Asides */
-
-article, aside {
+article,
+aside {
     width: 50%;
-    /* TODO: check resizing on exceptions-for-php-errors.html
-       There's a dodgy patch around half-width */
     max-width: 36em;
 }
 
-aside > * {
-    display: block;
-    max-width: 100%;
-}
-
-@media (max-width: 75em) {
-    article, aside {
-        width: 100%;
-    }
-}
-
-/* Introduction */
-
-article#introduction {
+section.front-page article {
     max-width: 50%;
 }
-
-@media (max-width: 75em) {
-    article#introduction img, article#introduction {
-        max-width: 100%;
-    }
-}
-
-/* Code blocks */
 
 pre code {
     width: fit-content;
     display: block;
     overflow-x: auto;
+}
+
+aside > img,
+aside > pre,
+aside > table {
+    margin-left: 10%;
+    display: block;
+    max-width: 100%;
+}
+
+nav.article-index {
+    margin-left: 10em;
+}
+
+@media (width <= 75em) {
+    section {
+        display: block;
+    }
+
+    article,
+    aside {
+        width: 100%;
+    }
+
+    aside > img,
+    aside > pre,
+    aside > table {
+        margin-left: 0;
+    }
+
+    section.front-page article,
+    section.front-page article img {
+        max-width: 100%;
+    }
+
+    nav.article-index {
+        margin-left: 0;
+    }
 }
 

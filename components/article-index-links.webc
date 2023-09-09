@@ -1,3 +1,9 @@
+<script webc:type="js">
+    if (collection == undefined) {
+        throw new Error(`*** Section "${section.title}" has no items ***`);
+    }
+    '';
+</script>
 <h2 @raw="section.title"></h2>
 <p webc:for="item of collection">
     <a :href="item.url" @raw="item.data.title"></a>

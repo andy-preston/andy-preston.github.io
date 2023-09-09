@@ -8,8 +8,8 @@
         <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
         <meta name="generator" :content="eleventy.generator">
         <link rel="stylesheet" :href="getBundleFileUrl('css')" webc:keep>
+        <link rel="stylesheet" href="colours.css">
         <link rel="stylesheet" href="style.css">
-        <link rel="stylesheet" href="prism.css">
         <script :src="getBundleFileUrl('js')" webc:keep></script>
     </head>
     <page-body webc:nokeep

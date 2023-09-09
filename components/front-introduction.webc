@@ -3,7 +3,8 @@
     <h1><span webc:for="piece of title" @raw="piece"></span></h1>
     <p class="tag-line"><span webc:for="piece of tagLine" @raw="piece"></span></p>
     <p webc:for="link of links"><a :href="'https://' + link" @raw="link"></a></p>
-    <div class="intro-block"><slot></slot></div>
+    <hr>
+    <slot></slot>
 </article>
 
 <script type="text/typescript">
