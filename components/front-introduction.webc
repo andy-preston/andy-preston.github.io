@@ -16,6 +16,7 @@ addEventListener("load", (event) => {
     const image = document.createElement("img");
     image.src = `https://i.imgur.com/${selected.dataset.tag}.jpg`;
     image.alt = selected.dataset.alt;
+    image.title = image.alt;
     while (templates.length > 0) {
         templates.item(0).remove();
     }

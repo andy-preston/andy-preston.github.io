@@ -70,8 +70,7 @@ img {
     margin-bottom: 2ex;
     margin-right: 10em;
     object-fit: scale-down;
-    max-width: 40em;
-    width: 609px;
+    max-width: min(40em, 609px);
     display: block;
 }
 
