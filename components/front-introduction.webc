@@ -1,5 +1,5 @@
 <article id="introduction">
-    <template class="image-list" webc:for="pic of pics" :data-tag="pic[0]" :data-alt="pic[1]"></template>
+    <template class="image-list" webc:for="pic of pics" :data-tag="pic[0]" :data-title="pic[1]"></template>
     <h1><span webc:for="piece of title" @raw="piece"></span></h1>
     <p class="tag-line"><span webc:for="piece of tagLine" @raw="piece"></span></p>
     <p webc:for="link of links"><a :href="'https://' + link" @raw="link"></a></p>
@@ -7,19 +7,30 @@
     <slot></slot>
 </article>
 
+<!--- TODO: add an image carousel -->
 <script type="text/typescript">
 addEventListener("load", (event) => {
+    const newElement = (tag: string, title: string) => {
+        const figure = document.createElement("figure");
+        const caption = document.createElement("figcaption");
+        const image = document.createElement("img");
+        image.src = `https://i.imgur.com/${tag}.jpg`;
+        image.alt = title;
+        figure.appendChild(image);
+        caption.appendChild(document.createTextNode(title))
+        figure.appendChild(caption);
+        return figure;
+    }
     const templates = document.getElementsByClassName("image-list");
     const selected = templates.item(
         Math.floor(Math.random() * templates.length)
     ) as HTMLElement;
-    const image = document.createElement("img");
-    image.src = `https://i.imgur.com/${selected.dataset.tag}.jpg`;
-    image.alt = selected.dataset.alt;
-    image.title = image.alt;
+    document.getElementById("introduction").prepend(newElement(
+        selected.dataset.tag,
+        selected.dataset.title
+    ));
     while (templates.length > 0) {
         templates.item(0).remove();
     }
-    document.getElementById("introduction").prepend(image);
 });
 </script>

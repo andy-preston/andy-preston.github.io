@@ -68,7 +68,7 @@ you'll need <code>libnewlib-arm-none-eabi</code> installed.</p>
 
 <p>Insert the USB/serial adapter in your computer.</p></article>
 
-<aside><imgur title="Blue Pill serial upload" pic="dKSzLko"></imgur></aside></section>
+<aside><imgur title="Blue Pill serial upload" tag="dKSzLko"></imgur></aside></section>
 
 <section><article><h2>Upload the Firmware</h2>
 
@@ -113,7 +113,7 @@ attach 1
 info registers
 quit</code></pre></article>
 
-<aside><imgur title="Blue Pill BMP SWD" pic="D0Xk3ND"></imgur></aside></section>
+<aside><imgur title="Blue Pill BMP SWD" tag="D0Xk3ND"></imgur></aside></section>
 
 <section><article><h2>Flashing script</h2>
 
@@ -133,4 +133,4 @@ See you soon, maybe.</p></article></section>
 But, with an extra header for the other 3 JTAG pins,
 it shouldn't be a problem.</p></article>
 
-<aside><imgur title="Blue Pill BMP JTAG" pic="c0yRLfN"></imgur></aside></section>
+<aside><imgur title="Blue Pill BMP JTAG" tag="c0yRLfN"></imgur></aside></section>

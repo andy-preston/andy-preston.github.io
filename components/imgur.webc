@@ -1,1 +1,4 @@
-<img :alt="title" :title="title" :src="`https://i.imgur.com/${pic}.jpg`">
+<figure>
+    <img :alt="title" :src="`https://i.imgur.com/${tag}.jpg`">
+    <figcaption @raw="title"></figcaption>
+</figure>
