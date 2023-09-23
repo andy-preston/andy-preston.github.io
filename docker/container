@@ -7,12 +7,9 @@ case $1 in
 'install')
     COMMAND="npm ${@}"
     ;;
-'test')
-    COMMAND='npm run test'
-    ;;
 *)
     rm -rf ./site/*
-    COMMAND='npm run build'
+    COMMAND='npm run localBuild'
     ;;
 esac
 

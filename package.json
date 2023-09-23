@@ -1,13 +1,66 @@
 {
-    "name": "my_github_pages_site",
+    "name": "andy_prestons_curates_egg",
     "version": "1.0.0",
-    "description": "My GitHub Pages site",
-    "scripts": {
-        "test": "node_modules/.bin/jest ; npx stylelint layouts/*.css",
-        "watch": "node_modules/.bin/ts-node node_modules/.bin/eleventy --watch",
-        "build": "node_modules/.bin/ts-node node_modules/.bin/eleventy"
-    },
+    "description": "Andy Preston's Curate's Egg",
     "author": "Andy Preston",
+    "scripts": {
+        "style": "npx stylelint **/*.css",
+        "check": "npx eslint . ; npx tsc --noEmit ; npm run style ; npx jest",
+        "build": "npx ts-node node_modules/.bin/eleventy",
+        "localBuild": "npm run build ; npm run check"
+    },
+    "eslintConfig": {
+        "overrides": [
+            {
+                "files": ["*.js"],
+                "extends": [
+                    "eslint:recommended"
+                ],
+                "env": {
+                    "node": true
+                },
+                "parserOptions": {
+                    "ecmaVersion": "latest",
+                    "sourceType": "module"
+                }
+            },
+            {
+                "files": ["site/*.js"],
+                "extends": [
+                    "eslint:recommended"
+                ],
+                "env": {
+                    "browser": true
+                },
+                "parserOptions": {
+                    "ecmaVersion": 2015,
+                    "sourceType": "script"
+                }
+            },
+            {
+                "files": ["**/*.ts"],
+                "extends": [
+                    "eslint:recommended",
+                    "plugin:@typescript-eslint/recommended"
+                ],
+                "parser": "@typescript-eslint/parser",
+                "plugins": [
+                    "@typescript-eslint"
+                ]
+            }
+        ]
+    },
+    "stylelint": {
+        "extends": ["stylelint-config-standard"],
+        "rules": {
+            "max-nesting-depth": 0,
+            "comment-empty-line-before": null
+        }
+    },
+    "jest": {
+        "preset": "ts-jest",
+        "testEnvironment": "node"
+    },
     "dependencies": {
         "@11ty/eleventy": "^2.0.1",
         "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.0",
@@ -16,9 +69,13 @@
     },
     "devDependencies": {
         "@jest/globals": "^29.6.1",
+        "@typescript-eslint/eslint-plugin": "^6.7.2",
+        "@typescript-eslint/parser": "^6.7.2",
+        "eslint": "^8.49.0",
         "jest": "^29.6.1",
         "stylelint": "^15.10.3",
         "stylelint-config-standard": "^34.0.0",
-        "ts-jest": "^29.1.1"
+        "ts-jest": "^29.1.1",
+        "typescript": "^5.2.2"
     }
 }

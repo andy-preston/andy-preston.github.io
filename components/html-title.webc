@@ -1,0 +1,3 @@
+<title @raw="Array.isArray(title) ?
+    title.join(' ') :
+    'Andy Preston - ' + title"></title>

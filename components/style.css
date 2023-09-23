@@ -1,7 +1,11 @@
 :root {
     --column-width: 40em;
+    --background: #000;
+    --dark-but-visible: #035;
+    --bright: #fff;
+    --main-green: #8f8;
+    --main-blue-green: #4fc;
 }
-
 
 body {
     margin-left: 10%;
@@ -164,3 +168,52 @@ nav.article-index {
     }
 }
 
+code:not([class]),
+strong,
+th,
+td,
+a:link,
+a:visited {
+    color: var(--main-blue-green);
+}
+
+a:focus,
+a:hover,
+a:active {
+    color: var(--bright);
+}
+
+.token.property,
+.token.variable {
+    color: #0ff;
+}
+
+.token.string,
+.token.char,
+.token.number,
+.token.constant {
+    color: #bbf;
+}
+
+.token.function {
+    color: #fa0;
+}
+
+.token.keyword,
+.token.punctuation,
+.token.operator {
+    color: #ff0;
+}
+
+.token.class-name,
+.token.type-declaration {
+    color: #f0f;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata,
+.token.shebang {
+    color: var(--main-green)
+}

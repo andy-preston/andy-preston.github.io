@@ -1,9 +1,7 @@
 import { parseDocument } from "htmlparser2";
 import render from "dom-serializer";
-import { Document, Node, isDirective, isTag, isText, hasChildren } from "domhandler";
+import { Node, isDirective, isTag, isText, hasChildren } from "domhandler";
 import { removeElement } from "domutils";
-
-let dom: Document;
 
 const upperCaseDocType = (node: Node): void => {
     if (isDirective(node) && node.name == "!doctype") {
@@ -34,8 +32,14 @@ const hasPreParent = (node: Node): boolean => {
     return parent === null ? false : hasPreParent(parent);
 }
 
-const isNotTag = (node: Node|null): boolean => {
-    return node === null || !isTag(node);
+const isNotInline = (node: Node|null): boolean => {
+    return node === null || !isTag(node) || ![
+        "a",
+        "code",
+        "em",
+        "span",
+        "strong"
+    ].includes(node.name);
 }
 
 const stripUnusedJs = (node: Node): void => {
@@ -47,10 +51,10 @@ const stripUnusedJs = (node: Node): void => {
 const stripWhitespace = (node: Node): void => {
     if (isText(node) && !hasPreParent(node)) {
         node.data = node.data.replace(/\s+/g, ' ');
-        if (isNotTag(node.next)) {
+        if (isNotInline(node.next)) {
             node.data = node.data.trimEnd();
         }
-        if (isNotTag(node.prev)) {
+        if (isNotInline(node.prev)) {
             node.data = node.data.trimStart();
         }
     }
@@ -67,8 +71,8 @@ const traverse = (children: Node[], callback: TraversalCallback): void => {
     });
 }
 
-module.exports = (content: string): string => {
-    dom = parseDocument(content);
+export = (content: string): string => {
+    const dom = parseDocument(content);
     traverse(dom.children, (child: Node): void => {
         upperCaseDocType(child);
         stripLeadingSlashes(child);

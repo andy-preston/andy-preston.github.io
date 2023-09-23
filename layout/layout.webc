@@ -1,20 +1,19 @@
 <html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <title @raw="Array.isArray(title) ?
-            title.join(' ') :
-            'Andy Preston - ' + title"></title>
+        <title webc:is="html-title" :title="title"></title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
         <meta name="generator" :content="eleventy.generator">
         <link rel="stylesheet" :href="getBundleFileUrl('css')" webc:keep>
-        <link rel="stylesheet" href="colours.css">
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="../components/style.css">
         <script :src="getBundleFileUrl('js')" webc:keep></script>
     </head>
-    <page-body webc:nokeep
-        :title="title"
-        :tags="tags"
-        :date="date"
-        :content="content"></page-body>
+    <body>
+        <page-body webc:nokeep
+            :title="title"
+            :tags="tags"
+            :date="date"
+            :content="content"></page-body>
+    <body>
 </html>

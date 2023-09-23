@@ -1,12 +1,11 @@
 import {describe, expect, test} from "@jest/globals";
-
-const tidy = require("./tidy-html.ts");
+import tidy from "./tidy-html";
 
 describe("Tidy HTML module", () => {
 
     test("It converts doctype to upper case", () => {
         // https://html-validate.org/rules/doctype-style.html
-        const matcher = /^\<!DOCTYPE/g;
+        const matcher = /^<!DOCTYPE/g;
         const rawHtml = `<!doctype html><html><head>
             <title>Test HTML</title>
             </head><body><p>Hello</p></body></html>`;
@@ -90,7 +89,7 @@ describe("Tidy HTML module", () => {
     });
 
 
-    test("It keeps a single space to separate elements", () => {
+    test("It keeps a single space to separate inline elements", () => {
         const matcher = /span> <strong/g;
         const rawHtml = `<!doctype html><html><head>
             <title>Test HTML</title>
@@ -98,6 +97,16 @@ describe("Tidy HTML module", () => {
             </body></html>`
         expect(rawHtml).toMatch(matcher);
         expect(tidy(rawHtml)).toMatch(matcher);
+    });
+
+    test("It removes spaces between block elements", () => {
+        const matcher = /p> <p/g;
+        const rawHtml = `<!doctype html><html><head>
+            <title>Test HTML</title>
+            </head><body> <p>para</p> <p>para</p>
+            </body></html>`
+        expect(rawHtml).toMatch(matcher);
+        expect(tidy(rawHtml)).not.toMatch(matcher);
     });
 
     test("It ignores leading whitespace inside <PRE> elements", () => {

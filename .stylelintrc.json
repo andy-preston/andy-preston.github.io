@@ -1,7 +1,0 @@
-{
-    "extends": ["stylelint-config-standard"],
-    "rules": {
-        "max-nesting-depth": 0,
-        "comment-empty-line-before": "never"
-    }
-}

@@ -1,5 +1,4 @@
 const tidyHtml = require("./builder/tidy-html.ts");
-const tidy = require("./builder/cheap-and-nasty-tidy.ts");
 const typescript = require("./builder/typescript.ts");
 const webCPlugin = require("@11ty/eleventy-plugin-webc");
 const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
@@ -10,7 +9,7 @@ module.exports = function(eleventyConfig) {
             `${data.page.filePathStem}.${data.page.outputFileExtension}`;
     });
     eleventyConfig.addGlobalData("layout", "layout.webc");
-    eleventyConfig.addPassthroughCopy({"views/*.html": "."});
+    eleventyConfig.addPassthroughCopy({"components/*.html": "."});
     eleventyConfig.addPlugin(webCPlugin, {
         "components": [
             "components/*.webc",
@@ -20,10 +19,9 @@ module.exports = function(eleventyConfig) {
             "toFileDirectory": "",
             "transforms": [
                 function(content) {
-                    return this.type == "js" ?
-                        tidy(typescript(content)) : tidy(content)
+                    return this.type == "js" ? typescript(content) : content
                 }
-            ],
+            ]
         }
     });
     eleventyConfig.addPlugin(syntaxHighlight);
@@ -38,7 +36,7 @@ module.exports = function(eleventyConfig) {
             "input": "views",
             "output": "site",
             "includes": "../includes",
-            "layouts": "../layouts",
+            "layouts": "../layout",
         },
         "templateFormats": ["webc"]
     };
