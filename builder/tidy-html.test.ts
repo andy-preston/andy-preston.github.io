@@ -45,7 +45,8 @@ describe("Tidy HTML module", () => {
             <script src=""></script>
             </head><body><p>hello</p></body></html>`;
         const countScriptTags = (content: string): number => {
-            return content.match(/<script src/g).length;
+            const match = content.match(/<script src/g);
+            return match === null ? 0 : match.length;
         }
         expect(countScriptTags(rawHtml)).toBe(3);
         expect(countScriptTags(tidy(rawHtml))).toBe(2);

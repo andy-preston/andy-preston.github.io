@@ -40,6 +40,8 @@ sections:
               title: Symfony 3 Console exception logging
             - url: https://stackoverflow.com/questions/15761685/multiple-dynamic-database-connections-in-symfony2/30800216#30800216
               title: Multiple, dynamic database connections in Symfony 2
+    admin:
+        title: "Linux/Network Administration"
     shell:
         title: "Shell Miscellany"
     philosophy:
