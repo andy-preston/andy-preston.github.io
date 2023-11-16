@@ -6,52 +6,47 @@
     "scripts": {
         "style": "npx stylelint **/*.css",
         "check": "npx eslint . ; npx tsc --noEmit ; npm run style ; npx jest",
-        "build": "npx ts-node node_modules/.bin/eleventy",
+        "build": "npx ts-node node_modules/.bin/eleventy --config=builder/eleventy.js",
         "localBuild": "npm run build ; npm run check"
     },
     "eslintConfig": {
         "overrides": [
             {
-                "files": ["*.js"],
-                "extends": [
-                    "eslint:recommended"
-                ],
-                "env": {
-                    "node": true
-                },
+                "files": [ "*.js" ],
+                "extends": [ "eslint:recommended" ],
+                "env": { "node": true },
                 "parserOptions": {
                     "ecmaVersion": "latest",
                     "sourceType": "module"
                 }
             },
             {
-                "files": ["site/*.js"],
-                "extends": [
-                    "eslint:recommended"
-                ],
-                "env": {
-                    "browser": true
-                },
+                "files": [ "site/*.js" ],
+                "extends": [ "eslint:recommended" ],
+                "env": { "browser": true },
                 "parserOptions": {
                     "ecmaVersion": 2015,
                     "sourceType": "script"
                 }
             },
             {
-                "files": ["**/*.ts"],
+                "files": [ "**/*.ts" ],
                 "extends": [
                     "eslint:recommended",
                     "plugin:@typescript-eslint/recommended"
                 ],
                 "parser": "@typescript-eslint/parser",
-                "plugins": [
-                    "@typescript-eslint"
-                ]
+                "plugins": [ "@typescript-eslint" ]
+            },
+            {
+                "files": [ "**/*.json" ],
+                "extends": [ "plugin:json/recommended" ],
+                "plugins": [ "json" ]
             }
         ]
     },
     "stylelint": {
-        "extends": ["stylelint-config-standard"],
+        "extends": [ "stylelint-config-standard" ],
         "rules": {
             "max-nesting-depth": 0,
             "comment-empty-line-before": null
@@ -72,6 +67,7 @@
         "@typescript-eslint/eslint-plugin": "^6.7.2",
         "@typescript-eslint/parser": "^6.7.2",
         "eslint": "^8.49.0",
+        "eslint-plugin-json": "^3.1.0",
         "jest": "^29.6.1",
         "stylelint": "^15.10.3",
         "stylelint-config-standard": "^34.0.0",
