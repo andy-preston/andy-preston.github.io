@@ -1,52 +1,10 @@
 ---
-title: "Blocking Rogue DHCP Servers with ebtables on OpenWRT"
-tags: admin
-date: "2023-10-17"
+title: "Codswallop!"
+tags: censored
 ---
-<section><article><p>I have a problem that all sorts of people hang all sorts of
-devices on our office network, and if one of these is, say, a domestic
-router with a DHCP server enabled, many packets end up getting
-dropped. My research led me to <code>ebtables</code> and, having initially
-struggled with iptables back in the day, I thought it'd be quite a steep
-learning curve... but it turned out to be quite easy.</p></article></section>
-
-<h2>Finding the offending MAC address</h2>
-
-<section><article><p>You can hunt the offending DHCP server from a root
-shell with:</p>
-
-<pre><code>nmap --script broadcast-dhcp-discover</code></pre>
-
-<p>This may give you the address of the legitimate DHCP server or the rogue
-(which is, after all, the problem we face in these situations).</p>
-
-<p>Once you've got an IP address for the rogue, you need to get it's MAC
-address with:</p>
-
-<pre><code>nmap -sn 192.168.0.1</code></pre>
-
-<p>(assuming <code>192.168.0.1</code> is the offending address from the
-previous step)</p>
-
-<p>That's the difficult steps done.</p></article></section>
-
-<h2>OpenWRT setup</h2>
-
-<section><article><p>Now it's just a matter of hopping over to my OpenWRT
-router which comes between me and the vagaries of the rest of the building.</p>
-
-<p>First time round, I had to install <code>ebtables</code>
-on the router with:</p>
-
-<pre><code>opkg update
-opkg install ebtables-utils</code></pre>
-
-<p>The it's just a matter of going to the <strong>System</strong> -
-<strong>Startup</strong> page of the OpenWRT configuration pages and adding the
-following to the <strong>Local Startup</strong> script (assuming
-<code>40:0d:10:65:61:4b</code> is the offending MAC.):</p>
-
-<pre><code>ebtables -A OUTPUT -d 40:0d:10:65:61:4b -j DROP
-ebtables -A INPUT -s 40:0d:10:65:61:4b -j DROP</code></pre>
-
-<p>And that's the job done</p></article></section>
+<section><article><p>This page has been removed!!</p>
+<p><a href="./">Site Index</a></p>
+<p>I was talking out of my (expletive deleted)!</p>
+<p><a href="./">Site Index</a></p>
+<p>the original content of this page was naught but codswallop!</p>
+<p><a href="./">Site Index</a></p></article></section>

@@ -21,7 +21,10 @@ pics:
     - ["WgnIdi8", "How can you choose not to follow the plan if you haven't got a plan in the first place?"]
     - ["PLBNQla", "The Crystal Palace"]
     - ["ji1pBD0", "The Chem Lab Mystery"]
+    - ["XF1FU2H", "How To Construct A Time Machine"]
 sections:
+    # You can also use the tag `censored` for pages that don't show up in the
+    # index!
     micro:
         title: "Microcontroller Programming"
         offSite:
@@ -40,8 +43,6 @@ sections:
               title: Symfony 3 Console exception logging
             - url: https://stackoverflow.com/questions/15761685/multiple-dynamic-database-connections-in-symfony2/30800216#30800216
               title: Multiple, dynamic database connections in Symfony 2
-    admin:
-        title: "Linux/Network Administration"
     shell:
         title: "Shell Miscellany"
     philosophy:
