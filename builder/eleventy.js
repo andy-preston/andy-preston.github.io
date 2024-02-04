@@ -9,7 +9,7 @@ module.exports = function(eleventyConfig) {
             `${data.page.filePathStem}.${data.page.outputFileExtension}`;
     });
     eleventyConfig.addGlobalData("layout", "layout.webc");
-    eleventyConfig.addPassthroughCopy({ "components/*.html": "." });
+    eleventyConfig.addPassthroughCopy({ "fixed/*": "." });
     eleventyConfig.addPlugin(webCPlugin, {
         "components": [
             "components/*.webc",
