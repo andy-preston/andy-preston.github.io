@@ -120,5 +120,4 @@ describe("Tidy HTML module", () => {
         expect(rawHtml).toMatch(matcher);
         expect(tidy(rawHtml)).toMatch(matcher);
     });
-
 });

@@ -1,7 +1,6 @@
-const tidyHtml = require("./tidy-html.ts");
-const typescript = require("./typescript.ts");
-const webCPlugin = require("@11ty/eleventy-plugin-webc");
 const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
+const transforms = require("./transforms.ts");
+const webCPlugin = require("@11ty/eleventy-plugin-webc");
 
 module.exports = function(eleventyConfig) {
     eleventyConfig.addGlobalData("permalink", () => {
@@ -19,17 +18,17 @@ module.exports = function(eleventyConfig) {
             "toFileDirectory": "",
             "transforms": [
                 function(content) {
-                    return this.type == "js" ? typescript(content) : content
+                    return transforms(content, this.type);
                 }
             ]
         }
     });
     eleventyConfig.addPlugin(syntaxHighlight);
     eleventyConfig.on("eleventy.config", async (params) => {
-        /* This is something of a horrible hack to ensure that my `tidyHTML`
-           transformer is run AFTER the transformer from
+        /* This is something of a horrible hack to ensure that tidying
+           transformers are run AFTER the transformer from
            `eleventy-plugin-bundle` */
-        params.config.transforms['andy-preston-tidy-html'] = tidyHtml;
+        params.config.transforms["andy-preston-transforms"] = transforms;
     });
     return {
         "dir": {
