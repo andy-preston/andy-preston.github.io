@@ -28,7 +28,6 @@ window.addEventListener("load", () => {
         const [tag, title] = figureList[currentFigure];
         image.setAttribute('src', `https://i.imgur.com/${tag}.jpg`);
         image.setAttribute('alt', title);
-        caption.textContent = title;
     }
 
     const firstImageLoaded = () => {
@@ -39,6 +38,10 @@ window.addEventListener("load", () => {
 
     image.addEventListener("load", firstImageLoaded);
     showCurrentFigure();
+
+    image.addEventListener("load", () => {
+        caption.textContent = image.getAttribute('alt');
+    });
 
     image.addEventListener("click", (event) => {
         if (event.offsetX < (image.width / 2)) {
