@@ -7,50 +7,46 @@ const upperCaseDocType = (node: Node): void => {
     if (isDirective(node) && node.name == "!doctype") {
         node.data = "!DOCTYPE HTML";
     }
-}
+};
 
 const stripLeadingSlashes = (node: Node): void => {
     if (isTag(node)) {
-        Object.keys(node.attribs).forEach(
-            (attribute: string) => {
-                if (['href', 'src'].includes(attribute)) {
-                    const value = node.attribs[attribute];
-                    if (value && value[0] == '/') {
-                        node.attribs[attribute] = value.slice(1);
-                    }
+        Object.keys(node.attribs).forEach((attribute: string) => {
+            if (["href", "src"].includes(attribute)) {
+                const value = node.attribs[attribute];
+                if (value && value[0] == "/") {
+                    node.attribs[attribute] = value.slice(1);
                 }
             }
-        );
+        });
     }
-}
+};
 
 const hasPreParent = (node: Node): boolean => {
-    if (isTag(node) && node.name == 'pre') {
+    if (isTag(node) && node.name == "pre") {
         return true;
     }
     const parent = node.parent;
     return parent === null ? false : hasPreParent(parent);
-}
+};
 
-const isNotInline = (node: Node|null): boolean => {
-    return node === null || !isTag(node) || ![
-        "a",
-        "code",
-        "em",
-        "span",
-        "strong"
-    ].includes(node.name);
-}
+const isNotInline = (node: Node | null): boolean => {
+    return (
+        node === null ||
+        !isTag(node) ||
+        !["a", "code", "em", "span", "strong"].includes(node.name)
+    );
+};
 
 const stripUnusedJs = (node: Node): void => {
-    if (isTag(node) && node.name == "script" && node.attribs.src == '') {
+    if (isTag(node) && node.name == "script" && node.attribs.src == "") {
         removeElement(node);
     }
-}
+};
 
 const stripWhitespace = (node: Node): void => {
     if (isText(node) && !hasPreParent(node)) {
-        node.data = node.data.replace(/\s+/g, ' ');
+        node.data = node.data.replace(/\s+/g, " ");
         if (isNotInline(node.next)) {
             node.data = node.data.trimEnd();
         }
@@ -58,7 +54,7 @@ const stripWhitespace = (node: Node): void => {
             node.data = node.data.trimStart();
         }
     }
-}
+};
 
 type TraversalCallback = (child: Node) => void;
 
@@ -69,7 +65,7 @@ const traverse = (children: Node[], callback: TraversalCallback): void => {
             traverse(child.children, callback);
         }
     });
-}
+};
 
 export = (content: string): string => {
     const dom = parseDocument(content);
@@ -85,4 +81,4 @@ export = (content: string): string => {
         stripWhitespace(child);
     });
     return render(dom);
-}
+};

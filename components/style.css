@@ -215,5 +215,5 @@ a:active {
 .token.doctype,
 .token.cdata,
 .token.shebang {
-    color: var(--main-green)
+    color: var(--main-green);
 }

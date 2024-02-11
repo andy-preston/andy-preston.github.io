@@ -2,7 +2,7 @@ const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 const transforms = require("./transforms.ts");
 const webCPlugin = require("@11ty/eleventy-plugin-webc");
 
-module.exports = function(eleventyConfig) {
+module.exports = function (eleventyConfig) {
     eleventyConfig.addGlobalData("permalink", () => {
         return (data) =>
             `${data.page.filePathStem}.${data.page.outputFileExtension}`;
@@ -17,7 +17,7 @@ module.exports = function(eleventyConfig) {
         "bundlePluginOptions": {
             "toFileDirectory": "",
             "transforms": [
-                function(content) {
+                function (content) {
                     return transforms(content, this.type);
                 }
             ]

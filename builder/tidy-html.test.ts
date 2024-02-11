@@ -1,4 +1,4 @@
-import {describe, expect, test} from "@jest/globals";
+import { describe, expect, test } from "@jest/globals";
 import tidy from "./tidy-html";
 
 describe("Tidy HTML module", () => {
@@ -47,7 +47,7 @@ describe("Tidy HTML module", () => {
         const countScriptTags = (content: string): number => {
             const match = content.match(/<script src/g);
             return match === null ? 0 : match.length;
-        }
+        };
         expect(countScriptTags(rawHtml)).toBe(3);
         expect(countScriptTags(tidy(rawHtml))).toBe(2);
     });
@@ -56,7 +56,7 @@ describe("Tidy HTML module", () => {
         const matcher = /\s\s/;
         const rawHtml = `<!doctype html><html><head>
             <title>Test HTML</title>
-            </head><body><p>Testing</p></body></html>`
+            </head><body><p>Testing</p></body></html>`;
         expect(rawHtml).toMatch(matcher);
         expect(tidy(rawHtml)).not.toMatch(matcher);
     });
@@ -65,7 +65,7 @@ describe("Tidy HTML module", () => {
         const matcher = /\s<\//g;
         const rawHtml = `<!doctype html><html><head>
             <title>Test HTML  </title>
-            </head><body><p>Testing  </p></body></html>`
+            </head><body><p>Testing  </p></body></html>`;
         expect(rawHtml).toMatch(matcher);
         expect(tidy(rawHtml)).not.toMatch(matcher);
     });
@@ -74,7 +74,7 @@ describe("Tidy HTML module", () => {
         const matcher = /\s<\//g;
         const rawHtml = `<!doctype html><html><head>
             <title>  Test HTML</title>
-            </head><body><p>  Testing</p></body></html>`
+            </head><body><p>  Testing</p></body></html>`;
         expect(rawHtml).toMatch(matcher);
         expect(tidy(rawHtml)).not.toMatch(matcher);
     });
@@ -84,18 +84,17 @@ describe("Tidy HTML module", () => {
         const rawHtml = `<!doctype html><html><head>
             <title>Test HTML</title>
             </head><body><p><span>1</span>   <strong>2</strong></p>
-            </body></html>`
+            </body></html>`;
         expect(rawHtml).not.toMatch(matcher);
         expect(tidy(rawHtml)).toMatch(matcher);
     });
-
 
     test("It keeps a single space to separate inline elements", () => {
         const matcher = /span> <strong/g;
         const rawHtml = `<!doctype html><html><head>
             <title>Test HTML</title>
             </head><body><p><span>1</span> <strong>2</strong></p>
-            </body></html>`
+            </body></html>`;
         expect(rawHtml).toMatch(matcher);
         expect(tidy(rawHtml)).toMatch(matcher);
     });
@@ -105,7 +104,7 @@ describe("Tidy HTML module", () => {
         const rawHtml = `<!doctype html><html><head>
             <title>Test HTML</title>
             </head><body> <p>para</p> <p>para</p>
-            </body></html>`
+            </body></html>`;
         expect(rawHtml).toMatch(matcher);
         expect(tidy(rawHtml)).not.toMatch(matcher);
     });
@@ -116,7 +115,7 @@ describe("Tidy HTML module", () => {
         const rawHtml = `<!doctype html><html><head>
             <title>Test HTML</title>
             </head><body><pre>Preformatted -
-            Keep Leading Space</pre></body></html>`
+            Keep Leading Space</pre></body></html>`;
         expect(rawHtml).toMatch(matcher);
         expect(tidy(rawHtml)).toMatch(matcher);
     });

@@ -26,25 +26,25 @@ window.addEventListener("load", () => {
 
     const showCurrentFigure = () => {
         const [tag, title] = figureList[currentFigure];
-        image.setAttribute('src', `https://i.imgur.com/${tag}.jpg`);
-        image.setAttribute('alt', title);
-    }
+        image.setAttribute("src", `https://i.imgur.com/${tag}.jpg`);
+        image.setAttribute("alt", title);
+    };
 
     const firstImageLoaded = () => {
         figure.removeAttribute("style");
         figure.removeAttribute("data-pics");
         image.removeEventListener("load", firstImageLoaded);
-    }
+    };
 
     image.addEventListener("load", firstImageLoaded);
     showCurrentFigure();
 
     image.addEventListener("load", () => {
-        caption.textContent = image.getAttribute('alt');
+        caption.textContent = image.getAttribute("alt");
     });
 
     image.addEventListener("click", (event) => {
-        if (event.offsetX < (image.width / 2)) {
+        if (event.offsetX < image.width / 2) {
             currentFigure = currentFigure == 0 ?
                 maximumFigure : currentFigure - 1;
         } else {

@@ -10,7 +10,7 @@ const pretty = async (content: string, parser: string): Promise<string> => {
         "singleAttributePerLine": false,
         "printWidth": 84
     });
-}
+};
 
 const typescript = (content: string): string => transpileModule(content, {
     "compilerOptions": {
@@ -33,4 +33,4 @@ export = async (content: string, spec: string): Promise<string> => {
         return pretty(tidyHtml(content), type);
     }
     return content;
-}
+};
