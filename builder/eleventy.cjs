@@ -1,3 +1,5 @@
+"use strict";
+
 const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 const transforms = require("./transforms.ts");
 const webCPlugin = require("@11ty/eleventy-plugin-webc");

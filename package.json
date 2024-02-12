@@ -4,15 +4,17 @@
     "description": "Andy Preston's Curate's Egg",
     "author": "Andy Preston",
     "scripts": {
+        "build": "npx ts-node node_modules/.bin/eleventy --config=builder/eleventy.cjs",
+        "eslint": "DEBUG=eslint:cli-engine npx eslint .",
         "style": "npx stylelint **/*.css",
-        "check": "npx eslint . ; npx tsc --noEmit ; npm run style ; npx jest",
-        "build": "npx ts-node node_modules/.bin/eleventy --config=builder/eleventy.js",
+        "tsCheck": "npx tsc --noEmit",
+        "check": "npm run eslint ; npm run tsCheck ; npm run style ; npx jest",
         "localBuild": "npm run build ; npm run check"
     },
     "eslintConfig": {
         "overrides": [
             {
-                "files": [ "*.js" ],
+                "files": [ "**/*.cjs" ],
                 "extends": [ "eslint:recommended" ],
                 "env": { "node": true },
                 "parserOptions": {

@@ -67,7 +67,7 @@ const traverse = (children: Node[], callback: TraversalCallback): void => {
     });
 };
 
-export = (content: string): string => {
+export default (content: string): string => {
     const dom = parseDocument(content);
     traverse(dom.children, (child: Node): void => {
         upperCaseDocType(child);
