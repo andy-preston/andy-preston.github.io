@@ -30,7 +30,7 @@ export = async (content: string, spec: string): Promise<string> => {
         return pretty(content, "css");
     }
     if (type == "html") {
-        return pretty(tidyHtml(content), type);
+        return pretty(tidyHtml(content, true), type);
     }
     return content;
 };

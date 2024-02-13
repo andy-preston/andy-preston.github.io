@@ -3,6 +3,11 @@ import tidy from "./tidy-html";
 
 describe("Tidy HTML module", () => {
 
+    test("Quotes and ampersands are rendered as entities", () => {
+        const rawHtml = "<a href=\"plop.html\">\"&\"</a>";
+        expect(tidy(rawHtml, false)).toBe("<a href=\"plop.html\">&quot;&amp;&quot;</a>");
+    });
+
     test("It converts doctype to upper case", () => {
         // https://html-validate.org/rules/doctype-style.html
         const matcher = /^<!DOCTYPE/g;
@@ -10,7 +15,7 @@ describe("Tidy HTML module", () => {
             <title>Test HTML</title>
             </head><body><p>Hello</p></body></html>`;
         expect(rawHtml).not.toMatch(matcher);
-        expect(tidy(rawHtml)).toMatch(matcher);
+        expect(tidy(rawHtml, false)).toMatch(matcher);
     });
 
     test("It strips leading slashes from URLs", () => {
@@ -22,7 +27,7 @@ describe("Tidy HTML module", () => {
             </head><body><p><a href="/plop.html">plop</a></p>
             </body></html>`;
         expect(rawHtml).toMatch(matcher);
-        expect(tidy(rawHtml)).not.toMatch(matcher);
+        expect(tidy(rawHtml, false)).not.toMatch(matcher);
     });
 
     test("It ignores URLs with no leading slash", () => {
@@ -34,7 +39,7 @@ describe("Tidy HTML module", () => {
             </head><body><p><a href="http://example.com/plop.html">plop</a></p>
             </body></html>`;
         expect(rawHtml).toMatch(matcher);
-        expect(tidy(rawHtml)).toMatch(matcher);
+        expect(tidy(rawHtml, false)).toMatch(matcher);
     });
 
     test("It removes Script tags with an empty src attribute", () => {
@@ -49,7 +54,7 @@ describe("Tidy HTML module", () => {
             return match === null ? 0 : match.length;
         };
         expect(countScriptTags(rawHtml)).toBe(3);
-        expect(countScriptTags(tidy(rawHtml))).toBe(2);
+        expect(countScriptTags(tidy(rawHtml, false))).toBe(2);
     });
 
     test("It strips whitespace", () => {
@@ -58,7 +63,7 @@ describe("Tidy HTML module", () => {
             <title>Test HTML</title>
             </head><body><p>Testing</p></body></html>`;
         expect(rawHtml).toMatch(matcher);
-        expect(tidy(rawHtml)).not.toMatch(matcher);
+        expect(tidy(rawHtml, false)).not.toMatch(matcher);
     });
 
     test("It strips trailing whitespace", () => {
@@ -67,7 +72,7 @@ describe("Tidy HTML module", () => {
             <title>Test HTML  </title>
             </head><body><p>Testing  </p></body></html>`;
         expect(rawHtml).toMatch(matcher);
-        expect(tidy(rawHtml)).not.toMatch(matcher);
+        expect(tidy(rawHtml, false)).not.toMatch(matcher);
     });
 
     test("It strips leading whitespace", () => {
@@ -76,7 +81,7 @@ describe("Tidy HTML module", () => {
             <title>  Test HTML</title>
             </head><body><p>  Testing</p></body></html>`;
         expect(rawHtml).toMatch(matcher);
-        expect(tidy(rawHtml)).not.toMatch(matcher);
+        expect(tidy(rawHtml, false)).not.toMatch(matcher);
     });
 
     test("It reduces whitespace between elements", () => {
@@ -86,7 +91,7 @@ describe("Tidy HTML module", () => {
             </head><body><p><span>1</span>   <strong>2</strong></p>
             </body></html>`;
         expect(rawHtml).not.toMatch(matcher);
-        expect(tidy(rawHtml)).toMatch(matcher);
+        expect(tidy(rawHtml, false)).toMatch(matcher);
     });
 
     test("It keeps a single space to separate inline elements", () => {
@@ -96,7 +101,7 @@ describe("Tidy HTML module", () => {
             </head><body><p><span>1</span> <strong>2</strong></p>
             </body></html>`;
         expect(rawHtml).toMatch(matcher);
-        expect(tidy(rawHtml)).toMatch(matcher);
+        expect(tidy(rawHtml, false)).toMatch(matcher);
     });
 
     test("It removes spaces between block elements", () => {
@@ -106,7 +111,7 @@ describe("Tidy HTML module", () => {
             </head><body> <p>para</p> <p>para</p>
             </body></html>`;
         expect(rawHtml).toMatch(matcher);
-        expect(tidy(rawHtml)).not.toMatch(matcher);
+        expect(tidy(rawHtml, false)).not.toMatch(matcher);
     });
 
     test("It ignores leading whitespace inside <PRE> elements", () => {
@@ -117,6 +122,6 @@ describe("Tidy HTML module", () => {
             </head><body><pre>Preformatted -
             Keep Leading Space</pre></body></html>`;
         expect(rawHtml).toMatch(matcher);
-        expect(tidy(rawHtml)).toMatch(matcher);
+        expect(tidy(rawHtml, false)).toMatch(matcher);
     });
 });

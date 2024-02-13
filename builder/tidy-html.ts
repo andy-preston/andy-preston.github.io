@@ -44,7 +44,11 @@ const stripUnusedJs = (node: Node): void => {
     }
 };
 
-const stripWhitespace = (node: Node): void => {
+const stripWhitespace = (
+    node: Node,
+    pretty: boolean,
+    depth: number
+): void => {
     if (isText(node) && !hasPreParent(node)) {
         node.data = node.data.replace(/\s+/g, " ");
         if (isNotInline(node.next)) {
@@ -56,20 +60,24 @@ const stripWhitespace = (node: Node): void => {
     }
 };
 
-type TraversalCallback = (child: Node) => void;
+type TraversalCallback = (depth: number, child: Node) => void;
 
-const traverse = (children: Node[], callback: TraversalCallback): void => {
+const traverse = (
+    depth: number,
+    children: Node[],
+    callback: TraversalCallback
+): void => {
     children.forEach((child: Node): void => {
-        callback(child);
+        callback(depth, child);
         if (hasChildren(child)) {
-            traverse(child.children, callback);
+            traverse(depth + 1, child.children, callback);
         }
     });
 };
 
-export default (content: string): string => {
+export default (content: string, pretty: boolean): string => {
     const dom = parseDocument(content);
-    traverse(dom.children, (child: Node): void => {
+    traverse(0, dom.children, (depth: number, child: Node): void => {
         upperCaseDocType(child);
         stripLeadingSlashes(child);
         stripUnusedJs(child);
@@ -77,8 +85,8 @@ export default (content: string): string => {
     /* We traverse twice because stripping out empty `<script>` tags can
        leave whitespace "laying around". It'd be worth investigating a more
        efficient way around this */
-    traverse(dom.children, (child: Node): void => {
-        stripWhitespace(child);
+    traverse(0, dom.children, (depth: number, child: Node): void => {
+        stripWhitespace(child, pretty, depth);
     });
     return render(dom);
 };
