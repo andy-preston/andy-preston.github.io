@@ -1,0 +1,122 @@
+---
+title: "Coding Katas Vs Real Life"
+tags: engineering
+date: "2024-02-18"
+---
+<section><article><p>I was watching Live Overflow the other day and he had
+made a pair of videos about how
+<a href="https://www.youtube.com/watch?v=L2C8rVO2lAg">CTFs are awesome</a>
+and, conversely, how
+<a href="https://www.youtube.com/watch?v=lxJpKUoX-6E">CTFs are terrible</a>.</p>
+
+<p>And this got me thinking about how CTFs are the hackers' equivalent of
+coding katas and how I don't particularly &quot;get&quot; the point of coding
+katas.</p></article></section>
+
+<h2>The Point of Coding Katas</h2>
+
+<section><article><p>Well, that's not strictly true.</p>
+
+<p>I see coding katas as something akin to unit tests but for your personal
+development.</p>
+
+<p>You take a small, easily defined problem and attempt to implement it using
+a technique or language you want to master and it's small and concise enough to
+get it done in a reasonable amount of time.</p>
+
+<p>But, then, when you've done it what do you have. Not a lot. A solution to a
+trivial problem that nobody really needs a solution to. Chuck it in the bin now
+I s'pose</p></article></section>
+
+<h2>An alternative approach</h2>
+
+<section><article><p>So if this is all &quot;so terrible&quot;, what's the
+alternative?</p>
+
+<p>Find yourself a project that at least you will find more or less useful but
+that's also going to offer a challenge or two, that's going to throw you into
+&quot;uncharted territory&quot; or &quot;stormy
+waters&quot;.</p></article></section>
+
+<h2>Making Things Hard For Fun &amp; Education.</h2>
+
+<section><article><p>In many of my spare-time projects, I like to muck around
+with microcontrollers and, I've been working on a device to adapt an obsolete
+<a href="https://www.britishtelephones.com/t746.htm">GPO-746</a>
+and bring it back to life.</p>
+
+<p>I've always though that it's a good idea for personal development to go down
+one stage in abstraction. If, at work, you'd use a library or framework to
+achieve something - instead try to implement that functionality yourself. If
+Python would be a sensible language to use for some project, have a go at doing
+it in Rust instead.</p>
+
+<p>With my microcontroller projects, I've taken this to the extreme of working
+in assembly language.</p>
+
+<p>But I'm in danger of getting off topic. Keep your eyes peeled for my upcoming
+&quot;Applying Software Engineering Practices to Assembly Language
+Programming&quot; (Catchy title????)</p></article></section>
+
+<h2>Go Looking For The Unfamiliar</h2>
+
+<section><article><p>... or better still &quot;disdained&quot;</p>
+
+<p>After a while of working on this project, it seemed the best way to go about
+it was to adapt it into an Android handset and to create a &quot;simple&quot;
+Android app to control it. If you want to have a look you can find it in on
+GitHub at <a
+    href="https://github.com/andy-preston/gpo-746-android"
+>andy-preston/gpo-746-android</a>.</p>
+
+<p>If I'm thinking of Android apps, I've got to look at using the JVM
+and Kotlin... I've got a bit of a problem there because, well, I've never really
+got on at all with the whole Java ecosystem. Is it just some personal foible or
+is it as bad as I say it is? I don't know. But I do know that it's certainly
+unexplored territory for me.</p>
+
+<p>And then there's Gradle... Oh Gradle, why are you so over-complex? You're
+only a build system, so you really need to contain multiple turing-complete
+programming languages just to run a few build tasks?</p>
+
+<p>So here I am in both &quot;uncharted territory&quot;, and &quot;stormy
+waters&quot;... Purely by wanting to get something done, I've accidentally
+found that &quot;perfect&quot; substitute for coding katas that I was going on
+about in the first place.</p></article></section>
+
+<h2>And Let's Make it Even More Difficult on Myself.</h2>
+
+<section><article><p>I'm also using the CH340G serial USB chip to handle the
+communication between my microcontroller in the phone and the Android device.
+On Linux or BSD, this is just a matter of opening a serial connection to
+<code>/dev/ttyUSB0</code>. But on Android you actually need your own drivers
+for &quot;strange&quot; USB devices in your app.</p>
+
+<p>I could use one of the available Java libraries for driving serial USB chips
+on Android and, if this was a commercial project, I'd probably be stupid not to.
+But, for an exercise like this, that's just way too easy. I'm sure all the
+people at the real-life non-metaphorical dojo would agree &quot;no pain, no
+gain!&quot;. And, for this chip, &quot;pain&quot; is certainly the word for it.
+The CH340 family of chips are probably THE worst documented series of ICs in the
+entire history of electronics.</p>
+
+<p>The only documentation I've got is the actual source-code for the Linux
+driver, the NetBSD driver, the FreeBSD driver and those 2 libraries I mentioned
+earlier. But the people who wrote this code also had no real documentation and
+reading their code, it comes over as leaning a little towards
+&quot;cargo culting&quot;.</p></article></section>
+
+<h2>Walking Out Of The Dojo</h2>
+
+<section><article><p>Now, if you're trying to &quot;Do your 10,000 hours&quot;,
+you need Deliberate Practice. And you can spend that time taking exercises
+with no goal beyond development itself or you can find a useful (or, at least,
+useful to you) project to complete. But make sure that project has some
+challenges that will make your skillset grow.</p>
+
+<p>Be obsessed with software quality and refine your project again and again
+until the code isn't just &quot;not bad&quot; but as close to perfect that you
+can get without quasi-divine superpowers... this is a spare time project -
+there's no manager here, fretting over deadlines.</p>
+
+<p>And now you are free to walk out of the dojo!</p></article></section>

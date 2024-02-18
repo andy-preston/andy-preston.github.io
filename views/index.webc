@@ -35,6 +35,8 @@ sections:
         title: "Architecture"
     docker:
         title: "Docker"
+    engineering:
+        title: "Software Engineering"
     php:
         title: "PHP"
         offSite:
