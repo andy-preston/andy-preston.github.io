@@ -14,7 +14,7 @@ const stripLeadingSlashes = (node: Node): void => {
         Object.keys(node.attribs).forEach((attribute: string) => {
             if (["href", "src"].includes(attribute)) {
                 const value = node.attribs[attribute];
-                if (value && value[0] == "/") {
+                if (value && value != "/" && value[0] == "/") {
                     node.attribs[attribute] = value.slice(1);
                 }
             }

@@ -37,6 +37,16 @@ describe("Tidy HTML module", () => {
         expect(tidy(rawHtml)).toMatch(matcher);
     });
 
+    test("It ignores URLs that are JUST a slash", () => {
+        const matcher = /href="\/"/g;
+        const rawHtml = `<!doctype html><html><head>
+            <title>Test HTML</title>
+            </head><body><p><a href="/">home</a></p>
+            </body></html>`;
+        expect(rawHtml).toMatch(matcher);
+        expect(tidy(rawHtml)).toMatch(matcher);
+    });
+
     test("It removes Script tags with an empty src attribute", () => {
         const rawHtml = `<!doctype html><html><head>
             <title>Test HTML</title>
