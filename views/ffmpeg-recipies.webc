@@ -1,7 +1,7 @@
 ---
 title: "FFMPEG Recipes"
 tags: shell
-date: "2023-06-26"
+date: "2024-02-18"
 ---
 <section>
 <article><p>Not exactly &quot;an FFMPEG cookbook&quot;,
@@ -11,24 +11,24 @@ envelopes.</p></article>
 
 <section>
 <article><p>Extract the audio from a bunch of MPEG-4 movies</p></article>
-<aside><syntax-highlight language="bash">for a in *.mp4
+<aside><pre><code>for a in *.mp4
 do
     ffmpeg -i $a -map 0:1 -codec:a copy $(
         echo $a | sed -e 's/mp4/aac/g'
     )
-done</syntax-highlight></aside>
+done</code></pre></aside>
 </section>
 
 <section>
 <article><p>Extract audio from an MPEG-4 stream and re-encode it as MP3</p></article>
-<aside><syntax-highlight language="bash">ffmpeg -hide_banner \
+<aside><pre><code>ffmpeg -hide_banner \
     -i ./stream.mp4 \
-    -map_metadata -1 -vn ./audio.mp3</syntax-highlight></aside>
+    -map_metadata -1 -vn ./audio.mp3</code></pre></aside>
 </section>
 
 <section>
 <article><p>Re-encode audio to MP3 with a selected bitrate</p></article>
-<aside><syntax-highlight language="bash">for a in $(
+<aside><pre><code>for a in $(
     find -name \*.aac
 )
 do
@@ -36,77 +36,77 @@ do
         -c:a libmp3lame -ac 2 -b:a 192k $(
             echo $a | sed 's/aac/mp3/'
         )
-done</syntax-highlight></aside>
+done</code></pre></aside>
 </section>
 
 <section>
 <article><p>Convert MPEG-4 AVI files to MPEG-4 streams</p></article>
-<aside><syntax-highlight language="bash">for a in *.avi
+<aside><pre><code>for a in *.avi
 do
     ffmpeg -hide_banner -i $a -map_metadata -1 \
         -codec:v copy -codec:a copy \
         $(echo $a | sed 's/avi/mp4/g')
-done</syntax-highlight></aside>
+done</code></pre></aside>
 </section>
 
 <section>
 <article><p>Concatenate 100% compatible videos that have already been split into parts</p></article>
-<aside><syntax-highlight language="bash">echo file part1.mp4 > list.txt
-echo file part2.mp4 >> list.txt
+<aside><pre><code>echo file part1.mp4 &gt; list.txt
+echo file part2.mp4 &gt;&gt; list.txt
 ffmpeg -f concat -safe 0 -i list.txt \
-    -c copy -y output.mp4</syntax-highlight></aside>
+    -c copy -y output.mp4</code></pre></aside>
 </section>
 
 <section>
 <article><p>Merge video and audio held into 2 MPEG-4 streams into a single MPEG-4 stream</p></article>
-<aside><syntax-highlight language="bash">ffmpeg -hide_banner \
+<aside><pre><code>ffmpeg -hide_banner \
     -i ./video.mp4 -i ./audio.mp4 \
     -map_metadata -1 \
     -codec:v copy -codec:a copy \
-    ./merged.mp4</syntax-highlight></aside>
+    ./merged.mp4</code></pre></aside>
 </section>
 
 <section>
 <article><p>Deinterlace, rescale and encode as silent H264/MPEG-4</p></article>
-<aside><syntax-highlight language="bash">ffmpeg -i ./original.mp4 \
+<aside><pre><code>ffmpeg -i ./original.mp4 \
     -vf yadif -vf scale=720:574 \
     -c:v libx264 -preset slow -crf 0 \
-    -an ./processed.mp4</syntax-highlight></aside>
+    -an ./processed.mp4</code></pre></aside>
 </section>
 
 <section>
 <article><p>Overlay two video camera streams on top of each other</p></article>
-<aside><syntax-highlight language="bash">ffmpeg \
+<aside><pre><code>ffmpeg \
     -f video4linux2 -r 30 -s 640x480 -i /dev/video0 \
     -f video4linux2 -r 30 -s 640x480 -i /dev/video2 \
     -filter_complex "[1]format=yuva444p,colorchannelmixer=aa=0.5[in2];[0][in2]overlay" \
-    -y overlaid.mp4</syntax-highlight></aside>
+    -y overlaid.mp4</code></pre></aside>
 </section>
 
 <section>
 <article><p>Determine which (video) frames in a soundtrack contain peaks</p></article>
-<aside><syntax-highlight language="bash">FPS=25
+<aside><pre><code>FPS=25
 ffmpeg \
     -i ./soundtrack.wav \
     -af astats=metadata=1:reset=$(
         echo ${FPS} | awk '{ printf 1 / $1 }'
     ),ametadata=print:key=lavfi.astats.Overall.Max_level:file=- \
-    -f null /dev/null</syntax-highlight></aside>
+    -f null /dev/null</code></pre></aside>
 </section>
 
 <section>
 <article><p>Split into chunks each starting on a keyframe</p></article>
-<aside><syntax-highlight language="bash">ffmpeg -i ./input.mp4 \
+<aside><pre><code>ffmpeg -i ./input.mp4 \
     -acodec copy -format segment -vcodec copy \
     -reset_timestamps 1 \
-    -map 0 chunk_%06d.mp4</syntax-highlight></aside>
+    -map 0 chunk_%06d.mp4</code></pre></aside>
 </section>
 
 <section>
 <article><p>After the chunks in the previous example have been split,
 You can copy them into subdirectories and join each subdirectory back into
 a video with:</p></article>
-<aside><syntax-highlight language="bash">AWK='{ print "file " $1; }'
+<aside><pre><code>AWK='{ print "file " $1; }'
 
 for CHUNK in $(find -type d | grep / | sort)
 do
@@ -114,15 +114,32 @@ do
     LIST_FILE=list_${CHUNK_NUMBER}.txt
     ls ${CHUNK}/*.mp4 | \
         grep mp4 | \
-        awk "${AWK}" >${LIST_FILE}
+        awk "${AWK}" &gt;${LIST_FILE}
     NEXT_CHUNK=./$((CHUNK_NUMBER + 1))
     if [ -d ${NEXT_CHUNK} ]
     then
         ls ${NEXT_CHUNK}/*.mp4 | \
             head --lines 1 | \
-            awk "${AWK}" >${LIST_FILE}
+            awk "${AWK}" &gt;${LIST_FILE}
     fi
     ffmpeg -f concat -safe 0 -i ${LIST_FILE} \
         -c copy -y chunk_${CHUNK_NUMBER}.mp4
-done</syntax-highlight></aside>
+done</code></pre></aside>
+</section>
+
+<section>
+<article><p>Rescale old-school PAL TV programmes.</p>
+<ul><li>Truncate to length of audio or video (whichever is shortest).</li>
+<li>Rescale the video to PAL &quot;standard&quot; size.</li>
+<li>Take the video quality down to &quot;good enough&quot; for PAL.</li>
+<li>Take the audio down to 44.1 mono at a suitable compression
+rate.</li></ul></article>
+<aside><pre><code>for a in *webm
+do
+    ffmpeg -hide_banner -i $a -shortest -map_metadata -1 \
+        -c:v libx264 -crf 27 \
+        -filter:v scale=746x576 -aspect 4:3 \
+        -ar 44100 -ac 1 -b:a 64k \
+        -y $( echo $a | sed -e 's/webm/mp4/g' )
+done</code></pre></aside>
 </section>
