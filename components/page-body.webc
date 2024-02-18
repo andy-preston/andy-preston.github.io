@@ -8,4 +8,7 @@
         webc:nokeep
         @raw="content"></article>
     <hr>
+    <article webc:if="page.url != '/'">
+        <a href="/">More stuff to read</a>
+    </article>
 </body>

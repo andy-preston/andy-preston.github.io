@@ -21,6 +21,7 @@
             :title="title"
             :tags="tags"
             :date="date"
+            :page="page"
             :content="content"></page-body>
     </body>
 </html>
