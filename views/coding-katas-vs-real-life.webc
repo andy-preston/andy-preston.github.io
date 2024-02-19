@@ -62,10 +62,10 @@ Programming&quot; (Catchy title????)</p></article></section>
 
 <section><article><p>... or better still &quot;disdained&quot;</p>
 
-<p>After a while of working on this project, it seemed the best way to go about
-it was to adapt it into an Android handset and to create a &quot;simple&quot;
-Android app to control it. If you want to have a look you can find it in on
-GitHub at <a
+<p>After a while of working on my telephone project, it seemed the best way to
+go about things was to adapt it into an Android handset and to create a
+&quot;simple&quot; Android app to control it. If you want to have a look you
+can find it in on GitHub at <a
     href="https://github.com/andy-preston/gpo-746-android"
 >andy-preston/gpo-746-android</a>.</p>
 
@@ -76,7 +76,7 @@ is it as bad as I say it is? I don't know. But I do know that it's certainly
 unexplored territory for me.</p>
 
 <p>And then there's Gradle... Oh Gradle, why are you so over-complex? You're
-only a build system, so you really need to contain multiple turing-complete
+only a build system, do you really need to contain multiple turing-complete
 programming languages just to run a few build tasks?</p>
 
 <p>So here I am in both &quot;uncharted territory&quot;, and &quot;stormy
@@ -87,15 +87,15 @@ about in the first place.</p></article></section>
 <h2>And Let's Make it Even More Difficult on Myself.</h2>
 
 <section><article><p>I'm also using the CH340G serial USB chip to handle the
-communication between my microcontroller in the phone and the Android device.
-On Linux or BSD, this is just a matter of opening a serial connection to
+communication between my microcontroller in the old telephone and the Android
+device. On Linux or BSD, this is just a matter of opening a serial connection to
 <code>/dev/ttyUSB0</code>. But on Android you actually need your own drivers
 for &quot;strange&quot; USB devices in your app.</p>
 
 <p>I could use one of the available Java libraries for driving serial USB chips
 on Android and, if this was a commercial project, I'd probably be stupid not to.
 But, for an exercise like this, that's just way too easy. I'm sure all the
-people at the real-life non-metaphorical dojo would agree &quot;no pain, no
+people at the real-life, non-metaphorical dojo would agree &quot;no pain, no
 gain!&quot;. And, for this chip, &quot;pain&quot; is certainly the word for it.
 The CH340 family of chips are probably THE worst documented series of ICs in the
 entire history of electronics.</p>
