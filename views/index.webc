@@ -33,10 +33,10 @@ sections:
               title: Adding Buffering to LCSoft CY7C68013A Mini Board
     arch:
         title: "Architecture"
-    docker:
-        title: "Docker"
     engineering:
         title: "Software Engineering"
+    docker:
+        title: "Docker"
     php:
         title: "PHP"
         offSite:
@@ -69,6 +69,9 @@ sections:
         things...</p>
         <p>But not a lot else.</p>
         <p>&quot;Enjoy!&quot; ;)</p>
+        <hr>
+        <p>Monty: "I'm told you're a writer too. Do you write blogs?"</p>
+        <p>Marwood: "No, I wish I could. It's just thoughts really."</p>
     </front-introduction>
     <article-index
         :sections="sections"
