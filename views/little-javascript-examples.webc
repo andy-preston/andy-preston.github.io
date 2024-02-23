@@ -14,8 +14,8 @@ a private saved state.</p>
 have to be method invocations in a "classical" OOP language and simply would be
 as neat.</p>
 <p>Just in case you were wondering what all this messing around with sines
-are periodicity is... this is a prototype for a generaterator of the classic
-British GPO dial tone for
+and periodicity are all about, this is a prototype for a generator of the
+classic British GPO dial tone for
 <a href="https://github.com/andy-preston/gpo-746-android">
     an antique phone emulation that I seem to have become obsessed with
 </a>.</p></article>
