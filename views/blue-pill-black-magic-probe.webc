@@ -21,15 +21,15 @@ would be more than welcome.</p></article></section>
 <a href="https://github.com/blacksphere/blackmagic">github.com/blacksphere/blackmagic</a>
 and you can obtain the firmware with:</p>
 
-<syntax-highlight language="bash">git clone git@github.com:blacksphere/blackmagic.git
-cd blackmagic</syntax-highlight>
+<pre><code>git clone git@github.com:blacksphere/blackmagic.git
+cd blackmagic</code></pre>
 
 <p>At the time of writing, the current release is v1.7.1,
 but you can substitute this with the current release in
 your time-stream by checking
 <a href="https://github.com/blacksphere/blackmagic/tags">github.com/blacksphere/blackmagic/tags</a></p>
 
-<syntax-highlight language="bash">git checkout v1.7.1</syntax-highlight>
+<pre><code>git checkout v1.7.1</code></pre>
 </article></section>
 
 <section><article><h2>Build the Firmware</h2>
@@ -48,7 +48,7 @@ just disappears.</p>
 <p>As well as <code>arm-none-eabi-gcc</code>,
 you'll need <code>libnewlib-arm-none-eabi</code> installed.</p>
 
-<syntax-highlight language="bash">make clean && make PROBE_HOST=swlink</syntax-highlight></article></section>
+<pre><code>make clean && make PROBE_HOST=swlink</code></pre></article></section>
 
 <section><article><h2>Prepare to Upload</h2>
 
@@ -83,9 +83,9 @@ But, even if you plan to never use DFU, you still
 need the bootloader to make the Blue Pill enumerate
 it's USB ports!</p>
 
-<syntax-highlight language="bash">stm32flash -o /dev/ttyUSB0
+<pre><code>stm32flash -o /dev/ttyUSB0
 stm32flash -w src/blackmagic_dfu.bin -v /dev/ttyUSB0
-stm32flash -w src/blackmagic.bin -v -S 0x08002000 /dev/ttyUSB0</syntax-highlight>
+stm32flash -w src/blackmagic.bin -v -S 0x08002000 /dev/ttyUSB0</code></pre>
 
 <p>I'm not sure if the <code>stm32flash -o</code> option is
 actually required (I'm a newbie myself) but it doesn't
