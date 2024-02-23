@@ -1,0 +1,43 @@
+---
+title: "Little JavaScript (TypeScript) Examples"
+tags: javascript
+date: "2024-02-23"
+---
+<section><article><p>I don't know what title to give this yet.
+Some provisional ideas are:</p>
+<ul><li>"JavaScript don't need no steenkin' classes"</li>
+<li>"I love to troll functional programming advocates"</li>
+<li>"Don't stand so closure me"</li></ul>
+<p>Here we have a nice little closure that returns a function that accesses
+a private saved state.</p>
+<p>I love how concise the execution of the returned functions are. These would
+have to be method invocations in a "classical" OOP language and simply would be
+as neat.</p>
+<p>Just in case you were wondering what all this messing around with sines
+are periodicity is... this is a prototype for a generaterator of the classic
+British GPO dial tone for
+<a href="https://github.com/andy-preston/gpo-746-android">
+    an antique phone emulation that I seem to have become obsessed with
+</a>.</p></article>
+<aside><syntax-highlight language="typescript">const samplePeriod = 1 / 11025;
+const twoPi = 2 * Math.PI;
+
+const sines = (period: number) => {
+    const inc = twoPi / (period / samplePeriod);
+    var theta = 0.0;
+    return (): number => {
+        const previousTheta = theta;
+        theta = theta + inc;
+        if (theta > twoPi) {
+            theta = theta - twoPi;
+        }
+        return Math.sin(previousTheta);
+    }
+}
+
+const sines1 = sines(1 / 350);
+const sines2 = sines(1 / 450);
+
+for (let sample = 0; sample < 300; sample++) {
+    console.log(sines1(),  sines2());
+}</syntax-highlight></aside></section>

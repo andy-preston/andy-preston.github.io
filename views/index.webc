@@ -37,6 +37,8 @@ sections:
         title: "Software Engineering"
     docker:
         title: "Docker"
+    javascript:
+        title: "JavaScript / TypeScript"
     php:
         title: "PHP"
         offSite:

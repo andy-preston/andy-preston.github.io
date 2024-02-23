@@ -206,6 +206,7 @@ a:active {
 }
 
 .token.class-name,
+.token.builtin,
 .token.type-declaration {
     color: #f0f;
 }
