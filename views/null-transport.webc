@@ -25,19 +25,19 @@ and paste the following code into the <code>doSend</code> method:</p>
 
 <syntax-highlight language="php">protected function doSend(SentMessage $message): void {
     $now = new \DateTime();
-    $envelope = $message-&gt;getEnvelope();
+    $envelope = $message->getEnvelope();
     file_put_contents(
         dirname(__DIR__) .
             '../../../../var/mail/' .
-            $now-&gt;format('Y-m-d-H-i-s'),
+            $now->format('Y-m-d-H-i-s'),
         json_encode([
-            'sender' =&gt; $envelope-&gt;getSender()-&gt;toString(),
-            'recipients' =&gt; array_map(function ($recipient) {
-                return $recipient-&gt;toString();
-            }, $envelope-&gt;getRecipients()),
-            'messageId' =&gt; $message-&gt;getMessageId(),
-            'debug' =&gt; $message-&gt;getDebug(),
-            'message' =&gt; $message-&gt;getMessage()-&gt;toString()
+            'sender' => $envelope->getSender()->toString(),
+            'recipients' => array_map(function ($recipient) {
+                return $recipient->toString();
+            }, $envelope->getRecipients()),
+            'messageId' => $message->getMessageId(),
+            'debug' => $message->getDebug(),
+            'message' => $message->getMessage()->toString()
         ])
     );
 }</syntax-highlight>
