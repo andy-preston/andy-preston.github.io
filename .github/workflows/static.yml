@@ -33,7 +33,7 @@ jobs:
       - name: Eleventy Build
         run: npm run build
       - name: Upload Artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v3
         with:
           path: './site'
       - name: Deploy to GitHub Pages
