@@ -1,0 +1,80 @@
+---
+title: "Evaluating arbitrary JS inside a scope"
+tags: javascript
+date: "2024-04-21"
+---
+<section><article><p>Most of the ideas here have been "stolen" from:
+<a href="https://stackoverflow.com/questions/8403108/calling-eval-in-particular-context#25859853">StackOverflow</a>.</p></article></section>
+
+<section><article><p>Here we have a normal JS object that stands in for the
+scope of our <code>eval</code>ed code.</p></article>
+<aside><syntax-highlight language="javascript">var scopeObject = {
+    "a": 1,
+    "b": 2,
+    "c": 3
+};</syntax-highlight></aside></section>
+
+<section><article><p>Read only properties do require a little extra work to add
+them to the object and they don't appear as ordinary fields (e.g. in a
+<code>console.log</code>)</p></article>
+<aside><syntax-highlight language="javascript">Object.defineProperty(scopeObject, "doNotTouch", {
+    value: 47,
+    writable: false,
+});</syntax-highlight></aside></section>
+
+<section><article><p>Here's the actual evaluation function.</p>
+<p>The function constructor both does the evaluation without an explicit call
+to <code>eval</code> (just in case you were wondering where it was).</p>
+<p>It also side-steps the <code>"strict-mode"</code> prohibition on using
+<code>with</code>. The <code>with</code> is necessary to allow us to access
+properties within <code>scopeObject</code> as though they were any normal JS
+scope (i.e. without prefixing them with <code>this.</code>).</p></article>
+<aside><syntax-highlight language="javascript">const evalInScope = function(jsString) {
+    return new Function(
+        `with (this) { return (${jsString}); }`
+    ).call(scopeObject);
+}</syntax-highlight></aside></section>
+
+<section><article><p>To read values from the scope, we can just reference them
+by name.</p></article>
+<aside><syntax-highlight language="javascript">const readTest = evalInScope("a + b");
+if (readTest != scopeObject.a + scopeObject.b) {
+    throw "read test failed";
+}
+if (readTest != 3) {
+    throw "read test failed";
+}</syntax-highlight></aside></section>
+
+<section><article><p>You can also write existing values with a
+"straight assignment"</p></article>
+<aside><syntax-highlight language="javascript">evalInScope("c = 25");
+if (scopeObject.c !== 25) {
+    throw "write test failed";
+}</syntax-highlight></aside></section>
+
+<section><article><p>To add values to the scope they must be prefixed with
+<code>this</code></p></article>
+<aside><syntax-highlight language="javascript">evalInScope("this.x = 23");
+if (scopeObject.x !== 23) {
+    throw "new value test failed";
+}</syntax-highlight></aside></section>
+
+<section><article><p>Read only properties can be read just like normal
+properties</p></article>
+<aside><syntax-highlight language="javascript">const readOnlyTest = evalInScope("doNotTouch");
+if (readOnlyTest !== scopeObject.doNotTouch) {
+    throw "read (only) test failed";
+}
+if (readOnlyTest != 47) {
+    throw "read (only) test failed";
+}</syntax-highlight></aside></section>
+
+<section><article><p>Read only properties cannot be changed</p></article>
+<aside><syntax-highlight language="javascript">evalInScope("doNotTouch = 999");
+if (scopeObject.doNotTouch != 47) {
+    throw "write read-only test failed";
+}
+evalInScope("this.doNotTouch = 999");
+if (scopeObject.doNotTouch != 47) {
+    throw "write read-only test failed";
+}</syntax-highlight></aside></section>
