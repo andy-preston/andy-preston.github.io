@@ -27,7 +27,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: 18.17.0
+          node-version: 21.6.2
       - name: NPM CI
         run: npm ci --omit=dev
       - name: Eleventy Build
