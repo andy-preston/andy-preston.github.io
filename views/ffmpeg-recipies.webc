@@ -67,7 +67,7 @@ ffmpeg -f concat -safe 0 -i list.txt \
 </section>
 
 <section>
-<article><p>Deinterlace, rescale and encode as silent H264/MPEG-4</p></article>
+<article><p>De-interlace, rescale and encode as silent H264/MPEG-4</p></article>
 <aside><pre><code>ffmpeg -i ./original.mp4 \
     -vf yadif -vf scale=720:574 \
     -c:v libx264 -preset slow -crf 0 \

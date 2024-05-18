@@ -78,9 +78,9 @@ to do my serial uploads.</p>
 
 <p>I didn't want to bother using the DFU option to
 upgrade my firmware in the future and I made the
-mistake of skipping uploading the DFU bootloader.
+mistake of skipping uploading the DFU boot loader.
 But, even if you plan to never use DFU, you still
-need the bootloader to make the Blue Pill enumerate
+need the boot loader to make the Blue Pill enumerate
 it's USB ports!</p>
 
 <pre><code>stm32flash -o /dev/ttyUSB0

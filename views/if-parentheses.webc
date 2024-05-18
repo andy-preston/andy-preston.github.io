@@ -42,8 +42,8 @@ The equality operator is still fine as only operators start and end with a dot.
 But the poor old compiler didn't have a clue what to do with the
 <code>IFA</code> or the <code>5THEN</code>.</p>
 
-<p>The solution was to parenthesise the expression <code>IF(A.EQ.5)THEN</code>
-- everything nicely tokenised - problem solved!</p>
+<p>The solution was to parenthesize the expression <code>IF(A.EQ.5)THEN</code>
+- everything nicely tokenized - problem solved!</p>
 
 <h2>But What's This Got to do With JavaScript?</h2>
 
