@@ -3,49 +3,72 @@
     "version": "1.0.0",
     "description": "Andy Preston's Curate's Egg",
     "author": "Andy Preston",
+    "license": "CC-BY-NC-ND-4.0",
     "type": "module",
     "scripts": {
-        "build": "npx tsx node_modules/.bin/eleventy --config=builder/eleventy.js",
-        "eslint": "DEBUG=eslint:cli-engine npx eslint .",
-        "style": "npx stylelint **/*.css",
-        "tsCheck": "npx tsc --project components ; npx tsc --project builder",
-        "test": "npx vitest run",
-        "check": "npm run eslint ; npm run tsCheck ; npm run style ; npm run test",
-        "localBuild": "npm run build ; npm run check"
+        "build": "yarn tsx node_modules/.bin/eleventy --config=builder/eleventy.js",
+        "tests": "yarn vitest run",
+        "lintScript": "DEBUG=eslint:cli-engine yarn eslint .",
+        "lintStyle": "yarn stylelint */*.css",
+        "checkTs": "yarn tsc --project components ; yarn tsc --project builder",
+        "checkAll": "yarn lintScript ; yarn checkTs ; yarn lintStyle ; yarn tests",
+        "localBuild": "yarn build ; yarn checkAll"
     },
     "eslintConfig": {
         "overrides": [
             {
-                "files": [ "site/*.js" ],
-                "extends": [ "eslint:recommended" ],
-                "env": { "browser": true },
+                "files": [
+                    "site/*.js"
+                ],
+                "extends": [
+                    "eslint:recommended"
+                ],
+                "env": {
+                    "browser": true
+                },
                 "parserOptions": {
                     "ecmaVersion": 2015,
                     "sourceType": "script"
                 }
             },
             {
-                "files": [ "builder/*.js" ],
-                "extends": [ "eslint:recommended" ],
-                "env": { "node": true },
+                "files": [
+                    "builder/*.js"
+                ],
+                "extends": [
+                    "eslint:recommended"
+                ],
+                "env": {
+                    "node": true
+                },
                 "parserOptions": {
                     "ecmaVersion": 2017,
                     "sourceType": "module"
                 }
             },
             {
-                "files": [ "**/*.ts" ],
+                "files": [
+                    "**/*.ts"
+                ],
                 "extends": [
                     "eslint:recommended",
                     "plugin:@typescript-eslint/recommended"
                 ],
                 "parser": "@typescript-eslint/parser",
-                "plugins": [ "@typescript-eslint" ]
+                "plugins": [
+                    "@typescript-eslint"
+                ]
             },
             {
-                "files": [ "**/*.json" ],
-                "extends": [ "plugin:json/recommended" ],
-                "plugins": [ "json" ]
+                "files": [
+                    "**/*.json"
+                ],
+                "extends": [
+                    "plugin:json/recommended"
+                ],
+                "plugins": [
+                    "json"
+                ]
             }
         ]
     },
@@ -69,6 +92,7 @@
     },
     "devDependencies": {
         "eslint": "^8.56.0",
+        "eslint-plugin-json": "^3.1.0",
         "npm-check-updates": "^16.14.20",
         "stylelint": "^16.5.0",
         "stylelint-config-standard": "^36.0.0",
