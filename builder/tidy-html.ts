@@ -1,5 +1,5 @@
 import { parseDocument } from "htmlparser2";
-import render from "dom-serializer";
+import render from "./dom-serializer.ts";
 import { Node, isDirective, isTag, isText, hasChildren } from "domhandler";
 import { removeElement } from "domutils";
 

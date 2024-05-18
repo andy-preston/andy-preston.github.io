@@ -1,0 +1,11 @@
+{
+    "compilerOptions": {
+        "lib": ["ES2015", "DOM"],
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "strict": true,
+        "noUncheckedIndexedAccess": true,
+        "noEmit": true,
+        "allowImportingTsExtensions": true
+    }
+}

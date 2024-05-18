@@ -1,10 +1,10 @@
 "use strict";
 
-const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
-const transforms = require("./transforms.ts");
-const webCPlugin = require("@11ty/eleventy-plugin-webc");
+import syntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
+import transforms from "./transforms.ts";
+import webCPlugin from "@11ty/eleventy-plugin-webc";
 
-module.exports = function (eleventyConfig) {
+export default async function(eleventyConfig) {
     eleventyConfig.addGlobalData("permalink", () => {
         // ensure page urls are `page.html` not `/page/'
         return (data) =>
@@ -43,4 +43,4 @@ module.exports = function (eleventyConfig) {
         },
         "templateFormats": ["webc"]
     };
-};
+}

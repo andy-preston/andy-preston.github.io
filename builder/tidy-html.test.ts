@@ -1,5 +1,5 @@
-import { describe, expect, test } from "@jest/globals";
-import tidy from "./tidy-html";
+import tidy from "./tidy-html.ts";
+import { describe, expect, test } from 'vitest'
 
 describe("Tidy HTML module", () => {
 

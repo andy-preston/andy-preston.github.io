@@ -3,25 +3,18 @@
     "version": "1.0.0",
     "description": "Andy Preston's Curate's Egg",
     "author": "Andy Preston",
+    "type": "module",
     "scripts": {
-        "build": "npx ts-node node_modules/.bin/eleventy --config=builder/eleventy.cjs",
+        "build": "npx tsx node_modules/.bin/eleventy --config=builder/eleventy.js",
         "eslint": "DEBUG=eslint:cli-engine npx eslint .",
         "style": "npx stylelint **/*.css",
-        "tsCheck": "npx tsc --noEmit",
-        "check": "npm run eslint ; npm run tsCheck ; npm run style ; npx jest",
+        "tsCheck": "npx tsc --project components ; npx tsc --project builder",
+        "test": "npx vitest run",
+        "check": "npm run eslint ; npm run tsCheck ; npm run style ; npm run test",
         "localBuild": "npm run build ; npm run check"
     },
     "eslintConfig": {
         "overrides": [
-            {
-                "files": [ "**/*.cjs" ],
-                "extends": [ "eslint:recommended" ],
-                "env": { "node": true },
-                "parserOptions": {
-                    "ecmaVersion": "latest",
-                    "sourceType": "module"
-                }
-            },
             {
                 "files": [ "site/*.js" ],
                 "extends": [ "eslint:recommended" ],
@@ -29,6 +22,15 @@
                 "parserOptions": {
                     "ecmaVersion": 2015,
                     "sourceType": "script"
+                }
+            },
+            {
+                "files": [ "builder/*.js" ],
+                "extends": [ "eslint:recommended" ],
+                "env": { "node": true },
+                "parserOptions": {
+                    "ecmaVersion": 2017,
+                    "sourceType": "module"
                 }
             },
             {
@@ -48,34 +50,29 @@
         ]
     },
     "stylelint": {
-        "extends": [ "stylelint-config-standard" ],
+        "extends": [
+            "stylelint-config-standard"
+        ],
         "rules": {
             "max-nesting-depth": 0,
             "comment-empty-line-before": null
         }
     },
-    "jest": {
-        "preset": "ts-jest",
-        "testEnvironment": "node"
-    },
     "dependencies": {
-        "@11ty/eleventy": "^2.0.1",
+        "@11ty/eleventy": "3.0.0-alpha.10",
         "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.0",
         "@11ty/eleventy-plugin-webc": "^0.11.2",
+        "@types/node": "^20.12.12",
         "prettier": "^3.2.5",
-        "ts-node": "^10.9.2"
+        "tsx": "^4.10.5",
+        "typescript": "^5.4.5"
     },
     "devDependencies": {
-        "@jest/globals": "^29.7.0",
-        "@typescript-eslint/eslint-plugin": "^7.0.1",
-        "@typescript-eslint/parser": "^7.0.1",
         "eslint": "^8.56.0",
-        "eslint-plugin-json": "^3.1.0",
-        "jest": "^29.7.0",
-        "npm-check-updates": "^16.14.15",
-        "stylelint": "^16.2.1",
+        "npm-check-updates": "^16.14.20",
+        "stylelint": "^16.5.0",
         "stylelint-config-standard": "^36.0.0",
-        "ts-jest": "^29.1.2",
-        "typescript": "^5.3.3"
+        "typescript-eslint": "^7.9.0",
+        "vitest": "^1.6.0"
     }
 }
