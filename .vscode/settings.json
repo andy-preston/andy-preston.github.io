@@ -1,44 +1,5 @@
 {
     "files.associations": {
         "*.webc": "html"
-    },
-    "cSpell.words": [
-        "blackmagic",
-        "blacksphere",
-        "blacktop",
-        "brne",
-        "cschleiden",
-        "deinterlace",
-        "eabi",
-        "ebtables",
-        "edgeeffect",
-        "eleventy",
-        "endproc",
-        "gcol",
-        "ghidra",
-        "gpio",
-        "hackaday",
-        "imgur",
-        "jtag",
-        "libmp3lame",
-        "libnewlib",
-        "libx264",
-        "multiarch",
-        "nmap",
-        "nokeep",
-        "opkg",
-        "pongy",
-        "procplot",
-        "stackexchange",
-        "stlink",
-        "stylelint",
-        "swdp",
-        "swlink",
-        "symfony",
-        "ucfirst",
-        "webc",
-        "xhost",
-        "yadif",
-        "youtube"
-    ]
+    }
 }
