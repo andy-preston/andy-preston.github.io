@@ -12,7 +12,7 @@
         "lintStyle": "yarn stylelint */*.css",
         "checkTs": "yarn tsc --project components ; yarn tsc --project builder",
         "checkAll": "yarn lintScript ; yarn checkTs ; yarn lintStyle ; yarn tests",
-        "localBuild": "yarn build ; yarn checkAll"
+        "pipeline": "yarn install ; yarn build ; yarn checkAll"
     },
     "eslintConfig": {
         "overrides": [

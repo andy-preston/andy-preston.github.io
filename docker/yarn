@@ -4,12 +4,11 @@ case $1 in
 'shell')
     COMMAND='sh'
     ;;
-'install')
-    COMMAND="npm ${@}"
-    ;;
 *)
     rm -rf ./site/*
-    COMMAND='npm run localBuild'
+    OPTION="${1:-pipeline}"
+    shift
+    COMMAND="yarn ${OPTION} $@"
     ;;
 esac
 
