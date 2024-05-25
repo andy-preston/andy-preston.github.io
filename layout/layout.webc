@@ -1,4 +1,3 @@
-<!--- cSpell:words nokeep -->
 <html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -18,6 +17,7 @@
         <script :src="getBundleFileUrl('js')" webc:keep></script>
     </head>
     <body>
+        <!--- cSpell:words nokeep -->
         <page-body webc:nokeep
             :title="title"
             :tags="tags"
