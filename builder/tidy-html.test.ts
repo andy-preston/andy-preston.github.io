@@ -1,7 +1,14 @@
+// cSpell:words quot
+
 import tidy from "./tidy-html.ts";
-import { describe, expect, test } from 'vitest'
+import { describe, expect, test } from "vitest";
 
 describe("Tidy HTML module", () => {
+
+    test("Quotes and ampersands are rendered as entities", () => {
+        const rawHtml = "<a href=\"plop.html\">\"&\"</a>";
+        expect(tidy(rawHtml)).toBe("<a href=\"plop.html\">&quot;&amp;&quot;</a>");
+    });
 
     test("It converts doctype to upper case", () => {
         // https://html-validate.org/rules/doctype-style.html

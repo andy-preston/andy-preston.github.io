@@ -1,4 +1,5 @@
 ---
+# cSpell:words culting
 title: "Coding Katas Vs Real Life"
 tags: engineering
 date: "2024-02-18"
@@ -112,7 +113,7 @@ reading their code, it comes over as leaning a little towards
 you need Deliberate Practice. And you can spend that time taking exercises
 with no goal beyond development itself or you can find a useful (or, at least,
 useful to you) project to complete. But make sure that project has some
-challenges that will make your skillset grow.</p>
+challenges that will make your skill-set grow.</p>
 
 <p>Be obsessed with software quality and refine your project again and again
 until the code isn't just &quot;not bad&quot; but as close to perfect that you

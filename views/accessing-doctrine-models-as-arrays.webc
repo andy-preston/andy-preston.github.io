@@ -1,4 +1,5 @@
 ---
+# cSpell:words ucfirst Symfony
 title: "Accessing Doctrine Models as Arrays"
 tags: php
 ---

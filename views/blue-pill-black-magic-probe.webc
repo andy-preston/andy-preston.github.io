@@ -1,4 +1,6 @@
 ---
+# cSpell:words blacksphere blackmagic stlink swlink imgur
+# cSpell:words JTAG GPIO libnewlib multiarch eabi swdp
 title: "Using a Blue Pill as a Black Magic Probe - The Easy Way"
 tags: micro
 date: "2023-06-26"

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# cSpell:words eleventy workdir
+
 case $1 in
 'shell')
     COMMAND='sh'

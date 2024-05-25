@@ -1,4 +1,6 @@
 ---
+# cSpell:words Ghidra blacktop
+# cSpell:words DIYLC unzipper noninteractive workdir
 title: "Running GUI Apps in Docker as a non root user"
 tags: docker
 date: "2023-07-11"

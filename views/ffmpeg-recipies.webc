@@ -1,4 +1,6 @@
 ---
+# cSpell:words libmp3lame yadif libx264 yuva444p colorchannelmixer
+# cSpell:words astats ametadata lavfi
 title: "FFMPEG Recipes"
 tags: shell
 date: "2024-02-18"
@@ -97,7 +99,7 @@ ffmpeg \
 <section>
 <article><p>Split into chunks each starting on a keyframe</p></article>
 <aside><pre><code>ffmpeg -i ./input.mp4 \
-    -acodec copy -format segment -vcodec copy \
+    -codec:a copy -format segment -codec:v copy \
     -reset_timestamps 1 \
     -map 0 chunk_%06d.mp4</code></pre></aside>
 </section>

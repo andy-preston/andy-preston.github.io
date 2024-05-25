@@ -20,7 +20,7 @@ const typescript = (content: string): string => ts.transpileModule(content, {
 }).outputText;
 
 export default async (content: string, spec: string): Promise<string> => {
-    // bundler transform pass in a type, HTML transforms a filename
+    // bundler transform passes in a type, HTML transform passes a filename
     const type = spec.includes(".") ?
         path.extname(spec).replace(/^./, "") : spec;
     if (type == "js") {

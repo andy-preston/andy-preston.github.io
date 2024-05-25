@@ -72,6 +72,22 @@
             }
         ]
     },
+    "cspell": {
+        "version": "0.2",
+        "language": "en-gb",
+        "useGitignore": false,
+        "words": [
+            "webc"
+        ],
+        "overrides": [
+            {
+                "filename": "package.json",
+                "words": [
+                    "stylelint", "prestons", "syntaxhighlight"
+                ]
+            }
+        ]
+    },
     "stylelint": {
         "extends": [
             "stylelint-config-standard"

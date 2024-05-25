@@ -1,4 +1,5 @@
 ---
+# cSpell:words Symfony
 title: "Debugging and Testing with Symfony's Mailer Component"
 tags: php
 ---
@@ -44,6 +45,4 @@ and paste the following code into the <code>doSend</code> method:</p>
 
 <p>This is just a quick hack-up. The handling of
 <code>./var/mail/</code> is hardly what could be called &quot;robust&quot;.
-But it's fine for testing and debugging environments.</p>
-
-</article></section>
+But it's fine for testing and debugging environments.</p></article></section>

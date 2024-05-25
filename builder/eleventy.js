@@ -1,5 +1,7 @@
 "use strict";
 
+// cSpell:words syntaxhighlight
+
 import syntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
 import transforms from "./transforms.ts";
 import webCPlugin from "@11ty/eleventy-plugin-webc";

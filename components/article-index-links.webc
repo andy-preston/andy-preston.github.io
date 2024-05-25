@@ -1,3 +1,4 @@
+<!--- cSpell:words nokeep -->
 <script webc:type="js">
     if (collection == undefined) {
         throw new Error(`*** Section "${section.title}" has no items ***`);

@@ -1,3 +1,5 @@
+// cSpell:words domhandler domutils
+
 import { parseDocument } from "htmlparser2";
 import render from "./dom-serializer.ts";
 import { Node, isDirective, isTag, isText, hasChildren } from "domhandler";
@@ -39,6 +41,7 @@ const isNotInline = (node: Node | null): boolean => {
 };
 
 const stripUnusedJs = (node: Node): void => {
+    // This is only needed as long as we're using Eleventy's "chunking"
     if (isTag(node) && node.name == "script" && node.attribs.src == "") {
         removeElement(node);
     }
