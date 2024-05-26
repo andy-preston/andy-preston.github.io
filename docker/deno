@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# cSpell:words deno denoland workdir
+
+mkdir -p deno
+
+docker run \
+    --rm --interactive --tty \
+    --mount type=bind,source="$(pwd)",target='/lume' \
+    --mount type=bind,source="$(pwd)/_deno",target='/deno-dir' \
+    --workdir '/lume' \
+    --user "$(id -u):$(id -g)" \
+    'denoland/deno:alpine-1.43.6' \
+    deno ${@}

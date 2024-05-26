@@ -1,5 +1,10 @@
 {
     "files.associations": {
-        "*.webc": "html"
-    }
+        "*.webc": "html",
+        "*.vto": "html",
+    },
+    "deno.path": "./docker/deno",
+    "deno.cache": "./deno",
+    "deno.enable": true,
+    "deno.lint": true
 }

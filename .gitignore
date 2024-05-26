@@ -1,4 +1,7 @@
-node_modules
+_cache
+_deno
 site
-old-stuff
+_old-stuff
 views/*.txt
+
+node_modules

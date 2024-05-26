@@ -1,0 +1,20 @@
+{{ layout "layout.vto" }}
+
+    <header>
+        <h1>{{ title }}</h1>
+        {{ if displayDate }}
+            <time datetime="{{ shortDate }}">{{ displayDate }}</time>
+        {{ /if }}
+    </header>
+
+    <article>
+        <section>
+            <article>
+                {{ content }}
+            </article>
+        </section>
+    </article>
+    <hr>
+    <article><a href="/">More stuff to read</a></article>
+
+{{ /layout }}
