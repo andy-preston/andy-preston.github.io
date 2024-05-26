@@ -2,7 +2,7 @@
 
 # cSpell:words deno denoland workdir
 
-mkdir -p deno
+mkdir -p _deno
 
 docker run \
     --rm --interactive --tty \
