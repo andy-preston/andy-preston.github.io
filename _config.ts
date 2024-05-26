@@ -6,6 +6,14 @@ import languages from "./_typescript/languages.ts";
 
 const markdown = {
     "html": false,
+    "rules": [
+        [
+            "plop",
+            function(tokens, idx, options, env, self) {
+                console.log('plop');
+            }
+        ]
+    ],
     // "plugins": [
     //     [container, "container", {}]
     // ]
