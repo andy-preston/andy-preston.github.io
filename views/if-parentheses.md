@@ -1,9 +1,10 @@
 ---
 # cSpell:words Rossum
-title: "Parentheses on IF statements"
 tags: philosophy
 date: "2023-09-07"
 ---
+
+# Parentheses on IF statements
 
 Look at this statement:
 

@@ -2,6 +2,7 @@
 # cSpell:words Symfony
 title: "Debugging and Testing with Symfony's Mailer Component"
 tags: php
+date: "unknown"
 ---
 <section><article>
 <p>When SwiftMailer was the standard component for sending E. mail in Symfony,

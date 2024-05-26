@@ -2,34 +2,38 @@
 # cSpell:words ucfirst Symfony
 title: "Accessing Doctrine Models as Arrays"
 tags: php
+date: "unknown"
 ---
-<section><article>
-<p>A few years ago, I was working on a Symfony project that contained some
+
+A few years ago, I was working on a Symfony project that contained some
 fairly torturous business logic and, as this logic was required in various
 parts of the application, we kept it in some helper classes that could be used
-as needed without reproducing the same logic throughout the application.</p>
+as needed without reproducing the same logic throughout the application.
 
-<p>Obviously, this logic applied to various hierarchies of Doctrine models.</p>
+Obviously, this logic applied to various hierarchies of Doctrine models.
 
-<p>Now, Doctrine models are great when you're dealing with simple datasets.
+Now, Doctrine models are great when you're dealing with simple datasets.
 But, even with pagination, hydrating all those PHP objects for a huge multi-row
 management report can make too much of an impact on performance to be
-tolerable. The answer is to hydrate data for big reports as arrays.</p>
+tolerable. The answer is to hydrate data for big reports as arrays.
 
-<p>But what if those reports require the use of the business logic helpers?
-Helpers that are full of constructs like:</p>
+But what if those reports require the use of the business logic helpers?
+Helpers that are full of constructs like:
 
-<syntax-highlight language="php">$order->getLines()[5]->getPrice()</syntax-highlight>
+```php
+    $order->getLines()[5]->getPrice()
+```
 
-<p>After much wailing and gnashing of teeth and wishing PHP couldn't be more
+After much wailing and gnashing of teeth and wishing PHP couldn't be more
 like some of my preferred languages and let you access objects as though they
 were arrays,
-<a href="https://www.php.net/manual/en/class.arrayaccess.php">The Class Array Access page of the PHP manual</a>
-came to my rescue.</p>
+[The Class Array Access page of the PHP manual](https://www.php.net/manual/en/class.arrayaccess.php)
+came to my rescue.
 
-<p>Each of out Doctrine models could inherit from this base class:</p>
+Each of out Doctrine models could inherit from this base class:
 
-<syntax-highlight language="php">abstract class objectOrArray implements \ArrayAccess {
+```php
+abstract class objectOrArray implements \ArrayAccess {
     private static function getter(string $offset) {
         return 'get' . ucfirst($offset);
     }
@@ -52,11 +56,13 @@ came to my rescue.</p>
         $getter = self::getter($offset);
         return method_exists($this, $getter) ? $this->$getter() : null;
     }
-}</syntax-highlight>
+}
+```
 
-<p>And our actual objects didn't need to change any more than that</p>
+And our actual objects didn't need to change any more than that.
 
-<syntax-highlight language="php">class orderLine extends objectOrArray {
+```php
+class orderLine extends objectOrArray {
     private $price;
 
     public function getPrice() : int {
@@ -91,15 +97,16 @@ class order extends objectOrArray {
         $this->customer = $customer;
         return $this;
     }
-}</syntax-highlight>
+}
+```
 
-<p>Then it was simply a matter of reimplementing this business logic (as per
-the example above) to use:</p>
+Then it was simply a matter of reimplementing this business logic (as per
+the example above) to use:
 
-<syntax-highlight language="php">$order['lines'][5]['price']</syntax-highlight>
+```php
+$order['lines'][5]['price']
+```
 
-<p>And we could continue to use it with Doctrine model objects in most of the
-code <strong>and</strong> it'd also allow us to fetch partial results from the
-database and hydrate as arrays for those long and tortuous reports.</p>
-
-</article></section>
+And we could continue to use it with Doctrine model objects in most of the
+code **and** it'd also allow us to fetch partial results from the
+database and hydrate as arrays for those long and tortuous reports.

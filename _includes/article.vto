@@ -1,12 +1,10 @@
 {{ layout "layout.vto" }}
-
     <header>
         <h1>{{ title }}</h1>
-        {{ if displayDate }}
-            <time datetime="{{ shortDate }}">{{ displayDate }}</time>
+        {{ if humanDate }}
+            <time datetime="{{ shortDate }}">{{ humanDate }}</time>
         {{ /if }}
     </header>
-
     <article>
         <section>
             <article>
@@ -16,5 +14,4 @@
     </article>
     <hr>
     <article><a href="/">More stuff to read</a></article>
-
 {{ /layout }}
