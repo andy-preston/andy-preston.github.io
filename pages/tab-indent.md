@@ -1,8 +1,8 @@
 ---
-title: 'Why Indenting With Tab is "Wrong"'
 tags: philosophy
 date: "2023-07-10"
 ---
+# Why Indenting With Tab is "Wrong"
 
 This used to be long an complicated. With all manner of comparisons and
 discussion.

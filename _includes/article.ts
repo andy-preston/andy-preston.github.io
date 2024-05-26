@@ -1,4 +1,4 @@
-// cSpell:words datetime softbreak hardbreak
+// cSpell:words datetime
 
 export default (md: any) => {
     const markdownTitle = (tokens: any[]): string | undefined => {
@@ -12,13 +12,13 @@ export default (md: any) => {
         }
     }
 
-    md.core.ruler.push("articleHeader", function (state: any) {
+    md.core.ruler.push("articlePrep", function (state: any) {
         const data = state.env.data?.page?.data;
         if (!data || data.basename == "index") {
             return;
         }
 
-        if (data.date == "unknown") {
+        if (data.noDate) {
             data.shortDate = '';
             data.humanDate = '';
         } else {
@@ -33,6 +33,8 @@ export default (md: any) => {
 
         data.title = markdownTitle(state.tokens);
         data.htmlTitle = "Andy Preston - " + data.title;
+        data.url = data.url.split("/").pop();
+        data.layout = "article.vto";
     });
 }
 

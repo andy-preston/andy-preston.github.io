@@ -1,9 +1,9 @@
 ---
 # cSpell:words ucfirst Symfony
-title: "Accessing Doctrine Models as Arrays"
 tags: php
-date: "unknown"
+noDate: true
 ---
+# Accessing Doctrine Models as Arrays
 
 A few years ago, I was working on a Symfony project that contained some
 fairly torturous business logic and, as this logic was required in various

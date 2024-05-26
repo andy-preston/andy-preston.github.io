@@ -1,15 +1,16 @@
 import lume from "lume/mod.ts";
-import preprocess from "./_includes/preprocess.ts";
 import code_highlight from "lume/plugins/code_highlight.ts";
 import languages from "./_includes/languages.ts";
 
 // import container from "npm:markdown-it-container";
-import articleHeader from "./_includes/articleHeader.ts";
+import article from "./_includes/article.ts";
+import index from "./_includes/index.ts";
 
 const markdown = {
     "html": false,
     "plugins": [
-        [articleHeader, {}],
+        index,
+        article,
         // [container, "container", {}]
     ],
     "keepDefaultPlugins": true
@@ -17,15 +18,13 @@ const markdown = {
 
 const site = lume(
     {
-        "dest": "./site",
         "prettyUrls": false
     },
     { markdown }
 );
 
 site
-    .ignore("README.md", "site", "docker")
-    .preprocess([".html"], preprocess)
+    .ignore("README.md", "script")
     .use(code_highlight(languages))
     .copy("fixed", ".");
 

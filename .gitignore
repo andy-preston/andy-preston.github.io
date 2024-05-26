@@ -1,7 +1,6 @@
 _cache
 _deno
-site
+_site
 _old-stuff
-views/*.txt
-
+pages/*.txt
 node_modules

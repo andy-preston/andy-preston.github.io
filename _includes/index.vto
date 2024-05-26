@@ -1,5 +1,4 @@
 {{ layout "layout.vto" }}
-
     <section class="front-page">
         <article>
             <figure style="display: none;" id="illustration" data-pics="{{ pics }}">
@@ -16,33 +15,23 @@
             {{ content }}
         </article>
         <nav class="article-index">
-            <!--
-            <article-index-links webc:for="(tag, section) in sections"
-                :collection="collections[tag]"
-                :section="section"></article-index-links>
-
-
-
-                <script webc:type="js">
-                    if (collection == undefined) {
-                        throw new Error(`*** Section "${section.title}" has no items ***`);
-                    }
-                    '';
-                </script>
-                <h2 @raw="section.title"></h2>
-                <p webc:for="item of collection">
-                    <a :href="item.url" @raw="item.data.title"></a>
-                    <template
-                        webc:nokeep
-                        webc:if="Object.hasOwn(item.data, 'draft')"> (Draft)</template>
-                </p>
-                <template webc:nokeep webc:if="Object.hasOwn(section, 'offSite')">
-                    <p webc:for="item of section.offSite">
-                        <a :href="item.url" @raw="item.title"></a> (Off site)
+            {{ for tag, section of sections}}
+                <h2>{{ section.title }}</h2>
+                {{ for article of search.pages(tag) }}
+                    <p>
+                        <a href="{{ article.url }}">{{ article.title }}</a>
+                        {{ if article.draft }}
+                            (Draft)
+                        {{ /if }}
                     </p>
-                </template>
-            -->
+                {{ /for }}
+                {{ for article of section.offSite }}
+                    <p>
+                        <a href="{{ article.url }}">{{ article.title }}</a>
+                        (Off Site)
+                    </p>
+                {{ /for }}
+            {{ /for }}
         </nav>
     </section>
-
 {{ /layout }}

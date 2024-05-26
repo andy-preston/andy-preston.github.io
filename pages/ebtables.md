@@ -1,8 +1,8 @@
 ---
-title: "Codswallop!"
 tags: censored
-date: "unknown"
+noDate: true
 ---
+# Codswallop!
 
 This page has been removed!!
 
