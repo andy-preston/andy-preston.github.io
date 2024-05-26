@@ -17,6 +17,7 @@ const displayDate = (date: string) =>
         if (data.basename == "index") {
             data.htmlTitle = data.title.join(' ');
             data.url = "/";
+            data.pics = JSON.stringify(data.pics);
         } else {
             data.htmlTitle = 'Andy Preston - ' + data.title;
             data.url = data.url.split("/").pop();

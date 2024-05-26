@@ -1,5 +1,48 @@
 {{ layout "layout.vto" }}
 
-{{ content }}
+    <section class="front-page">
+        <article>
+            <figure style="display: none;" id="illustration" data-pics="{{ pics }}">
+                <img src="" alt="">
+                <figcaption></figcaption>
+            </figure>
+            <script src="front-illustration.ts"></script>
+            <h1>{{ for piece of title }}<span>{{ piece }}</span>{{ /for }}</h1>
+            <p class="tag-line">{{ for piece of tagLine }}<span>{{ piece }}</span>{{ /for }}</p>
+            {{ for link of links }}
+                <p><a href="https://{{ link }}">{{ link }}</a></p>
+            {{ /for }}
+            <hr>
+            {{ content }}
+        </article>
+        <nav class="article-index">
+            <!--
+            <article-index-links webc:for="(tag, section) in sections"
+                :collection="collections[tag]"
+                :section="section"></article-index-links>
+
+
+
+                <script webc:type="js">
+                    if (collection == undefined) {
+                        throw new Error(`*** Section "${section.title}" has no items ***`);
+                    }
+                    '';
+                </script>
+                <h2 @raw="section.title"></h2>
+                <p webc:for="item of collection">
+                    <a :href="item.url" @raw="item.data.title"></a>
+                    <template
+                        webc:nokeep
+                        webc:if="Object.hasOwn(item.data, 'draft')"> (Draft)</template>
+                </p>
+                <template webc:nokeep webc:if="Object.hasOwn(section, 'offSite')">
+                    <p webc:for="item of section.offSite">
+                        <a :href="item.url" @raw="item.title"></a> (Off site)
+                    </p>
+                </template>
+            -->
+        </nav>
+    </section>
 
 {{ /layout }}

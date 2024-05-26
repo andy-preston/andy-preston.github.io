@@ -1,9 +1,0 @@
-<figure
-        style="display: none;"
-        id="illustration"
-        :data-pics="JSON.stringify(pics)">
-    <img src="" alt="">
-    <figcaption></figcaption>
-</figure>
-
-<script src="front-illustration.ts"></script>
