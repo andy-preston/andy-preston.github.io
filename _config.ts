@@ -26,6 +26,7 @@ const site = lume(
 site
     .ignore("README.md", "script")
     .use(code_highlight(languages))
-    .copy("fixed", ".");
+    .copy("_includes/style.css", "style.css")
+    .copy("_includes/fixed", ".");
 
 export default site;
