@@ -88,15 +88,6 @@
             }
         ]
     },
-    "stylelint": {
-        "extends": [
-            "stylelint-config-standard"
-        ],
-        "rules": {
-            "max-nesting-depth": 0,
-            "comment-empty-line-before": null
-        }
-    },
     "dependencies": {
         "@11ty/eleventy": "3.0.0-alpha.10",
         "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.0",
