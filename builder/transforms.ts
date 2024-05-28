@@ -1,4 +1,3 @@
-import ts from "typescript";
 import * as prettier from "prettier";
 import * as path from "path";
 import tidyHtml from "./tidy-html.ts";
@@ -12,12 +11,6 @@ const pretty = async (content: string, parser: string): Promise<string> => {
     });
 };
 
-const typescript = (content: string): string => ts.transpileModule(content, {
-    "compilerOptions": {
-        "module": ts.ModuleKind.ES2015,
-        "removeComments": true
-    }
-}).outputText;
 
 export default async (content: string, spec: string): Promise<string> => {
     // bundler transform passes in a type, HTML transform passes a filename
