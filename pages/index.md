@@ -4,8 +4,10 @@ title:
     - "Andy Preston"
     - "(Edge Effect)"
 tagLine:
-    - "Polyglot computer programmer, failed digital artist &amp; barely competent electronics engineer."
-    - "Swindon, UK"
+    - "Polyglot computer programmer,"
+    - "failed digital artist"
+    - "& barely competent electronics engineer"
+    - "from Swindon, UK"
 externalLinks:
     - "github.com/andy-preston"
     - "youtube.com/@edgeeffect"
@@ -74,6 +76,6 @@ But not a lot else.
 
 ---
 
-Monty: "I'm told you're a writer too. Do you write blogs?"
+Monty: "I'm told you're a writer too. Do you write... blogs?"
 
 Marwood: "No, I wish I could. It's just thoughts really."

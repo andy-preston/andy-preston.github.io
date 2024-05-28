@@ -7,7 +7,7 @@ export default (md: any) => {
 
         data.htmlTitle = data.title.join(' ');
         data.url = "/";
-        data.pics = JSON.stringify(data.pics);
+        data.pics = JSON.stringify(data.pics).replace(/\"/g, "|");
         data.layout = "index.vto";
     });
 }

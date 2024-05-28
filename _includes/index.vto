@@ -5,9 +5,19 @@
                 <img src="" alt="">
                 <figcaption></figcaption>
             </figure>
-            <script src="front-illustration.ts"></script>
-            <h1>{{ for piece of title }}<span>{{ piece }}</span>{{ /for }}</h1>
-            <p class="tag-line">{{ for piece of tagLine }}<span>{{ piece }}</span>{{ /for }}</p>
+            <script src="front-illustration.js"></script>
+            <h1>
+                {{ for piece of title }}
+                    <span>
+                        {{ piece }}
+                    </span>
+                {{ /for }}
+            </h1>
+            <p class="tag-line">
+                {{ for piece of tagLine }}
+                    <span>{{ piece }}</span>
+                {{ /for }}
+            </p>
             {{ for link of links }}
                 <p><a href="https://{{ link }}">{{ link }}</a></p>
             {{ /for }}
@@ -15,7 +25,7 @@
             {{ content }}
         </article>
         <nav class="article-index">
-            {{ for tag, section of sections}}
+            {{ for tag, section of sections }}
                 <h2>{{ section.title }}</h2>
                 {{ for article of search.pages(tag) }}
                     <p>

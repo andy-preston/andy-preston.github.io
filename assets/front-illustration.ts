@@ -18,7 +18,7 @@ window.addEventListener("load", () => {
     }
 
     const figureList = figure.dataset.pics == undefined ?
-        [] : JSON.parse(figure.dataset.pics);
+        [] : JSON.parse(figure.dataset.pics.replaceAll("|", "\""));
 
     const maximumFigure = figureList.length - 1;
 
