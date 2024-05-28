@@ -36,7 +36,7 @@ your time-stream by checking
 
 <section><article><h2>Build the Firmware</h2>
 
-<p>You'll find many instructions online saying use the
+<p>You'll find many instructions online saying to use the
 <code>stlink</code> target and this does, indeed, work. But if
 you do use this target, the onboard LED doesn't work
 and the wires you need to connect to the target device

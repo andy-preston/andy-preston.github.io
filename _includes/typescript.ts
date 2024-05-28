@@ -2,7 +2,6 @@ import typescript from "npm:typescript";
 
 export default (pages) => {
     for (const page of pages) {
-        console.log(page.data.url);
         page.content = typescript.transpileModule(page.content, {
             "compilerOptions": {
                 "module": typescript.ModuleKind.ES2015,
