@@ -1,49 +1,50 @@
 type TagType = "open" | "close";
 
 let tokens = [];
-let idx = 0;
+let idx: Integer = 0;
 
-////////////////////////////////////////////////////////////////////////////////
-//
-// TODO: this is broken - it thinks the intro is also an aside not an intro
-//
-////////////////////////////////////////////////////////////////////////////////
+const constructor = (_tokens, _idx: Integer): TagType => {
+    tokens = _tokens;
+    idx = _idx;
+    return tokens[idx].type.split("_")[2];
+}
 
-const moreContentAfter = () => {
-    for (let pos = idx+1; pos < tokens.length; pos++) {
-        if (tokens[pos].content.trim() != "") {
+const tokenNotEmpty = (pos) => tokens[pos].content.trim() != "";
+
+const moreContentBefore = () => {
+    for (let pos = idx-1; pos > 0; pos--) {
+        if (tokenNotEmpty(pos)) {
             return true;
         }
     }
     return false;
 };
 
-const nextSection = () => moreContentAfter() ? "<section><article>" : "";
-
-const renderAside = (type: TagType) => type == "open" ?
-    "</article><aside>" :
-    `</aside></section>${nextSection()}`;
-
-// TODO: this doesn't understand what to do if the intro isn't at the top of the
-// article
-const renderIntro = (type: TagType) => type = "open" ?
-    "" :
-    `</article></section>${nextSection()}`;
-
-export default {
-    // we can get this check array out of the type or the type out of the array
-    "validate": (params) =>  ["aside", "intro"].includes(params.trim()),
-
-    "render": (_tokens, _idx) => {
-        tokens = _tokens;
-        idx = _idx;
-        const token = tokens[idx];
-        const type = token.type.split("_");
-        if (type[1] == "aside") {
-            return renderAside(type[2]);
-        }
-        if (type[1] == "intro") {
-            return renderIntro(type[2]);
+const moreContentAfter = () => {
+    for (let pos = idx+1; pos < tokens.length; pos++) {
+        if (tokenNotEmpty(pos)) {
+            return true;
         }
     }
+    return false;
+};
+
+const prevSection = () => moreContentBefore() ? "</article></section>" : "";
+
+const nextSection = () => moreContentAfter() ? "<section><article>" : "";
+
+export const asideRender = (_tokens, _idx) => {
+    const type = constructor(_tokens, _idx);
+    // You can't have an aside before any other sections...
+    //    it's just not cricket!
+    return type == "open" ?
+        "</article><aside>" :
+        `</aside></section>${nextSection()}`;
+};
+
+export const sectionRender = (_tokens, _idx) => {
+    const type = constructor(_tokens, _idx);
+    return type == "open" ?
+        prevSection() :
+        `</article></section>${nextSection()}`;
 };
