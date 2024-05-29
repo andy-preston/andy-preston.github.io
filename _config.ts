@@ -1,10 +1,10 @@
 import lume from "lume/mod.ts";
 import code_highlight from "lume/plugins/code_highlight.ts";
+import containerPlugin from "npm:markdown-it-container";
+import container from "./_includes/container.ts";
 import languages from "./_includes/languages.ts";
 import cssProcessor from "./_includes/css.ts";
 import typescriptProcessor from "./_includes/typescript.ts";
-
-// import container from "npm:markdown-it-container";
 import article from "./_includes/article.ts";
 import index from "./_includes/index.ts";
 
@@ -13,15 +13,13 @@ const markdown = {
     "plugins": [
         index,
         article,
-        // [container, "container", {}]
+        [containerPlugin, "aside", container]
     ],
     "keepDefaultPlugins": true
 };
 
 const site = lume(
-    {
-        "prettyUrls": false
-    },
+    { "prettyUrls": false },
     { markdown }
 );
 

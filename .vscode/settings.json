@@ -3,8 +3,8 @@
         "*.webc": "html",
         "*.vto": "html",
     },
-    "deno.path": "./docker/deno",
-    "deno.cache": "./deno",
+    "deno.path": "./deno",
+    "deno.cache": "./deno/",
     "deno.enable": true,
     "deno.lint": true
 }
