@@ -12,6 +12,10 @@
     "compilerOptions": {
         "types": [
             "lume/types.ts"
-        ]
+        ],
+        "noUncheckedIndexedAccess": true,
+        "noImplicitAny": true,
+        "noImplicitReturns": true,
+        "strict": true
     }
 }
