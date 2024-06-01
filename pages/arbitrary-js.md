@@ -4,7 +4,7 @@ date: "2024-04-21"
 ---
 # Evaluating arbitrary JS inside a scope
 
-:::intro
+:::section
 
 Most of the ideas here have been "stolen" from:
 [StackOverflow](https://stackoverflow.com/questions/8403108/calling-eval-in-particular-context#25859853).
