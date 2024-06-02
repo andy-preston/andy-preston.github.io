@@ -5,7 +5,7 @@ import cssProcessor from "./_includes/css.ts";
 import typescriptProcessor from "./_includes/typescript.ts";
 import article from "./_includes/article.ts";
 import index from "./_includes/index.ts";
-import figures from "./_includes/figures.ts";
+import htmlProcessor from "./_includes/htmlProcessor.ts";
 import markdownItAttrs from "npm:markdown-it-attrs";
 
 const markdown = {
@@ -29,7 +29,7 @@ site
     .loadAssets([".css", ".ts"])
     .process([".ts"], typescriptProcessor)
     .process([".css"], cssProcessor)
-    .process([".html"], figures)
+    .process([".html"], htmlProcessor)
     .copy("fixed", ".");
 
 export default site;
