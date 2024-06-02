@@ -1,7 +1,5 @@
 import lume from "lume/mod.ts";
 import code_highlight from "lume/plugins/code_highlight.ts";
-import containerPlugin from "npm:markdown-it-container";
-import { sectionRender, asideRender } from "./_includes/container.ts";
 import languages from "./_includes/languages.ts";
 import cssProcessor from "./_includes/css.ts";
 import typescriptProcessor from "./_includes/typescript.ts";
@@ -15,9 +13,7 @@ const markdown = {
     "plugins": [
         markdownItAttrs,
         index,
-        article,
-        [containerPlugin, "aside", {"render": asideRender}],
-        [containerPlugin, "section", {"render": sectionRender}],
+        article
     ],
     "keepDefaultPlugins": true
 };
