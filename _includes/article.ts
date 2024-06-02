@@ -37,5 +37,3 @@ export default (md: any) => {
         data.layout = "article.vto";
     });
 }
-
-

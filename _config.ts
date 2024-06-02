@@ -7,6 +7,7 @@ import cssProcessor from "./_includes/css.ts";
 import typescriptProcessor from "./_includes/typescript.ts";
 import article from "./_includes/article.ts";
 import index from "./_includes/index.ts";
+import figures from "./_includes/figures.ts";
 
 const markdown = {
     "html": false,
@@ -30,6 +31,7 @@ site
     .loadAssets([".css", ".ts"])
     .process([".ts"], typescriptProcessor)
     .process([".css"], cssProcessor)
+    .process([".html"], figures)
     .copy("fixed", ".");
 
 export default site;
