@@ -22,7 +22,7 @@ The Black Magic Probe project is hosted at:
 [github.com/blacksphere/blackmagic](https://github.com/blacksphere/blackmagic)
 and you can obtain the firmware with:
 
-```bash
+```text
 git clone git@github.com:blacksphere/blackmagic.git
 cd blackmagic
 ```
@@ -31,7 +31,7 @@ At the time of writing, the current release is v1.7.1, but you can substitute
 this with the current release in your time-stream by checking
 [github.com/blacksphere/blackmagic/tags](https://github.com/blacksphere/blackmagic/tags)
 
-```bash
+```text
 git checkout v1.7.1
 ```
 
@@ -48,7 +48,7 @@ boards just disappears.
 
 As well as `arm-none-eabi-gcc`, you'll need `libnewlib-arm-none-eabi` installed.
 
-```bash
+```text
 make clean && make PROBE_HOST=swlink
 ```
 
@@ -82,7 +82,7 @@ future and I made the mistake of skipping uploading the DFU boot loader. But,
 even if you plan to never use DFU, you still need the boot loader to make the
 Blue Pill enumerate it's USB ports!
 
-```bash
+```text
 stm32flash -o /dev/ttyUSB0
 stm32flash -w src/blackmagic_dfu.bin -v /dev/ttyUSB0
 stm32flash -w src/blackmagic.bin -v -S 0x08002000 /dev/ttyUSB0

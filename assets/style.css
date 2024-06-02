@@ -191,23 +191,33 @@ a:active {
     color: var(--bright);
 }
 
-.token.property,
-.token.variable {
+/* cSpell:words hljs */
+
+.hljs-property,
+.hljs-params,
+.hljs-attr,
+.hljs-variable {
     color: #0ff;
 }
 
-.token.string,
+.hljs-string,
 .token.char,
-.token.number,
+.hljs-number,
+.hljs-literal,
 .token.constant {
     color: #bbf;
 }
 
-.token.function {
+.hljs-subst {
+    color: #f0a;
+}
+
+.hljs-title {
     color: #fa0;
 }
 
-.token.keyword,
+.hljs-keyword,
+.hljs-built_in,
 .token.punctuation,
 .token.operator {
     color: #ff0;
@@ -219,7 +229,7 @@ a:active {
     color: #f0f;
 }
 
-.token.comment,
+.hljs-comment,
 .token.prolog,
 .token.doctype,
 .token.cdata,

@@ -25,8 +25,8 @@ them to the object and they don't appear as ordinary fields (e.g. in a
 
 ```javascript {aside}
 Object.defineProperty(scopeObject, "doNotTouch", {
-    value: 47,
-    writable: false,
+    "value": 47,
+    "writeable": false,
 });
 ```
 

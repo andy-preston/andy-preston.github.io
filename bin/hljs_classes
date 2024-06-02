@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# cSpell:words hljs
+
+grep 'hljs-' _site/* | \
+    sed -e 's/hljs-[[:alpha:]]\+/\n\0\n/g' | \
+    grep hljs- | \
+    sort | \
+    uniq
