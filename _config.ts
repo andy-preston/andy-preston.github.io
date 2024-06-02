@@ -8,10 +8,12 @@ import typescriptProcessor from "./_includes/typescript.ts";
 import article from "./_includes/article.ts";
 import index from "./_includes/index.ts";
 import figures from "./_includes/figures.ts";
+import markdownItAttrs from "npm:markdown-it-attrs";
 
 const markdown = {
     "html": false,
     "plugins": [
+        markdownItAttrs,
         index,
         article,
         [containerPlugin, "aside", {"render": asideRender}],
