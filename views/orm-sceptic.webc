@@ -80,7 +80,9 @@ everything is a table.</p>
 If a view looks like a table, if a stored procedure yields a table, if a
 sub-query is basically just another table, then all of these things can be
 joined in a bigger query as though they were all tables.</p>
-</article><aside><table><thead><tr>
+</article>
+<!--- this table goes off the edge of the screen on my home laptop! -->
+<aside><table><thead><tr>
 <th scope="col">cust_id</th>
 <th scope="col">name</th>
 <th scope="col">addr_type</th>
