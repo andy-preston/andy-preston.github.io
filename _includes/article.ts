@@ -1,23 +1,24 @@
 // cSpell:words datetime
 
 export default (md: any) => {
-    const markdownTitle = (tokens: any[]): string | undefined => {
+    let data = null;
+
+    const markdownTitle = (tokens: Array<Token>): string => {
         for (let i = 0; i < tokens.length; i++) {
             const token = tokens[i];
             if (token.type == "heading_open" && token.tag == "h1") {
+                // Instead of just cutting 3 out, it might be better to look
+                // for the next heading_close and cut everything up to and
+                // including that
                 const articleTitle = tokens[i + 1].content;
                 tokens.splice(i, 3);
                 return articleTitle;
             }
         }
+        return "NO TITLE FOUND";
     }
 
-    md.core.ruler.push("articlePrep", function (state: any) {
-        const data = state.env.data?.page?.data;
-        if (!data || data.basename == "index") {
-            return;
-        }
-
+    const dates = () => {
         if (data.noDate) {
             data.shortDate = "";
             data.humanDate = "";
@@ -30,7 +31,15 @@ export default (md: any) => {
             });
             data.shortDate = date.toLocaleDateString("en-uk");
         }
+    }
 
+    md.core.ruler.push("articlePrep", function (state: any) {
+        data = state.env.data?.page?.data;
+        if (!data || data.basename == "index") {
+            return;
+        }
+
+        dates();
         data.title = markdownTitle(state.tokens);
         data.htmlTitle = "Andy Preston - " + data.title;
         data.url = data.url.split("/").pop();

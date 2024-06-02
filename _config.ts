@@ -1,4 +1,5 @@
 import lume from "lume/mod.ts";
+import markdownItAttrs from "npm:markdown-it-attrs";
 import code_highlight from "lume/plugins/code_highlight.ts";
 import languages from "./_includes/languages.ts";
 import cssProcessor from "./_includes/css.ts";
@@ -6,7 +7,6 @@ import typescriptProcessor from "./_includes/typescript.ts";
 import article from "./_includes/article.ts";
 import index from "./_includes/index.ts";
 import htmlProcessor from "./_includes/htmlProcessor.ts";
-import markdownItAttrs from "npm:markdown-it-attrs";
 
 const markdown = {
     "html": false,
