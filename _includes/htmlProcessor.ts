@@ -60,7 +60,7 @@ export default (filteredPages: Array<Page>, allPages: Array<Page>) => {
 
         // we "should" never get here. (famous last words).
         return null;
-    }
+    };
 
     const replaceLine = (): boolean => {
         const target = document.querySelector("section > article > hr");
@@ -70,20 +70,32 @@ export default (filteredPages: Array<Page>, allPages: Array<Page>) => {
 
         target.remove();
         return true;
-    }
+    };
 
     const moveAsides = (): boolean => {
         const target = document.querySelector("[aside]");
-        // If this is <code>, we need the parent <pre>
-        // if it's <img>, we need the parent <figure>
-        const wrapped = target === null ? null : target.parentNode;
+        if (target === null) {
+            return false;
+        }
 
+        let wrapped = null;
+        if (['img', 'code'].includes(target.tagName.toLowerCase())) {
+            // If this is <code>, we need the parent <pre>
+            // if it's <img>, we need the parent <figure>
+            wrapped = target.parentNode;
+        } else {
+            // But (e.g.) a table just wants to wrap the table
+            wrapped = target;
+        }
+        if (target.getAttribute("aside") == "bottom") {
+            wrapped.classList.add("bottom");
+        }
+        target.removeAttribute("aside");
         const topSection = moveToNewSection(wrapped);
         if (topSection === null) {
             return false;
         }
 
-        target.removeAttribute("aside");
         const wrapper = document.createElement("aside");
         wrapper.appendChild(wrapped);
         topSection.append(wrapper);
