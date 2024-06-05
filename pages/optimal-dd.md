@@ -1,32 +1,30 @@
 ---
-title: "Optimal Secure Erasure With dd"
 tags: shell
 date: "2023-06-26"
 ---
-<section><article>
-<p>I occasionally find old hard disks in dumpsters or other people's rubbish.
-Ask and the bin-man doth provide.</p>
 
-<p>It's always a good idea to securely erase such disk... you've no idea what
-sort of stuff is on them.</p>
+# Optimal Secure Erasure With dd
 
-<p>The easiest way to do this is with <code>dd</code> and
-<code>/dev/random</code>.</p>
+I occasionally find old hard disks in dumpsters or other people's rubbish.
+Ask and the bin-man doth provide.
 
-<p>Although, if I'm going to sell them on E. Bay, I like to fill them up with a
-video loop of Joey saying &quot;I copied a garbage file&quot; and Phreak
-responding &quot;Big deal, a garbage file's got shit in it, Joey&quot;
-just for jollies.</p>
-</article></section>
+It's always a good idea to securely erase such disk... you've no idea what
+sort of stuff is on them.
 
-<section><article><h2>Block Size!</h2>
+The easiest way to do this is with `dd` and `/dev/random`.
 
-<p>But <code>dd</code>ing that many bytes can take a long time, so with the
-help of
-<a href="https://blog.tdg5.com/tuning-dd-block-size/">blog.tdg5.com/tuning-dd-block-size</a>,
-I cooked up this little script to find the optimal block size:</p>
+Although, if I'm going to sell them on E. Bay, I like to fill them up with a
+video loop of Joey saying "I copied a garbage file" and Phreak responding
+"Big deal, a garbage file's got shit in it, Joey" just for jollies.
 
-<syntax-highlight language="bash">#!/bin/bash
+## Block Size!
+
+But `dd`ing that many bytes can take a long time, so with the help of
+[blog.tdg5.com/tuning-dd-block-size](https://blog.tdg5.com/tuning-dd-block-size/),
+I cooked up this little script to find the optimal block size:
+
+```bash
+#!/bin/bash
 
 # Since we're dealing with dd, abort if any errors occur
 set -e
@@ -67,6 +65,4 @@ do
     echo ===============================================
     cat /tmp/dd-random-results
 done
-</syntax-highlight>
-
-</article></section>
+```
