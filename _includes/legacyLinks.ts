@@ -1,14 +1,7 @@
 // See: ./pages/legacyLinks.page.js
 
 export default function* (data) {
-    const allPages = data.search.pages().map(
-        (page: Array) => page.basename
-    );
-
     const redirector = (basename: string, legacy: string, redirectTo:string) => {
-        if (!allPages.includes(basename)) {
-            console.log(`WARNING! redirect to ${redirectTo} that doesn't exist!`);
-        }
         return {
             "url": legacy,
             "redirectTo": redirectTo,
