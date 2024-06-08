@@ -38,4 +38,6 @@ export default function* (data) {
     }
     // This one is spelled incorrectly as well as being "old style"
     yield redirector("ffmpeg-recipes", "/ffmpeg-recipies.html", "/ffmpeg-recipes/");
+    // And this one was discarded because I was talking out of my (expletive deleted)
+    yield redirector("ebtables", "/ebtables.html", "/");
 }
