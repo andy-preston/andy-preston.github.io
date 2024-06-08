@@ -30,7 +30,7 @@
                 {{ for article of search.pages(tag) }}
                     <p>
                         <a href="{{ article.url }}">{{ article.title }}</a>
-                        {{ if article.draft }}
+                        {{ if article.publishAsDraft }}
                             (Draft)
                         {{ /if }}
                     </p>
