@@ -19,8 +19,11 @@ const markdown = {
 };
 
 const site = lume(
-    { "prettyUrls": false },
-    { markdown }
+    {
+    },
+    {
+        markdown
+    }
 );
 
 site

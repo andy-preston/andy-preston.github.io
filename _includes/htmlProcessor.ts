@@ -119,7 +119,7 @@ export default (filteredPages: Array<Page>, allPages: Array<Page>) => {
     };
 
     for (page of filteredPages) {
-        if (page.data.basename == "index") {
+        if (["index", "legacyLinks"].includes(page.data.basename)) {
             continue;
         }
 
