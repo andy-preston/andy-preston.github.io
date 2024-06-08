@@ -5,7 +5,7 @@
     "tasks": {
         "lume": "echo \"import 'lume/cli.ts'\" | deno run -A -",
         "build": "deno task lume",
-        "serve": "deno task lume -s",
+        "serve": "deno task lume --serve",
         "lint:css": "deno run --allow-env --allow-read --allow-sys _includes/stylelint.ts",
         "pipeline": "deno task build"
     },
