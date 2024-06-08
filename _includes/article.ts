@@ -1,5 +1,7 @@
 // cSpell:words datetime
 
+import { Token } from "npm:markdown-it@14.1.0";
+
 export default (md: any) => {
 
     const markdownTitle = (tokens: Array<Token>): string => {
@@ -30,10 +32,12 @@ export default (md: any) => {
         });
         const shortDate = date.toLocaleDateString("en-uk");
         return [humanDate, shortDate];
-    }
+    };
 
-    const shortestUrl = (url: string): string =>
-        "/" + url.match(/[^\/]+/g).pop() + "/";
+    const shortestUrl = (url: string): string => {
+        const parts = url.match(/[^\/]+/g);
+        return parts === null ? "/" : "/" + parts.pop() + "/";
+    };
 
     md.core.ruler.push("articlePrep", function (state: any) {
         let data = state.env.data?.page?.data;

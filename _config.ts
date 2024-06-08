@@ -1,7 +1,6 @@
 import lume from "lume/mod.ts";
 import markdownItAttrs from "npm:markdown-it-attrs";
 import code_highlight from "lume/plugins/code_highlight.ts";
-import languages from "./_includes/languages.ts";
 import cssProcessor from "./_includes/css.ts";
 import typescriptProcessor from "./_includes/typescript.ts";
 import article from "./_includes/article.ts";
@@ -28,7 +27,7 @@ const site = lume(
 
 site
     .ignore("README.md", "fixed", "builder") // "builder" should be removed eventually
-    .use(code_highlight(languages))
+    .use(code_highlight())
     .loadAssets([".css", ".ts"])
     .process([".ts"], typescriptProcessor)
     .process([".css"], cssProcessor)
