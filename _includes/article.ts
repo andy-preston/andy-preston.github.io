@@ -1,7 +1,6 @@
 // cSpell:words datetime
 
 export default (md: any) => {
-    let data = null;
 
     const markdownTitle = (tokens: Array<Token>): string => {
         for (let i = 0; i < tokens.length; i++) {
@@ -16,33 +15,38 @@ export default (md: any) => {
             }
         }
         return "NO TITLE FOUND";
+    };
+
+    const displayDates = (pageDate: string): Array<string> => {
+        if (pageDate == "") {
+            return ["", ""];
+        }
+
+        const date = new Date(pageDate);
+        const humanDate = date.toLocaleDateString("en-uk", {
+            "year": "numeric",
+            "month": "long",
+            "day": "numeric"
+        });
+        const shortDate = date.toLocaleDateString("en-uk");
+        return [humanDate, shortDate];
     }
 
-    const dates = () => {
-        if (data.noDate) {
-            data.shortDate = "";
-            data.humanDate = "";
-        } else {
-            const date = new Date(data.date);
-            data.humanDate = date.toLocaleDateString("en-uk", {
-                "year": "numeric",
-                "month": "long",
-                "day": "numeric"
-            });
-            data.shortDate = date.toLocaleDateString("en-uk");
-        }
-    }
+    const shortestUrl = (url: string): string =>
+        "/" + url.match(/[^\/]+/g).pop() + "/";
 
     md.core.ruler.push("articlePrep", function (state: any) {
-        data = state.env.data?.page?.data;
-        if (!data || data.basename == "index") {
-            return;
+        let data = state.env.data?.page?.data;
+        if (!data) {
+            throw "No data???????"
         }
 
-        dates();
-        data.title = markdownTitle(state.tokens);
-        data.htmlTitle = "Andy Preston - " + data.title;
-        data.url = data.url.split("/").pop();
-        data.layout = "article.vto";
+        if (data.basename != "index") {
+            data.title = markdownTitle(state.tokens);
+            data.htmlTitle = `Andy Preston - ${data.title}`;
+            [data.humanDate, data.shortDate] = displayDates(data.noDate ? "" : data.date);
+            data.url = shortestUrl(data.url);
+            data.layout = "article.vto";
+        }
     });
 }
