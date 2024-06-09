@@ -1,39 +1,11 @@
 // cSpell:words datetime
 
-import { MarkdownIt, Token } from "npm:markdown-it@14.1.0";
+import { MarkdownIt } from "npm:markdown-it@14.1.0";
 import MarkdownItState from "./MarkdownItState.ts";
+import markdownTitle from "./markdownTitle.ts";
+import displayDates from "./displayDates.ts";
 
 export default (md: MarkdownIt) => {
-
-    const markdownTitle = (tokens: Array<Token>): string => {
-        for (let i = 0; i < tokens.length; i++) {
-            const token = tokens[i];
-            if (token.type == "heading_open" && token.tag == "h1") {
-                // Instead of just cutting 3 out, it might be better to look
-                // for the next heading_close and cut everything up to and
-                // including that
-                const articleTitle = tokens[i + 1].content;
-                tokens.splice(i, 3);
-                return articleTitle;
-            }
-        }
-        return "NO TITLE FOUND";
-    };
-
-    const displayDates = (pageDate: string): Array<string> => {
-        if (pageDate == "") {
-            return ["", ""];
-        }
-
-        const date = new Date(pageDate);
-        const humanDate = date.toLocaleDateString("en-uk", {
-            "year": "numeric",
-            "month": "long",
-            "day": "numeric"
-        });
-        const shortDate = date.toLocaleDateString("en-uk");
-        return [humanDate, shortDate];
-    };
 
     md.core.ruler.push("articlePrep", function (state: MarkdownItState) {
         const data = state.env.data?.page?.data;
