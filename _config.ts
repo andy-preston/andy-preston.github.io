@@ -2,7 +2,7 @@ import lume from "lume/mod.ts";
 import markdownItAttrs from "npm:markdown-it-attrs";
 import code_highlight from "lume/plugins/code_highlight.ts";
 import typescriptProcessor from "./_includes/typescript.ts";
-import article from "./_includes/article.ts";
+import article from "./_includes/article/article.ts";
 import index from "./_includes/index.ts";
 import htmlProcessor from "./_includes/htmlProcessor.ts";
 
