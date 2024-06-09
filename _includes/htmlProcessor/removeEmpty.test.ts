@@ -5,8 +5,7 @@ import {
 } from "./testing/documentToFromHtml.ts";
 import {
     assert,
-    assertEquals,
-    assertNotEquals
+    assertEquals
 } from "https://deno.land/std@0.224.0/assert/mod.ts";
 
 Deno.test("It leaves html with no empty elements unchanged and returns false", () => {
@@ -22,7 +21,7 @@ Deno.test("It leaves html with no empty elements unchanged and returns false", (
 
     const result = removeEmpty(document, "article");
     // Hey Deno people, some negative assertions would be nice too.
-    assertNotEquals(result, true);
+    assertEquals(result, false);
 
     const processed = documentToHtml(document);
     assertEquals(processed, originalHtml);
@@ -36,13 +35,11 @@ Deno.test("It removes empty elements and returns true", () => {
         "</article></section>",
         "</body></html>"
     ].join("\n");
-
     const expectedHtml = [
         "<html><head><title>Test</title></head>",
         "<body><section></section>",
         "</body></html>"
     ].join("\n");
-
     const document = documentFromHtml(originalHtml);
 
     const result = removeEmpty(document, "article");

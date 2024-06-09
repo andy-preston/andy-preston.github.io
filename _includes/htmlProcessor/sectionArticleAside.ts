@@ -49,6 +49,7 @@ export const moveAsides = (document: Document): boolean => {
         wrapped.classList.add("bottom");
     }
     target.removeAttribute("aside");
+
     const topSection = moveToNewSection(document, wrapped);
     if (topSection === null) {
         return false;
