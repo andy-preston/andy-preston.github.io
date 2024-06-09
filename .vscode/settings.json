@@ -6,5 +6,9 @@
     "deno.path": "./bin/deno",
     "deno.cache": "./_deno/",
     "deno.enable": true,
-    "deno.lint": true
+    "deno.lint": true,
+    "deno.disablePaths": [
+        "./assets/"
+    ],
+    "deno.logFile": true
 }

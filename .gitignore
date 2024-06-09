@@ -2,5 +2,6 @@ _cache
 _deno
 _site
 _old-stuff
+bin/_deno
 pages/*.txt
 node_modules
