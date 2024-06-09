@@ -7,6 +7,6 @@
     "deno.enable": true,
     "deno.lint": true,
     "deno.disablePaths": [
-        "./assets/"
+        "assets/front-illustration.ts"
     ]
 }

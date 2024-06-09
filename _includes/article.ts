@@ -46,6 +46,7 @@ export default (md: MarkdownIt) => {
             data.htmlTitle = `Andy Preston - ${data.title}`;
             [data.humanDate, data.shortDate] = displayDates(data.noDate ? "" : data.date);
             data.layout = "article.vto";
+            data.url = `/${data.basename}/`;
         }
     });
 }
