@@ -1,6 +1,6 @@
 // See: ./pages/legacyLinks.page.js
 
-export default function* (data) {
+export default function* (_: Lume.Data) {
     const redirector = (basename: string, legacy: string, redirectTo:string) => {
         return {
             "url": legacy,
