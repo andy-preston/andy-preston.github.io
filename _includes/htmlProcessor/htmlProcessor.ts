@@ -13,7 +13,7 @@ export default (
             }
 
             const document = page.document!;
-            while (paragraphToFigure(document, page));
+            while (paragraphToFigure(document, page.data.basename));
             while (replaceHRule(document));
             while (moveAsides(document));
             while (removeEmpty(document, "article"));

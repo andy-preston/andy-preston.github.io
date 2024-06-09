@@ -1,13 +1,10 @@
-export default (document: Document, page: Lume.Page) => {
+export default (document: Document, basename: string) => {
 
-    const reportError = (imageElement: Element) => {
-        const name = page.data.basename;
+    const reportError = (imageElement: Element, message : string) => {
         const source = imageElement.getAttribute("src");
         const title = imageElement.getAttribute("alt");
         const markDown = `![${title}](${source})`;
-        console.error(
-            `${name}: "${markDown}" - Images should be in a paragraph of their own`
-        );
+        throw new Error(`${basename}: "${markDown}" - ${message}`);
     };
 
     const image = document.querySelector("p > img");
@@ -17,13 +14,16 @@ export default (document: Document, page: Lume.Page) => {
 
     const paragraph = image.parentNode!;
     if (paragraph.childNodes.length != 1) {
-        reportError(image);
+        reportError(image, "Images should be in a paragraph of their own");
         return false;
     }
 
     const altText = (image: Element) => {
         const text = image.getAttribute("alt");
-        return text ? text : "??? NO CAPTION ???";
+        if (!text) {
+            reportError(image, "No caption on image");
+        }
+        return text!;
     }
 
     const caption = document.createElement("figcaption");
