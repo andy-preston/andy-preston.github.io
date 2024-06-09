@@ -1,7 +1,6 @@
 import lume from "lume/mod.ts";
 import markdownItAttrs from "npm:markdown-it-attrs";
 import code_highlight from "lume/plugins/code_highlight.ts";
-import cssProcessor from "./_includes/css.ts";
 import typescriptProcessor from "./_includes/typescript.ts";
 import article from "./_includes/article.ts";
 import index from "./_includes/index.ts";
@@ -30,7 +29,6 @@ site
     .use(code_highlight())
     .loadAssets([".css", ".ts"])
     .process([".ts"], typescriptProcessor)
-    .process([".css"], cssProcessor)
     .process([".html"], htmlProcessor)
     .copy("fixed", ".");
 

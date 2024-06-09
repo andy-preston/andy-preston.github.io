@@ -11,6 +11,6 @@ export default (pages: Array<Lume.Page>) => {
                 }
             }
         ).outputText;
-        page.data.url = page.data.url.split("/").pop().replace(/\.ts$/, ".js");
+        page.data.url = page.data.url!.replace(/\.ts$/, ".js");
     }
 };

@@ -34,11 +34,6 @@ export default (md: any) => {
         return [humanDate, shortDate];
     };
 
-    const shortestUrl = (url: string): string => {
-        const parts = url.match(/[^\/]+/g);
-        return parts === null ? "/" : "/" + parts.pop() + "/";
-    };
-
     md.core.ruler.push("articlePrep", function (state: any) {
         let data = state.env.data?.page?.data;
         if (!data) {
@@ -49,7 +44,6 @@ export default (md: any) => {
             data.title = markdownTitle(state.tokens);
             data.htmlTitle = `Andy Preston - ${data.title}`;
             [data.humanDate, data.shortDate] = displayDates(data.noDate ? "" : data.date);
-            data.url = shortestUrl(data.url);
             data.layout = "article.vto";
         }
     });
