@@ -19,5 +19,15 @@
         "noImplicitAny": true,
         "noImplicitReturns": true,
         "strict": true
+    },
+    "test": {
+        "exclude": [
+            "_deno",
+            "_old-stuff",
+            "bin",
+            "builder",
+            "fixed",
+            "node_modules"
+        ]
     }
 }

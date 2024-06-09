@@ -1,13 +1,5 @@
 {
-    "name": "andy_prestons_curates_egg",
-    "version": "1.0.0",
-    "description": "Andy Preston's Curate's Egg",
-    "author": "Andy Preston",
-    "license": "CC-BY-NC-ND-4.0",
-    "type": "module",
     "scripts": {
-        "build": "yarn tsx node_modules/.bin/eleventy --config=builder/eleventy.js",
-        "tests": "yarn vitest run",
         "lintScript": "DEBUG=eslint:cli-engine yarn eslint .",
         "lintStyle": "yarn stylelint */*.css",
         "checkTs": "yarn tsc --project components ; yarn tsc --project builder",
@@ -89,10 +81,6 @@
         ]
     },
     "dependencies": {
-        "@11ty/eleventy": "3.0.0-alpha.10",
-        "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.0",
-        "@11ty/eleventy-plugin-webc": "^0.11.2",
-        "@types/node": "^20.12.12",
         "prettier": "^3.2.5",
         "tsx": "^4.10.5",
         "typescript": "^5.4.5"
@@ -100,10 +88,8 @@
     "devDependencies": {
         "eslint": "^8.56.0",
         "eslint-plugin-json": "^3.1.0",
-        "npm-check-updates": "^16.14.20",
         "stylelint": "^16.5.0",
         "stylelint-config-standard": "^36.0.0",
-        "typescript-eslint": "^7.9.0",
-        "vitest": "^1.6.0"
+        "typescript-eslint": "^7.9.0"
     }
 }
