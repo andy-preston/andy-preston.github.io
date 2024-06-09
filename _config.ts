@@ -10,7 +10,6 @@ const markdown = {
     "html": false,
     "plugins": [
         markdownItAttrs,
-        index,
         article
     ],
     "keepDefaultPlugins": true
@@ -28,6 +27,7 @@ site
     .ignore("README.md", "fixed", "builder") // "builder" should be removed eventually
     .use(code_highlight())
     .loadAssets([".css", ".ts"])
+    .preprocess([".html"], index)
     .process([".ts"], typescriptProcessor)
     .process([".html"], htmlProcessor)
     .copy("fixed", ".");

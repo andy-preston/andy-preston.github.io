@@ -1,6 +1,6 @@
 ---
 # cSpell:words edgeeffect youtube hackaday stackexchange Symfony nokeep
-title:
+titles:
     - "Andy Preston"
     - "(Edge Effect)"
 tagLine:

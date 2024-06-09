@@ -1,18 +1,10 @@
-import { MarkdownIt } from "npm:markdown-it@14.1.0";
-import MarkdownItState from "./MarkdownItState.ts";
-
-export default (md: MarkdownIt) => {
-    md.core.ruler.push("indexPrep", function (state: MarkdownItState) {
-        const data = state.env.data?.page?.data;
-        if (!data || data.basename != "index") {
-            return;
+export default (pages: Array<Lume.Page>) => {
+    for (const page of pages) {
+        if (page.data.basename == "index") {
+            page.data.htmlTitle = page.data.titles.join(' ');
+            page.data.url = "/";
+            page.data.pics = JSON.stringify(page.data.pics).replace(/\"/g, "|");
+            page.data.layout = "index.vto";
         }
-
-        data.htmlTitle = data.title.join(' ');
-        data.url = "/";
-        data.pics = JSON.stringify(data.pics).replace(/\"/g, "|");
-        data.layout = "index.vto";
-    });
-}
-
-
+    }
+  };
