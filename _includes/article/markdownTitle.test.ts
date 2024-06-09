@@ -7,7 +7,6 @@ import {
     assertStringIncludes
 } from "https://deno.land/std@0.224.0/assert/mod.ts";
 
-
 let extractedTitle: string = "";
 
 const mockPlugin = (md: MarkdownIt) => {
@@ -19,7 +18,7 @@ const mockPlugin = (md: MarkdownIt) => {
     );
 };
 
-Deno.test("it extracts title from markdown without breaking other text", () => {
+Deno.test("It extracts title from markdown without breaking other text", () => {
     const testMarkdown = [
         "# The Title  ",
         "",

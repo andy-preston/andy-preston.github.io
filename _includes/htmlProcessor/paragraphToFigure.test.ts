@@ -1,20 +1,14 @@
 import paragraphToFigure from "./paragraphToFigure.ts";
 import {
-    DOMParser
-} from "https://deno.land/x/deno_dom@v0.1.45/deno-dom-wasm.ts";
+    documentFromHtml,
+    documentToHtml
+} from "./testing/documentToFromHtml.ts";
 import {
     assert,
     assertNotEquals,
     assertStringIncludes,
     assertThrows
 } from "https://deno.land/std@0.224.0/assert/mod.ts";
-
-const documentFromHtml = (html: Array<string>): Document => {
-    return new DOMParser().parseFromString(
-        html.join("\n"),
-        "text/html"
-    ) as unknown as Document;
-};
 
 Deno.test("If no alt text is given it throws 'no caption'", () => {
     const document = documentFromHtml([
@@ -65,7 +59,6 @@ Deno.test("If there is no suitable image, it returns false", () => {
     assertNotEquals(result, true);
 });
 
-
 Deno.test("It transforms an image in a paragraph into a figure", () => {
     const document = documentFromHtml([
         "<html><head><title>Test</title></head>",
@@ -84,9 +77,7 @@ Deno.test("It transforms an image in a paragraph into a figure", () => {
 
     const result = paragraphToFigure(document, "Test Document");
     assert(result);
-    // deno-lint-ignore no-unused-vars
-    const { doctype, documentElement } = document;
-    const processed = documentElement.outerHTML;
 
+    const processed = documentToHtml(document);
     assertStringIncludes(processed, expectedHtml);
 });
