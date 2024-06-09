@@ -1,8 +1,9 @@
 // cSpell:words datetime
 
-import { Token } from "npm:markdown-it@14.1.0";
+import { MarkdownIt, Token } from "npm:markdown-it@14.1.0";
+import MarkdownItState from "./MarkdownItState.ts";
 
-export default (md: any) => {
+export default (md: MarkdownIt) => {
 
     const markdownTitle = (tokens: Array<Token>): string => {
         for (let i = 0; i < tokens.length; i++) {
@@ -34,8 +35,8 @@ export default (md: any) => {
         return [humanDate, shortDate];
     };
 
-    md.core.ruler.push("articlePrep", function (state: any) {
-        let data = state.env.data?.page?.data;
+    md.core.ruler.push("articlePrep", function (state: MarkdownItState) {
+        const data = state.env.data?.page?.data;
         if (!data) {
             throw "No data???????"
         }

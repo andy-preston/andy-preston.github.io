@@ -1,5 +1,8 @@
-export default (md: any) => {
-    md.core.ruler.push("indexPrep", function (state: any) {
+import { MarkdownIt } from "npm:markdown-it@14.1.0";
+import MarkdownItState from "./MarkdownItState.ts";
+
+export default (md: MarkdownIt) => {
+    md.core.ruler.push("indexPrep", function (state: MarkdownItState) {
         const data = state.env.data?.page?.data;
         if (!data || data.basename != "index") {
             return;

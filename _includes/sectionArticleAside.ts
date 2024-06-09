@@ -1,4 +1,7 @@
-const moveToNewSection = (target: Element|null): Element|null => {
+const moveToNewSection = (
+    document: Document,
+    target: Element|null
+): Element|null => {
     if (target === null) {
         return null;
     }
@@ -17,14 +20,11 @@ const moveToNewSection = (target: Element|null): Element|null => {
 
         topArticle.appendChild(child!);
     }
-
-    // we "should" never get here. (famous last words).
-    return null;
 };
 
 export const replaceHRule = (document: Document): boolean => {
     const target = document.querySelector("section > article > hr");
-    if (moveToNewSection(target) === null) {
+    if (moveToNewSection(document, target) === null) {
         return false;
     }
 
@@ -49,7 +49,7 @@ export const moveAsides = (document: Document): boolean => {
         wrapped.classList.add("bottom");
     }
     target.removeAttribute("aside");
-    const topSection = moveToNewSection(wrapped);
+    const topSection = moveToNewSection(document, wrapped);
     if (topSection === null) {
         return false;
     }

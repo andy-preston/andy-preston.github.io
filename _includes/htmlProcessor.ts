@@ -2,7 +2,10 @@ import paragraphToFigure from "./paragraphToFigure.ts";
 import removeEmpty from "./removeEmpty.ts";
 import {replaceHRule, moveAsides } from "./sectionArticleAside.ts";
 
-export default (filteredPages: Array<Lume.Page>, allPages: Array<Lume.Page>) => {
+export default (
+    filteredPages: Array<Lume.Page>,
+    _allPages: Array<Lume.Page>
+) => {
     for (const page of filteredPages) {
         if (["index", "legacyLinks"].includes(page.data.basename)) {
             continue;
