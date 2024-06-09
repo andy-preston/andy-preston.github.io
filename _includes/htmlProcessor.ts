@@ -6,16 +6,18 @@ export default (
     filteredPages: Array<Lume.Page>,
     _allPages: Array<Lume.Page>
 ) => {
-    for (const page of filteredPages) {
-        if (["index", "legacyLinks"].includes(page.data.basename)) {
-            continue;
-        }
+    filteredPages.forEach(
+        (page: Lume.Page) => {
+            if (["index", "legacyLinks"].includes(page.data.basename)) {
+                return;
+            }
 
-        const document = page.document!;
-        while (paragraphToFigure(document!, page));
-        while (replaceHRule(document));
-        while (moveAsides(document));
-        while (removeEmpty(document!, "article"));
-        while (removeEmpty(document!, "section"));
-    }
+            const document = page.document!;
+            while (paragraphToFigure(document, page));
+            while (replaceHRule(document));
+            while (moveAsides(document));
+            while (removeEmpty(document, "article"));
+            while (removeEmpty(document, "section"));
+        }
+    );
 };

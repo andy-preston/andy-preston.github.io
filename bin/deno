@@ -2,5 +2,6 @@
 
 # cSpell:words deno
 
-export DENO_DIR=$(pwd)/_deno
-$(pwd)/bin/_deno $@
+export DENO_DIR="$(pwd)/_deno"
+export PATH="$(pwd)/bin:${PATH}"
+_deno $@

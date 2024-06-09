@@ -4,7 +4,7 @@ export default (document: Document, querySelector: string) => {
         return false;
     }
 
-    for(const target of targets) {
+    for (const target of targets) {
         if (target.innerHTML.trim() == "") {
             target.remove();
             return true;
