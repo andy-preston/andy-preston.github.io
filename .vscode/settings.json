@@ -1,7 +1,6 @@
 {
     "files.associations": {
-        "*.webc": "html",
-        "*.vto": "html",
+        "*.vto": "html"
     },
     "deno.path": "./bin/deno",
     "deno.cache": "./_deno/",
@@ -9,6 +8,5 @@
     "deno.lint": true,
     "deno.disablePaths": [
         "./assets/"
-    ],
-    "deno.logFile": true
+    ]
 }
