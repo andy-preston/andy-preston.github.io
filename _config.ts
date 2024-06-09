@@ -4,7 +4,7 @@ import code_highlight from "lume/plugins/code_highlight.ts";
 import typescriptProcessor from "./_includes/typescript.ts";
 import article from "./_includes/article/article.ts";
 import index from "./_includes/index.ts";
-import htmlProcessor from "./_includes/htmlProcessor.ts";
+import htmlProcessor from "./_includes/htmlProcessor/htmlProcessor.ts";
 
 const markdown = {
     "html": false,
