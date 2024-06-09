@@ -4,5 +4,4 @@ _cache
 _deno
 _site
 _old-stuff
-pages/*.txt
 node_modules

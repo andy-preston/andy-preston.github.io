@@ -9,7 +9,7 @@
 # It was just too complicated getting Deno to do the check stage in deno.json
 # So the rest might as well be in a shell script too.
 #
-# This is a wierd order to do things in... but it puts the most important
+# This is a weird order to do things in... but it puts the most important
 # errors near the bottom of the screen, and that works for me.
 #
 ################################################################################

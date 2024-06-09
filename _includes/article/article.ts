@@ -5,8 +5,8 @@ import MarkdownItState from "./MarkdownItState.ts";
 import markdownTitle from "./markdownTitle.ts";
 import displayDates from "./displayDates.ts";
 
-export default (md: MarkdownIt) => {
-    md.core.ruler.push(
+export default (markdownIt: MarkdownIt) => {
+    markdownIt.core.ruler.push(
         "articlePrep",
         (state: MarkdownItState) => {
             const pageData = state.env.data!.page!.data!;
