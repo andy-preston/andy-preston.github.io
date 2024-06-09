@@ -16,11 +16,8 @@ const markdown = {
 };
 
 const site = lume(
-    {
-    },
-    {
-        markdown
-    }
+    {},
+    { markdown }
 );
 
 site

@@ -6,10 +6,7 @@
         "lume": "echo \"import 'lume/cli.ts'\" | deno run -A -",
         "build": "deno task lume",
         "serve": "deno task lume --serve",
-        "check": "deno check _includes/*.ts _config.ts _data.ts",
-        "lint": "deno lint _includes/*.ts _config.ts _data.ts",
         "lint:css": "deno run --allow-env --allow-read --allow-sys _includes/stylelint.ts",
-        "pipeline": "deno task build"
     },
     "compilerOptions": {
         "types": [
@@ -20,14 +17,14 @@
         "noImplicitReturns": true,
         "strict": true
     },
-    "test": {
-        "exclude": [
-            "_deno",
-            "_old-stuff",
-            "bin",
-            "builder",
-            "fixed",
-            "node_modules"
-        ]
-    }
+    "exclude": [
+        "_deno",
+        "_old-stuff",
+        "_site",
+        "assets",
+        "bin",
+        "builder",
+        "fixed",
+        "node_modules"
+    ]
 }
