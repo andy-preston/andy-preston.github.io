@@ -2,7 +2,7 @@
 
 import { Token } from "npm:markdown-it@14.1.0";
 
-export default (tokens: Array<Token>): string => {
+export default (tokens: Array<Token>, basename: string): string => {
     for (let i = 0; i < tokens.length; i++) {
         const token = tokens[i];
         if (token.type == "heading_open" && token.tag == "h1") {
@@ -14,5 +14,5 @@ export default (tokens: Array<Token>): string => {
             return articleTitle;
         }
     }
-    return "NO TITLE FOUND";
+    throw Error(`${basename} - no title found`);
 };

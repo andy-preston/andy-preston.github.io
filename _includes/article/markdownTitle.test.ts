@@ -4,16 +4,17 @@ import markdownTitle from "./markdownTitle.ts";
 import {
     assert,
     assertEquals,
-    assertStringIncludes
+    assertStringIncludes,
+    assertThrows
 } from "https://deno.land/std@0.224.0/assert/mod.ts";
 
 let extractedTitle: string = "";
 
-const mockPlugin = (md: MarkdownIt) => {
-    md.core.ruler.push(
+const mockPlugin = (markdownIt: MarkdownIt) => {
+    markdownIt.core.ruler.push(
         "mockPlugin",
         (state: MarkdownItState) => {
-            extractedTitle = markdownTitle(state.tokens);
+            extractedTitle = markdownTitle(state.tokens, "Test Document");
         }
     );
 };
@@ -27,12 +28,29 @@ Deno.test("It extracts title from markdown without breaking other text", () => {
         "The second paragraph"
     ];
 
-    const md = MarkdownIt().use(mockPlugin);
-    const finalHtml = md.render(testMarkdown.join("\n"));
+    const markdownIt = MarkdownIt().use(mockPlugin);
+    const finalHtml = markdownIt.render(testMarkdown.join("\n"));
 
     assertEquals(extractedTitle, "The Title");
     // Hey Deno people, some negative assertions would be nice too.
     assert(!finalHtml.includes("The Title"));
     assertStringIncludes(finalHtml, "<p>The first paragraph</p>");
     assertStringIncludes(finalHtml, "<p>The second paragraph</p>");
+});
+
+Deno.test("If there is no title, an exception is thrown", () => {
+    const testMarkdown = [
+        "The first paragraph",
+        "",
+        "The second paragraph"
+    ];
+    const markdownIt = MarkdownIt().use(mockPlugin);
+
+    assertThrows(
+        () => {
+            markdownIt.render(testMarkdown.join("\n"));
+        },
+        Error,
+        "Test Document - no title found"
+    );
 });
