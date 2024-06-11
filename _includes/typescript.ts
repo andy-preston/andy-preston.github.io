@@ -1,13 +1,11 @@
 import typescript from "npm:typescript";
+import options from "../assets/tsconfig.json" with { type: "json" };
 
 const transpile = (source: string): string => typescript.transpileModule(
     source,
-    {
-        "compilerOptions": {
-            "module": typescript.ModuleKind.ES2015,
-            "removeComments": true
-        }
-    }
+    // It's horrible doing `as unknown as SomethingElse`
+    // but this gets the job done for now.
+    options as unknown as typescript.TranspileOptions
 ).outputText;
 
 export default (pages: Array<Lume.Page>) => {

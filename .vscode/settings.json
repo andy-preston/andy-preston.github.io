@@ -1,12 +1,13 @@
 {
-    "files.associations": {
-        "*.vto": "html"
-    },
     "deno.path": "./bin/deno",
     "deno.cache": "./_deno/",
     "deno.enable": true,
     "deno.lint": true,
     "deno.disablePaths": [
-        "assets/front-illustration.ts"
-    ]
+        "assets/front-illustration.ts",
+        "assets/tsconfig.json",
+    ],
+    "files.associations": {
+        "*.vto": "html"
+    }
 }
