@@ -8,16 +8,15 @@ export default (
 ) => {
     filteredPages.forEach(
         (page: Lume.Page) => {
-            if (["index", "legacyLinks"].includes(page.data.basename)) {
-                return;
-            }
-
             const document = page.document!;
-            while (paragraphToFigure(document, page.data.basename));
-            while (replaceHRule(document));
-            while (moveAsides(document));
-            while (removeEmpty(document, "article"));
-            while (removeEmpty(document, "section"));
+
+            if (!["index", "legacyLinks"].includes(page.data.basename)) {
+                while (paragraphToFigure(document, page.data.basename));
+                while (replaceHRule(document));
+                while (moveAsides(document));
+                while (removeEmpty(document, "article"));
+                while (removeEmpty(document, "section"));
+            }
         }
     );
 };
