@@ -1,5 +1,3 @@
-// cSpell:words datetime
-
 import { MarkdownIt } from "npm:markdown-it@14.1.0";
 import MarkdownItState from "./MarkdownItState.ts";
 import markdownTitle from "./markdownTitle.ts";

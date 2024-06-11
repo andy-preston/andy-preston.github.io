@@ -1,5 +1,3 @@
-// cSpell:words datetime
-
 export default (pageDate: string): Array<string> => {
     if (pageDate == "") {
         return ["", ""];
