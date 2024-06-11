@@ -2,7 +2,7 @@
 
 # cSpell:words hljs
 
-grep 'hljs-' _site/* | \
+find _site/ -name \*.html -exec grep 'hljs-' {} \; | \
     sed -e 's/hljs-[[:alpha:]]\+/\n\0\n/g' | \
     grep hljs- | \
     sort | \
