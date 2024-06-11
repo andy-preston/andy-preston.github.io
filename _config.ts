@@ -15,13 +15,11 @@ const markdown = {
     "keepDefaultPlugins": true
 };
 
-const site = lume(
-    {},
-    { markdown }
-);
+const siteBuilder = lume({}, { markdown });
 
-site
-    .ignore("README.md", "fixed", "builder") // "builder" should be removed eventually
+siteBuilder
+    // "builder" directory should be removed eventually
+    .ignore("README.md", "fixed", "builder")
     .use(code_highlight())
     .loadAssets([".css", ".ts"])
     .preprocess([".html"], index)
@@ -29,4 +27,4 @@ site
     .process([".html"], htmlProcessor)
     .copy("fixed", ".");
 
-export default site;
+export default siteBuilder;

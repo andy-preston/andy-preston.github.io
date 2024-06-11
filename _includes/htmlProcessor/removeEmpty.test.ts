@@ -34,7 +34,7 @@ Deno.test("It removes empty elements and returns true", () => {
         "",
         "</article></section>",
         "</body></html>"
-    ].join("\n");
+    ];
     const expectedHtml = [
         "<html><head><title>Test</title></head>",
         "<body><section></section>",
@@ -56,7 +56,7 @@ Deno.test("Removing articles may leave sections empty", () => {
         "",
         "</article></section>",
         "</body></html>"
-    ].join("\n");
+    ];
 
     const firstExpectedHtml = [
         "<html><head><title>Test</title></head>",

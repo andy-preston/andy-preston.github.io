@@ -1,6 +1,6 @@
 import paragraphToFigure from "./paragraphToFigure.ts";
 import removeEmpty from "./removeEmpty.ts";
-import {replaceHRule, moveAsides } from "./sectionArticleAside.ts";
+import { replaceHRule, moveAsides } from "./sectionArticleAside.ts";
 
 export default (
     filteredPages: Array<Lume.Page>,
