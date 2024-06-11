@@ -48,3 +48,39 @@ Deno.test("It removes empty elements and returns true", () => {
     const processed = documentToHtml(document);
     assertEquals(processed, expectedHtml);
 });
+
+Deno.test("Removing articles may leave sections empty", () => {
+    const originalHtml = [
+        "<html><head><title>Test</title></head>",
+        "<body><section><article>",
+        "",
+        "</article></section>",
+        "</body></html>"
+    ].join("\n");
+
+    const firstExpectedHtml = [
+        "<html><head><title>Test</title></head>",
+        "<body><section></section>",
+        "</body></html>"
+    ].join("\n");
+
+    const secondExpectedHtml = [
+        "<html><head><title>Test</title></head>",
+        "<body>",
+        "</body></html>"
+    ].join("\n");
+
+    const document = documentFromHtml(originalHtml);
+
+    const firstResult = removeEmpty(document, "article");
+    assert(firstResult);
+
+    const firstPass = documentToHtml(document);
+    assertEquals(firstPass, firstExpectedHtml)
+
+    const secondResult = removeEmpty(document, "section");
+    assert(secondResult);
+
+    const secondPass = documentToHtml(document);
+    assertEquals(secondPass, secondExpectedHtml)
+});
