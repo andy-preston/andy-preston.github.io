@@ -29,25 +29,25 @@ Deno.test("It leaves html with no asides unchanged and returns false", () => {
 });
 
 Deno.test(
-    "It moves a table tagged as aside into an aside and moves following content into a new section",
+    "A table tagged as aside moves into an aside and following content into a new section",
     () => {
     }
 );
 
 Deno.test(
-    "It moves a figure with an image tagged aside into an aside and puts following content into a section",
+    "A figure with an image tagged aside moves into an aside and following content into a section",
     () => {
     }
 );
 
 Deno.test(
-    "It moves a pre with a code tagged aside into an aside and puts following content into a section",
+    "A pre with a code tagged aside moves into an aside and following content into a section",
     () => {
     }
 );
 
 Deno.test(
-    "If an aside attribute is set to bottom, it adds the bottom class to the new aside",
+    "An aside attribute is set to bottom adds the bottom class to the new aside",
     () => {
     }
 );
