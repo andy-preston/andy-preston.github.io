@@ -2,7 +2,7 @@ import removeEmpty from "./removeEmpty.ts";
 import {
     documentFromHtml,
     documentToHtml
-} from "./testing/documentToFromHtml.ts";
+} from "../testing/documentToFromHtml.ts";
 import {
     assert,
     assertEquals

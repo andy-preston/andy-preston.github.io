@@ -2,7 +2,7 @@ import paragraphToFigure from "./paragraphToFigure.ts";
 import {
     documentFromHtml,
     documentToHtml
-} from "./testing/documentToFromHtml.ts";
+} from "../testing/documentToFromHtml.ts";
 import {
     assert,
     assertNotEquals,

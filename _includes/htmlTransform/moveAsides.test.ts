@@ -2,7 +2,7 @@ import { moveAsides } from "./sectionArticleAside.ts";
 import {
     documentFromHtml,
     documentToHtml
-} from "./testing/documentToFromHtml.ts";
+} from "../testing/documentToFromHtml.ts";
 import {
     assert,
     assertEquals
