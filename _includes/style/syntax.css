@@ -1,0 +1,50 @@
+/* cSpell:words hljs */
+
+.hljs-class {
+    font-weight: bold;
+}
+
+.hljs-string {
+    color: #ffb;
+}
+
+.hljs-comment {
+    color: #777;
+}
+
+.hljs-attr,
+.hljs-property,
+.hljs-variable {
+    color: #5fd;
+}
+
+.hljs-params {
+    color: #fc7;
+}
+
+.hljs-built_in,
+.hljs-punctuation,
+.hljs-keyword {
+    color: #f4a;
+}
+
+.hljs-subst {
+    color: #44f;
+}
+
+.hljs-number,
+.hljs-literal {
+    color: #88f;
+}
+
+.hljs-function {
+    color: #f0f;
+}
+
+.hljs-title {
+    color: #fa0;
+}
+
+.hljs-meta {
+    color: #ff6;
+}

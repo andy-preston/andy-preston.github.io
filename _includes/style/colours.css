@@ -1,0 +1,28 @@
+body {
+    background-color: #000;
+    color: #8f8;
+}
+
+.todo {
+    color: #f00;
+    background-color: #fff;
+}
+
+hr, td, th,
+pre code,
+figure,
+p.boxed {
+    border-color: #035;
+}
+
+h1, h2, h3,h4,
+code:not([class]),
+strong,
+th, td,
+a:link, a:visited {
+    color: #4fc;
+}
+
+a:focus, a:hover, a:active {
+    color: #fff;
+}
