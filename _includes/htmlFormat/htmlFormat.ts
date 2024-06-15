@@ -1,7 +1,5 @@
+import stripComments from "./stripComments.ts";
 import { traverse } from './traverse.ts';
-
-const dummyCallback = (child: Node) => {
-}
 
 export default (
     filteredPages: Array<Lume.Page>,
@@ -10,7 +8,7 @@ export default (
     filteredPages.forEach(
         (page: Lume.Page) => {
             const document = page.document!;
-            traverse(document.childNodes, dummyCallback);
+            traverse(document.childNodes, stripComments);
         }
     );
 };
