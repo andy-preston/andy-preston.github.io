@@ -23,7 +23,7 @@ const isNotInline = (node: Node|null): boolean => {
     );
 };
 
-export default (_document: Document, node: Node) => {
+export default (node: Node) => {
     if (isTextNode(node) && !hasPreParent(node)) {
         let text: string = node.nodeValue === null ? "" :
             node.nodeValue.replace(/\s+/g, " ");

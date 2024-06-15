@@ -28,7 +28,7 @@ Deno.test(
 
         const visitedNodes: Array<string> = [];
 
-        const dummyCallback = (_document: Document, child: Node): boolean => {
+        const dummyCallback = (child: Node): boolean => {
             if (child.nodeType == NodeType.TEXT_NODE) {
                 visitedNodes.push(child.textContent!);
             }
@@ -66,7 +66,7 @@ Deno.test(
 
         let firstTimeRound = true;
 
-        const dummyCallback = (_document: Document, child: Node) => {
+        const dummyCallback = (child: Node): boolean => {
             if (child.nodeType == NodeType.TEXT_NODE) {
                 visitedNodes.push(child.textContent!);
                 if (child.textContent! == "Inside a section" && firstTimeRound) {
