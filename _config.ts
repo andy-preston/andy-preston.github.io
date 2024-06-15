@@ -5,6 +5,7 @@ import typescriptProcessor from "./_includes/typescript.ts";
 import article from "./_includes/article/article.ts";
 import index from "./_includes/index.ts";
 import htmlTransform from "./_includes/htmlTransform/htmlTransform.ts";
+import htmlFormat from "./_includes/htmlFormat/htmlFormat.ts";
 
 const markdown = {
     "html": false,
@@ -25,6 +26,7 @@ siteBuilder
     .preprocess([".html"], index)
     .process([".ts"], typescriptProcessor)
     .process([".html"], htmlTransform)
+    .process([".html"], htmlFormat)
     .copy("fixed", ".");
 
 export default siteBuilder;
