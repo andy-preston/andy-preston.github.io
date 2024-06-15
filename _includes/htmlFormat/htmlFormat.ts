@@ -1,5 +1,6 @@
 import stripComments from "./stripComments.ts";
-import { traverse } from './traverse.ts';
+import stripWhitespace from "./stripWhitespace.ts";
+import traverseDocument from './traverse.ts';
 
 export default (
     filteredPages: Array<Lume.Page>,
@@ -8,7 +9,8 @@ export default (
     filteredPages.forEach(
         (page: Lume.Page) => {
             const document = page.document!;
-            traverse(document.childNodes, stripComments);
+            traverseDocument(document, stripComments);
+            traverseDocument(document, stripWhitespace);
         }
     );
 };

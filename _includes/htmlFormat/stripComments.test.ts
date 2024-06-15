@@ -1,9 +1,14 @@
-import { traverse } from './traverse.ts';
-import { documentFromHtml, documentToHtml } from "../testing/documentToFromHtml.ts";
+import traverseDocument from './traverse.ts';
 import stripComments from "./stripComments.ts";
-import { assertEquals } from "https://deno.land/std@0.224.0/assert/assert_equals.ts";
+import {
+    documentFromHtml,
+    documentToHtml
+} from "../testing/documentToFromHtml.ts";
+import {
+    assertEquals
+} from "https://deno.land/std@0.224.0/assert/assert_equals.ts";
 
-Deno.test("It visits every node of the given parent", () => {
+Deno.test("It removes all HTML comments", () => {
 
     const document = documentFromHtml([
         "<html><head>",
@@ -31,6 +36,6 @@ Deno.test("It visits every node of the given parent", () => {
         "</body></html>"
     ].join("\n");
 
-    traverse(document.childNodes, stripComments);
+    traverseDocument(document, stripComments);
     assertEquals(documentToHtml(document), expectedHtml);
 });

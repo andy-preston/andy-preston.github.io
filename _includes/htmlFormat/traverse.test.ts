@@ -1,4 +1,4 @@
-import { traverse } from './traverse.ts';
+import traverseDocument from './traverse.ts';
 import { NodeType } from "lume/deps/dom.ts";
 import { documentFromHtml } from "../testing/documentToFromHtml.ts";
 import {
@@ -27,12 +27,12 @@ Deno.test("It visits every node of the given parent", () => {
 
     const visitedNodes: Array<string> = [];
 
-    const dummyCallback = (child: Node) => {
+    const dummyCallback = (_document: Document, child: Node) => {
         if (child.nodeType == NodeType.TEXT_NODE) {
             visitedNodes.push(child.textContent!);
         }
     }
 
-    traverse(documentFromHtml(sampleHtml).childNodes, dummyCallback);
+    traverseDocument(documentFromHtml(sampleHtml), dummyCallback);
     assertArrayIncludes(visitedNodes, expectedResult);
 });
