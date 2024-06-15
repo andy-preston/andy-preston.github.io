@@ -9,7 +9,6 @@ export default (
     filteredPages.forEach(
         (page: Lume.Page) => {
             const document = page.document!;
-
             if (!["index", "legacyLinks"].includes(page.data.basename)) {
                 while (paragraphToFigure(document, page.data.basename));
                 while (replaceHRule(document));

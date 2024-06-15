@@ -4,7 +4,7 @@ import code_highlight from "lume/plugins/code_highlight.ts";
 import typescriptProcessor from "./_includes/typescript.ts";
 import article from "./_includes/article/article.ts";
 import index from "./_includes/index.ts";
-import htmlProcessor from "./_includes/htmlProcessor/htmlProcessor.ts";
+import htmlTransform from "./_includes/htmlTransform/htmlTransform.ts";
 
 const markdown = {
     "html": false,
@@ -24,7 +24,7 @@ siteBuilder
     .loadAssets([".css", ".ts"])
     .preprocess([".html"], index)
     .process([".ts"], typescriptProcessor)
-    .process([".html"], htmlProcessor)
+    .process([".html"], htmlTransform)
     .copy("fixed", ".");
 
 export default siteBuilder;
