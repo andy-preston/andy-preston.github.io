@@ -191,46 +191,51 @@ a:active {
 
 /* cSpell:words hljs */
 
-.hljs-property,
-.hljs-params,
-.hljs-attr,
-.hljs-variable {
-    color: #0ff;
+.hljs-class {
+    font-weight: bold;
 }
 
-.hljs-string,
-.token.char,
-.hljs-number,
-.hljs-literal,
-.token.constant {
-    color: #bbf;
+.hljs-string {
+    color: #ffb;
+}
+
+.hljs-comment {
+    color: #777;
+}
+
+.hljs-attr,
+.hljs-property,
+.hljs-variable {
+    color: #5fd;
+}
+
+.hljs-params {
+    color: #fc7;
+}
+
+.hljs-built_in,
+.hljs-punctuation,
+.hljs-keyword {
+    color: #f4a;
 }
 
 .hljs-subst {
-    color: #f0a;
+    color: #44f;
+}
+
+.hljs-number,
+.hljs-literal {
+    color: #88f;
+}
+
+.hljs-function {
+    color: #f0f;
 }
 
 .hljs-title {
     color: #fa0;
 }
 
-.hljs-keyword,
-.hljs-built_in,
-.token.punctuation,
-.token.operator {
-    color: #ff0;
-}
-
-.token.class-name,
-.token.builtin,
-.token.type-declaration {
-    color: #f0f;
-}
-
-.hljs-comment,
-.token.prolog,
-.token.doctype,
-.token.cdata,
-.token.shebang {
-    color: var(--main-green);
+.hljs-meta {
+    color: #ff6;
 }

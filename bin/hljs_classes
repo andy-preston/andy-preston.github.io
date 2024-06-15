@@ -2,8 +2,21 @@
 
 # cSpell:words hljs
 
-find _site/ -name \*.html -exec grep 'hljs-' {} \; | \
-    sed -e 's/hljs-[[:alpha:]]\+/\n\0\n/g' | \
-    grep hljs- | \
-    sort | \
-    uniq
+USED_CLASSES=$(
+    find _site/ -name \*.html -exec grep 'hljs-' {} \; | \
+        sed -e 's/hljs-[[:alpha:]]\+/\n\0\n/g' | \
+        grep hljs- | \
+        sort | \
+        uniq
+)
+
+for CLASS in $USED_CLASSES
+do
+    if grep -q $CLASS assets/style.css
+    then
+        echo "${CLASS} covered"
+    else
+        echo "${CLASS} missing"
+        find _site/ -name \*.html -exec grep -H ${CLASS} {} \;
+    fi
+done
