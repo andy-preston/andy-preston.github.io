@@ -1,16 +1,22 @@
-type TraversalCallback = (document: Document, child: Node) => void;
+// returned values indicates that DOM has been altered
+
+type TraversalCallback = (document: Document, child: Node) => boolean;
 
 export default (document: Document, callback: TraversalCallback) => {
-    const traverse = (children: NodeListOf<ChildNode>) => {
-        children.forEach(
-            (child: Node): void => {
-                callback(document, child);
+    const traverseChildrenOf = (node: Node) => {
+        let domChanged = true;
+        while (domChanged) {
+            for (const child of node.childNodes) {
+                domChanged = callback(document, child);
+                if (domChanged) {
+                    break;
+                }
                 if (child.hasChildNodes()) {
-                    traverse(child.childNodes);
+                    traverseChildrenOf(child);
                 }
             }
-        );
+        }
     };
 
-    traverse (document.childNodes);
+    traverseChildrenOf(document);
 };
