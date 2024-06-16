@@ -1,0 +1,33 @@
+:root {
+    --column-width: 40em;
+}
+
+section {
+    display: flex;
+}
+
+section.front-page {
+    justify-content: space-evenly;
+}
+
+section:not(.front-page) {
+    margin-bottom: 1ex;
+}
+
+section:has(> aside.bottom) {
+    align-items: flex-end;
+}
+
+article,
+aside {
+    width: 50%;
+    max-width: var(--column-width);
+}
+
+aside > figure,
+aside > pre,
+aside > table {
+    margin-left: 10%;
+    display: block;
+    max-width: 100%;
+}

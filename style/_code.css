@@ -1,5 +1,11 @@
 /* cSpell:words hljs */
 
+pre code {
+    width: fit-content;
+    display: block;
+    overflow-x: auto;
+}
+
 .hljs-class {
     font-weight: bold;
 }

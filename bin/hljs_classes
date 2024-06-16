@@ -12,7 +12,7 @@ USED_CLASSES=$(
 
 for CLASS in $USED_CLASSES
 do
-    if grep -q $CLASS assets/style.css
+    if grep -q $CLASS style/_code.css
     then
         echo "${CLASS} covered"
     else
