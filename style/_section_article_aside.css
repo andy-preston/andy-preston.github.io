@@ -10,7 +10,7 @@ section:not(.front-page) {
     margin-bottom: 1ex;
 }
 
-section:has(> aside.bottom) {
+section.bottom {
     align-items: flex-end;
 }
 

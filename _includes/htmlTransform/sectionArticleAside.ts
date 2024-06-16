@@ -45,11 +45,6 @@ export const moveAsides = (document: Document): boolean => {
         // (e.g.) <table> just needs to have itself wrapped
         target;
 
-    if (target.getAttribute("aside") == "bottom") {
-        wrapped.classList.add("bottom");
-    }
-    target.removeAttribute("aside");
-
     const topSection = moveToNewSection(document, wrapped);
     if (topSection === null) {
         return false;
@@ -58,5 +53,10 @@ export const moveAsides = (document: Document): boolean => {
     const wrapper = document.createElement("aside");
     wrapper.appendChild(wrapped);
     topSection.append(wrapper!);
+
+    if (target.getAttribute("aside") == "bottom") {
+        topSection.classList.add("bottom");
+    }
+    target.removeAttribute("aside");
     return true;
 };

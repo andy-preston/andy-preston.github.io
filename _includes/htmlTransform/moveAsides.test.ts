@@ -131,7 +131,7 @@ Deno.test(
 );
 
 Deno.test(
-    "An aside attribute is set to bottom adds the bottom class to the contained element",
+    "An aside attribute is set to bottom adds the bottom class to the new section",
     () => {
         const originalHtml = [
             "<html><head><title>Test</title></head>",
@@ -145,9 +145,9 @@ Deno.test(
 
         const expectedHtml = [
             "<html><head><title>Test</title></head>\n",
-            "<body><section><article>",
+            "<body><section class=\"bottom\"><article>",
             "<p>The main text</p></article><aside>",
-            "<pre class=\"bottom\"><code>c++;</code></pre>",
+            "<pre><code>c++;</code></pre>",
             "</aside></section><section><article>\n\n\n",
             "<p>The following text</p>\n",
             "</article></section>\n",
