@@ -54,30 +54,3 @@ hr {
     margin-bottom: 2lh;
     border-style: solid;
 }
-
-
-@media (width <= 75em) {
-    section {
-        display: block;
-    }
-
-    article,
-    aside {
-        width: 100%;
-    }
-
-    aside > figure,
-    aside > pre,
-    aside > table {
-        margin-left: 0;
-    }
-
-    section.front-page article,
-    section.front-page article figure {
-        max-width: 100%;
-    }
-
-    nav.article-index {
-        margin-left: 0;
-    }
-}

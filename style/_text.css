@@ -2,7 +2,7 @@ body {
     font-family: sans-serif;
 }
 
-.todo, .important {
+.todo {
     font-weight: bold;
 }
 

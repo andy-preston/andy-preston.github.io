@@ -11,3 +11,8 @@ nav.article-index {
     margin-left: 10em;
 }
 
+@media (--narrow-window) {
+    nav.article-index {
+        margin-left: 0;
+    }
+}

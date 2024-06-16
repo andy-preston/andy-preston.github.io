@@ -1,6 +1,12 @@
 @import "./_colours.css";
 @import "./_text.css";
+@import "./_display.css";
 @import "./_index.css";
 @import "./_section_article_aside.css";
-@import "./_display.css";
 @import "./_code.css";
+
+@custom-media --narrow-window (width <= 75em);
+
+:root {
+    --column-width: 40em;
+}
