@@ -1,12 +1,15 @@
 {
-    "deno.path": "./bin/deno",
+    "cSpell.words": [
+        "lume"
+    ],
     "deno.cache": "./_deno/",
-    "deno.enable": true,
-    "deno.lint": true,
     "deno.disablePaths": [
         "assets/front-illustration.ts",
         "assets/tsconfig.json",
     ],
+    "deno.enable": true,
+    "deno.lint": true,
+    "deno.path": "./bin/deno",
     "files.associations": {
         "*.vto": "html"
     }
