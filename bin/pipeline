@@ -20,7 +20,7 @@ rm -rf _site
 
 ./bin/deno test
 
-./bin/deno check $(
+./bin/deno check -q $(
     find -name \*.ts | \
     grep -v -e ./node_modules/ -e ./_deno/ -e ./builder/
 )

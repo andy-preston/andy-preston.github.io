@@ -8,7 +8,6 @@ import {
     assertEquals
 } from "https://deno.land/std@0.224.0/assert/mod.ts";
 
-
 Deno.test("It leaves html with no asides unchanged and returns false", () => {
     const originalHtml = [
         "<html><head><title>Test</title></head>",
