@@ -1,5 +1,6 @@
 import paragraphToFigure from "./paragraphToFigure.ts";
 import removeEmpty from "./removeEmpty.ts";
+import hljsWorkaround from "./hljsWorkaround.ts";
 import { replaceHRule, moveAsides } from "./sectionArticleAside.ts";
 
 export default (
@@ -13,6 +14,7 @@ export default (
                 while (paragraphToFigure(document, page.data.basename));
                 while (replaceHRule(document));
                 while (moveAsides(document));
+                while (hljsWorkaround(document));
                 while (removeEmpty(document, "article"));
                 while (removeEmpty(document, "section"));
             }
