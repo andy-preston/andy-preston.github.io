@@ -49,19 +49,19 @@ to follow).
 ```bash{aside}
 #!/bin/bash
 
-HOME_DIR=/home/$(id --user --name)
-GHIDRA_HOME=${HOME_DIR}/Documents/ghidra
+HOME_DIR="/home/$(id --user --name)"
+GHIDRA_HOME="${HOME_DIR}/Documents/ghidra"
 
-mkdir -p ${GHIDRA_HOME}
+mkdir -p "${GHIDRA_HOME}"
 
 docker run --init --rm \
     --interactive --tty \
     --name ghidra \
-    --user $(id --user):$(id --group) \
-    --volume ${GHIDRA_HOME}:${HOME_DIR} \
-    --volume /etc/group:/etc/group:ro \
-    --volume /etc/passwd:/etc/passwd:ro \
-    --env DISPLAY=:0.0 \
+    --user "$(id --user):$(id --group)" \
+    --volume "${GHIDRA_HOME}:${HOME_DIR}" \
+    --volume "/etc/group:/etc/group:ro" \
+    --volume "/etc/passwd:/etc/passwd:ro" \
+    --env DISPLAY=":0.0" \
     --net host \
     blacktop/ghidra
 ```

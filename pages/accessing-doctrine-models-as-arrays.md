@@ -21,7 +21,7 @@ But what if those reports require the use of the business logic helpers?
 Helpers that are full of constructs like:
 
 ```php
-    $order->getLines()[5]->getPrice()
+$order->getLines()[5]->getPrice()
 ```
 
 After much wailing and gnashing of teeth and wishing PHP couldn't be more
