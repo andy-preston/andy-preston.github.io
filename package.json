@@ -2,7 +2,6 @@
     "scripts": {
         "lintScript": "DEBUG=eslint:cli-engine yarn eslint .",
         "lintStyle": "yarn stylelint */*.css",
-        "checkTs": "yarn tsc --project components ; yarn tsc --project builder",
         "checkAll": "yarn lintScript ; yarn checkTs ; yarn lintStyle ; yarn tests",
         "pipeline": "yarn install ; yarn build ; yarn checkAll"
     },

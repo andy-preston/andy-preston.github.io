@@ -23,7 +23,6 @@
         "scripts",
         "style",
         "bin",
-        "builder",
         "fixed",
         "node_modules"
     ]

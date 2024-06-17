@@ -22,7 +22,7 @@ rm -rf _site
 
 ./bin/deno check -q $(
     find -name \*.ts | \
-    grep -v -e ./node_modules/ -e ./_deno/ -e ./builder/
+    grep -v -e ./node_modules/ -e ./_deno/
 )
 
 ./bin/deno lint

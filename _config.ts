@@ -10,8 +10,7 @@ import postCss from "./_includes/postCss.ts";
 const siteBuilder = lume({}, { markdown });
 
 siteBuilder
-    // "builder" directory should be removed eventually
-    .ignore("README.md", "fixed", "builder")
+    .ignore("README.md", "fixed")
     .use(code_highlight())
     .use(postCss)
     .preprocess([".html"], index)
