@@ -18,11 +18,11 @@ rm -rf _site
 
 ./bin/deno task build
 
-./bin/deno test
+./bin/deno test --allow-read
 
 ./bin/deno check -q $(
     find -name \*.ts | \
-    grep -v -e ./node_modules/ -e ./_deno/
+    grep -v -e ./_deno/
 )
 
 ./bin/deno lint
