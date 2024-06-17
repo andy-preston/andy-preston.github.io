@@ -1,14 +1,11 @@
-import paragraphToFigure from "./paragraphToFigure.ts";
-import {
-    documentFromHtml,
-    documentToHtml
-} from "../testing/documentToFromHtml.ts";
 import {
     assert,
     assertNotEquals,
     assertStringIncludes,
     assertThrows
-} from "https://deno.land/std@0.224.0/assert/mod.ts";
+} from "../dev_deps.ts";
+import { documentFromHtml, documentToHtml } from "../testing/htmlDocument.ts";
+import paragraphToFigure from "./paragraphToFigure.ts";
 
 Deno.test("If no alt text is given it throws 'no caption'", () => {
     const document = documentFromHtml([

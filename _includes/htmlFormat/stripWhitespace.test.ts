@@ -1,12 +1,7 @@
+import { assertEquals } from "../dev_deps.ts";
+import { documentFromHtml, documentToHtml } from "../testing/htmlDocument.ts";
 import traverseDocument from './traverse.ts';
 import stripWhitespace from "./stripWhitespace.ts";
-import {
-    documentFromHtml,
-    documentToHtml
-} from "../testing/documentToFromHtml.ts";
-import {
-    assertEquals
-} from "https://deno.land/std@0.224.0/assert/assert_equals.ts";
 
 Deno.test("It removes all whitespace", () => {
 

@@ -1,12 +1,6 @@
+import { assert, assertEquals } from "../dev_deps.ts";
+import { documentFromHtml, documentToHtml } from "../testing/htmlDocument.ts";
 import { replaceHRule } from "./sectionArticleAside.ts";
-import {
-    documentFromHtml,
-    documentToHtml
-} from "../testing/documentToFromHtml.ts";
-import {
-    assert,
-    assertEquals
-} from "https://deno.land/std@0.224.0/assert/mod.ts";
 
 
 Deno.test("It leaves html with no HRules unchanged and returns false", () => {

@@ -1,12 +1,12 @@
-import { MarkdownIt } from "../deps.ts";
-import { MarkdownItState } from "./MarkdownItTypes.ts";
-import markdownTitle from "./markdownTitle.ts";
 import {
     assert,
     assertEquals,
     assertStringIncludes,
     assertThrows
-} from "https://deno.land/std@0.224.0/assert/mod.ts";
+} from "../dev_deps.ts";
+import { MarkdownIt } from "../deps.ts";
+import { MarkdownItState } from "./MarkdownItTypes.ts";
+import markdownTitle from "./markdownTitle.ts";
 
 let extractedTitle: string = "";
 

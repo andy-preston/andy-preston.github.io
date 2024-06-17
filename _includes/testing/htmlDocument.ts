@@ -1,6 +1,4 @@
-import {
-    DOMParser
-} from "https://deno.land/x/deno_dom@v0.1.45/deno-dom-wasm.ts";
+import { DOMParser } from "../dev_deps.ts";
 
 export const documentFromHtml = (html: string|Array<string>): Document => {
     const htmlString = typeof(html) == "string" ? html : html.join("\n");
