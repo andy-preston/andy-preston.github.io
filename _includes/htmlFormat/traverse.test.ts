@@ -1,5 +1,5 @@
 import traverseDocument from './traverse.ts';
-import { NodeType } from "lume/deps/dom.ts";
+import { NodeType } from "../deps.ts";
 import { documentFromHtml } from "../testing/documentToFromHtml.ts";
 import {
     assertArrayIncludes

@@ -1,4 +1,4 @@
-import typescript from "npm:typescript";
+import { typescript } from "./deps.ts";
 import options from "../scripts/tsconfig.json" with { type: "json" };
 
 const transpile = (source: string): string => typescript.transpileModule(

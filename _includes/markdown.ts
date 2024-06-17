@@ -1,4 +1,4 @@
-import markdownItAttrs from "npm:markdown-it-attrs";
+import { markdownItAttrs } from "./deps.ts";
 import article from "./article/article.ts";
 
 export default {

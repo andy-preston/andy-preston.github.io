@@ -1,5 +1,5 @@
-import { MarkdownIt } from "npm:markdown-it@14.1.0";
-import MarkdownItState from "./MarkdownItState.ts";
+import { MarkdownIt } from "../deps.ts";
+import { MarkdownItState } from "./MarkdownItTypes.ts";
 import markdownTitle from "./markdownTitle.ts";
 import displayDates from "./displayDates.ts";
 

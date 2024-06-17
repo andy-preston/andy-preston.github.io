@@ -1,6 +1,6 @@
 // cSpell:words datetime
 
-import { Token } from "npm:markdown-it@14.1.0";
+import { Token } from "./MarkdownItTypes.ts";
 
 export default (tokens: Array<Token>, basename: string): string => {
     for (let i = 0; i < tokens.length; i++) {
