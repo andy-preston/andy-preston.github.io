@@ -9,8 +9,5 @@
     ],
     "deno.enable": true,
     "deno.lint": true,
-    "deno.path": "./bin/deno",
-    "files.associations": {
-        "*.vto": "html"
-    }
+    "deno.path": "./bin/deno"
 }
