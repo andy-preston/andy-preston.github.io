@@ -1,17 +1,11 @@
 {{ layout "layout.vto" }}
     <section class="front-page">
         <article>
-            <figure style="display: none;" id="illustration" data-pics="{{ pics }}">
-                <img src="" alt="">
-                <figcaption></figcaption>
-            </figure>
-            <script src="front-illustration.js?cb={{ cacheBuster }}"></script>
+            {{ include "frontIllustration.vto" }}
             <hgroup>
                 <h1>
                     {{ for piece of titles }}
-                        <span>
-                            {{ piece }}
-                        </span>
+                        <span>{{ piece }}</span>
                     {{ /for }}
                 </h1>
                 <p class="tag-line">
@@ -26,24 +20,6 @@
             <hr>
             {{ content }}
         </article>
-        <nav class="article-index">
-            {{ for tag, section of sections }}
-                <h2>{{ section.title }}</h2>
-                {{ for article of search.pages(tag) }}
-                    <p>
-                        <a href="{{ article.url }}">{{ article.title }}</a>
-                        {{ if article.publishAsDraft }}
-                            (Draft)
-                        {{ /if }}
-                    </p>
-                {{ /for }}
-                {{ for article of section.offSite }}
-                    <p>
-                        <a href="{{ article.url }}">{{ article.title }}</a>
-                        (Off Site)
-                    </p>
-                {{ /for }}
-            {{ /for }}
-        </nav>
+        {{ include "articleIndex.vto" }}
     </section>
 {{ /layout }}
