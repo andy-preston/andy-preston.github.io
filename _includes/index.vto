@@ -6,18 +6,20 @@
                 <figcaption></figcaption>
             </figure>
             <script src="front-illustration.js"></script>
-            <h1>
-                {{ for piece of titles }}
-                    <span>
-                        {{ piece }}
-                    </span>
-                {{ /for }}
-            </h1>
-            <p class="tag-line">
-                {{ for piece of tagLine }}
-                    <span>{{ piece }}</span>
-                {{ /for }}
-            </p>
+            <hgroup>
+                <h1>
+                    {{ for piece of titles }}
+                        <span>
+                            {{ piece }}
+                        </span>
+                    {{ /for }}
+                </h1>
+                <p class="tag-line">
+                    {{ for piece of tagLine }}
+                        <span>{{ piece }}</span>
+                    {{ /for }}
+                </p>
+            <hgroup>
             {{ for link of links }}
                 <p><a href="https://{{ link }}">{{ link }}</a></p>
             {{ /for }}
