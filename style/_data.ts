@@ -1,1 +1,1 @@
-export { url } from "../_includes/assetUrl.ts";
+export const url = (page: Lume.Page) => `/${page.data.basename}.css`;

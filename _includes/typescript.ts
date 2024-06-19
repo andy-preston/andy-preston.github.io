@@ -12,7 +12,7 @@ export default (pages: Array<Lume.Page>) => {
     pages.forEach(
         (page: Lume.Page) => {
             page.content = transpile(page.content as string);
-            page.data.url = page.data.url!.replace(/\.ts$/, ".js");
+            page.data.url = `/${page.data.basename}.js`;
         }
     );
 };
