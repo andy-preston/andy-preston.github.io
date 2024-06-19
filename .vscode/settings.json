@@ -1,6 +1,9 @@
 {
+    "cSpell.languageSettings": [
+        { "languageId": "Vento", "dictionaries": ["html", "javascript"] }
+    ],
     "cSpell.words": [
-        "lume"
+        "Lume"
     ],
     "deno.cache": "./_deno/",
     "deno.disablePaths": [
@@ -10,4 +13,3 @@
     "deno.enable": true,
     "deno.lint": true,
     "deno.path": "./bin/deno"
-}
