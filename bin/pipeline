@@ -22,7 +22,7 @@ rm -rf _site
 
 ./bin/deno check -q $(
     find -name \*.ts | \
-    grep -v -e ./_deno/ -e ./scripts/front-illustration.ts
+    grep -v -e ./_deno/ -e ./front-illustration/
 )
 
 ./bin/deno lint

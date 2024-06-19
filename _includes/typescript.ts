@@ -1,5 +1,5 @@
 import { typescript } from "./deps.ts";
-import options from "../scripts/tsconfig.json" with { type: "json" };
+import options from "../front-illustration/tsconfig.json" with { type: "json" };
 
 const transpile = (source: string): string => typescript.transpileModule(
     source,

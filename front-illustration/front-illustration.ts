@@ -17,6 +17,7 @@ window.addEventListener("load", () => {
         return;
     }
 
+    // See ./_includes/index.ts for why the replaceAll is being used here!
     const figureList = figure.dataset.pics == undefined ?
         [] : JSON.parse(figure.dataset.pics.replaceAll("|", "\""));
 
