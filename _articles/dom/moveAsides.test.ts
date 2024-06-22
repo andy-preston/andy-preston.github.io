@@ -1,5 +1,5 @@
 import { assert, assertEquals } from "../../_deps/dev.ts";
-import { documentFromHtml, documentToHtml } from "../testing/htmlDocument.ts";
+import { documentFromHtml, documentToHtml } from "../../_domTesting/mod.ts";
 import { moveAsides } from "./sectionArticleAside.ts";
 
 Deno.test("It leaves html with no asides unchanged and returns false", () => {

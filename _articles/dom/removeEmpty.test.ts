@@ -1,5 +1,5 @@
 import { assert, assertEquals } from "../../_deps/dev.ts";
-import { documentFromHtml, documentToHtml } from "../testing/htmlDocument.ts";
+import { documentFromHtml, documentToHtml } from "../../_domTesting/mod.ts";
 import removeEmpty from "./removeEmpty.ts";
 
 Deno.test("It leaves html with no empty elements unchanged and returns false", () => {
