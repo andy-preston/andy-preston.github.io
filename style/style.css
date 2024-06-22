@@ -4,9 +4,3 @@
 @import "./_index.css";
 @import "./_section_article_aside.css";
 @import "./_code.css";
-
-@custom-media --narrow-window (width <= 75em);
-
-:root {
-    --column-width: max(45vw, 30em);
-}

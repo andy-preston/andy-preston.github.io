@@ -6,13 +6,3 @@ p.tag-line span {
 .front-page h1 {
     margin-top: 1em;
 }
-
-nav.article-index {
-    margin-left: 10em;
-}
-
-@media (--narrow-window) {
-    nav.article-index {
-        margin-left: 0;
-    }
-}

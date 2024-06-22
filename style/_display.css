@@ -43,7 +43,6 @@ header {
 
 img {
     margin-bottom: 2ex;
-    object-fit: scale-down;
     width: 100%;
     display: block;
 }

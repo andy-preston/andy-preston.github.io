@@ -1,14 +1,20 @@
 section {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(var(--column-width), 1fr));
     gap: 1em;
 }
 
 section.front-page {
-    /* justify-content: space-evenly; */
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(max(45vw, 23em), 1fr)
+    );
 }
 
 section:not(.front-page) {
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(max(45vw, 30em), 1fr)
+    );
     margin-bottom: 2lh;
 }
 
