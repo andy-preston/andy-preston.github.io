@@ -1,7 +1,7 @@
 /* cSpell:words hljs */
 
 import { assert, assertEquals } from "../../_deps/dev.ts";
-import { documentFromHtml, documentToHtml } from "../../_domTesting/mod.ts";
+import { documentFromHtml, documentToHtml } from "../../_domTesting.ts";
 import hljsWorkaround from "./hljsWorkaround.ts";
 
 Deno.test(

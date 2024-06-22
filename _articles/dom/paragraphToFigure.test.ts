@@ -4,7 +4,7 @@ import {
     assertStringIncludes,
     assertThrows
 } from "../../_deps/dev.ts";
-import { documentFromHtml, documentToHtml } from "../../_domTesting/mod.ts";
+import { documentFromHtml, documentToHtml } from "../../_domTesting.ts";
 import paragraphToFigure from "./paragraphToFigure.ts";
 
 Deno.test("If no alt text is given it throws 'no caption'", () => {

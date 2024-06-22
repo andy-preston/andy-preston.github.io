@@ -1,5 +1,5 @@
 import { assert, assertEquals } from "../../_deps/dev.ts";
-import { documentFromHtml, documentToHtml } from "../../_domTesting/mod.ts";
+import { documentFromHtml, documentToHtml } from "../../_domTesting.ts";
 import { replaceHRule } from "./sectionArticleAside.ts";
 
 

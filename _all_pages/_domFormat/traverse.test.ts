@@ -1,5 +1,5 @@
 import { assertArrayIncludes } from "../../_deps/dev.ts";
-import { documentFromHtml } from "../../_domTesting/mod.ts";
+import { documentFromHtml } from "../../_domTesting.ts";
 import traverseDocument from './traverse.ts';
 import { NodeType } from "../../_deps/lume.ts";
 
