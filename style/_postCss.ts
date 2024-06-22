@@ -6,7 +6,7 @@ import {
     discardComments,
     removeRoot,
     perfectionist
-} from "./deps.ts";
+} from "../_includes/deps.ts";
 import postcss from "lume/plugins/postcss.ts";
 
 export default postcss({
