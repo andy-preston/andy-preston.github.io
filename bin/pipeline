@@ -25,4 +25,8 @@ rm -rf _site
     grep -v -e ./_deno/ -e ./front-illustration/
 )
 
+./bin/deno run --allow-read --allow-env \
+    npm:typescript/tsc --noEmit \
+    front-illustration/front-illustration.ts
+
 ./bin/deno lint
