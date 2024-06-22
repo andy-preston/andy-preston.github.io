@@ -1,6 +1,6 @@
 body {
-    margin-left: 10%;
-    margin-right: 10%;
+    width: 95%;
+    margin-inline: auto;
 }
 
 p {
@@ -32,7 +32,6 @@ p.boxed {
     border-width: 1px;
     border-style: solid;
     padding: 1em;
-    width: fit-content;
     margin: 0;
 }
 
@@ -45,7 +44,7 @@ header {
 img {
     margin-bottom: 2ex;
     object-fit: scale-down;
-    max-width: min(var(--column-width), 609px, 100%);
+    width: 100%;
     display: block;
 }
 

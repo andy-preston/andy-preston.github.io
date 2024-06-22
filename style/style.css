@@ -8,5 +8,5 @@
 @custom-media --narrow-window (width <= 75em);
 
 :root {
-    --column-width: 40em;
+    --column-width: max(45vw, 30em);
 }
