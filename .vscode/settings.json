@@ -12,4 +12,11 @@
     ],
     "deno.enable": true,
     "deno.lint": true,
-    "deno.path": "./bin/deno"
+    "deno.path": "./bin/deno",
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[json]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    }
+}
