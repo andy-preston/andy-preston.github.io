@@ -5,7 +5,7 @@ const redirector = (basename: string, legacy: string, redirectTo:string) => {
         "url": legacy,
         "redirectTo": redirectTo,
         "title": basename,
-        "layout": "redirect.vto"
+        "layout": "./_redirect.vto"
     };
 }
 
