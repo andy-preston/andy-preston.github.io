@@ -7,5 +7,9 @@ export {
 } from "npm:postcss-discard-comments";
 
 export {
+    default as nesting
+} from "npm:postcss-nesting";
+
+export {
     default as perfectionist
 } from "npm:perfectionist";

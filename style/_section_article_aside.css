@@ -1,39 +1,39 @@
 section {
     display: grid;
     gap: 1em;
+
+    &.front-page {
+        grid-template-columns: repeat(
+            auto-fit,
+            minmax(max(45vw, 23em), 1fr)
+        );
+    }
+
+    &:not(.front-page) {
+        grid-template-columns: repeat(
+            auto-fit,
+            minmax(max(45vw, 30em), 1fr)
+        );
+        margin-bottom: 2lh;
+
+        > article {
+            max-width: max(45vw, 30em);
+        }
+    }
 }
 
-section.front-page {
-    grid-template-columns: repeat(
-        auto-fit,
-        minmax(max(45vw, 23em), 1fr)
-    );
-}
+aside {
+    &.bottom {
+        display: flex;
+        align-items: flex-end;
+        flex-direction: row;
+    }
 
-section:not(.front-page) {
-    grid-template-columns: repeat(
-        auto-fit,
-        minmax(max(45vw, 30em), 1fr)
-    );
-    margin-bottom: 2lh;
-}
+    &:has(table) {
+        overflow-x: auto;
+    }
 
-aside.bottom {
-    display: flex;
-    align-items: flex-end;
-    flex-direction: row;
-}
-
-section:not(.front-page) > article {
-    max-width: max(45vw, 30em);
-}
-
-aside:has(table) {
-    overflow-x: auto;
-}
-
-aside > figure,
-aside > pre,
-aside > table {
-    max-width: 100%;
+    > figure, > pre, > table {
+        max-width: 100%;
+    }
 }

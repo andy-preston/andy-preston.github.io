@@ -1,4 +1,5 @@
 import {
+    nesting,
     combineDuplicatedSelectors,
     discardComments,
     perfectionist
@@ -7,6 +8,7 @@ import postcss from "lume/plugins/postcss.ts";
 
 export default postcss({
     "plugins": [
+        nesting(),
         combineDuplicatedSelectors(),
         discardComments(),
         perfectionist({ "format": "compact" })

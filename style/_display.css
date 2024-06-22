@@ -7,10 +7,7 @@ p {
     margin-top: 1ex;
 }
 
-h1,
-h2,
-h3,
-h4 {
+h1, h2, h3, h4 {
     margin-top: 0;
     margin-bottom: 0;
 }
@@ -24,20 +21,17 @@ table {
     border-collapse: collapse;
 }
 
-td,
-th,
-pre code,
-figure,
-p.boxed {
+hr, td, th, pre code, figure, p.boxed {
     border-width: 1px;
     border-style: solid;
+}
+
+td, th, pre code, figure, p.boxed {
     padding: 1em;
     margin: 0;
 }
 
-p,
-table,
-header {
+p, table, header {
     margin-bottom: 1ex;
 }
 
@@ -50,5 +44,4 @@ img {
 hr {
     margin-top: 2lh;
     margin-bottom: 2lh;
-    border-style: solid;
 }
