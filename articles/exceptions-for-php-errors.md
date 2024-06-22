@@ -26,11 +26,13 @@ hard to deal with the errors:
 set_error_handler(
     function($severity, $message, $file, $line) {
         if (!(error_reporting() && $severity)) {
-            echo "Setting a flag to ignore errors in any language in";
-            echo " any environment is repugnant! Don't do it!\n";
+            echo "Setting a flag to ignore errors";
+            echo " in any language in any environment";
+            echo " is repugnant! Don't do it!\n";
             return;
         }
-        // Try to handle the error here and recover with dignity!
+        // Try to handle the error here
+        // and recover with dignity!
     }
 );
 ```
@@ -41,7 +43,13 @@ exceptions that can be handled with `catch`.
 ```php{aside}
 set_error_handler(
     function($severity, $message, $file, $line) {
-        throw new ErrorException($message, 0, $severity, $file, $line);
+        throw new ErrorException(
+            $message,
+            0,
+            $severity,
+            $file,
+            $line
+        );
     }
 );
 ```
