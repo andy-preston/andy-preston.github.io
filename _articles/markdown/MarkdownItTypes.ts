@@ -1,4 +1,4 @@
-import { MarkdownIt } from "../deps.ts";
+import { MarkdownIt } from "../../_deps/lume.ts";
 
 // Typescript representation of markdown-it/14.1.0/lib/token.mjs
 //

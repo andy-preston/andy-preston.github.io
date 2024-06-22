@@ -1,4 +1,4 @@
-import { MarkdownIt } from "../deps.ts";
+import { MarkdownIt } from "../../_deps/lume.ts";
 import { MarkdownItState } from "./MarkdownItTypes.ts";
 import markdownTitle from "./markdownTitle.ts";
 import displayDates from "./displayDates.ts";
@@ -15,7 +15,7 @@ export default (markdownIt: MarkdownIt) => {
                 [pageData.humanDate, pageData.shortDate] =
                     displayDates(pageData.noDate ? "" : pageData.date);
 
-                pageData.layout = "article.vto";
+                pageData.layout = "../_articles/layout.vto";
                 pageData.url = `/${pageData.basename}/`;
             }
         }

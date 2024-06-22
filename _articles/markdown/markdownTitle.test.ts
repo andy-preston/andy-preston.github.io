@@ -3,8 +3,8 @@ import {
     assertEquals,
     assertStringIncludes,
     assertThrows
-} from "../dev_deps.ts";
-import { MarkdownIt } from "../deps.ts";
+} from "../../_deps/dev.ts";
+import { MarkdownIt } from "../../_deps/lume.ts";
 import { MarkdownItState } from "./MarkdownItTypes.ts";
 import markdownTitle from "./markdownTitle.ts";
 

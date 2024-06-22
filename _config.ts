@@ -4,6 +4,8 @@ import { markdownItAttrs } from "./_deps/lume.ts";
 import frontPageProcess from "./front-page/_process.ts";
 import postCss from "./style/_postCss.ts";
 import { esBuildPlugin, javaScriptUrl } from "./front-page/illustration/_build.ts";
+import articleBuilder from "./_articles/markdown/markdownItPlugin.ts";
+import articlesDom from "./_articles/dom/mod.ts";
 import htmlTransform from "./_includes/htmlTransform/htmlTransform.ts";
 import domFormat from "./_all_pages/_domFormat/mod.ts";
 const markdown = {
@@ -23,7 +25,7 @@ siteBuilder
     .use(esBuildPlugin)
     .use(postCss)
     .preprocess([".html"], frontPageProcess)
-    .process([".html"], htmlTransform)
+    .process([".html"], articlesDom)
     .process([".html"], domFormat)
     .process([".ts"], javaScriptUrl)
     .copy("fixed", ".");
