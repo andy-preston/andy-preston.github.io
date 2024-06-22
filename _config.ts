@@ -4,8 +4,8 @@ import frontPageProcess from "./front-page/_process.ts";
 import postCss from "./style/_postCss.ts";
 import { esBuildPlugin, javaScriptUrl } from "./front-page/illustration/_build.ts";
 import htmlTransform from "./_includes/htmlTransform/htmlTransform.ts";
-import htmlFormat from "./_includes/htmlFormat/htmlFormat.ts";
 import markdown from "./_includes/markdown.ts";
+import domFormat from "./_all_pages/_domFormat/mod.ts";
 
 const siteBuilder = lume({}, { markdown });
 
@@ -16,7 +16,7 @@ siteBuilder
     .use(postCss)
     .preprocess([".html"], frontPageProcess)
     .process([".html"], htmlTransform)
-    .process([".html"], htmlFormat)
+    .process([".html"], domFormat)
     .process([".ts"], javaScriptUrl)
     .copy("fixed", ".");
 
