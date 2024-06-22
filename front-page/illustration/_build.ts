@@ -1,11 +1,11 @@
 import esBuild from "lume/plugins/esbuild.ts";
-import { typescript } from "../../_includes/deps.ts";
+import { typescript } from "../../_deps/typescript.ts";
 import {
     OnLoadArgs,
     OnLoadResult,
     Plugin,
     PluginBuild
-} from "lume/deps/esbuild.ts";
+} from "../../_deps/lume.ts";
 import options from "./tsconfig.json" with { type: "json" };
 
 const transpile = (args: OnLoadArgs): OnLoadResult => {

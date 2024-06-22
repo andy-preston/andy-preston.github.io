@@ -3,7 +3,7 @@ import {
     assertNotEquals,
     assertStringIncludes,
     assertThrows
-} from "../dev_deps.ts";
+} from "../../_deps/dev.ts";
 import { documentFromHtml, documentToHtml } from "../testing/htmlDocument.ts";
 import paragraphToFigure from "./paragraphToFigure.ts";
 

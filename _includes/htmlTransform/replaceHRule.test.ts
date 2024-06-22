@@ -1,4 +1,4 @@
-import { assert, assertEquals } from "../dev_deps.ts";
+import { assert, assertEquals } from "../../_deps/dev.ts";
 import { documentFromHtml, documentToHtml } from "../testing/htmlDocument.ts";
 import { replaceHRule } from "./sectionArticleAside.ts";
 

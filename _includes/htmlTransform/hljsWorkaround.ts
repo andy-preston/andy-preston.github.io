@@ -1,4 +1,4 @@
-import { NodeType } from "../deps.ts";
+import { NodeType } from "../../_deps/lume.ts";
 
 export default (document: Document) => {
 

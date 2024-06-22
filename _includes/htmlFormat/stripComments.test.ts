@@ -1,4 +1,4 @@
-import { assertEquals } from "../dev_deps.ts";
+import { assertEquals } from "../../_deps/dev.ts";
 import { documentFromHtml, documentToHtml } from "../testing/htmlDocument.ts";
 import traverseDocument from './traverse.ts';
 import stripComments from "./stripComments.ts";

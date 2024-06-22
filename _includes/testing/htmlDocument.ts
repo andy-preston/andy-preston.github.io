@@ -1,4 +1,4 @@
-import { DOMParser } from "../dev_deps.ts";
+import { DOMParser } from "../../_deps/lume.ts";
 
 export const documentFromHtml = (html: string|Array<string>): Document => {
     const htmlString = typeof(html) == "string" ? html : html.join("\n");

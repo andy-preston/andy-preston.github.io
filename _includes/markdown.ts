@@ -1,4 +1,4 @@
-import { markdownItAttrs } from "./deps.ts";
+import { markdownItAttrs } from "../_deps/lume.ts";
 import article from "./article/article.ts";
 
 export default {
