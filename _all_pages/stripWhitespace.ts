@@ -1,4 +1,4 @@
-import { NodeType } from "../../_deps/lume.ts";
+import { NodeType } from "../_deps/lume.ts";
 
 const isElement = (node: Node) => node.nodeType == NodeType.ELEMENT_NODE;
 

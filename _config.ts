@@ -5,7 +5,7 @@ import frontPageProcess from "./front-page/_process.ts";
 import { esBuildPlugin, javaScriptUrl } from "./front-page/illustration/_build.ts";
 import articleBuilder from "./_articles/markdown/markdownItPlugin.ts";
 import articlesDom from "./_articles/dom/mod.ts";
-import domFormat from "./_all_pages/_domFormat/mod.ts";
+import domFormat from "./_all_pages/domFormat.ts";
 import postCss from "./style/_postCss.ts";
 
 const markdown = {
