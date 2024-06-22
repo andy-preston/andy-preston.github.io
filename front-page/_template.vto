@@ -1,7 +1,7 @@
 {{ layout "layout.vto" }}
     <section class="front-page">
         <article>
-            {{ include "../front-illustration/_template.vto" }}
+            {{ include "./illustration/_template.vto" }}
             <hgroup>
                 <h1>
                     {{ for piece of titles }}
@@ -20,6 +20,6 @@
             <hr>
             {{ content }}
         </article>
-        {{ include "articleIndex.vto" }}
+        {{ include "./_article-index.vto" }}
     </section>
 {{ /layout }}

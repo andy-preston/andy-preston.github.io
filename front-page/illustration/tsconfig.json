@@ -1,0 +1,11 @@
+{
+    "exclude": ["_compiler.ts"],
+    "compilerOptions": {
+        "moduleResolution": "Bundler",
+        "resolveJsonModule": true,
+        "module": "ES6",
+        "target": "es5",
+        "lib": ["ES2021","DOM","ES2021.String"],
+        "removeComments": true
+    }
+}

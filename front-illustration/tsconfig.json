@@ -1,7 +1,0 @@
-{
-    "compilerOptions": {
-        "module": "ES2015",
-        "lib": ["ES2021","DOM","ES2021.String"],
-        "removeComments": true
-    }
-}

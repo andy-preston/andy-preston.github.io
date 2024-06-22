@@ -22,11 +22,10 @@ rm -rf _site
 
 ./bin/deno check -q $(
     find -name \*.ts | \
-    grep -v -e ./_deno/ -e ./front-illustration/
+    grep -v -e ./_deno/ -e ./front-page/illustration/front-illustration.ts
 )
 
 ./bin/deno run --allow-read --allow-env \
-    npm:typescript/tsc --noEmit \
-    front-illustration/front-illustration.ts
+    npm:typescript/tsc --project front-page/illustration --noEmit
 
 ./bin/deno lint

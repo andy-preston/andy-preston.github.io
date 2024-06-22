@@ -1,3 +1,5 @@
+import picturesAndCaptions from "./pictures.json";
+
 window.addEventListener("load", () => {
     const figure = document.getElementById("illustration");
     if (figure === null) {
@@ -17,41 +19,31 @@ window.addEventListener("load", () => {
         return;
     }
 
-    // See ./_includes/index.ts for why the replaceAll is being used here!
-    const figureList = figure.dataset.pics == undefined ?
-        [] : JSON.parse(figure.dataset.pics.replaceAll("|", "\""));
+    const lastPicture = picturesAndCaptions.length - 1;
 
-    const maximumFigure = figureList.length - 1;
+    let currentPicture = Math.floor(Math.random() * picturesAndCaptions.length);
 
-    let currentFigure = Math.floor(Math.random() * figureList.length);
-
-    const showCurrentFigure = () => {
-        const [tag, title] = figureList[currentFigure];
+    const showCurrentPicture = () => {
+        const [tag, title] = picturesAndCaptions[currentPicture];
         image.setAttribute("src", `https://i.imgur.com/${tag}.jpg`);
         image.setAttribute("alt", title);
     };
 
-    const firstImageLoaded = () => {
-        figure.removeAttribute("style");
-        figure.removeAttribute("data-pics");
-        image.removeEventListener("load", firstImageLoaded);
-    };
-
-    image.addEventListener("load", firstImageLoaded);
-    showCurrentFigure();
-
     image.addEventListener("load", () => {
+        figure.removeAttribute("style");
         caption.textContent = image.getAttribute("alt");
     });
 
+    showCurrentPicture();
+
     image.addEventListener("click", (event) => {
         if (event.offsetX < image.width / 2) {
-            currentFigure = currentFigure == 0 ?
-                maximumFigure : currentFigure - 1;
+            currentPicture = currentPicture == 0 ?
+                lastPicture : currentPicture - 1;
         } else {
-            currentFigure = currentFigure == maximumFigure ?
-                0 : currentFigure + 1;
+            currentPicture = currentPicture == lastPicture ?
+                0 : currentPicture + 1;
         }
-        showCurrentFigure();
+        showCurrentPicture();
     });
 });
