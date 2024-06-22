@@ -22,7 +22,7 @@ rm -rf _site
 
 ./bin/deno check -q $(
     find -name \*.ts | \
-    grep -v -e ./_deno/ -e ./front-page/illustration/front-illustration.ts
+    grep -v -e ./_deno/ -e ./front-page/illustration/illustration.ts
 )
 
 ./bin/deno run --allow-read --allow-env \
