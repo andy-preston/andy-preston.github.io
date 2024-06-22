@@ -18,8 +18,18 @@ section:not(.front-page) {
     margin-bottom: 2lh;
 }
 
-section.bottom {
-    /* align-items: flex-end; */
+aside.bottom {
+    display: flex;
+    align-items: flex-end;
+    flex-direction: row;
+}
+
+section:not(.front-page) > article {
+    max-width: max(45vw, 30em);
+}
+
+aside:has(table) {
+    overflow-x: auto;
 }
 
 aside > figure,

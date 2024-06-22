@@ -55,7 +55,7 @@ export const moveAsides = (document: Document): boolean => {
     topSection.append(wrapper!);
 
     if (target.getAttribute("aside") == "bottom") {
-        topSection.classList.add("bottom");
+        wrapper.classList.add("bottom");
     }
     target.removeAttribute("aside");
     return true;
