@@ -1,5 +1,5 @@
 import { assertEquals } from "../_deps/dev.ts";
-import { documentFromHtml, documentToHtml } from "../_domTesting.ts";
+import { documentFromHtml, documentToHtml } from "../_tests/dom.ts";
 import traverseDocument from './traverse.ts';
 import stripWhitespace from "./stripWhitespace.ts";
 
