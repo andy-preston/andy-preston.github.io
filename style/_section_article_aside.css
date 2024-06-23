@@ -23,14 +23,12 @@ section {
 }
 
 aside {
+    overflow-x: auto;
+
     &.bottom {
         display: flex;
         align-items: flex-end;
         flex-direction: row;
-    }
-
-    &:has(table) {
-        overflow-x: auto;
     }
 
     > figure, > pre, > table {
