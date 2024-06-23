@@ -1,10 +1,10 @@
-# cSpell:words Eleventy borales
+# cSpell:words deno denoland
 
 name: Deploy static content to Pages
 
 on:
   push:
-    branches: ["none"]
+    branches: ["main"]
   workflow_dispatch:
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
@@ -27,18 +27,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - name: Install Deno
+        uses: denoland/setup-deno@v1
         with:
-          node-version: 21.6.2
+          deno-version: v1.x
 
-      - name: Install Yarn
-        uses: borales/actions-yarn@v4
-        with:
-          cmd: install --production=true
-
-      - name: Eleventy Build
-        run: yarn build
+      - name: Build step
+        run: "deno task build"
 
       - name: Upload Artifact
         uses: actions/upload-pages-artifact@v3
