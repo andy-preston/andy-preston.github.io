@@ -25,12 +25,6 @@ section {
 aside {
     overflow-x: auto;
 
-    &.bottom {
-        display: flex;
-        align-items: flex-end;
-        flex-direction: row;
-    }
-
     > figure, > pre, > table {
         max-width: 100%;
     }

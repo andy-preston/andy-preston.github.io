@@ -106,41 +106,6 @@ Deno.test(
         const expectedHtml = [
             "<html><head><title>Test</title></head>\n",
             "<body><section><article>",
-            "<p>The main text</p></article><aside>",
-            "<pre><code>c++;</code></pre>",
-            "</aside></section><section><article>\n\n\n",
-            "<p>The following text</p>\n",
-            "</article></section>\n",
-            "</body></html>"
-        ].join("");
-
-        const document = documentFromHtml(originalHtml);
-
-        const result = moveAsides(document);
-        assert(result);
-
-        const processed = documentToHtml(document);
-        assertEquals(processed, expectedHtml);
-    }
-);
-
-Deno.test(
-    "An aside attribute is set to bottom adds the bottom class to the aside",
-    () => {
-        const originalHtml = [
-            "<html><head><title>Test</title></head>",
-            "<body><section><article>",
-            "<p>The main text</p>",
-            "<pre><code aside=\"bottom\">c++;</code></pre>",
-            "<p>The following text</p>",
-            "</article></section>",
-            "</body></html>"
-        ];
-
-        const expectedHtml = [
-            "<html><head><title>Test</title></head>\n",
-            "<body><section><article>",
-            "<p>The main text</p></article><aside class=\"bottom\">",
             "<pre><code>c++;</code></pre>",
             "</aside></section><section><article>\n\n\n",
             "<p>The following text</p>\n",

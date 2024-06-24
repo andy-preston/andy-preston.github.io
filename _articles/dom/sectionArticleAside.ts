@@ -54,9 +54,6 @@ export const moveAsides = (document: Document): boolean => {
     wrapper.appendChild(wrapped);
     topSection.append(wrapper!);
 
-    if (target.getAttribute("aside") == "bottom") {
-        wrapper.classList.add("bottom");
-    }
     target.removeAttribute("aside");
     return true;
 };
