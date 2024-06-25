@@ -1,6 +1,7 @@
 import { MarkdownIt } from "../../_deps/lume.ts";
 import { MarkdownItState } from "./MarkdownItTypes.ts";
-import markdownTitle from "./markdownTitle.ts";
+import tokenTransform from "./tokenTransform.ts";
+import htmlTitle from "./htmlTitle.ts"
 import displayDates from "./displayDates.ts";
 
 export default (markdownIt: MarkdownIt) => {
@@ -9,8 +10,11 @@ export default (markdownIt: MarkdownIt) => {
         (state: MarkdownItState) => {
             const pageData = state.env.data!.page!.data!;
             if (pageData.basename != "index") {
-                pageData.title = markdownTitle(state.tokens, pageData.basename);
-                pageData.htmlTitle = `Andy Preston - ${pageData.title}`;
+                const transform = tokenTransform(state.tokens, pageData.basename);
+                state.tokens = transform.tokens;
+
+                pageData.title = transform.title;
+                pageData.htmlTitle = htmlTitle(pageData.title);
 
                 [pageData.humanDate, pageData.shortDate] =
                     displayDates(pageData.noDate ? "" : pageData.date);
