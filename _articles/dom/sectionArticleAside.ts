@@ -32,15 +32,16 @@ export const replaceHRule = (document: Document): boolean => {
     return true;
 };
 
-export const moveAsides = (document: Document): boolean => {
+export const moveAsides = (document: Document, basename: string): boolean => {
     const target = document.querySelector("[aside]");
     if (target === null) {
         return false;
     }
 
-    const isCodeOrImg = ['img', 'code'].includes(target.tagName.toLowerCase());
+    const tagName = target.tagName.toLowerCase();
+    const isCodeOrImg = ['img', 'code'].includes(tagName);
     const wrapped = isCodeOrImg ?
-        // <code> has parent <pre> / <img> has parent <figure>
+        // <code> has parent <pre> - <img> has parent <figure>
         target.parentNode! as Element :
         // (e.g.) <table> just needs to have itself wrapped
         target;
@@ -51,9 +52,14 @@ export const moveAsides = (document: Document): boolean => {
     }
 
     const wrapper = document.createElement("aside");
+
+    const labelText = target.getAttribute(tagName == "img" ? "alt" : "aside");
+    if (!labelText) {
+        throw new Error(`${basename}: No label on aside`);
+    }
+    target.removeAttribute("aside");
+    wrapper.setAttribute("aria-label", labelText);
     wrapper.appendChild(wrapped);
     topSection.append(wrapper!);
-
-    target.removeAttribute("aside");
     return true;
 };

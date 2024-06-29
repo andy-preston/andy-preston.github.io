@@ -13,7 +13,7 @@ export default (
             if (!["index", "legacyLinks"].includes(page.data.basename)) {
                 while (paragraphToFigure(document, page.data.basename));
                 while (replaceHRule(document));
-                while (moveAsides(document));
+                while (moveAsides(document, page.data.basename));
                 while (hljsWorkaround(document));
                 while (removeEmpty(document, "article"));
                 while (removeEmpty(document, "section"));

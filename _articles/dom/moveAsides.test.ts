@@ -1,4 +1,9 @@
-import { assert, assertEquals, assertFalse } from "../../_deps/dev.ts";
+import {
+    assert,
+    assertEquals,
+    assertFalse,
+    assertThrows
+} from "../../_deps/dev.ts";
 import { documentFromHtml, documentToHtml } from "../../_tests/dom.ts";
 import { moveAsides } from "./sectionArticleAside.ts";
 
@@ -13,7 +18,7 @@ Deno.test("It leaves html with no asides unchanged and returns false", () => {
 
     const document = documentFromHtml(originalHtml);
 
-    const result = moveAsides(document);
+    const result = moveAsides(document, "MockPageName");
     assertFalse(result);
 
     const processed = documentToHtml(document);
@@ -27,7 +32,7 @@ Deno.test(
             "<html><head><title>Test</title></head>",
             "<body><section><article>",
             "<p>The table description</p>",
-            "<table aside=\"\"></table>",
+            "<table aside=\"Example data\"></table>",
             "<p>The following text</p>",
             "</article></section>",
             "</body></html>"
@@ -37,7 +42,7 @@ Deno.test(
             "<html><head><title>Test</title></head>\n",
             "<body><section><article>",
             "<p>The table description</p>",
-            "</article><aside>",
+            "</article><aside aria-label=\"Example data\">",
             "<table></table>",
             "</aside></section><section><article>\n\n\n",
             "<p>The following text</p>\n",
@@ -47,7 +52,63 @@ Deno.test(
 
         const document = documentFromHtml(originalHtml);
 
-        const result = moveAsides(document);
+        const result = moveAsides(document, "MockPageName");
+        assert(result);
+
+        const processed = documentToHtml(document);
+        assertEquals(processed, expectedHtml);
+    }
+);
+
+Deno.test("An aside table with no label throws an error", () => {
+    const originalHtml = [
+        "<html><head><title>Test</title></head>",
+        "<body><section><article>",
+        "<p>The table description</p>",
+        "<table aside></table>",
+        "<p>The following text</p>",
+        "</article></section>",
+        "</body></html>"
+    ];
+
+    const document = documentFromHtml(originalHtml);
+
+    assertThrows(
+        () => moveAsides(document, "MockPageName"),
+        Error,
+        "",
+        "MockPageName: No label on aside"
+    );
+});
+
+
+Deno.test(
+    "A figure with an image tagged aside moves into an aside and following content into a section",
+    () => {
+        const originalHtml = [
+            "<html><head><title>Test</title></head>",
+            "<body><section><article>",
+            "<p>The main text</p>",
+            "<figure><img alt=\"Illustration\" aside=\"\"></figure>",
+            "<p>The following text</p>",
+            "</article></section>",
+            "</body></html>"
+        ];
+
+        const expectedHtml = [
+            "<html><head><title>Test</title></head>\n",
+            "<body><section><article>",
+            "<p>The main text</p></article><aside aria-label=\"Illustration\">",
+            "<figure><img alt=\"Illustration\"></figure>",
+            "</aside></section><section><article>\n\n\n",
+            "<p>The following text</p>\n",
+            "</article></section>\n",
+            "</body></html>"
+        ].join("");
+
+        const document = documentFromHtml(originalHtml);
+
+        const result = moveAsides(document, "MockPageName");
         assert(result);
 
         const processed = documentToHtml(document);
@@ -56,7 +117,30 @@ Deno.test(
 );
 
 Deno.test(
-    "A figure with an image tagged aside moves into an aside and following content into a section",
+    "A figure with an image tagged aside but with no alt text throws",
+    () => {
+        const originalHtml = [
+            "<html><head><title>Test</title></head>",
+            "<body><section><article>",
+            "<p>The main text</p>",
+            "<figure><img alt=\"\" aside=\"\"></figure>",
+            "<p>The following text</p>",
+            "</article></section>",
+            "</body></html>"
+        ];
+
+        const document = documentFromHtml(originalHtml);
+
+        assertThrows(
+            () => moveAsides(document, "MockPageName"),
+            Error,
+            "",
+            "MockPageName: No label on aside"
+        );
+});
+
+Deno.test(
+    "A figure with an image tagged aside but with no alt attribute throws",
     () => {
         const originalHtml = [
             "<html><head><title>Test</title></head>",
@@ -68,26 +152,15 @@ Deno.test(
             "</body></html>"
         ];
 
-        const expectedHtml = [
-            "<html><head><title>Test</title></head>\n",
-            "<body><section><article>",
-            "<p>The main text</p></article><aside>",
-            "<figure><img></figure>",
-            "</aside></section><section><article>\n\n\n",
-            "<p>The following text</p>\n",
-            "</article></section>\n",
-            "</body></html>"
-        ].join("");
-
         const document = documentFromHtml(originalHtml);
 
-        const result = moveAsides(document);
-        assert(result);
-
-        const processed = documentToHtml(document);
-        assertEquals(processed, expectedHtml);
-    }
-);
+        assertThrows(
+            () => moveAsides(document, "MockPageName"),
+            Error,
+            "",
+            "MockPageName: No label on aside"
+        );
+});
 
 Deno.test(
     "A pre with a code tagged aside moves into an aside and following content into a section",
@@ -96,7 +169,7 @@ Deno.test(
             "<html><head><title>Test</title></head>",
             "<body><section><article>",
             "<p>The main text</p>",
-            "<pre><code aside=\"\">c++;</code></pre>",
+            "<pre><code aside=\"Example code\">c++;</code></pre>",
             "<p>The following text</p>",
             "</article></section>",
             "</body></html>"
@@ -105,6 +178,7 @@ Deno.test(
         const expectedHtml = [
             "<html><head><title>Test</title></head>\n",
             "<body><section><article>",
+            "<p>The main text</p></article><aside aria-label=\"Example code\">",
             "<pre><code>c++;</code></pre>",
             "</aside></section><section><article>\n\n\n",
             "<p>The following text</p>\n",
@@ -114,10 +188,34 @@ Deno.test(
 
         const document = documentFromHtml(originalHtml);
 
-        const result = moveAsides(document);
+        const result = moveAsides(document, "MockPageName");
         assert(result);
 
         const processed = documentToHtml(document);
         assertEquals(processed, expectedHtml);
+    }
+);
+
+Deno.test(
+    "A code aside with no label throws",
+    () => {
+        const originalHtml = [
+            "<html><head><title>Test</title></head>",
+            "<body><section><article>",
+            "<p>The main text</p>",
+            "<pre><code aside>c++;</code></pre>",
+            "<p>The following text</p>",
+            "</article></section>",
+            "</body></html>"
+        ];
+
+        const document = documentFromHtml(originalHtml);
+
+        assertThrows(
+            () => moveAsides(document, "MockPageName"),
+            Error,
+            "",
+            "MockPageName: No label on aside"
+        );
     }
 );
