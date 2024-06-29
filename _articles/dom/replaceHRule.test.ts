@@ -1,4 +1,4 @@
-import { assert, assertEquals } from "../../_deps/dev.ts";
+import { assert, assertEquals, assertFalse } from "../../_deps/dev.ts";
 import { documentFromHtml, documentToHtml } from "../../_tests/dom.ts";
 import { replaceHRule } from "./sectionArticleAside.ts";
 
@@ -15,8 +15,7 @@ Deno.test("It leaves html with no HRules unchanged and returns false", () => {
     const document = documentFromHtml(originalHtml);
 
     const result = replaceHRule(document);
-    // Hey Deno people, some negative assertions would be nice too.
-    assertEquals(result, false);
+    assertFalse(result);
 
     const processed = documentToHtml(document);
     assertEquals(processed, originalHtml);

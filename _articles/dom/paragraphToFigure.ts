@@ -1,4 +1,4 @@
-export default (document: Document, basename: string) => {
+export default (document: Document, basename: string): boolean => {
 
     const reportError = (imageElement: Element, message : string) => {
         const source = imageElement.getAttribute("src");

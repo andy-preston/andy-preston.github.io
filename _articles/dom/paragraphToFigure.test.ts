@@ -1,6 +1,6 @@
 import {
     assert,
-    assertNotEquals,
+    assertFalse,
     assertStringIncludes,
     assertThrows
 } from "../../_deps/dev.ts";
@@ -52,8 +52,7 @@ Deno.test("If there is no suitable image, it returns false", () => {
     ]);
 
     const result = paragraphToFigure(document, "Test Document");
-    // Hey Deno people, some negative assertions would be nice too.
-    assertNotEquals(result, true);
+    assertFalse(result);
 });
 
 Deno.test("It transforms an image in a paragraph into a figure", () => {

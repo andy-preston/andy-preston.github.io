@@ -1,6 +1,6 @@
 /* cSpell:words hljs */
 
-import { assert, assertEquals } from "../../_deps/dev.ts";
+import { assert, assertEquals, assertFalse } from "../../_deps/dev.ts";
 import { documentFromHtml, documentToHtml } from "../../_tests/dom.ts";
 import hljsWorkaround from "./hljsWorkaround.ts";
 
@@ -32,8 +32,7 @@ Deno.test(
         assertEquals(firstHtml, expectedHtml);
 
         const secondResult = hljsWorkaround(document);
-        // Hey Deno people, some negative assertions would be nice too.
-        assertEquals(secondResult, false);
+        assertFalse(secondResult);
 
         const secondHtml = documentToHtml(document);
         assertEquals(secondHtml, expectedHtml);
@@ -85,8 +84,7 @@ Deno.test(
         assertEquals(secondPass, expectedSecondPass);
 
         const thirdResult = hljsWorkaround(document);
-        // Hey Deno people, some negative assertions would be nice too.
-        assertEquals(thirdResult, false);
+        assertFalse(thirdResult);
 
         const thirdPass = documentToHtml(document);
         assertEquals(thirdPass, expectedSecondPass);
