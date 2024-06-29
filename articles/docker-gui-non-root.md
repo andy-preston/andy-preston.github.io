@@ -1,7 +1,8 @@
 ---
 # cSpell:words Ghidra blacktop
+# cSpell:words DIYLC unzipper noninteractive workdir
 tags: docker
-date: "2023-07-11"
+date: "2024-02-25"
 ---
 # Running GUI Apps in Docker as a non root user
 
@@ -68,4 +69,79 @@ docker run --init --rm \
 
 ## No Dockerfile Available - DIY Layout Creator
 
-Coming soon
+There seems to be a running theme here of using Docker to try to throw a rug
+over the fact that I'm using a JVM app. Because I've also got a container to
+run [DIY Layout Creator](https://diy-fever.com/software/diylc/).
+
+--------------------------------------------------------------------------------
+
+Where DIYLC doesn't provide a ready-made Docker image,
+it's up to us to create one for ourselves. This Dockerfile comes in two
+sections: the first to define a build-time container image to assemble the
+required components, the second to define the run-time container image.
+
+The first container ("unzipper") has a copy of the downloadable
+zip file for DIYLC and an unzip program to expand it. We also have to generate
+locale information to keep the `unzip` utility happy.
+
+(TODO: is that correct?) {.todo}
+
+```dockerfile{aside="DIYLC Dockerfile"}
+FROM ubuntu:focal AS unzipper
+ENV TERM=linux
+ENV DEBIAN_FRONTEND=noninteractive
+
+ADD https://github.com/bancika/diy-layout-creator/releases/download/v4.37.0/diylc-4.37.0.zip \
+    /diylc.zip
+
+RUN apt-get update && \
+    apt-get install --no-install-recommends -y \
+        locales unzip
+
+RUN locale-gen en_GB.UTF-8
+
+ENV LANG en_GB.UTF-8
+ENV LANGUAGE en_GB:en
+ENV LC_ALL en_GB.UTF-8
+
+RUN mkdir -p /opt/diylc && \
+    cd /opt/diylc && \
+    unzip /diylc.zip
+
+FROM ubuntu:focal
+ENV TERM=linux
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && \
+    apt-get install --no-install-recommends -y \
+        bash openjdk-17-jre && \
+    rm -rf \
+        /var/lib/apt/lists/* \
+        /tmp/* \
+        /var/tmp/* \
+        /usr/src/doc/*
+
+COPY --from=unzipper /opt/diylc /opt/diylc
+
+RUN chmod a+x /opt/diylc/run.sh
+
+WORKDIR /opt/diylc
+
+CMD [ "bash", "/opt/diylc/run.sh" ]
+```
+
+The Script
+
+```bash{aside="Script to run DIYLC in Docker"}
+#!/bin/bash
+
+docker build --progress=plain --tag diylc .
+
+docker run \
+    --interactive --tty --rm \
+    --user $(id -u):$(id -g) \
+    --volume /home/$(id --user --name)/Documents:/opt/diylc/Documents \
+    --env DISPLAY=:0.0 \
+    --net=host \
+    diylc</syntax-highlight></aside></section>
+```
