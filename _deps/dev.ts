@@ -7,8 +7,11 @@ export {
     assertGreaterOrEqual,
     assertLessOrEqual,
     assertStringIncludes,
-    assertThrows
 } from "https://deno.land/std@0.224.0/assert/mod.ts";
+
+export {
+    assertThrows
+} from "https://deno.land/std@0.224.0/assert/assert_throws.ts";
 
 export {
     default as getFiles,
