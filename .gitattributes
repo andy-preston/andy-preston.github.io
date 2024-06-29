@@ -1,1 +1,4 @@
-*.vto linguist-language=html
+*.vto linguist-language=HTML
+*.md linguist-detectable
+*.json linguist-detectable
+fixed/* -linguist-detectable

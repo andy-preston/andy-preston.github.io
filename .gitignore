@@ -4,3 +4,4 @@ _cache
 _deno
 _site
 _old-stuff
+deno.lock
