@@ -14,7 +14,7 @@ on the back of old envelopes.
 
 Extract the audio from a bunch of MPEG-4 movies
 
-```bash{aside}
+```bash{aside="Audio extraction from movies"}
 for a in *.mp4
 do
     ffmpeg -i $a -map 0:1 -codec:a copy $(
@@ -25,7 +25,7 @@ done
 
 Extract audio from an MPEG-4 stream and re-encode it as MP3
 
-```bash{aside}
+```bash{aside="MP3 extraction from steams"}
 ffmpeg -hide_banner \
     -i ./stream.mp4 \
     -map_metadata -1 -vn ./audio.mp3
@@ -33,7 +33,7 @@ ffmpeg -hide_banner \
 
 Re-encode audio to MP3 with a selected bitrate
 
-```bash{aside}
+```bash{aside="MP3 encoding from AAC"}
 for a in $(
     find -name \*.aac
 )
@@ -47,7 +47,7 @@ done
 
 Convert MPEG-4 AVI files to MPEG-4 streams
 
-```bash{aside}
+```bash{aside="AVI to MPEG-4"}
 for a in *.avi
 do
     ffmpeg -hide_banner -i $a -map_metadata -1 \
@@ -58,7 +58,7 @@ done
 
 Concatenate 100% compatible videos that have already been split into parts
 
-```bash{aside}
+```bash{aside="Concatenation example"}
 echo file part1.mp4 > list.txt
 echo file part2.mp4 >> list.txt
 ffmpeg -f concat -safe 0 -i list.txt \
@@ -67,7 +67,7 @@ ffmpeg -f concat -safe 0 -i list.txt \
 
 Merge video and audio held into 2 MPEG-4 streams into a single MPEG-4 stream
 
-```bash{aside}
+```bash{aside="Mix audio and video"}
 ffmpeg -hide_banner \
     -i ./video.mp4 -i ./audio.mp4 \
     -map_metadata -1 \
@@ -77,7 +77,7 @@ ffmpeg -hide_banner \
 
 De-interlace, rescale and encode as silent H264/MPEG-4
 
-```bash{aside}
+```bash{aside="Deinterlace and rescale silent movie"}
 ffmpeg -i ./original.mp4 \
     -vf yadif -vf scale=720:574 \
     -c:v libx264 -preset slow -crf 0 \
@@ -86,7 +86,7 @@ ffmpeg -i ./original.mp4 \
 
 Overlay two video camera streams on top of each other
 
-```bash{aside}
+```bash{aside="Overlay camera streams"}
 ffmpeg \
     -f video4linux2 -r 30 -s 640x480 -i /dev/video0 \
     -f video4linux2 -r 30 -s 640x480 -i /dev/video2 \
@@ -96,7 +96,7 @@ ffmpeg \
 
 Determine which (video) frames in a soundtrack contain peaks
 
-```bash{aside}
+```bash{aside="peak detector"}
 FPS=25
 ffmpeg \
     -i ./soundtrack.wav \
@@ -108,7 +108,7 @@ ffmpeg \
 
 Split into chunks each starting on a keyframe
 
-```bash{aside}
+```bash{aside="Chunking example"}
 ffmpeg -i ./input.mp4 \
     -codec:a copy -format segment -codec:v copy \
     -reset_timestamps 1 \
@@ -118,7 +118,7 @@ ffmpeg -i ./input.mp4 \
 After the chunks in the previous example have been split, you can copy them
 into subdirectories and join each subdirectory back into a video with:
 
-```bash{aside}
+```bash{aside="Join the chunks back together"}
 AWK='{ print "file " $1; }'
 
 for CHUNK in $(find -type d | grep / | sort)
@@ -147,7 +147,7 @@ Rescale old-school PAL TV programmes.
 - Take the video quality down to "good enough" for PAL.
 - Take the audio down to 44.1 mono at a suitable compression rate.
 
-```bash{aside}
+```bash{aside="Rescaling PAL TV"}
 for a in *webm
 do
     ffmpeg -hide_banner -i $a -shortest -map_metadata -1 \

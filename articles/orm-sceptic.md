@@ -54,7 +54,7 @@ ORMs do treat data objects as "OOP objects" there's another way to view
 objects, without classes and methods, just simple JSON (or a PHP associative
 array or a Python dictionary...):
 
-```json{aside="bottom"}
+```json{aside="Example JSON Object"}
     "orders": [{
         "customer": {
             "name": "Tim Tester",
@@ -89,7 +89,7 @@ joined in a bigger query as though they were all tables.
 | 23      | Tim Tester | Billing   | 93      | ...     | 57      | Hacking Flange | 4.18  |
 | 23      | Tim Tester | Billing   | 93      | ...     | 75      | Strong Glue    | 5.28  |
 
-{aside}
+{aside="Example SQL Result"}
 
 --------------------------------------------------------------------------------
 

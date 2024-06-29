@@ -46,7 +46,7 @@ We also need `--net=host` so that Java will access the X11 display using it's
 host network address rather than Docker's virtual network. (better explanation
 to follow).
 
-```bash{aside}
+```bash{aside="Script to run Ghidra in Docker"}
 #!/bin/bash
 
 HOME_DIR="/home/$(id --user --name)"

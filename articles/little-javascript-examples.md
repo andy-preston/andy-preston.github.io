@@ -25,7 +25,7 @@ classic British GPO dial tone for
 [an antique phone emulation](https://github.com/andy-preston/gpo-746-android)
 that I seem to have become obsessed with.
 
-```typescript {aside}
+```typescript {aside="Closure and higher-order function example"}
 const samplePeriod = 1 / 11025;
 const twoPi = 2 * Math.PI;
 

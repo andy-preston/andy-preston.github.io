@@ -22,7 +22,7 @@ ago).
 And even if we wrap all this up in a nice "modern" lambda function, it's still
 hard to deal with the errors:
 
-```php{aside="bottom}
+```php{aside="Horrible PHP Error Handler}
 set_error_handler(
     function($severity, $message, $file, $line) {
         if (!(error_reporting() && $severity)) {
@@ -40,7 +40,7 @@ set_error_handler(
 But this error handling mechanism does give us a simple way to generate
 exceptions that can be handled with `catch`.
 
-```php{aside}
+```php{aside="Error handler with exception throwing"}
 set_error_handler(
     function($severity, $message, $file, $line) {
         throw new ErrorException(

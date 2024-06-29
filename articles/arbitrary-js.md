@@ -11,7 +11,7 @@ Most of the ideas here have been "stolen" from:
 
 Here we have a normal JS object that stands in for the scope of our `eval`ed code.
 
-```javascript {aside}
+```javascript {aside="Scope Object"}
 var scopeObject = {
     "a": 1,
     "b": 2,
@@ -23,7 +23,7 @@ Read only properties do require a little extra work to add
 them to the object and they don't appear as ordinary fields (e.g. in a
 `console.log`
 
-```javascript {aside}
+```javascript {aside="Adding Properties"}
 Object.defineProperty(scopeObject, "doNotTouch", {
     "value": 47,
     "writeable": false,
@@ -39,7 +39,7 @@ It also side-steps the `"strict-mode"` prohibition on using `with`. The
 `with` is necessary to allow us to access properties within `scopeObject` as
 though they were any normal JS scope (i.e. without prefixing them with `this.`).
 
-```javascript {aside}
+```javascript {aside="Using 'eval'"}
 const evalInScope = function(jsString) {
     return new Function(
         `with (this) { return (${jsString}); }`
@@ -49,7 +49,7 @@ const evalInScope = function(jsString) {
 
 To read values from the scope, we can just reference them by name.
 
-```javascript {aside}
+```javascript {aside="Read Test"}
 const readTest = evalInScope("a + b");
 if (readTest != scopeObject.a + scopeObject.b) {
     throw "read test failed";
@@ -61,7 +61,7 @@ if (readTest != 3) {
 
 You can also write existing values with a "straight assignment"
 
-```javascript {aside}
+```javascript {aside="Write Test"}
 evalInScope("c = 25");
 if (scopeObject.c !== 25) {
     throw "write test failed";
@@ -70,7 +70,7 @@ if (scopeObject.c !== 25) {
 
 To add values to the scope they must be prefixed with `this`
 
-```javascript {aside}
+```javascript {aside="Writing with 'this' prefix"}
 evalInScope("this.x = 23");
 if (scopeObject.x !== 23) {
     throw "new value test failed";
@@ -79,7 +79,7 @@ if (scopeObject.x !== 23) {
 
 Read only properties can be read just like normal properties
 
-```javascript {aside}
+```javascript {aside="Reading read-only properties"}
 const readOnlyTest = evalInScope("doNotTouch");
 if (readOnlyTest !== scopeObject.doNotTouch) {
     throw "read (only) test failed";
@@ -91,7 +91,7 @@ if (readOnlyTest != 47) {
 
 Read only properties cannot be changed
 
-```javascript {aside}
+```javascript {aside="Trying to change read-only properties"}
 evalInScope("doNotTouch = 999");
 if (scopeObject.doNotTouch != 47) {
     throw "write read-only test failed";
