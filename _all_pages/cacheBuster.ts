@@ -12,7 +12,6 @@ export const cacheBusterAssets = async (pages: Array<Lume.Page>) => {
         const extension = oldUrl.split('.').pop();
         page.data.url = `/${hash}.${extension}`;
         urlMap[oldUrl] = page.data.url;
-        console.log(urlMap);
     }
 };
 
