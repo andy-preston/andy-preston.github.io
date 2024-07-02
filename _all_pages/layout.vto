@@ -13,7 +13,9 @@
         <!-- cSpell:words msapplication -->
         <meta name="msapplication-TileColor" content="#da532c">
         <meta name="theme-color" content="#0000">
-        <link rel="stylesheet" href="/style.css?cb={{ cacheBuster }}">
+        {{ for style of search.files(/\.css$/) }}
+            <link rel="stylesheet" href="{{ style }}">
+        {{ /for }}
     </head>
     <body>
         {{ content }}

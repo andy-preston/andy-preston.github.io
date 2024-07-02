@@ -32,24 +32,14 @@ const typescriptPlugin: Plugin = {
 export const esBuildPlugin = esBuild({
     "options": {
         "plugins": [typescriptPlugin],
-        // cSpell:words iife
-        "format": "iife",
+        "banner": {
+            "js": "(function () {"
+        },
+        "footer": {
+            "js": "})();"
+        },
         "minify": false,
         "minifyWhitespace": true,
         "keepNames": false
     }
 });
-
-export const javaScriptUrl = (
-    filteredPages: Array<Lume.Page>,
-    _allPages: Array<Lume.Page>
-) => {
-    const urls = {
-        "illustration": "/front-illustration.js"
-    };
-    filteredPages.forEach(
-        (page: Lume.Page) => {
-            page.data.url = urls[page.data.basename as keyof typeof urls];
-        }
-    );
-};
