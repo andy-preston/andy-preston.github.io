@@ -1,21 +1,21 @@
 import picturesAndCaptions from "./pictures.json";
 
 window.addEventListener("load", () => {
-    const figure = document.getElementById("illustration");
+    const figure = document.getElementById("cover-pic");
     if (figure === null) {
-        console.log("Can't find element id=\"illustration\"");
+        console.log("Can't find element id=\"cover-pic\"");
         return;
     }
 
     const image = figure.getElementsByTagName("img").item(0);
     if (image === null) {
-        console.log("Can't find image element in \"illustration\"");
+        console.log("Can't find image element in \"cover-pic\"");
         return;
     }
 
     const caption = figure.getElementsByTagName("figcaption").item(0);
     if (caption === null) {
-        console.log("Can't find caption element in \"illustration\"");
+        console.log("Can't find caption element in \"cover-pic\"");
         return;
     }
 
@@ -36,7 +36,7 @@ window.addEventListener("load", () => {
 
     showCurrentPicture();
 
-    image.addEventListener("click", (event) => {
+    figure.addEventListener("click", (event) => {
         if (event.offsetX < image.width / 2) {
             currentPicture = currentPicture == 0 ?
                 lastPicture : currentPicture - 1;
