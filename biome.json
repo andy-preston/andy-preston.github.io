@@ -1,0 +1,23 @@
+{
+	"$schema": "https://biomejs.dev/schemas/1.8.3/schema.json",
+	"organizeImports": {
+		"enabled": true
+	},
+    "files": {
+        "include": [
+            "cover-pic/choose.ts"
+        ]
+    },
+    "formatter": {
+        "enabled": false
+    },
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"all": true,
+            "suspicious": {
+                "noDoubleEquals": "off"
+            }
+		}
+	}
+}
