@@ -1,0 +1,20 @@
+h1 span, p.tag-line span {
+    display: inline-block;
+}
+
+.front-page h1 {
+    margin-top: 1em;
+}
+
+#cover-pic {
+    margin-top: 1lh;
+    margin-bottom: 1lh;
+
+    & img {
+        max-height: 70vh;
+        max-width: 35vw;
+        width: auto;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
