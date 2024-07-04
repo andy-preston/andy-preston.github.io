@@ -2,12 +2,15 @@
 
 import { Token } from "./MarkdownItTypes.ts";
 
-interface TransformerResult {
+type TransformerResult = {
     "tokens": Array<Token>,
     "title": string
 };
 
-export default (tokens: Array<Token>, basename: string): TransformerResult => {
+export const tokenTransform = (
+    tokens: Array<Token>,
+    basename: string
+): TransformerResult => {
     let articleTitle = "";
     let skipTokens = 0;
 
@@ -42,6 +45,7 @@ export default (tokens: Array<Token>, basename: string): TransformerResult => {
     }
     // Apparently, with Typescript 5.5, it'll be able to infer this
     // and we won't need the `as` any more.
+    // Currently using typescript 5.4.5
     return {
         "tokens": transformed as Array<Token>,
         "title": articleTitle,

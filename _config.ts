@@ -3,20 +3,20 @@ import code_highlight from "lume/plugins/code_highlight.ts";
 import { markdownItAttrs } from "./_deps/lume.ts";
 import frontPageProcess from "./front-page/_process.ts";
 import { esBuildPlugin } from "./front-page/illustration/_build.ts";
-import articleBuilder from "./_articles/markdown/markdownItPlugin.ts";
 import domFormat from "./_all_pages/domFormat.ts";
 import postCss from "./style/_postCss.ts";
 import {
     cacheBusterAssets,
     cacheBusterLinks
 } from "./_all_pages/cacheBuster.ts";
+import { markdownTransform } from "./articles/_markdown-transform/mod.ts";
 import { articleDomTransform } from "./articles/_dom-transform/mod.ts";
 
 const markdown = {
     "html": false,
     "plugins": [
         markdownItAttrs,
-        articleBuilder
+        markdownTransform
     ],
     "keepDefaultPlugins": true
 };

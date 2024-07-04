@@ -1,10 +1,10 @@
-import { MarkdownIt } from "../../_deps/lume.ts";
+import { markdownIt as MarkdownIt } from "lume/deps/markdown_it.ts";
 
 // Typescript representation of markdown-it/14.1.0/lib/token.mjs
 //
 // This is a bit quick 'n' dirty. We need to know the possible values of the
 // strings and have a nice enumeration for `nesting`, etc, etc.
-export interface Token {
+export type Token = {
     "type": string,
     "tag": string,
     "attrs": Array<[string, string]>,
@@ -26,7 +26,7 @@ export interface Token {
     "attrJoin": (name: string, value: string) => void,
 }
 
-export interface MarkdownItState {
+export type MarkdownItState = {
     "src": string,
     "env": Lume.Data,
     "tokens": Array<Token>,
