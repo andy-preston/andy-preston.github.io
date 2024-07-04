@@ -20,8 +20,8 @@
         "_deno",
         "_old-stuff",
         "_site",
-        "front-page/illustration/illustration.ts",
-        "front-page/illustration/tsconfig.json",
+        "cover-pic/choose.ts",
+        "cover-pic/tsconfig.json",
         "bin",
         "fixed"
     ]
