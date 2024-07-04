@@ -1,11 +1,11 @@
-// returned values indicates that DOM has been altered
+export type DomChanged = boolean;
 
-type TraversalCallback = (child: Node) => boolean;
+export type TraversalCallback = (child: Node) => DomChanged;
 
-export default (document: Document, callback: TraversalCallback) => {
+export const traverseDocument = (document: Document, callback: TraversalCallback) => {
     const traverseChildrenOf = (node: Node) => {
-        let domChanged = true;
-        while (domChanged) {
+        let domChanged: DomChanged = false;
+        do {
             for (const child of node.childNodes) {
                 domChanged = callback(child);
                 if (domChanged) {
@@ -15,7 +15,7 @@ export default (document: Document, callback: TraversalCallback) => {
                     traverseChildrenOf(child);
                 }
             }
-        }
+        } while (domChanged);
     };
 
     traverseChildrenOf(document);

@@ -1,8 +1,8 @@
-import stripComments from "./stripComments.ts";
-import stripWhitespace from "./stripWhitespace.ts";
-import traverseDocument from './traverse.ts';
+import { stripComments } from "./stripComments.ts";
+import { stripWhitespace } from "./stripWhitespace.ts";
+import { traverseDocument } from './traverse.ts';
 
-export default (
+export const htmlFormat = (
     filteredPages: Array<Lume.Page>,
     _allPages: Array<Lume.Page>
 ) => {
