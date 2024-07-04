@@ -1,4 +1,4 @@
-import { getFiles, FileInfo } from "../_deps/dev.ts";
+import { default as getFiles, FileInfo } from "getFiles";
 
 export const siteFiles = (extension: string): Array<string> => getFiles(
     { "root": "./_site" }
