@@ -12,7 +12,6 @@
     ],
     "deno.enable": true,
     "deno.lint": true,
-    "deno.path": "./bin/deno",
     "[javascript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
