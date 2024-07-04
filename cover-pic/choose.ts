@@ -3,20 +3,17 @@ import picturesAndCaptions from "./pictures.json";
 window.addEventListener("load", () => {
     const figure = document.getElementById("cover-pic");
     if (figure === null) {
-        console.log("Can't find element id=\"cover-pic\"");
-        return;
+        throw new Error("Can't find element id=\"cover-pic\"");
     }
 
     const image = figure.getElementsByTagName("img").item(0);
     if (image === null) {
-        console.log("Can't find image element in \"cover-pic\"");
-        return;
+        throw new Error("Can't find image element in \"cover-pic\"");
     }
 
     const caption = figure.getElementsByTagName("figcaption").item(0);
     if (caption === null) {
-        console.log("Can't find caption element in \"cover-pic\"");
-        return;
+        throw new Error("Can't find caption element in \"cover-pic\"");
     }
 
     const lastPicture = picturesAndCaptions.length - 1;
