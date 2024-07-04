@@ -3,17 +3,17 @@ import picturesAndCaptions from "./pictures.json";
 window.addEventListener("load", () => {
     const figure = document.getElementById("cover-pic");
     if (figure === null) {
-        throw new Error("Can't find element id=\"cover-pic\"");
+        throw new Error("Can't find element id=cover-pic");
     }
 
     const image = figure.getElementsByTagName("img").item(0);
     if (image === null) {
-        throw new Error("Can't find image element in \"cover-pic\"");
+        throw new Error("Can't find image element in cover-pic");
     }
 
     const caption = figure.getElementsByTagName("figcaption").item(0);
     if (caption === null) {
-        throw new Error("Can't find caption element in \"cover-pic\"");
+        throw new Error("Can't find caption element in cover-pic");
     }
 
     const lastPicture = picturesAndCaptions.length - 1;
@@ -35,11 +35,11 @@ window.addEventListener("load", () => {
 
     figure.addEventListener("click", (event) => {
         if (event.offsetX < image.width / 2) {
-            currentPicture = currentPicture == 0 ?
-                lastPicture : currentPicture - 1;
+            currentPicture =
+                currentPicture == 0 ? lastPicture : currentPicture - 1;
         } else {
-            currentPicture = currentPicture == lastPicture ?
-                0 : currentPicture + 1;
+            currentPicture =
+                currentPicture == lastPicture ? 0 : currentPicture + 1;
         }
         showCurrentPicture();
     });
