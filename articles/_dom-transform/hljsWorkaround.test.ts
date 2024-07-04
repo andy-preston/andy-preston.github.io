@@ -1,8 +1,8 @@
 /* cSpell:words hljs */
 
-import { assert, assertEquals, assertFalse } from "../../_deps/dev.ts";
-import { documentFromHtml, documentToHtml } from "../../_tests/dom.ts";
-import hljsWorkaround from "./hljsWorkaround.ts";
+import { assert, assertEquals, assertFalse } from "assert";
+import { documentFromHtml, documentToHtml } from "testDom";
+import { hljsWorkaround } from "./hljsWorkaround.ts";
 
 Deno.test(
     "It removes all .hljs-number elements within a .language-dockerfile",

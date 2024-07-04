@@ -1,6 +1,7 @@
-import { NodeType } from "../../_deps/lume.ts";
+import { NodeType } from "lume/deps/dom.ts";
+import { DomRewriter, DomChanged } from "./functionTypes.ts";
 
-export default (document: Document) => {
+export const hljsWorkaround: DomRewriter = (document: Document): DomChanged => {
 
     const precededByDash = (span: Node): boolean => {
         const previous = span.previousSibling;
@@ -29,11 +30,11 @@ export default (document: Document) => {
         return null;
     }
 
-    const span = somethingRotten();
-    if (span === null) {
+    const badSpan = somethingRotten();
+    if (badSpan === null) {
         return false;
     }
 
-    span.parentNode!.replaceChild(span.childNodes[0]!, span);
+    badSpan.parentNode!.replaceChild(badSpan.childNodes[0]!, badSpan);
     return true;
 }

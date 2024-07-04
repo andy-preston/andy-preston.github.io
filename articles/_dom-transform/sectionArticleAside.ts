@@ -1,3 +1,5 @@
+import { DomRewriter, DomChanged } from "./functionTypes.ts";
+
 const moveToNewSection = (
     document: Document,
     target: Element|null
@@ -22,7 +24,7 @@ const moveToNewSection = (
     }
 };
 
-export const replaceHRule = (document: Document): boolean => {
+export const replaceHRule: DomRewriter = (document: Document): DomChanged => {
     const target = document.querySelector("section > article > hr");
     if (moveToNewSection(document, target) === null) {
         return false;
@@ -32,7 +34,7 @@ export const replaceHRule = (document: Document): boolean => {
     return true;
 };
 
-export const moveAsides = (document: Document, basename: string): boolean => {
+export const moveAsides: DomRewriter = (document: Document, basename: string): DomChanged => {
     const target = document.querySelector("[aside]");
     if (target === null) {
         return false;

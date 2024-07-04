@@ -1,5 +1,9 @@
-export default (document: Document, basename: string): boolean => {
+import { DomChanged, DomRewriter } from "./functionTypes.ts";
 
+export const paragraphToFigure: DomRewriter = (
+    document: Document,
+    basename: string
+): DomChanged => {
     const reportError = (imageElement: Element, message : string) => {
         const source = imageElement.getAttribute("src");
         const title = imageElement.getAttribute("alt");

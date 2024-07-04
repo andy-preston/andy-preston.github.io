@@ -1,32 +1,31 @@
-import {
-    assert,
-    assertEquals,
-    assertFalse,
-    assertThrows
-} from "../../_deps/dev.ts";
-import { documentFromHtml, documentToHtml } from "../../_tests/dom.ts";
+import { assert, assertEquals, assertFalse } from "assert";
+import { assertThrows } from "assertThrows";
+import { documentFromHtml, documentToHtml } from "testDom";
 import { moveAsides } from "./sectionArticleAside.ts";
 
-Deno.test("It leaves html with no asides unchanged and returns false", () => {
-    const originalHtml = [
-        "<html><head><title>Test</title></head>",
-        "<body><section><article>",
-        "<p>This is a test</p>",
-        "</article></section>",
-        "</body></html>"
-    ].join("\n");
+Deno.test(
+    "It leaves html with no asides unchanged and returns false",
+    () => {
+        const originalHtml = [
+            "<html><head><title>Test</title></head>",
+            "<body><section><article>",
+            "<p>This is a test</p>",
+            "</article></section>",
+            "</body></html>"
+        ].join("\n");
 
-    const document = documentFromHtml(originalHtml);
+        const document = documentFromHtml(originalHtml);
 
-    const result = moveAsides(document, "MockPageName");
-    assertFalse(result);
+        const result = moveAsides(document, "MockPageName");
+        assertFalse(result);
 
-    const processed = documentToHtml(document);
-    assertEquals(processed, originalHtml);
-});
+        const processed = documentToHtml(document);
+        assertEquals(processed, originalHtml);
+    }
+);
 
 Deno.test(
-    "A table tagged as aside moves into an aside and following content into a new section",
+    "Tables tagged as aside become an aside and following content - a new section",
     () => {
         const originalHtml = [
             "<html><head><title>Test</title></head>",
@@ -60,30 +59,32 @@ Deno.test(
     }
 );
 
-Deno.test("An aside table with no label throws an error", () => {
-    const originalHtml = [
-        "<html><head><title>Test</title></head>",
-        "<body><section><article>",
-        "<p>The table description</p>",
-        "<table aside></table>",
-        "<p>The following text</p>",
-        "</article></section>",
-        "</body></html>"
-    ];
+Deno.test(
+    "An aside table with no label throws an error",
+    () => {
+        const originalHtml = [
+            "<html><head><title>Test</title></head>",
+            "<body><section><article>",
+            "<p>The table description</p>",
+            "<table aside></table>",
+            "<p>The following text</p>",
+            "</article></section>",
+            "</body></html>"
+        ];
 
-    const document = documentFromHtml(originalHtml);
+        const document = documentFromHtml(originalHtml);
 
-    assertThrows(
-        () => moveAsides(document, "MockPageName"),
-        Error,
-        "",
-        "MockPageName: No label on aside"
-    );
-});
-
+        assertThrows(
+            () => moveAsides(document, "MockPageName"),
+            Error,
+            "",
+            "MockPageName: No label on aside"
+        );
+    }
+);
 
 Deno.test(
-    "A figure with an image tagged aside moves into an aside and following content into a section",
+    "Figure with images tagged aside become an aside and following content - a new section",
     () => {
         const originalHtml = [
             "<html><head><title>Test</title></head>",
@@ -137,7 +138,8 @@ Deno.test(
             "",
             "MockPageName: No label on aside"
         );
-});
+    }
+);
 
 Deno.test(
     "A figure with an image tagged aside but with no alt attribute throws",
@@ -160,10 +162,11 @@ Deno.test(
             "",
             "MockPageName: No label on aside"
         );
-});
+    }
+);
 
 Deno.test(
-    "A pre with a code tagged aside moves into an aside and following content into a section",
+    "Pre elements with code tagged aside become an aside and following content - a new section",
     () => {
         const originalHtml = [
             "<html><head><title>Test</title></head>",

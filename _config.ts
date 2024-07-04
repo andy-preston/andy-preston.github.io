@@ -4,13 +4,13 @@ import { markdownItAttrs } from "./_deps/lume.ts";
 import frontPageProcess from "./front-page/_process.ts";
 import { esBuildPlugin } from "./front-page/illustration/_build.ts";
 import articleBuilder from "./_articles/markdown/markdownItPlugin.ts";
-import articlesDom from "./_articles/dom/mod.ts";
 import domFormat from "./_all_pages/domFormat.ts";
 import postCss from "./style/_postCss.ts";
 import {
     cacheBusterAssets,
     cacheBusterLinks
 } from "./_all_pages/cacheBuster.ts";
+import { articleDomTransform } from "./articles/_dom-transform/mod.ts";
 
 const markdown = {
     "html": false,
@@ -30,8 +30,8 @@ siteBuilder
     .use(postCss)
     .process([".css", ".ts"], cacheBusterAssets)
     .process([".html"], cacheBusterLinks)
+    .process([".html"], articleDomTransform)
     .preprocess([".html"], frontPageProcess)
-    .process([".html"], articlesDom)
     .process([".html"], domFormat)
     .copy("fixed", ".");
 
