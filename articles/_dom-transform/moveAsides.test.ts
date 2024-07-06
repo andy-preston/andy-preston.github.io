@@ -16,7 +16,7 @@ Deno.test(
 
         const document = documentFromHtml(originalHtml);
 
-        const result = moveAsides(document, "MockPageName");
+        const result = moveAsides(document, "", "MockPageName");
         assertFalse(result);
 
         const processed = documentToHtml(document);
@@ -51,7 +51,7 @@ Deno.test(
 
         const document = documentFromHtml(originalHtml);
 
-        const result = moveAsides(document, "MockPageName");
+        const result = moveAsides(document, "", "MockPageName");
         assert(result);
 
         const processed = documentToHtml(document);
@@ -75,7 +75,7 @@ Deno.test(
         const document = documentFromHtml(originalHtml);
 
         assertThrows(
-            () => moveAsides(document, "MockPageName"),
+            () => moveAsides(document, "", "MockPageName"),
             Error,
             "",
             "MockPageName: No label on aside"
@@ -109,7 +109,7 @@ Deno.test(
 
         const document = documentFromHtml(originalHtml);
 
-        const result = moveAsides(document, "MockPageName");
+        const result = moveAsides(document, "", "MockPageName");
         assert(result);
 
         const processed = documentToHtml(document);
@@ -133,7 +133,7 @@ Deno.test(
         const document = documentFromHtml(originalHtml);
 
         assertThrows(
-            () => moveAsides(document, "MockPageName"),
+            () => moveAsides(document, "", "MockPageName"),
             Error,
             "",
             "MockPageName: No label on aside"
@@ -157,7 +157,7 @@ Deno.test(
         const document = documentFromHtml(originalHtml);
 
         assertThrows(
-            () => moveAsides(document, "MockPageName"),
+            () => moveAsides(document, "", "MockPageName"),
             Error,
             "",
             "MockPageName: No label on aside"
@@ -191,7 +191,7 @@ Deno.test(
 
         const document = documentFromHtml(originalHtml);
 
-        const result = moveAsides(document, "MockPageName");
+        const result = moveAsides(document, "", "MockPageName");
         assert(result);
 
         const processed = documentToHtml(document);
@@ -215,7 +215,7 @@ Deno.test(
         const document = documentFromHtml(originalHtml);
 
         assertThrows(
-            () => moveAsides(document, "MockPageName"),
+            () => moveAsides(document, "", "MockPageName"),
             Error,
             "",
             "MockPageName: No label on aside"

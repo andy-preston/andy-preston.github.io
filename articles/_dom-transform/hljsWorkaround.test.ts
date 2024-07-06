@@ -25,13 +25,13 @@ Deno.test(
 
         const document = documentFromHtml(originalHtml);
 
-        const firstResult = hljsWorkaround(document);
+        const firstResult = hljsWorkaround(document, "", "");
         assert(firstResult);
 
         const firstHtml = documentToHtml(document);
         assertEquals(firstHtml, expectedHtml);
 
-        const secondResult = hljsWorkaround(document);
+        const secondResult = hljsWorkaround(document, "", "");
         assertFalse(secondResult);
 
         const secondHtml = documentToHtml(document);
@@ -71,19 +71,19 @@ Deno.test(
 
         const document = documentFromHtml(originalHtml);
 
-        const firstResult = hljsWorkaround(document);
+        const firstResult = hljsWorkaround(document, "", "");
         assert(firstResult);
 
         const firstPass = documentToHtml(document);
         assertEquals(firstPass, expectedFirstPass);
 
-        const secondResult = hljsWorkaround(document);
+        const secondResult = hljsWorkaround(document, "", "");
         assert(secondResult);
 
         const secondPass = documentToHtml(document);
         assertEquals(secondPass, expectedSecondPass);
 
-        const thirdResult = hljsWorkaround(document);
+        const thirdResult = hljsWorkaround(document, "", "");
         assertFalse(thirdResult);
 
         const thirdPass = documentToHtml(document);

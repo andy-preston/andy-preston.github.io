@@ -15,7 +15,7 @@ Deno.test(
 
         const document = documentFromHtml(originalHtml);
 
-        const result = removeEmpty(document, "article");
+        const result = removeEmpty(document, "article", "");
         assertFalse(result);
 
         const processed = documentToHtml(document);
@@ -40,7 +40,7 @@ Deno.test(
         ].join("\n");
         const document = documentFromHtml(originalHtml);
 
-        const result = removeEmpty(document, "article");
+        const result = removeEmpty(document, "article", "");
         assert(result);
 
         const processed = documentToHtml(document);
@@ -73,13 +73,13 @@ Deno.test(
 
         const document = documentFromHtml(originalHtml);
 
-        const firstResult = removeEmpty(document, "article");
+        const firstResult = removeEmpty(document, "article", "");
         assert(firstResult);
 
         const firstPass = documentToHtml(document);
         assertEquals(firstPass, firstExpectedHtml)
 
-        const secondResult = removeEmpty(document, "section");
+        const secondResult = removeEmpty(document, "section", "");
         assert(secondResult);
 
         const secondPass = documentToHtml(document);

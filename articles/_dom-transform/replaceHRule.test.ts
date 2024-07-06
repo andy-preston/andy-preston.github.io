@@ -16,7 +16,7 @@ Deno.test(
 
         const document = documentFromHtml(originalHtml);
 
-        const result = replaceHRule(document);
+        const result = replaceHRule(document, "", "");
         assertFalse(result);
 
         const processed = documentToHtml(document);
@@ -49,7 +49,7 @@ Deno.test(
 
         const document = documentFromHtml(originalHtml);
 
-        const result = replaceHRule(document);
+        const result = replaceHRule(document, "", "");
         assert(result);
 
         const processed = documentToHtml(document);

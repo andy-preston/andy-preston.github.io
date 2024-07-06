@@ -16,7 +16,7 @@ Deno.test(
 
         assertThrows(
             () => {
-                paragraphToFigure(document, "Test Document");
+                paragraphToFigure(document, "", "Test Document");
             },
             Error,
             "No caption on image"
@@ -37,7 +37,7 @@ Deno.test(
 
         assertThrows(
             () => {
-                paragraphToFigure(document, "Test Document");
+                paragraphToFigure(document, "", "Test Document");
             },
             Error,
             "Images should be in a paragraph of their own"
@@ -55,7 +55,7 @@ Deno.test(
             "</html>"
         ]);
 
-        const result = paragraphToFigure(document, "Test Document");
+        const result = paragraphToFigure(document, "", "Test Document");
         assertFalse(result);
     }
 );
@@ -78,7 +78,7 @@ Deno.test(
             "</figure>"
         ].join("");
 
-        const result = paragraphToFigure(document, "Test Document");
+        const result = paragraphToFigure(document, "", "Test Document");
         assert(result);
 
         const processed = documentToHtml(document);
