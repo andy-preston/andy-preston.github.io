@@ -24,14 +24,14 @@ export const tokenTransform = (
         }
         skipTokens = skipTokens - 1;
         return null;
-    }
+    };
 
     const headingAdjuster = (token: Token): Token => {
         if (token.type == "th_open" && token.tag == "th") {
             token.attrSet("scope", "col");
         }
         return token;
-    }
+    };
 
     const transformed = tokens.map(
         (token: Token, index: number): Token|null =>

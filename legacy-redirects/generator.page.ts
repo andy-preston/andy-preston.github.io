@@ -7,7 +7,7 @@ const redirector = (basename: string, legacy: string, redirectTo:string) => {
         "title": basename,
         "layout": "./_redirect.vto"
     };
-}
+};
 
 const legacyPages = [
     "accessing-doctrine-models-as-arrays",

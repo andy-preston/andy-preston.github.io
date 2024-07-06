@@ -28,7 +28,7 @@ export const paragraphToFigure: DomRewriter = (
             reportError(image, "No caption on image");
         }
         return text!;
-    }
+    };
 
     const caption = document.createElement("figcaption");
     caption.innerText = altText(image);

@@ -8,7 +8,7 @@ export const hljsWorkaround: DomRewriter = (document: Document): DomChanged => {
         return previous !== null &&
             previous.nodeType == NodeType.TEXT_NODE &&
             previous.textContent!.endsWith("-");
-    }
+    };
 
     const somethingRotten = (): Node|null => {
         const dockerNumber = document.querySelector(
@@ -28,7 +28,7 @@ export const hljsWorkaround: DomRewriter = (document: Document): DomChanged => {
         }
 
         return null;
-    }
+    };
 
     const badSpan = somethingRotten();
     if (badSpan === null) {
@@ -37,4 +37,4 @@ export const hljsWorkaround: DomRewriter = (document: Document): DomChanged => {
 
     badSpan.parentNode!.replaceChild(badSpan.childNodes[0]!, badSpan);
     return true;
-}
+};

@@ -6,4 +6,4 @@ export default (pageTitle: string): string => {
     return fullTitle.length <= 70 ?
         fullTitle :
         fullTitle.slice(0, 67) + "...";
-}
+};

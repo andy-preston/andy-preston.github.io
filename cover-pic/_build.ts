@@ -20,7 +20,7 @@ const transpile = (args: OnLoadArgs): OnLoadResult => {
         ).outputText,
         "loader": "js"
     };
-}
+};
 
 const typescriptPlugin: Plugin = {
     "name": "typescriptPlugin",

@@ -27,9 +27,9 @@ export const cacheBusterLinks = (pages: Array<Lume.Page>) => {
             if (typeof newUrl == "undefined") {
                 throw new Error(`Can't find ${oldUrl} from ${basename}`);
             }
-            link.setAttribute(urlAttribute, newUrl)
+            link.setAttribute(urlAttribute, newUrl);
         }
-    }
+    };
 
     for (const page of pages) {
         basename = page.data.basename;
