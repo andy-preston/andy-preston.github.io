@@ -8,9 +8,11 @@ export const hljsWorkaround: DomRewriter = (
 ): DomChanged => {
     const precededByDash = (span: Node): boolean => {
         const previous = span.previousSibling;
-        return previous !== null &&
+        return (
+            previous !== null &&
             previous.nodeType == NodeType.TEXT_NODE &&
-            previous.textContent!.endsWith("-");
+            previous.textContent!.endsWith("-")
+        );
     };
 
     const somethingRotten = (): Node | null => {

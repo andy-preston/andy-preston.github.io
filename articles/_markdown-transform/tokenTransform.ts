@@ -15,7 +15,11 @@ export const tokenTransform = (
     let skipTokens = 0;
 
     const titleFinder = (token: Token, index: number): Token|null => {
-        if (articleTitle == "" && token.type == "heading_open" && token.tag == "h1") {
+        if (
+            articleTitle == "" &&
+            token.type == "heading_open" &&
+            token.tag == "h1"
+        ) {
             articleTitle = tokens[index + 1]!.content;
             skipTokens = 3;
         }
