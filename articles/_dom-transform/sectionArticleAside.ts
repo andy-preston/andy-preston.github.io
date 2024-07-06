@@ -2,8 +2,8 @@ import { DomRewriter, DomChanged } from "./functionTypes.ts";
 
 const moveToNewSection = (
     document: Document,
-    target: Element|null
-): Element|null => {
+    target: Element | null
+): Element | null => {
     if (target === null) {
         return null;
     }

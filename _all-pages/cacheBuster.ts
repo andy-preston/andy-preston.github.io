@@ -17,7 +17,7 @@ export const cacheBusterAssets = async (pages: Array<Lume.Page>) => {
 
 export const cacheBusterLinks = (pages: Array<Lume.Page>) => {
     let basename: string = "";
-    let document: Document|undefined;
+    let document: Document | undefined;
 
     const domModify = (querySelector: string, urlAttribute: string) => {
         const links = document!.querySelectorAll(querySelector);

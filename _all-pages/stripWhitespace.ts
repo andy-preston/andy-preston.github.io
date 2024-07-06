@@ -17,7 +17,7 @@ const hasPreParent = (node: Node): boolean => {
 
 const inlineElements = ["a", "code", "em", "span", "strong"];
 
-const isInline = (node: Node|null): boolean =>
+const isInline = (node: Node | null): boolean =>
     node !== null &&
     isElement(node) &&
     inlineElements.includes(node.nodeName.toLowerCase());

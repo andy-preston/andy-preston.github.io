@@ -10,7 +10,7 @@ export const hljsWorkaround: DomRewriter = (document: Document): DomChanged => {
             previous.textContent!.endsWith("-");
     };
 
-    const somethingRotten = (): Node|null => {
+    const somethingRotten = (): Node | null => {
         const dockerNumber = document.querySelector(
             ".language-dockerfile .hljs-number"
         );
