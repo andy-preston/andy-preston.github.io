@@ -1,4 +1,4 @@
-import { default as getFiles, FileInfo } from "getFiles";
+import { type FileInfo, default as getFiles } from "getFiles";
 
 export const siteFiles = (extension: string): Array<string> => getFiles(
     { "root": "./_site" }

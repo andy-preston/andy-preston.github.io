@@ -1,5 +1,5 @@
-import { markdownIt as MarkdownIt } from "lume/deps/markdown_it.ts";
-import { MarkdownItState } from "./MarkdownItTypes.ts";
+import type { markdownIt as MarkdownIt } from "lume/deps/markdown_it.ts";
+import type { MarkdownItState } from "./markdownItTypes.ts";
 import { tokenTransform } from "./tokenTransform.ts";
 import htmlTitle from "./htmlTitle.ts"
 import displayDates from "./displayDates.ts";

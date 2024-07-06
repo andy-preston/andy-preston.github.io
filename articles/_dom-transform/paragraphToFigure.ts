@@ -1,4 +1,4 @@
-import { DomChanged, DomRewriter } from "./functionTypes.ts";
+import type { DomChanged, DomRewriter } from "./functionTypes.ts";
 
 export const paragraphToFigure: DomRewriter = (
     document: Document,

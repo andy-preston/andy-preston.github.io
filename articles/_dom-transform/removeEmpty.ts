@@ -1,4 +1,4 @@
-import { DomRewriter, DomChanged } from "./functionTypes.ts";
+import type { DomChanged, DomRewriter } from "./functionTypes.ts";
 
 export const removeEmpty: DomRewriter = (
     document: Document,

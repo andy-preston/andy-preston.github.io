@@ -1,6 +1,6 @@
 // cSpell:words datetime
 
-import { Token } from "./MarkdownItTypes.ts";
+import type { Token } from "./markdownItTypes.ts";
 
 type TransformerResult = {
     "tokens": Array<Token>,

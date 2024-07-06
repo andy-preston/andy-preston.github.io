@@ -1,6 +1,6 @@
 import esBuild from "lume/plugins/esbuild.ts";
 import typescript from "typescript";
-import {
+import type {
     OnLoadArgs,
     OnLoadResult,
     Plugin,

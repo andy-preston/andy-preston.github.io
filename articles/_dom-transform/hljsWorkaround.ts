@@ -1,5 +1,5 @@
 import { NodeType } from "lume/deps/dom.ts";
-import { DomRewriter, DomChanged } from "./functionTypes.ts";
+import type { DomChanged, DomRewriter } from "./functionTypes.ts";
 
 export const hljsWorkaround: DomRewriter = (document: Document): DomChanged => {
 

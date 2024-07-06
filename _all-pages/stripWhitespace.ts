@@ -1,5 +1,5 @@
 import { NodeType } from "lume/deps/dom.ts";
-import { TraversalCallback, DomChanged } from "./traverse.ts";
+import type { DomChanged, TraversalCallback } from "./traverse.ts";
 
 const isTextNode = (node: Node) => node.nodeType == NodeType.TEXT_NODE;
 

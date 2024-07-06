@@ -1,4 +1,4 @@
-import { DomRewriter, DomChanged } from "./functionTypes.ts";
+import type { DomChanged, DomRewriter } from "./functionTypes.ts";
 
 const moveToNewSection = (
     document: Document,
