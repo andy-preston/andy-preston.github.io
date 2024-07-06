@@ -4,7 +4,7 @@ import { markdownIt as MarkdownIt } from "lume/deps/markdown_it.ts";
 import type { MarkdownItState } from "./markdownItTypes.ts";
 import { tokenTransform } from "./tokenTransform.ts";
 
-let extractedTitle: string = "";
+let extractedTitle = "";
 
 const mockPlugin = (markdownIt: MarkdownIt) => {
     markdownIt.core.ruler.push(
