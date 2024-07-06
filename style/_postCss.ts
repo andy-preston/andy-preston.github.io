@@ -10,5 +10,5 @@ export const postCss = postcss({
         combineDuplicatedSelectors(),
         discardComments(),
         perfectionist({ "format": "compact" })
-    ],
+    ]
 });

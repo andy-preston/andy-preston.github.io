@@ -18,9 +18,7 @@
         "serve": "deno task lume --serve"
     },
     "compilerOptions": {
-        "types": [
-            "lume/types.ts"
-        ],
+        "types": ["lume/types.ts"],
         "noUncheckedIndexedAccess": true,
         "noImplicitAny": true,
         "noImplicitReturns": true,

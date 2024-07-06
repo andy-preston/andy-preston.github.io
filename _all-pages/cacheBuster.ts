@@ -1,6 +1,6 @@
 import { encodeHex } from "lume/deps/hex.ts";
 
-const urlMap: {[k: string]: string} = {};
+const urlMap: { [k: string]: string } = {};
 
 export const cacheBusterAssets = async (pages: Array<Lume.Page>) => {
     for (const page of pages) {

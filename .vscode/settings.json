@@ -2,9 +2,7 @@
     "cSpell.languageSettings": [
         { "languageId": "Vento", "dictionaries": ["html", "javascript"] }
     ],
-    "cSpell.words": [
-        "Lume"
-    ],
+    "cSpell.words": ["Lume"],
     "deno.cache": "./_deno/",
     "deno.enable": true,
     "deno.lint": true,
