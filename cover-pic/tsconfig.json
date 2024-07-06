@@ -11,7 +11,7 @@
         "resolveJsonModule": true,
         "module": "ES6",
         "target": "es5",
-        "lib": ["ES2021","DOM"],
+        "lib": ["ES2021", "DOM"],
         "removeComments": true
     }
 }

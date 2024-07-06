@@ -51,6 +51,6 @@ export const tokenTransform = (
     // Currently using typescript 5.4.5
     return {
         "tokens": transformed as Array<Token>,
-        "title": articleTitle,
+        "title": articleTitle
     };
 };
