@@ -1,23 +1,34 @@
+import type { DomRewriter } from "./functionTypes.ts";
 import { hljsWorkaround } from "./hljsWorkaround.ts";
 import { paragraphToFigure } from "./paragraphToFigure.ts";
 import { removeEmpty } from "./removeEmpty.ts";
 import { moveAsides, replaceHRule } from "./sectionArticleAside.ts";
 
+type DomOperation = {
+    "method": DomRewriter;
+    "querySelector": string;
+};
+
 export const articleDomTransform = (
     filteredPages: Array<Lume.Page>,
     _allPages: Array<Lume.Page>
 ) => {
-    filteredPages.forEach(
-        (page: Lume.Page) => {
-            const document = page.document!;
-            if (!["front-page", "legacyLinks"].includes(page.data.basename)) {
-                while (paragraphToFigure(document, page.data.basename));
-                while (replaceHRule(document));
-                while (moveAsides(document, page.data.basename));
-                while (hljsWorkaround(document));
-                while (removeEmpty(document, "article"));
-                while (removeEmpty(document, "section"));
+    const operations: Array<DomOperation> = [
+        { "method": paragraphToFigure, "querySelector": "" },
+        { "method": replaceHRule, "querySelector": "" },
+        { "method": moveAsides, "querySelector": "" },
+        { "method": hljsWorkaround, "querySelector": "" },
+        { "method": removeEmpty, "querySelector": "article" },
+        { "method": removeEmpty, "querySelector": "section" }
+    ];
+
+    for (const page of filteredPages) {
+        const document = page.document!;
+        if (!["front-page", "legacyLinks"].includes(page.data.basename)) {
+            for (const { method, querySelector } of operations) {
+                // biome-ignore lint/style/useBlockStatements:
+                while (method(document, querySelector, page.data.basename));
             }
         }
-    );
+    }
 };

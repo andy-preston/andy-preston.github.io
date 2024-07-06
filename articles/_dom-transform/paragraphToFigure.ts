@@ -2,6 +2,7 @@ import type { DomChanged, DomRewriter } from "./functionTypes.ts";
 
 export const paragraphToFigure: DomRewriter = (
     document: Document,
+    _querySelector: string,
     basename: string
 ): DomChanged => {
     const reportError = (imageElement: Element, message : string) => {
