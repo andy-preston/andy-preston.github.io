@@ -1,10 +1,12 @@
 {
     "micro": {
         "title": "Microcontroller Programming",
-        "offSite": [{
-            "url": "https://hackaday.io/project/170532/instructions",
-            "title": "Adding Buffering to LCSoft CY7C68013A Mini Board"
-        }]
+        "offSite": [
+            {
+                "url": "https://hackaday.io/project/170532/instructions",
+                "title": "Adding Buffering to LCSoft CY7C68013A Mini Board"
+            }
+        ]
     },
     "arch": {
         "title": "Architecture"
@@ -20,16 +22,20 @@
     },
     "php": {
         "title": "PHP",
-        "offSite": [{
-            "url": "https://stackoverflow.com/questions/53408755/symfony-production-mode-error-reports-and-post-values",
-            "title": "Symfony Production Mode Error Reports and POST values"
-        }, {
-            "url": "https://stackoverflow.com/questions/60930236/symfony-3-console-exception-logging-only-displayed-on-console",
-            "title": "Symfony 3 Console exception logging"
-        }, {
-            "url": "https://stackoverflow.com/questions/15761685/multiple-dynamic-database-connections-in-symfony2/30800216#30800216",
-            "title": "Multiple, dynamic database connections in Symfony 2"
-        }]
+        "offSite": [
+            {
+                "url": "https://stackoverflow.com/questions/53408755/symfony-production-mode-error-reports-and-post-values",
+                "title": "Symfony Production Mode Error Reports and POST values"
+            },
+            {
+                "url": "https://stackoverflow.com/questions/60930236/symfony-3-console-exception-logging-only-displayed-on-console",
+                "title": "Symfony 3 Console exception logging"
+            },
+            {
+                "url": "https://stackoverflow.com/questions/15761685/multiple-dynamic-database-connections-in-symfony2/30800216#30800216",
+                "title": "Multiple, dynamic database connections in Symfony 2"
+            }
+        ]
     },
     "shell": {
         "title": "Shell Miscellany"
