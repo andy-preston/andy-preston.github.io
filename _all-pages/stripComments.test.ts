@@ -1,7 +1,7 @@
 import { assertEquals } from "assert";
+import { stripComments } from "./stripComments.ts";
 import { documentFromHtml, documentToHtml } from "./testDom.ts";
 import { traverseDocument } from './traverse.ts';
-import { stripComments } from "./stripComments.ts";
 
 Deno.test(
     "It removes all HTML comments",

@@ -1,7 +1,7 @@
 import { assertArrayIncludes } from "assert";
+import { NodeType } from "lume/deps/dom.ts";
 import { documentFromHtml } from "./testDom.ts";
 import { traverseDocument } from './traverse.ts';
-import { NodeType } from "lume/deps/dom.ts";
 
 Deno.test(
     "It visits every node of the given parent",

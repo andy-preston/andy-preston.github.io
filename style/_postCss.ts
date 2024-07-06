@@ -1,8 +1,8 @@
-import nesting from "nesting";
 import combineDuplicatedSelectors from "combineDuplicatedSelectors";
 import discardComments from "discardComments";
-import perfectionist from "perfectionist";
 import postcss from "lume/plugins/postcss.ts";
+import nesting from "nesting";
+import perfectionist from "perfectionist";
 
 export const postCss = postcss({
     "plugins": [

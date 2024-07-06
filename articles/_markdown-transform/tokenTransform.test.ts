@@ -1,4 +1,4 @@
-import { assertFalse, assertEquals, assertStringIncludes } from "assert";
+import { assertEquals, assertFalse, assertStringIncludes } from "assert";
 import { assertThrows } from "assertThrows";
 import { markdownIt as MarkdownIt } from "lume/deps/markdown_it.ts";
 import type { MarkdownItState } from "./markdownItTypes.ts";

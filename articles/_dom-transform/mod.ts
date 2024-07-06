@@ -1,7 +1,7 @@
+import { hljsWorkaround } from "./hljsWorkaround.ts";
 import { paragraphToFigure } from "./paragraphToFigure.ts";
 import { removeEmpty } from "./removeEmpty.ts";
-import { hljsWorkaround } from "./hljsWorkaround.ts";
-import { replaceHRule, moveAsides } from "./sectionArticleAside.ts";
+import { moveAsides, replaceHRule } from "./sectionArticleAside.ts";
 
 export const articleDomTransform = (
     filteredPages: Array<Lume.Page>,

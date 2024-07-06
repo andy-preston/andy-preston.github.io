@@ -1,8 +1,8 @@
 import type { markdownIt as MarkdownIt } from "lume/deps/markdown_it.ts";
+import { displayDates } from "./displayDates.ts";
+import { htmlTitle } from "./htmlTitle.ts";
 import type { MarkdownItState } from "./markdownItTypes.ts";
 import { tokenTransform } from "./tokenTransform.ts";
-import htmlTitle from "./htmlTitle.ts"
-import displayDates from "./displayDates.ts";
 
 export const markdownTransform = (markdownIt: MarkdownIt) => {
     markdownIt.core.ruler.push(

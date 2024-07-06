@@ -1,5 +1,5 @@
-import { siteFiles } from "./siteFiles.ts";
 import { assertArrayIncludes } from "assert";
+import { siteFiles } from "./siteFiles.ts";
 
 const hljsClassesIn = (path: string): IterableIterator<RegExpExecArray> =>
     Deno.readTextFileSync(path).matchAll(/hljs-\w+/g);

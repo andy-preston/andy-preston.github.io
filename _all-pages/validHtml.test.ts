@@ -1,5 +1,5 @@
-import { HtmlValidate, formatterFactory  } from "htmlValidate";
 import { assert } from "assert";
+import { HtmlValidate, formatterFactory } from "htmlValidate";
 import { siteFiles } from "./siteFiles.ts";
 
 Deno.test(
