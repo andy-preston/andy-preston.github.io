@@ -26,7 +26,7 @@ const legacyPages = [
 ];
 
 export default function* (_: Lume.Data) {
-    for(const page of legacyPages) {
+    for (const page of legacyPages) {
         yield redirector(page, `/${page}.html`, `/${page}/`);
     }
     // This one is spelled incorrectly as well as being "old style"

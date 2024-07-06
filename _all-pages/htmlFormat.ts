@@ -6,11 +6,9 @@ export const htmlFormat = (
     filteredPages: Array<Lume.Page>,
     _allPages: Array<Lume.Page>
 ) => {
-    filteredPages.forEach(
-        (page: Lume.Page) => {
-            const document = page.document!;
-            traverseDocument(document, stripComments);
-            traverseDocument(document, stripWhitespace);
-        }
-    );
+    for (const page of filteredPages) {
+        const document = page.document!;
+        traverseDocument(document, stripComments);
+        traverseDocument(document, stripWhitespace);
+    }
 };
