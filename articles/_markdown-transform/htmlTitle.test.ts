@@ -1,5 +1,5 @@
 import { assertEquals, assertGreaterOrEqual, assertLessOrEqual } from "assert";
-import htmlTitle from "./htmlTitle.ts";
+import { htmlTitle } from "./htmlTitle.ts";
 
 Deno.test(
     "It's prepended with my name",

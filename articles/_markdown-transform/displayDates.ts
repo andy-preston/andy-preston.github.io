@@ -1,4 +1,4 @@
-export default (pageDate: string): Array<string> => {
+export const displayDates = (pageDate: string): Array<string> => {
     if (pageDate == "") {
         return ["", ""];
     }
