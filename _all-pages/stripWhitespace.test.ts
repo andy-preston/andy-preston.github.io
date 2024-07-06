@@ -1,6 +1,6 @@
 import { assertEquals } from "assert";
-import { documentFromHtml, documentToHtml } from "./testDom.ts";
 import { stripWhitespace } from "./stripWhitespace.ts";
+import { documentFromHtml, documentToHtml } from "testDom";
 import { traverseDocument } from "./traverse.ts";
 
 Deno.test(
