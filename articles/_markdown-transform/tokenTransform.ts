@@ -30,7 +30,7 @@ export const tokenTransform = (
         return null;
     };
 
-    const headingAdjuster = (token: Token): Token => {
+    const adjustedHeadings = (token: Token): Token => {
         if (token.type == "th_open" && token.tag == "th") {
             token.attrSet("scope", "col");
         }
