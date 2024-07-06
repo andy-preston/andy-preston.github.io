@@ -4,9 +4,7 @@ const urlMap: {[k: string]: string} = {};
 
 export const cacheBusterAssets = async (pages: Array<Lume.Page>) => {
     for (const page of pages) {
-        const buffer = new TextEncoder().encode(
-            page.content! as string
-        );
+        const buffer = new TextEncoder().encode(page.content! as string);
         const hash = encodeHex(await crypto.subtle.digest("SHA-1", buffer));
         const oldUrl = page.data.url;
         const extension = oldUrl.split(".").pop();

@@ -13,10 +13,7 @@ import { postCss } from "./style/_postCss.ts";
 
 const markdown = {
     "html": false,
-    "plugins": [
-        markdownItAttrs,
-        markdownTransform
-    ],
+    "plugins": [markdownItAttrs, markdownTransform],
     "keepDefaultPlugins": true
 };
 

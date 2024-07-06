@@ -22,9 +22,8 @@ const isInline = (node: Node | null): boolean =>
     isElement(node) &&
     inlineElements.includes(node.nodeName.toLowerCase());
 
-const withReducedSpaces = (text: string|null): string => text === null ?
-    "" :
-    text.replace(/\s+/g, " ");
+const withReducedSpaces = (text: string | null): string =>
+    text === null ? "" : text.replace(/\s+/g, " ");
 
 
 export const stripWhitespace : TraversalCallback = (node: Node): DomChanged => {

@@ -2,7 +2,10 @@ export type DomChanged = boolean;
 
 export type TraversalCallback = (child: Node) => DomChanged;
 
-export const traverseDocument = (document: Document, callback: TraversalCallback) => {
+export const traverseDocument = (
+    document: Document,
+    callback: TraversalCallback
+) => {
     const traverseChildrenOf = (node: Node) => {
         let domChanged: DomChanged = false;
         do {
