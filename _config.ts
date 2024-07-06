@@ -1,6 +1,6 @@
-import code_highlight from "lume/plugins/code_highlight.ts";
 import { markdownItAttrs } from "lume/deps/markdown_it.ts";
 import lume from "lume/mod.ts";
+import codeHighlight from "lume/plugins/code_highlight.ts";
 import {
     cacheBusterAssets,
     cacheBusterLinks
@@ -21,7 +21,7 @@ const siteBuilder = lume({}, { markdown });
 
 siteBuilder
     .ignore("README.md", "fixed")
-    .use(code_highlight())
+    .use(codeHighlight())
     .use(esBuildPlugin)
     .use(postCss)
     .process([".css", ".ts"], cacheBusterAssets)
