@@ -8,9 +8,5 @@ export const documentFromHtml = (html: string | Array<string>): Document => {
     ) as unknown as Document;
 };
 
-export const documentToHtml = (document: Document): string => {
-    // cSpell:words vars
-    // deno-lint-ignore no-unused-vars
-    const { doctype, documentElement } = document;
-    return documentElement.outerHTML;
-}
+export const documentToHtml = (document: Document): string =>
+    document.documentElement.outerHTML;
