@@ -33,12 +33,11 @@ export const tokenTransform = (
         return token;
     };
 
-    const transformed = tokens.map(
-        (token: Token, index: number): Token|null =>
-            titleFinder(headingAdjuster(token), index)
-    ).filter (
-        (token: Token|null): boolean => token !== null
-    );
+    const transformed = tokens
+        .map((token: Token, index: number): Token | null =>
+            titleFinder(adjustedHeadings(token), index)
+        )
+        .filter((token: Token | null): boolean => token !== null);
 
     if (articleTitle == "") {
         throw Error(`${basename} - no title found`);
