@@ -3,8 +3,8 @@
 import type { Token } from "./markdownItTypes.ts";
 
 type TransformerResult = {
-    "tokens": Array<Token>,
-    "title": string
+    "tokens": Array<Token>;
+    "title": string;
 };
 
 export const tokenTransform = (
