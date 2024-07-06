@@ -49,7 +49,7 @@ export const moveAsides: DomRewriter = (
     }
 
     const tagName = target.tagName.toLowerCase();
-    const isCodeOrImg = ['img', 'code'].includes(tagName);
+    const isCodeOrImg = ["img", "code"].includes(tagName);
     // <code> has parent <pre> - <img> has parent <figure>
     // (e.g.) <table> just needs to have itself wrapped
     const wrapped = isCodeOrImg ? (target.parentNode! as Element) : target;
