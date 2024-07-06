@@ -9,7 +9,7 @@ export const cacheBusterAssets = async (pages: Array<Lume.Page>) => {
         );
         const hash = encodeHex(await crypto.subtle.digest("SHA-1", buffer));
         const oldUrl = page.data.url;
-        const extension = oldUrl.split('.').pop();
+        const extension = oldUrl.split(".").pop();
         page.data.url = `/${hash}.${extension}`;
         urlMap[oldUrl] = page.data.url;
     }
@@ -34,7 +34,7 @@ export const cacheBusterLinks = (pages: Array<Lume.Page>) => {
     for (const page of pages) {
         basename = page.data.basename;
         document = page.document;
-        domModify('link[rel="stylesheet"]', 'href');
-        domModify('script', 'src');
+        domModify('link[rel="stylesheet"]', "href");
+        domModify("script", "src");
     }
 };
