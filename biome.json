@@ -1,8 +1,8 @@
 {
-	"$schema": "https://biomejs.dev/schemas/1.8.3/schema.json",
-	"organizeImports": {
-		"enabled": true
-	},
+    "$schema": "https://biomejs.dev/schemas/1.8.3/schema.json",
+    "organizeImports": {
+        "enabled": true
+    },
     "files": {
         "include": [
             "cover-pic/choose.ts"
@@ -13,13 +13,13 @@
         "indentStyle": "space",
         "indentWidth": 4
     },
-	"linter": {
-		"enabled": true,
-		"rules": {
-			"all": true,
+    "linter": {
+        "enabled": true,
+        "rules": {
+            "all": true,
             "suspicious": {
                 "noDoubleEquals": "off"
             }
-		}
-	}
+        }
+    }
 }
