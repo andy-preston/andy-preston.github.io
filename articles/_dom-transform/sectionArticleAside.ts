@@ -50,11 +50,9 @@ export const moveAsides: DomRewriter = (
 
     const tagName = target.tagName.toLowerCase();
     const isCodeOrImg = ['img', 'code'].includes(tagName);
-    const wrapped = isCodeOrImg ?
-        // <code> has parent <pre> - <img> has parent <figure>
-        target.parentNode! as Element :
-        // (e.g.) <table> just needs to have itself wrapped
-        target;
+    // <code> has parent <pre> - <img> has parent <figure>
+    // (e.g.) <table> just needs to have itself wrapped
+    const wrapped = isCodeOrImg ? (target.parentNode! as Element) : target;
 
     const topSection = moveToNewSection(document, wrapped);
     if (topSection === null) {
