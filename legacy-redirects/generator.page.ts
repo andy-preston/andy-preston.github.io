@@ -1,6 +1,6 @@
 // cSpell:words ebtables
 
-const redirector = (basename: string, legacy: string, redirectTo:string) => {
+const redirector = (basename: string, legacy: string, redirectTo: string) => {
     return {
         "url": legacy,
         "redirectTo": redirectTo,

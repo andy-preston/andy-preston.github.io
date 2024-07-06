@@ -25,8 +25,7 @@ const isInline = (node: Node | null): boolean =>
 const withReducedSpaces = (text: string | null): string =>
     text === null ? "" : text.replace(/\s+/g, " ");
 
-
-export const stripWhitespace : TraversalCallback = (node: Node): DomChanged => {
+export const stripWhitespace: TraversalCallback = (node: Node): DomChanged => {
     if (isTextNode(node) && !hasPreParent(node)) {
         let text: string = withReducedSpaces(node.nodeValue);
 

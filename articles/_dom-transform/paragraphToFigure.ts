@@ -5,7 +5,7 @@ export const paragraphToFigure: DomRewriter = (
     _querySelector: string,
     basename: string
 ): DomChanged => {
-    const reportError = (imageElement: Element, message : string) => {
+    const reportError = (imageElement: Element, message: string) => {
         const source = imageElement.getAttribute("src");
         const title = imageElement.getAttribute("alt");
         const markDown = `![${title}](${source})`;
