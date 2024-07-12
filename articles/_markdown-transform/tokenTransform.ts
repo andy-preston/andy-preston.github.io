@@ -64,10 +64,8 @@ export const tokenTransform = (
         pipe.andThen(findAndHideTitle);
     }
 
-    const result: TransformerResult = { "tokens": Array.from(pipe.result()) };
-    if (basename != "front-page") {
-        result.title = articleTitle;
-    }
-
-    return result;
+    return {
+        "tokens": Array.from(pipe.result()),
+        "title": articleTitle
+    };
 };
