@@ -12,7 +12,7 @@ const mockPlugin = (markdownIt: MarkdownIt) => {
         (state: MarkdownItState) => {
             const transform = tokenTransform(state.tokens, "Test Document");
             state.tokens = transform.tokens;
-            extractedTitle = transform.title;
+            extractedTitle = transform.title!;
         }
     );
 };

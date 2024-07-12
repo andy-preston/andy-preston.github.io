@@ -4,7 +4,25 @@ import type { Token } from "./markdownItTypes.ts";
 
 type TransformerResult = {
     "tokens": Array<Token>;
-    "title": string;
+    "title"?: string;
+};
+
+type TokenIterator = IterableIterator<Token>;
+
+type TokenTransformer = (tokens: TokenIterator) => TokenIterator;
+
+const pipeline = (initialValues: Array<Token>) => {
+    let transformerPile: TokenIterator = initialValues.values();
+
+    const publicInterface = {
+        "result": () => Array.from(transformerPile),
+        "andThen": (transformer: TokenTransformer) => {
+            transformerPile = transformer(transformerPile);
+            return publicInterface;
+        }
+    };
+
+    return publicInterface;
 };
 
 export const tokenTransform = (
@@ -12,45 +30,44 @@ export const tokenTransform = (
     basename: string
 ): TransformerResult => {
     let articleTitle = "";
-    let skipTokens = 0;
 
-    const titleFinder = (token: Token, index: number): Token | null => {
-        if (
-            articleTitle == "" &&
-            token.type == "heading_open" &&
-            token.tag == "h1"
-        ) {
-            articleTitle = tokens[index + 1]!.content;
-            skipTokens = 3;
+    const findAndHideTitle = function* (tokens: IterableIterator<Token>) {
+        let next = tokens.next();
+        while (!next.done) {
+            if (next.value.type == "heading_open" && next.value.tag == "h1") {
+                articleTitle = tokens.next().value.content;
+                const _headingClose = tokens.next();
+                next = tokens.next();
+                if (next.done) {
+                    throw new Error(`${basename} - title without content`);
+                }
+            }
+            yield next.value;
+            next = tokens.next();
         }
-        if (skipTokens == 0) {
-            return token;
+        if (articleTitle == "") {
+            throw new Error(`${basename} - no title found`);
         }
-        skipTokens = skipTokens - 1;
-        return null;
     };
 
-    const adjustedHeadings = (token: Token): Token => {
-        if (token.type == "th_open" && token.tag == "th") {
-            token.attrSet("scope", "col");
+    const scopeOnHeadings = function* (tokens: IterableIterator<Token>) {
+        for (const token of tokens) {
+            if (token.type == "th_open" && token.tag == "th") {
+                token.attrSet("scope", "col");
+            }
+            yield token;
         }
-        return token;
     };
 
-    const transformed = tokens
-        .map((token: Token, index: number): Token | null =>
-            titleFinder(adjustedHeadings(token), index)
-        )
-        .filter((token: Token | null): boolean => token !== null);
-
-    if (articleTitle == "") {
-        throw Error(`${basename} - no title found`);
+    const pipe = pipeline(tokens).andThen(scopeOnHeadings);
+    if (basename != "front-page") {
+        pipe.andThen(findAndHideTitle);
     }
-    // Apparently, with Typescript 5.5, it'll be able to infer this
-    // and we won't need the `as` any more.
-    // Currently using typescript 5.4.5
-    return {
-        "tokens": transformed as Array<Token>,
-        "title": articleTitle
-    };
+
+    const result: TransformerResult = { "tokens": Array.from(pipe.result()) };
+    if (basename != "front-page") {
+        result.title = articleTitle;
+    }
+
+    return result;
 };
