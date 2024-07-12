@@ -1,28 +1,9 @@
-// cSpell:words datetime
-
 import type { Token } from "./markdownItTypes.ts";
+import { type Pipe, pipeline } from "./pipeline.ts";
 
 type TransformerResult = {
     "tokens": Array<Token>;
-    "title"?: string;
-};
-
-type TokenIterator = IterableIterator<Token>;
-
-type TokenTransformer = (tokens: TokenIterator) => TokenIterator;
-
-const pipeline = (initialValues: Array<Token>) => {
-    let transformerPile: TokenIterator = initialValues.values();
-
-    const publicInterface = {
-        "result": () => Array.from(transformerPile),
-        "andThen": (transformer: TokenTransformer) => {
-            transformerPile = transformer(transformerPile);
-            return publicInterface;
-        }
-    };
-
-    return publicInterface;
+    "title": string;
 };
 
 export const tokenTransform = (
@@ -31,7 +12,7 @@ export const tokenTransform = (
 ): TransformerResult => {
     let articleTitle = "";
 
-    const findAndHideTitle = function* (tokens: IterableIterator<Token>) {
+    const findAndHideTitle = function* (tokens: Pipe<Token>) {
         let next = tokens.next();
         while (!next.done) {
             if (next.value.type == "heading_open" && next.value.tag == "h1") {
@@ -50,7 +31,7 @@ export const tokenTransform = (
         }
     };
 
-    const scopeOnHeadings = function* (tokens: IterableIterator<Token>) {
+    const scopeOnHeadings = function* (tokens: Pipe<Token>) {
         for (const token of tokens) {
             if (token.type == "th_open" && token.tag == "th") {
                 token.attrSet("scope", "col");
@@ -59,7 +40,7 @@ export const tokenTransform = (
         }
     };
 
-    const pipe = pipeline(tokens).andThen(scopeOnHeadings);
+    const pipe = pipeline<Token>(tokens).andThen(scopeOnHeadings);
     if (basename != "front-page") {
         pipe.andThen(findAndHideTitle);
     }
