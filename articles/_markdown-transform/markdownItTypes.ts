@@ -14,8 +14,7 @@ export type Token = {
     "map": [string, string];
     "nesting": -1 | 0 | 1;
     "level": number;
-    // deno-lint-ignore no-explicit-any
-    "children": Array<any>;
+    "children": Array<Token>;
     "content": string;
     "markup": string;
     "info": string;

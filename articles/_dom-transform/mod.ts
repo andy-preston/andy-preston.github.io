@@ -1,6 +1,5 @@
 import type { DomRewriter } from "./functionTypes.ts";
 import { hljsWorkaround } from "./hljsWorkaround.ts";
-import { paragraphToFigure } from "./paragraphToFigure.ts";
 import { removeEmpty } from "./removeEmpty.ts";
 import { moveAsides, replaceHRule } from "./sectionArticleAside.ts";
 
@@ -14,7 +13,6 @@ export const articleDomTransform = (
     _allPages: Array<Lume.Page>
 ) => {
     const operations: Array<DomOperation> = [
-        { "method": paragraphToFigure, "querySelector": "" },
         { "method": replaceHRule, "querySelector": "" },
         { "method": moveAsides, "querySelector": "" },
         { "method": hljsWorkaround, "querySelector": "" },
