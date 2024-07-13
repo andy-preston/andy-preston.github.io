@@ -1,4 +1,7 @@
-import type { markdownIt as MarkdownIt } from "lume/deps/markdown_it.ts";
+import type {
+    markdownIt as MarkdownIt,
+    MarkdownItOptions
+} from "lume/deps/markdown_it.ts";
 
 // Typescript representation of markdown-it/14.1.0/lib/token.mjs
 //
@@ -32,4 +35,21 @@ export type MarkdownItState = {
     "tokens": Array<Token>;
     "inlineMode": boolean;
     "md": MarkdownIt;
+    // biome-ignore lint/style/useNamingConvention:
+    "Token": new (
+        tokenType: string,
+        tag: string,
+        nesting: number
+    ) => Token;
 };
+
+// deno-lint-ignore no-explicit-any
+export type MarkdownItEnvironment = Record<string, any>;
+
+export type RenderFunction = (
+    tokens: Array<Token>,
+    idx: number,
+    options: MarkdownItOptions,
+    env: MarkdownItEnvironment,
+    self: MarkdownIt
+) => string;

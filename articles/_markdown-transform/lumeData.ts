@@ -1,15 +1,12 @@
-export const displayDates = (pageDate: string): Array<string> => {
-    if (pageDate == "") {
-        return ["", ""];
-    }
-    const date = new Date(pageDate);
-    const humanDate = date.toLocaleDateString("en-uk", {
-        "year": "numeric",
-        "month": "long",
-        "day": "numeric"
-    });
-    const shortDate = date.toLocaleDateString("en-uk");
-    return [humanDate, shortDate];
+export type PageData = {
+    basename: string;
+    title: string;
+    htmlTitle: string;
+    layout: string;
+    url: string;
+    noDate?: boolean;
+    titles?: Array<string>;
+    date: string;
 };
 
 // TODO: Would it be better to issue a warning "over-verbose title"
@@ -20,18 +17,15 @@ export const htmlTitle = (pageTitle: string): string => {
 };
 
 export const giveDataToLume = (lumeData: Lume.Data, extractedTitle: string) => {
-    const pageData = lumeData.data!.page!.data!;
+    const pageData: PageData = lumeData.data!.page!.data!;
     if (pageData.basename == "front-page") {
-        pageData.htmlTitle = htmlTitle(pageData.titles.join(" "));
+        pageData.htmlTitle = htmlTitle(pageData.titles!.join(" "));
         pageData.layout = "../front-page/_template.vto";
         pageData.url = "/";
     } else {
         pageData.title = extractedTitle;
-        pageData.htmlTitle = htmlTitle(pageData.title);
+        pageData.htmlTitle = htmlTitle(extractedTitle);
         pageData.layout = "../_layout.vto";
         pageData.url = `/${pageData.basename}/`;
-        [pageData.humanDate, pageData.shortDate] = displayDates(
-            pageData.noDate ? "" : pageData.date
-        );
     }
 };

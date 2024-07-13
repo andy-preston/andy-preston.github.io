@@ -1,15 +1,5 @@
 {{ layout "../_all-pages/layout.vto" }}
-    <header>
-        <h1>{{ title }}</h1>
-        {{ if humanDate }}
-            <time datetime="{{ shortDate }}">{{ humanDate }}</time>
-        {{ /if }}
-    </header>
-    <section>
-        <article>
-            {{ content }}
-        </article>
-    </section>
+    {{ content }}
     <hr>
     <article><a href="/">More stuff to read</a></article>
     <article><a href="https://github.com/andy-preston/andy-preston.github.io/blob/main/articles/{{ basename }}.md">Original Markdown</a></article>
