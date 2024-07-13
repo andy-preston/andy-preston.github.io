@@ -47,7 +47,7 @@ export type MarkdownItEnvironment = Record<string, any>;
 
 export type RenderFunction = (
     tokens: Array<Token>,
-    idx: number,
+    index: number,
     options: MarkdownItOptions,
     env: MarkdownItEnvironment,
     self: MarkdownIt
