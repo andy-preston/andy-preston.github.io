@@ -20,7 +20,7 @@ export const giveDataToLume = (lumeData: Lume.Data, extractedTitle: string) => {
     const pageData: PageData = lumeData.data!.page!.data!;
     if (pageData.basename == "front-page") {
         pageData.htmlTitle = htmlTitle(pageData.titles!.join(" "));
-        pageData.layout = "../front-page/_template.vto";
+        pageData.layout = "./_template.vto";
         pageData.url = "/";
     } else {
         pageData.title = extractedTitle;
