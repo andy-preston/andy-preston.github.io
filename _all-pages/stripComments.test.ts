@@ -1,38 +1,35 @@
 import { assertEquals } from "assert";
+import { documentFromHtml, documentToHtml } from "testDom";
 import { stripComments } from "./stripComments.ts";
-import { documentFromHtml, documentToHtml } from "./testDom.ts";
-import { traverseDocument } from './traverse.ts';
+import { traverseDocument } from "./traverse.ts";
 
-Deno.test(
-    "It removes all HTML comments",
-    () => {
-        const document = documentFromHtml([
-            "<html><head>",
-            "<!-- header comment -->",
-            "<title>Test</title></head>",
-            "<body>",
-            "<p>Base Level Element<!-- with a comment in it --></p>",
-            "<section>",
-            "<!-- comment inside a section -->",
-            "<p>Inside a section</p>",
-            "</section>",
-            "</body></html>"
-        ]);
+Deno.test("It removes all HTML comments", () => {
+    const document = documentFromHtml([
+        "<html><head>",
+        "<!-- header comment -->",
+        "<title>Test</title></head>",
+        "<body>",
+        "<p>Base Level Element<!-- with a comment in it --></p>",
+        "<section>",
+        "<!-- comment inside a section -->",
+        "<p>Inside a section</p>",
+        "</section>",
+        "</body></html>"
+    ]);
 
-        const expectedHtml = [
-            "<html><head>",
-            "",
-            "<title>Test</title></head>",
-            "<body>",
-            "<p>Base Level Element</p>",
-            "<section>",
-            "",
-            "<p>Inside a section</p>",
-            "</section>",
-            "</body></html>"
-        ].join("\n");
+    const expectedHtml = [
+        "<html><head>",
+        "",
+        "<title>Test</title></head>",
+        "<body>",
+        "<p>Base Level Element</p>",
+        "<section>",
+        "",
+        "<p>Inside a section</p>",
+        "</section>",
+        "</body></html>"
+    ].join("\n");
 
-        traverseDocument(document, stripComments);
-        assertEquals(documentToHtml(document), expectedHtml);
-    }
-);
+    traverseDocument(document, stripComments);
+    assertEquals(documentToHtml(document), expectedHtml);
+});

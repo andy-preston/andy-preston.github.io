@@ -8,7 +8,7 @@
     },
     "formatter": {
         "enabled": true,
-        "ignore": ["*.test.ts", "cover-pic/pictures.json"],
+        "ignore": ["cover-pic/pictures.json"],
         "indentStyle": "space",
         "indentWidth": 4
     },
