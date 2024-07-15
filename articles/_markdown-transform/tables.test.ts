@@ -1,15 +1,13 @@
 import { assertStringIncludes } from "assert";
-import { markdownIt as MarkdownIt } from "lume/deps/markdown_it.ts";
 import type { MarkdownItState } from "./markdownItTypes.ts";
+import { markdownItWithMockPlugin } from "./mocks.ts";
 import { pipeline } from "./pipeline.ts";
 import { scopeOnHeadings } from "./tables.ts";
 
-const mockPlugin = (markdownIt: MarkdownIt) => {
-    markdownIt.core.ruler.push("mockPlugin", (state: MarkdownItState) => {
-        state.tokens = pipeline(state.tokens, null)
-            .andThen(scopeOnHeadings, null)
-            .result();
-    });
+const pipelineHandler = (state: MarkdownItState) => {
+    state.tokens = pipeline(state.tokens, null)
+        .andThen(scopeOnHeadings, null)
+        .result();
 };
 
 Deno.test("all TH tokens have scope=col attribute", () => {
@@ -23,7 +21,7 @@ Deno.test("all TH tokens have scope=col attribute", () => {
         "Some text"
     ];
 
-    const markdownIt = MarkdownIt().use(mockPlugin);
+    const markdownIt = markdownItWithMockPlugin(pipelineHandler);
     const finalHtml = markdownIt.render(testMarkdown.join("\n"));
 
     assertStringIncludes(finalHtml, '<th scope="col">heading1</th>');

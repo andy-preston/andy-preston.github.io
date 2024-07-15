@@ -1,21 +1,18 @@
 import { assertEquals } from "assert";
 import { assertThrows } from "assertThrows";
-import { markdownIt as MarkdownIt } from "lume/deps/markdown_it.ts";
 import { finder, rules } from "./articleTitle.ts";
 import type { MarkdownItState } from "./markdownItTypes.ts";
-import { mockEnvironment } from "./mockEnvironment.ts";
+import { markdownItWithMockPlugin, mockEnvironment } from "./mocks.ts";
 import { pipeline } from "./pipeline.ts";
 
 let extractedTitle = "";
 
-const mockPlugin = (markdownIt: MarkdownIt) => {
-    markdownIt.core.ruler.push("mockPlugin", (state: MarkdownItState) => {
-        const titleFinder = finder(state);
-        state.tokens = pipeline(state.tokens, markdownIt.renderer.rules)
-            .andThen(titleFinder.find, rules)
-            .result();
-        extractedTitle = titleFinder.title();
-    });
+const pipelineHandler = (state: MarkdownItState) => {
+    const titleFinder = finder(state);
+    state.tokens = pipeline(state.tokens, state.md.renderer.rules)
+        .andThen(titleFinder.find, rules)
+        .result();
+    extractedTitle = titleFinder.title();
 };
 
 Deno.test("It extracts title from markdown", () => {
@@ -27,7 +24,7 @@ Deno.test("It extracts title from markdown", () => {
         "The second paragraph"
     ].join("\n");
 
-    const markdownIt: MarkdownIt = MarkdownIt().use(mockPlugin);
+    const markdownIt = markdownItWithMockPlugin(pipelineHandler);
     markdownIt.render(testMarkdown, mockEnvironment());
     assertEquals(extractedTitle, "The Title");
 });
@@ -52,7 +49,7 @@ Deno.test("It puts the title in a header and the content in a section", () => {
         "</article></section>"
     ].join("");
 
-    const markdownIt: MarkdownIt = MarkdownIt().use(mockPlugin);
+    const markdownIt = markdownItWithMockPlugin(pipelineHandler);
     const resultingHtml = markdownIt.render(
         testMarkdown,
         mockEnvironment({ "date": "1966/04/01" })
@@ -67,8 +64,7 @@ Deno.test("If there is no title, an exception is thrown", () => {
         "The second paragraph"
     ].join();
 
-    const markdownIt: MarkdownIt = MarkdownIt().use(mockPlugin);
-
+    const markdownIt = markdownItWithMockPlugin(pipelineHandler);
     assertThrows(
         () => {
             markdownIt.render(testMarkdown, mockEnvironment());
