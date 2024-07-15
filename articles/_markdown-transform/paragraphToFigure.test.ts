@@ -5,28 +5,16 @@ import {
     markdownItAttrs
 } from "lume/deps/markdown_it.ts";
 import type { MarkdownItState } from "./markdownItTypes.ts";
+import { mockEnvironment } from "./mockEnvironment.ts";
 import { paragraphToFigure, rules } from "./paragraphToFigure.ts";
 import { pipeline } from "./pipeline.ts";
 
 const mockPlugin = (markdownIt: MarkdownIt) => {
-    markdownIt.core.ruler.push(
-        "markdownTransform",
-        (state: MarkdownItState) => {
-            state.tokens = pipeline(state.tokens, markdownIt.renderer.rules)
-                .andThen(paragraphToFigure(state), rules)
-                .result();
-        }
-    );
-};
-
-const mockEnv = {
-    "data": {
-        "page": {
-            "data": {
-                "basename": "Mock Document"
-            }
-        }
-    }
+    markdownIt.core.ruler.push("mockPlugin", (state: MarkdownItState) => {
+        state.tokens = pipeline(state.tokens, markdownIt.renderer.rules)
+            .andThen(paragraphToFigure(state), rules)
+            .result();
+    });
 };
 
 Deno.test("It transforms an image in a paragraph into a figure", () => {
@@ -57,7 +45,7 @@ Deno.test("If no caption is given it throws 'no caption'", () => {
     const markdownIt: MarkdownIt = MarkdownIt().use(mockPlugin);
     assertThrows(
         () => {
-            markdownIt.render(testMarkdown, mockEnv);
+            markdownIt.render(testMarkdown, mockEnvironment());
         },
         Error,
         "No caption at 0-1 in Mock Document"
@@ -69,7 +57,7 @@ Deno.test("If no source is given it throws 'no source'", () => {
     const markdownIt: MarkdownIt = MarkdownIt().use(mockPlugin);
     assertThrows(
         () => {
-            markdownIt.render(testMarkdown, mockEnv);
+            markdownIt.render(testMarkdown, mockEnvironment());
         },
         Error,
         "No source at 0-1 in Mock Document"
@@ -81,7 +69,7 @@ Deno.test("If more than an image is in a paragraph it throws", () => {
     const markdownIt: MarkdownIt = MarkdownIt().use(mockPlugin);
     assertThrows(
         () => {
-            markdownIt.render(testMarkdown, mockEnv);
+            markdownIt.render(testMarkdown, mockEnvironment());
         },
         Error,
         "Unwanted extra content in image paragraph at 0-1 in Mock Document"

@@ -3,33 +3,22 @@ import { assertThrows } from "assertThrows";
 import { markdownIt as MarkdownIt } from "lume/deps/markdown_it.ts";
 import { finder, rules } from "./articleTitle.ts";
 import type { MarkdownItState } from "./markdownItTypes.ts";
+import { mockEnvironment } from "./mockEnvironment.ts";
 import { pipeline } from "./pipeline.ts";
 
 let extractedTitle = "";
 
 const mockPlugin = (markdownIt: MarkdownIt) => {
-    markdownIt.core.ruler.push(
-        "markdownTransform",
-        (state: MarkdownItState) => {
-            const titleFinder = finder(state);
-            state.tokens = pipeline(state.tokens, markdownIt.renderer.rules)
-                .andThen(titleFinder.find, rules)
-                .result();
-            extractedTitle = titleFinder.title();
-        }
-    );
+    markdownIt.core.ruler.push("mockPlugin", (state: MarkdownItState) => {
+        const titleFinder = finder(state);
+        state.tokens = pipeline(state.tokens, markdownIt.renderer.rules)
+            .andThen(titleFinder.find, rules)
+            .result();
+        extractedTitle = titleFinder.title();
+    });
 };
 
 Deno.test("It extracts title from markdown", () => {
-    const mockEnv = {
-        "data": {
-            "page": {
-                "data": {
-                    "basename": "Mock Document"
-                }
-            }
-        }
-    };
     const testMarkdown = [
         "# The Title  ",
         "",
@@ -39,22 +28,11 @@ Deno.test("It extracts title from markdown", () => {
     ].join("\n");
 
     const markdownIt: MarkdownIt = MarkdownIt().use(mockPlugin);
-    markdownIt.render(testMarkdown, mockEnv);
+    markdownIt.render(testMarkdown, mockEnvironment());
     assertEquals(extractedTitle, "The Title");
 });
 
 Deno.test("It puts the title in a header and the content in a section", () => {
-    const mockEnv = {
-        "data": {
-            "page": {
-                "data": {
-                    "basename": "Mock Document",
-                    "date": "1966/04/01"
-                }
-            }
-        }
-    };
-
     const testMarkdown = [
         "# The Title  ",
         "",
@@ -75,21 +53,14 @@ Deno.test("It puts the title in a header and the content in a section", () => {
     ].join("");
 
     const markdownIt: MarkdownIt = MarkdownIt().use(mockPlugin);
-    const resultingHtml = markdownIt.render(testMarkdown, mockEnv);
+    const resultingHtml = markdownIt.render(
+        testMarkdown,
+        mockEnvironment({ "date": "1966/04/01" })
+    );
     assertEquals(resultingHtml, expectedHtml);
 });
 
 Deno.test("If there is no title, an exception is thrown", () => {
-    const mockEnv = {
-        "data": {
-            "page": {
-                "data": {
-                    "basename": "Mock Document"
-                }
-            }
-        }
-    };
-
     const testMarkdown = [
         "The first paragraph",
         "",
@@ -100,7 +71,7 @@ Deno.test("If there is no title, an exception is thrown", () => {
 
     assertThrows(
         () => {
-            markdownIt.render(testMarkdown, mockEnv);
+            markdownIt.render(testMarkdown, mockEnvironment());
         },
         Error,
         "Mock Document - no title found"

@@ -5,14 +5,11 @@ import { pipeline } from "./pipeline.ts";
 import { scopeOnHeadings } from "./tables.ts";
 
 const mockPlugin = (markdownIt: MarkdownIt) => {
-    markdownIt.core.ruler.push(
-        "markdownTransform",
-        (state: MarkdownItState) => {
-            state.tokens = pipeline(state.tokens, null)
-                .andThen(scopeOnHeadings, null)
-                .result();
-        }
-    );
+    markdownIt.core.ruler.push("mockPlugin", (state: MarkdownItState) => {
+        state.tokens = pipeline(state.tokens, null)
+            .andThen(scopeOnHeadings, null)
+            .result();
+    });
 };
 
 Deno.test("all TH tokens have scope=col attribute", () => {
