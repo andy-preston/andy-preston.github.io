@@ -7,7 +7,7 @@ import {
 } from "./_all-pages/cacheBuster.ts";
 import { htmlFormat } from "./_all-pages/htmlFormat.ts";
 import { articleDomTransform } from "./articles/_dom-transform/mod.ts";
-import { markdownTransform } from "./articles/_markdown-transform/mod.ts";
+import { transformer as markdownTransform } from "./articles/_markdown-transform/mod.ts";
 import { esBuildPlugin } from "./cover-pic/_build.ts";
 import { postCss } from "./style/_postCss.ts";
 
