@@ -9,21 +9,18 @@ import {
 import { pipeline } from "./pipeline.ts";
 import { scopeOnHeadings } from "./tables.ts";
 
-export const markdownTransform = (markdownIt: MarkdownIt) => {
-    markdownIt.core.ruler.push(
-        "markdownTransform",
-        (state: MarkdownItState) => {
-            const titleFinder = finder(state);
-            state.tokens = pipeline(state.tokens, markdownIt.renderer.rules)
-                .andThen(scopeOnHeadings, null)
-                .andThen(paragraphToFigure(state), figureRules)
-                .andThen(
-                    titleFinder.find,
-                    titleStructureRules,
-                    state.env.data!.page!.data!.basename != "front-page"
-                )
-                .result();
-            giveDataToLume(state.env, titleFinder.title());
-        }
-    );
+export const transformer = (markdownIt: MarkdownIt) => {
+    markdownIt.core.ruler.push("transformer", (state: MarkdownItState) => {
+        const titleFinder = finder(state);
+        state.tokens = pipeline(state.tokens, markdownIt.renderer.rules)
+            .andThen(scopeOnHeadings, null)
+            .andThen(paragraphToFigure(state), figureRules)
+            .andThen(
+                titleFinder.find,
+                titleStructureRules,
+                state.env.data!.page!.data!.basename != "front-page"
+            )
+            .result();
+        giveDataToLume(state.env, titleFinder.title());
+    });
 };
