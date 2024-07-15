@@ -4,7 +4,6 @@ import { siteFiles } from "./siteFiles.ts";
 const hljsClassesIn = (path: string): IterableIterator<RegExpExecArray> =>
     Deno.readTextFileSync(path).matchAll(/hljs-\w+/g);
 
-
 Deno.test("hljs styles that are used are covered in CSS", () => {
     let styles: Array<string> = [];
 

@@ -1,6 +1,4 @@
 ---
-url: "/"
-layout: "./_template.vto"
 titles:
     - "Andy Preston"
     - "(Edge Effect)"
