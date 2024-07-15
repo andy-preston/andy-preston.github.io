@@ -1,9 +1,8 @@
 import { assertEquals } from "assert";
 import { assertThrows } from "assertThrows";
 import { markdownIt as MarkdownIt } from "lume/deps/markdown_it.ts";
-import { finder, titleRender } from "./articleTitle.ts";
+import { finder, rules } from "./articleTitle.ts";
 import type { MarkdownItState } from "./markdownItTypes.ts";
-import type { Token } from "./markdownItTypes.ts";
 import { pipeline } from "./pipeline.ts";
 
 let extractedTitle = "";
@@ -13,16 +12,24 @@ const mockPlugin = (markdownIt: MarkdownIt) => {
         "markdownTransform",
         (state: MarkdownItState) => {
             const titleFinder = finder(state);
-            const pipe = pipeline<Token>(state.tokens).andThen(
-                titleFinder.find
-            );
-            state.tokens = Array.from(pipe.result());
+            state.tokens = pipeline(state.tokens, markdownIt.renderer.rules)
+                .andThen(titleFinder.find, rules)
+                .result();
             extractedTitle = titleFinder.title();
         }
     );
 };
 
 Deno.test("It extracts title from markdown", () => {
+    const mockEnv = {
+        "data": {
+            "page": {
+                "data": {
+                    "basename": "Mock Document"
+                }
+            }
+        }
+    };
     const testMarkdown = [
         "# The Title  ",
         "",
@@ -32,7 +39,7 @@ Deno.test("It extracts title from markdown", () => {
     ].join("\n");
 
     const markdownIt: MarkdownIt = MarkdownIt().use(mockPlugin);
-    markdownIt.render(testMarkdown);
+    markdownIt.render(testMarkdown, mockEnv);
     assertEquals(extractedTitle, "The Title");
 });
 
@@ -68,7 +75,6 @@ Deno.test("It puts the title in a header and the content in a section", () => {
     ].join("");
 
     const markdownIt: MarkdownIt = MarkdownIt().use(mockPlugin);
-    titleRender(markdownIt.renderer.rules);
     const resultingHtml = markdownIt.render(testMarkdown, mockEnv);
     assertEquals(resultingHtml, expectedHtml);
 });

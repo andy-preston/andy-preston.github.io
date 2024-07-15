@@ -1,6 +1,6 @@
 import { assertStringIncludes } from "assert";
 import { markdownIt as MarkdownIt } from "lume/deps/markdown_it.ts";
-import type { MarkdownItState, Token } from "./markdownItTypes.ts";
+import type { MarkdownItState } from "./markdownItTypes.ts";
 import { pipeline } from "./pipeline.ts";
 import { scopeOnHeadings } from "./tables.ts";
 
@@ -8,8 +8,9 @@ const mockPlugin = (markdownIt: MarkdownIt) => {
     markdownIt.core.ruler.push(
         "markdownTransform",
         (state: MarkdownItState) => {
-            const pipe = pipeline<Token>(state.tokens).andThen(scopeOnHeadings);
-            state.tokens = Array.from(pipe.result());
+            state.tokens = pipeline(state.tokens, null)
+                .andThen(scopeOnHeadings, null)
+                .result();
         }
     );
 };

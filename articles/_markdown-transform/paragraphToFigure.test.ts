@@ -5,18 +5,16 @@ import {
     markdownItAttrs
 } from "lume/deps/markdown_it.ts";
 import type { MarkdownItState } from "./markdownItTypes.ts";
-import type { Token } from "./markdownItTypes.ts";
-import { imageRender, paragraphToFigure } from "./paragraphToFigure.ts";
+import { paragraphToFigure, rules } from "./paragraphToFigure.ts";
 import { pipeline } from "./pipeline.ts";
 
 const mockPlugin = (markdownIt: MarkdownIt) => {
     markdownIt.core.ruler.push(
         "markdownTransform",
         (state: MarkdownItState) => {
-            const pipe = pipeline<Token>(state.tokens).andThen(
-                paragraphToFigure(state)
-            );
-            state.tokens = Array.from(pipe.result());
+            state.tokens = pipeline(state.tokens, markdownIt.renderer.rules)
+                .andThen(paragraphToFigure(state), rules)
+                .result();
         }
     );
 };
@@ -50,18 +48,13 @@ Deno.test("It transforms an image in a paragraph into a figure", () => {
     ].join("");
 
     const markdownIt: MarkdownIt = MarkdownIt().use(mockPlugin);
-    imageRender(markdownIt.renderer.rules);
-
     const resultingHtml = markdownIt.render(testMarkdown);
     assertEquals(resultingHtml, expectedHtml);
 });
 
 Deno.test("If no caption is given it throws 'no caption'", () => {
     const testMarkdown = "![](test.jpg)";
-
     const markdownIt: MarkdownIt = MarkdownIt().use(mockPlugin);
-    imageRender(markdownIt.renderer.rules);
-
     assertThrows(
         () => {
             markdownIt.render(testMarkdown, mockEnv);
@@ -73,10 +66,7 @@ Deno.test("If no caption is given it throws 'no caption'", () => {
 
 Deno.test("If no source is given it throws 'no source'", () => {
     const testMarkdown = "![Caption]()";
-
     const markdownIt: MarkdownIt = MarkdownIt().use(mockPlugin);
-    imageRender(markdownIt.renderer.rules);
-
     assertThrows(
         () => {
             markdownIt.render(testMarkdown, mockEnv);
@@ -88,10 +78,7 @@ Deno.test("If no source is given it throws 'no source'", () => {
 
 Deno.test("If more than an image is in a paragraph it throws", () => {
     const testMarkdown = "![caption](test.jpg) Irrelevant text!";
-
     const markdownIt: MarkdownIt = MarkdownIt().use(mockPlugin);
-    imageRender(markdownIt.renderer.rules);
-
     assertThrows(
         () => {
             markdownIt.render(testMarkdown, mockEnv);
@@ -103,19 +90,15 @@ Deno.test("If more than an image is in a paragraph it throws", () => {
 
 Deno.test("An aside attribute on the image is transferred to the figure", () => {
     const testMarkdown = "![Test caption](test.jpg){aside}";
-
     const expectedHtml = [
         '<figure aside="Test caption">',
         '<img src="test.jpg" alt="Test caption">',
         "<figcaption>Test caption</figcaption>",
         "</figure>\n"
     ].join("");
-
     const markdownIt: MarkdownIt = MarkdownIt()
         .use(markdownItAttrs)
         .use(mockPlugin);
-    imageRender(markdownIt.renderer.rules);
-
     const resultingHtml = markdownIt.render(testMarkdown);
     assertEquals(resultingHtml, expectedHtml);
 });

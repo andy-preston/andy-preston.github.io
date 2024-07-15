@@ -52,3 +52,5 @@ export type RenderFunction = (
     env: MarkdownItEnvironment,
     self: MarkdownIt
 ) => string;
+
+export type RenderFunctions = Record<string, RenderFunction>;

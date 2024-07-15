@@ -1,15 +1,35 @@
-export type Pipe<T> = IterableIterator<T>;
+import type { RenderFunctions, Token } from "./markdownItTypes.ts";
 
-export const pipeline = <T>(initialValues: Array<T>) => {
-    let transformerPile: Pipe<T> = initialValues.values();
+export type Pipe = IterableIterator<Token>;
 
-    const publicInterface = {
-        "result": () => Array.from(transformerPile),
-        "andThen": (transformer: (pipe: Pipe<T>) => Pipe<T>) => {
+export const pipeline = (
+    initialValues: Array<Token>,
+    rendererRules: RenderFunctions | null
+) => {
+    let transformerPile: Pipe = initialValues.values();
+
+    const result = () => Array.from(transformerPile);
+
+    const andThen = (
+        transformer: (pipe: Pipe) => Pipe,
+        newRendererRules: RenderFunctions | null,
+        condition?: boolean
+    ) => {
+        if (condition === undefined || condition === true) {
             transformerPile = transformer(transformerPile);
-            return publicInterface;
+            if (newRendererRules !== null && rendererRules !== null) {
+                // biome-ignore lint/style/noParameterAssign:
+                rendererRules = Object.assign(rendererRules, newRendererRules);
+            }
         }
+        return {
+            "result": result,
+            "andThen": andThen
+        };
     };
 
-    return publicInterface;
+    return {
+        "result": result,
+        "andThen": andThen
+    };
 };

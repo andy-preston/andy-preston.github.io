@@ -6,7 +6,6 @@ import type { PageData } from "./lumeData.ts";
 import type {
     MarkdownItEnvironment,
     MarkdownItState,
-    RenderFunction,
     Token
 } from "./markdownItTypes.ts";
 import type { Pipe } from "./pipeline.ts";
@@ -14,7 +13,7 @@ import type { Pipe } from "./pipeline.ts";
 export const finder = (state: MarkdownItState) => {
     let articleTitle = "";
     return {
-        "find": function* (tokens: Pipe<Token>) {
+        "find": function* (tokens: Pipe) {
             let nextIsTitle = false;
             for (const token of tokens) {
                 if (nextIsTitle) {
@@ -51,8 +50,9 @@ const dates = (pageData: PageData): string => {
     return `<time datetime="${shortDate}">${humanDate}</time>`;
 };
 
-export const titleRender = (rules: Record<string, RenderFunction>) => {
-    rules.heading_open = (
+export const rules = {
+    // biome-ignore lint/style/useNamingConvention:
+    "heading_open": (
         tokens: Array<Token>,
         index: number,
         _options: MarkdownItOptions,
@@ -61,8 +61,10 @@ export const titleRender = (rules: Record<string, RenderFunction>) => {
     ) => {
         const tag = tokens[index]!.tag;
         return tag != "h1" ? `<${tag}>` : "<header><h1>";
-    };
-    rules.heading_close = (
+    },
+
+    // biome-ignore lint/style/useNamingConvention:
+    "heading_close": (
         tokens: Array<Token>,
         index: number,
         _options: MarkdownItOptions,
@@ -74,19 +76,14 @@ export const titleRender = (rules: Record<string, RenderFunction>) => {
         return tag != "h1"
             ? `</${tag}>`
             : `</h1>${dates(pageData)}</header><section><article>`;
-    };
-    rules.article_footer = (
+    },
+
+    // biome-ignore lint/style/useNamingConvention:
+    "article_footer": (
         _tokens: Array<Token>,
         _index: number,
         _options: MarkdownItOptions,
         _env: MarkdownItEnvironment,
         _self: MarkdownIt
-    ) => {
-        ////////////////////////////////////////////////////////////////////////
-        //
-        // If the last thing in the document is an aside, then this is not true
-        //
-        ////////////////////////////////////////////////////////////////////////
-        return "</article></section>";
-    };
+    ) => "</article></section>"
 };

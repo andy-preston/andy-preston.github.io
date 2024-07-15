@@ -5,7 +5,6 @@ import type {
     MarkdownItState,
     Token
 } from "./markdownItTypes.ts";
-import type { RenderFunction } from "./markdownItTypes.ts";
 import type { Pipe } from "./pipeline.ts";
 
 export const paragraphToFigure = (state: MarkdownItState) => {
@@ -50,7 +49,7 @@ export const paragraphToFigure = (state: MarkdownItState) => {
         return `${text} at ${map} in ${basename}`;
     };
 
-    return function* (tokens: Pipe<Token>) {
+    return function* (tokens: Pipe) {
         for (const token of tokens) {
             threeTokens.push(token);
             if (threeTokens.length < 3) {
@@ -69,8 +68,8 @@ export const paragraphToFigure = (state: MarkdownItState) => {
     };
 };
 
-export const imageRender = (rules: Record<string, RenderFunction>) => {
-    rules.image = (
+export const rules = {
+    "image": (
         tokens: Array<Token>,
         index: number,
         _options: MarkdownItOptions,
@@ -84,5 +83,5 @@ export const imageRender = (rules: Record<string, RenderFunction>) => {
             `<img src="${source}" alt="${caption}">` +
             `<figcaption>${caption}</figcaption>`
         );
-    };
+    }
 };
