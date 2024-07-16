@@ -8,7 +8,6 @@
         "typescript": "npm:typescript@5.4.5",
         "getFiles": "https://deno.land/x/getfiles@v1.0.0/mod.ts",
         "assert": "https://deno.land/std@0.224.0/assert/mod.ts",
-        "assertThrows": "https://deno.land/std@0.224.0/assert/assert_throws.ts",
         "htmlValidate": "npm:html-validate@8.20.1",
         "testDom": "./_all-pages/testDom.ts"
     },

@@ -1,5 +1,4 @@
-import { assertEquals } from "assert";
-import { assertThrows } from "assertThrows";
+import { assertEquals, assertThrows } from "assert";
 import { finder, rules } from "./articleTitle.ts";
 import type { MarkdownItState } from "./markdownItTypes.ts";
 import { markdownItWithTestPlugin, mockEnvironment } from "./mocks.ts";
@@ -66,9 +65,7 @@ Deno.test("If there is no title, an exception is thrown", () => {
 
     const markdownIt = markdownItWithTestPlugin(pipelineHandler, []);
     assertThrows(
-        () => {
-            markdownIt.render(testMarkdown, mockEnvironment());
-        },
+        () => markdownIt.render(testMarkdown, mockEnvironment()),
         Error,
         "Mock Document - no title found"
     );
