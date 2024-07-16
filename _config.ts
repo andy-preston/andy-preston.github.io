@@ -1,4 +1,3 @@
-import { markdownItAttrs } from "lume/deps/markdown_it.ts";
 import lume from "lume/mod.ts";
 import codeHighlight from "lume/plugins/code_highlight.ts";
 import {
@@ -13,7 +12,7 @@ import { postCss } from "./style/_postCss.ts";
 
 const markdown = {
     "html": false,
-    "plugins": [markdownItAttrs, markdownTransform],
+    "plugins": [markdownTransform],
     "keepDefaultPlugins": true
 };
 
