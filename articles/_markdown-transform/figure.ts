@@ -7,7 +7,7 @@ import type {
 } from "./markdownItTypes.ts";
 import type { Pipe } from "./pipeline.ts";
 
-export const paragraphToFigure = (state: MarkdownItState) => {
+export const figure = (state: MarkdownItState) => {
     const threeTokens: Array<Token> = [];
 
     const isImage = (token: Token): boolean => {
@@ -20,6 +20,11 @@ export const paragraphToFigure = (state: MarkdownItState) => {
             }
         }
         return false;
+    };
+
+    const paragraphToFigure = (token: Token) => {
+        token.tag = "figure";
+        token.type = token.type.replace("paragraph", "figure");
     };
 
     const transform = () => {
@@ -39,8 +44,8 @@ export const paragraphToFigure = (state: MarkdownItState) => {
         if (imageToken.attrGet("aside") !== null) {
             threeTokens[0]!.attrSet("aside", imageToken.content);
         }
-        threeTokens[0]!.tag = "figure";
-        threeTokens[2]!.tag = "figure";
+        paragraphToFigure(threeTokens[0]!);
+        paragraphToFigure(threeTokens[2]!);
     };
 
     const message = (text: string) => {
