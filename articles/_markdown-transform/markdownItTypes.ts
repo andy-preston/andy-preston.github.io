@@ -54,3 +54,5 @@ export type RenderFunction = (
 ) => string;
 
 export type RenderFunctions = Record<string, RenderFunction>;
+
+export type MarkdownItPlugin = (markdownIt: MarkdownIt) => void;

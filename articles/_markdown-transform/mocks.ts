@@ -1,5 +1,5 @@
 import { markdownIt as MarkdownIt } from "lume/deps/markdown_it.ts";
-import type { MarkdownItState } from "./markdownItTypes.ts";
+import type { MarkdownItPlugin, MarkdownItState } from "./markdownItTypes.ts";
 
 export const mockEnvironment = (extraFields?: Record<string, string>) => {
     const basePageData = { "basename": "Mock Document" };
@@ -16,14 +16,14 @@ export const mockEnvironment = (extraFields?: Record<string, string>) => {
     };
 };
 
-export const mockPlugin = (
-    pipelineHandler: (state: MarkdownItState) => void
+export const markdownItWithTestPlugin = (
+    pipelineHandler: (state: MarkdownItState) => void,
+    otherPlugins: Array<MarkdownItPlugin>
 ) => {
-    return (markdownIt: MarkdownIt) => {
-        markdownIt.core.ruler.push("pipelineHandler", pipelineHandler);
-    };
+    const markdownIt = MarkdownIt();
+    for (const otherPlugin of otherPlugins) {
+        markdownIt.use(otherPlugin);
+    }
+    markdownIt.core.ruler.push("pipelineHandler", pipelineHandler);
+    return markdownIt;
 };
-
-export const markdownItWithMockPlugin = (
-    pipelineHandler: (state: MarkdownItState) => void
-) => MarkdownIt().use(mockPlugin(pipelineHandler));

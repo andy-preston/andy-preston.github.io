@@ -1,6 +1,6 @@
 import { assertStringIncludes } from "assert";
 import type { MarkdownItState } from "./markdownItTypes.ts";
-import { markdownItWithMockPlugin } from "./mocks.ts";
+import { markdownItWithTestPlugin } from "./mocks.ts";
 import { pipeline } from "./pipeline.ts";
 import { scopeOnHeadings } from "./tables.ts";
 
@@ -21,7 +21,7 @@ Deno.test("all TH tokens have scope=col attribute", () => {
         "Some text"
     ];
 
-    const markdownIt = markdownItWithMockPlugin(pipelineHandler);
+    const markdownIt = markdownItWithTestPlugin(pipelineHandler, []);
     const finalHtml = markdownIt.render(testMarkdown.join("\n"));
 
     assertStringIncludes(finalHtml, '<th scope="col">heading1</th>');

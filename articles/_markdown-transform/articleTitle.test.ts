@@ -2,7 +2,7 @@ import { assertEquals } from "assert";
 import { assertThrows } from "assertThrows";
 import { finder, rules } from "./articleTitle.ts";
 import type { MarkdownItState } from "./markdownItTypes.ts";
-import { markdownItWithMockPlugin, mockEnvironment } from "./mocks.ts";
+import { markdownItWithTestPlugin, mockEnvironment } from "./mocks.ts";
 import { pipeline } from "./pipeline.ts";
 
 let extractedTitle = "";
@@ -24,7 +24,7 @@ Deno.test("It extracts title from markdown", () => {
         "The second paragraph"
     ].join("\n");
 
-    const markdownIt = markdownItWithMockPlugin(pipelineHandler);
+    const markdownIt = markdownItWithTestPlugin(pipelineHandler, []);
     markdownIt.render(testMarkdown, mockEnvironment());
     assertEquals(extractedTitle, "The Title");
 });
@@ -49,7 +49,7 @@ Deno.test("It puts the title in a header and the content in a section", () => {
         "</article></section>"
     ].join("");
 
-    const markdownIt = markdownItWithMockPlugin(pipelineHandler);
+    const markdownIt = markdownItWithTestPlugin(pipelineHandler, []);
     const resultingHtml = markdownIt.render(
         testMarkdown,
         mockEnvironment({ "date": "1966/04/01" })
@@ -64,7 +64,7 @@ Deno.test("If there is no title, an exception is thrown", () => {
         "The second paragraph"
     ].join();
 
-    const markdownIt = markdownItWithMockPlugin(pipelineHandler);
+    const markdownIt = markdownItWithTestPlugin(pipelineHandler, []);
     assertThrows(
         () => {
             markdownIt.render(testMarkdown, mockEnvironment());
