@@ -28,7 +28,7 @@ Deno.test("It extracts title from markdown", () => {
     assertEquals(extractedTitle, "The Title");
 });
 
-Deno.test("It puts the title in a header and the content in a section", () => {
+Deno.test("It puts the title in a header", () => {
     const testMarkdown = [
         "# The Title  ",
         "",
@@ -42,10 +42,9 @@ Deno.test("It puts the title in a header and the content in a section", () => {
         "<h1>The Title</h1>",
         // cSpell:words datetime
         '<time datetime="01/04/1966">1 April 1966</time>',
-        "</header><section><article>",
+        "</header>",
         "<p>The first paragraph</p>\n",
-        "<p>The second paragraph</p>\n",
-        "</article></section>"
+        "<p>The second paragraph</p>\n"
     ].join("");
 
     const markdownIt = markdownItWithTestPlugin(pipelineHandler, []);

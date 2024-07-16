@@ -29,7 +29,6 @@ export const finder = (state: MarkdownItState) => {
                 const basename: string = state.env.data!.page!.data!.basename;
                 throw new Error(`${basename} - no title found`);
             }
-            yield new state.Token("article_footer", "", 1);
         },
         "title": () => articleTitle
     };
@@ -60,7 +59,7 @@ export const rules = {
         _self: MarkdownIt
     ) => {
         const tag = tokens[index]!.tag;
-        return tag != "h1" ? `<${tag}>` : "<header><h1>";
+        return tag == "h1" ? "<header><h1>" : `<${tag}>`;
     },
 
     // biome-ignore lint/style/useNamingConvention:
@@ -72,18 +71,10 @@ export const rules = {
         _self: MarkdownIt
     ) => {
         const tag = tokens[index]!.tag;
-        const pageData = env.data!.page!.data!;
-        return tag != "h1"
-            ? `</${tag}>`
-            : `</h1>${dates(pageData)}</header><section><article>`;
-    },
-
-    // biome-ignore lint/style/useNamingConvention:
-    "article_footer": (
-        _tokens: Array<Token>,
-        _index: number,
-        _options: MarkdownItOptions,
-        _env: MarkdownItEnvironment,
-        _self: MarkdownIt
-    ) => "</article></section>"
+        if (tag == "h1") {
+            const pageData = env.data!.page!.data!;
+            return `</h1>${dates(pageData)}</header>`;
+        }
+        return `</${tag}>`;
+    }
 };
