@@ -1,6 +1,5 @@
 import type { DomRewriter } from "./functionTypes.ts";
 import { hljsWorkaround } from "./hljsWorkaround.ts";
-import { removeEmpty } from "./removeEmpty.ts";
 
 type DomOperation = {
     "method": DomRewriter;
@@ -12,9 +11,7 @@ export const articleDomTransform = (
     _allPages: Array<Lume.Page>
 ) => {
     const operations: Array<DomOperation> = [
-        { "method": hljsWorkaround, "querySelector": "" },
-        { "method": removeEmpty, "querySelector": "article" },
-        { "method": removeEmpty, "querySelector": "section" }
+        { "method": hljsWorkaround, "querySelector": "" }
     ];
 
     for (const page of filteredPages) {
