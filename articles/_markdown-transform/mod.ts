@@ -1,5 +1,5 @@
 import type { markdownIt as MarkdownIt } from "lume/deps/markdown_it.ts";
-import { finder, rules as titleStructureRules } from "./articleTitle.ts";
+import { finder } from "./articleTitle.ts";
 import { figure, rules as figureRules } from "./figure.ts";
 import { giveDataToLume } from "./lumeData.ts";
 import type { MarkdownItState } from "./markdownItTypes.ts";
@@ -15,7 +15,7 @@ export const transformer = (markdownIt: MarkdownIt) => {
         state.tokens = tokenPipeline(state.tokens, markdownIt.renderer.rules)
             .andThen(scopeOnHeadings, null)
             .andThen(figure(state), figureRules)
-            .andThen(titleFinder.find, titleStructureRules, notFrontPage)
+            .andThen(titleFinder.find, null, notFrontPage)
             .andThen(sections(state), null, notFrontPage)
             .result();
         giveDataToLume(state.env, titleFinder.title());

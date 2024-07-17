@@ -1,7 +1,9 @@
 import { markdownIt as MarkdownIt } from "lume/deps/markdown_it.ts";
 import type { MarkdownItPlugin, MarkdownItState } from "./markdownItTypes.ts";
 
-export const testEnvironment = (extraFields?: Record<string, string>) => {
+type EnvironmentItem = Record<string, string | boolean>;
+
+export const testEnvironment = (extraFields?: EnvironmentItem) => {
     const basePageData = { "basename": "Test Document" };
     const pageData =
         extraFields == undefined
