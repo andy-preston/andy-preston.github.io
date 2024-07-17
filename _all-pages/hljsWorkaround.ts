@@ -1,8 +1,6 @@
 import { NodeType } from "lume/deps/dom.ts";
 
-export type DomChanged = boolean;
-
-export const hljsWorkaround = (document: Document): DomChanged => {
+export const hljsWorkaround = (document: Document) => {
     const precededByDash = (span: Node): boolean => {
         const previous = span.previousSibling;
         return (
@@ -19,7 +17,6 @@ export const hljsWorkaround = (document: Document): DomChanged => {
         if (dockerNumber !== null) {
             return dockerNumber;
         }
-
         const builtIns = document.querySelectorAll(
             ".language-bash .hljs-built_in"
         );
@@ -28,15 +25,14 @@ export const hljsWorkaround = (document: Document): DomChanged => {
                 return builtIn;
             }
         }
-
         return null;
     };
 
-    const badSpan = somethingRotten();
-    if (badSpan === null) {
-        return false;
-    }
-
-    badSpan.parentNode!.replaceChild(badSpan.childNodes[0]!, badSpan);
-    return true;
+    let badSpan: Node | null;
+    do {
+        badSpan = somethingRotten();
+        if (badSpan !== null) {
+            badSpan.parentNode!.replaceChild(badSpan.childNodes[0]!, badSpan);
+        }
+    } while (badSpan !== null);
 };

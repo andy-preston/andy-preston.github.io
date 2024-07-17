@@ -6,7 +6,6 @@ import {
 } from "./_all-pages/cacheBuster.ts";
 import { htmlFormat } from "./_all-pages/htmlFormat.ts";
 import { transformer as markdownTransform } from "./_markdown-transform/mod.ts";
-import { articleDomTransform } from "./articles/_dom-transform/mod.ts";
 import { esBuildPlugin } from "./cover-pic/_build.ts";
 import { postCss } from "./style/_postCss.ts";
 
@@ -25,7 +24,6 @@ siteBuilder
     .use(postCss)
     .process([".css", ".ts"], cacheBusterAssets)
     .process([".html"], cacheBusterLinks)
-    .process([".html"], articleDomTransform)
     .process([".html"], htmlFormat)
     .copy("fixed", ".");
 
