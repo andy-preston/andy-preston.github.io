@@ -1,5 +1,4 @@
 import { hljsWorkaround } from "./hljsWorkaround.ts";
-import { stripComments } from "./stripComments.ts";
 import { stripWhitespace } from "./stripWhitespace.ts";
 import { traverseDocument } from "./traverse.ts";
 
@@ -12,7 +11,6 @@ export const htmlFormat = (
         if (!["front-page", "legacyLinks"].includes(page.data.basename)) {
             hljsWorkaround(page.document!);
         }
-        traverseDocument(document, stripComments);
         traverseDocument(document, stripWhitespace);
     }
 };
