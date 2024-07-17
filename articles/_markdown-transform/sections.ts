@@ -1,4 +1,4 @@
-import type { MarkdownItState, Token } from "./markdownIt.ts";
+import { type MarkdownItState, type Token, attrRemove } from "./markdownIt.ts";
 import type { Pipe } from "./tokenPipeline.ts";
 
 type ArticleOrAside = "article" | "aside";
@@ -13,19 +13,6 @@ export const sections = (state: MarkdownItState) => {
         const basename: string = state.env.data!.page!.data!.basename;
         const map = token.map.join("-");
         throw new Error(`${message} at ${map} in ${basename}`);
-    };
-
-    const asideAttr = (token: Token): string | null => {
-        const index = token.attrIndex("aside");
-        if (index == -1) {
-            return null;
-        }
-        const value = token.attrs[index]![1];
-        if (!value) {
-            error("No label on aside", token);
-        }
-        token.attrs.splice(index, 1);
-        return value;
     };
 
     const asideOpen = (label: string): Array<Token> => {
@@ -67,8 +54,11 @@ export const sections = (state: MarkdownItState) => {
     // biome-ignore lint/complexity/noExcessiveCognitiveComplexity:
     return function* (tokens: Pipe) {
         for (const token of tokens) {
-            const aside = asideAttr(token);
+            const aside = attrRemove(token, "aside");
             if (aside !== null) {
+                if (!aside) {
+                    error("No label on aside", token);
+                }
                 yield* asideOpen(aside);
             }
             if (token.type != "hr") {

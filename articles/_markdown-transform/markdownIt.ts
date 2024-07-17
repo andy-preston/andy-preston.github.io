@@ -56,3 +56,13 @@ export type RenderFunction = (
 export type RenderFunctions = Record<string, RenderFunction>;
 
 export type MarkdownItPlugin = (markdownIt: MarkdownIt) => void;
+
+export const attrRemove = (token: Token, attrName: string): string | null => {
+    const index = token.attrIndex(attrName);
+    if (index == -1) {
+        return null;
+    }
+    const value = token.attrs[index]![1];
+    token.attrs.splice(index, 1);
+    return value;
+};
