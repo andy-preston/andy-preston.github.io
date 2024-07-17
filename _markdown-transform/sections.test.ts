@@ -1,5 +1,6 @@
 import { assertEquals, assertThrows } from "assert";
 import { markdownItAttrs } from "lume/deps/markdown_it.ts";
+import { finder } from "./articleTitle.ts";
 import { figure } from "./figure.ts";
 import type { MarkdownItState } from "./markdownIt.ts";
 import { sections } from "./sections.ts";
@@ -8,27 +9,31 @@ import { tokenPipeline } from "./tokenPipeline.ts";
 
 const pipeline = (state: MarkdownItState) => {
     state.tokens = tokenPipeline(state.tokens)
+        .andThen(figure(state))
+        .andThen(finder(state).find)
         .andThen(sections(state))
         .result();
 };
 
-Deno.test("A level 1 heading is followed by a section with an article", () => {
+const environment = testEnvironment({ "noDate": true });
+
+Deno.test("The header is followed by a section with an article", () => {
     const testMarkdown = [
         "# The Title  ",
         "",
         "Some text",
         "",
         "Some more text"
-    ];
+    ].join("\n");
     const expectedHtml = [
-        "<h1>The Title</h1>\n",
+        "<header><h1>The Title</h1>\n</header>",
         "<section><article>",
         "<p>Some text</p>\n",
         "<p>Some more text</p>\n",
         "</article></section>"
     ].join("");
     const markdownIt = testMarkdownIt(pipeline, []);
-    const actualHtml = markdownIt.render(testMarkdown.join("\n"));
+    const actualHtml = markdownIt.render(testMarkdown, environment);
     assertEquals(actualHtml, expectedHtml);
 });
 
@@ -41,9 +46,9 @@ Deno.test("A horizontal rule splits a section in two", () => {
         "--------------",
         "",
         "Some more text"
-    ];
+    ].join("\n");
     const expectedHtml = [
-        "<h1>The Title</h1>\n",
+        "<header><h1>The Title</h1>\n</header>",
         "<section><article>",
         "<p>Some text</p>\n",
         "</article></section>",
@@ -52,7 +57,7 @@ Deno.test("A horizontal rule splits a section in two", () => {
         "</article></section>"
     ].join("");
     const markdownIt = testMarkdownIt(pipeline, []);
-    const actualHtml = markdownIt.render(testMarkdown.join("\n"));
+    const actualHtml = markdownIt.render(testMarkdown, environment);
     assertEquals(actualHtml, expectedHtml);
 });
 
@@ -65,9 +70,9 @@ Deno.test("Figures tagged aside go in an aside tag followed by a new section", (
         "![Test caption](test.jpg){aside}",
         "",
         "Some more text"
-    ];
+    ].join("\n");
     const expectedHtml = [
-        "<h1>The Title</h1>\n",
+        "<header><h1>The Title</h1>\n</header>",
         "<section><article>",
         "<p>Some text</p>\n",
         "</article>",
@@ -81,14 +86,8 @@ Deno.test("Figures tagged aside go in an aside tag followed by a new section", (
         "<p>Some more text</p>\n",
         "</article></section>"
     ].join("");
-    const specialPipeline = (state: MarkdownItState) => {
-        state.tokens = tokenPipeline(state.tokens)
-            .andThen(figure(state))
-            .andThen(sections(state))
-            .result();
-    };
-    const markdownIt = testMarkdownIt(specialPipeline, [markdownItAttrs]);
-    const actualHtml = markdownIt.render(testMarkdown.join("\n"));
+    const markdownIt = testMarkdownIt(pipeline, [markdownItAttrs]);
+    const actualHtml = markdownIt.render(testMarkdown, environment);
     assertEquals(actualHtml, expectedHtml);
 });
 
@@ -99,9 +98,9 @@ Deno.test("A figure aside at the bottom of the text has a normal section closing
         "Some text",
         "",
         "![Test caption](test.jpg){aside}"
-    ];
+    ].join("\n");
     const expectedHtml = [
-        "<h1>The Title</h1>\n",
+        "<header><h1>The Title</h1>\n</header>",
         "<section><article>",
         "<p>Some text</p>\n",
         "</article>",
@@ -112,14 +111,8 @@ Deno.test("A figure aside at the bottom of the text has a normal section closing
         "</figure>\n",
         "</aside></section>"
     ].join("");
-    const specialPipeline = (state: MarkdownItState) => {
-        state.tokens = tokenPipeline(state.tokens)
-            .andThen(figure(state))
-            .andThen(sections(state))
-            .result();
-    };
-    const markdownIt = testMarkdownIt(specialPipeline, [markdownItAttrs]);
-    const actualHtml = markdownIt.render(testMarkdown.join("\n"));
+    const markdownIt = testMarkdownIt(pipeline, [markdownItAttrs]);
+    const actualHtml = markdownIt.render(testMarkdown, environment);
     assertEquals(actualHtml, expectedHtml);
 });
 
@@ -139,7 +132,7 @@ Deno.test("Tables tagged aside go in an aside tag followed by a new section", ()
         "Next section"
     ].join("\n");
     const expectedHtml = [
-        "<h1>Table Test</h1>\n",
+        "<header><h1>Table Test</h1>\n</header>",
         "<section><article>",
         "<p>First paragraph</p>\n",
         "</article>",
@@ -156,7 +149,7 @@ Deno.test("Tables tagged aside go in an aside tag followed by a new section", ()
         "</article></section>"
     ].join("");
     const markdownIt = testMarkdownIt(pipeline, [markdownItAttrs]);
-    const resultingHtml = markdownIt.render(testMarkdown);
+    const resultingHtml = markdownIt.render(testMarkdown, environment);
     assertEquals(resultingHtml, expectedHtml);
 });
 
@@ -177,7 +170,7 @@ Deno.test("An aside table with no label throws an error", () => {
     ].join("\n");
     const markdownIt = testMarkdownIt(pipeline, [markdownItAttrs]);
     assertThrows(
-        () => markdownIt.render(testMarkdown, testEnvironment()),
+        () => markdownIt.render(testMarkdown, environment),
         Error,
         "No label on aside at 4-8 in Test Document"
     );
@@ -197,7 +190,7 @@ Deno.test("A table aside at the bottom of the text has a normal section closing"
         '{aside="test table"}'
     ].join("\n");
     const expectedHtml = [
-        "<h1>Table Test</h1>\n",
+        "<header><h1>Table Test</h1>\n</header>",
         "<section><article>",
         "<p>First paragraph</p>\n",
         "</article>",
@@ -211,7 +204,7 @@ Deno.test("A table aside at the bottom of the text has a normal section closing"
         "</aside></section>"
     ].join("");
     const markdownIt = testMarkdownIt(pipeline, [markdownItAttrs]);
-    const resultingHtml = markdownIt.render(testMarkdown);
+    const resultingHtml = markdownIt.render(testMarkdown, environment);
     assertEquals(resultingHtml, expectedHtml);
 });
 
@@ -232,7 +225,7 @@ Deno.test("Code blocks tagged aside go in an aside followed by a new section", (
         "Next section"
     ].join("\n");
     const expectedHtml = [
-        "<h1>Code Test</h1>\n",
+        "<header><h1>Code Test</h1>\n</header>",
         "<section><article>",
         "<p>First paragraph</p>\n",
         '</article><aside aria-label="AVR Example">',
@@ -247,7 +240,7 @@ Deno.test("Code blocks tagged aside go in an aside followed by a new section", (
         "</article></section>"
     ].join("");
     const markdownIt = testMarkdownIt(pipeline, [markdownItAttrs]);
-    const resultingHtml = markdownIt.render(testMarkdown);
+    const resultingHtml = markdownIt.render(testMarkdown, environment);
     assertEquals(resultingHtml, expectedHtml);
 });
 
@@ -267,7 +260,7 @@ Deno.test("An aside code block with no label throws an error", () => {
     ].join("\n");
     const markdownIt = testMarkdownIt(pipeline, [markdownItAttrs]);
     assertThrows(
-        () => markdownIt.render(testMarkdown, testEnvironment()),
+        () => markdownIt.render(testMarkdown, environment),
         Error,
         "No label on aside at 4-9 in Test Document"
     );
@@ -286,7 +279,7 @@ Deno.test("An code aside at the bottom of the text has a normal section closing"
         "```"
     ].join("\n");
     const expectedHtml = [
-        "<h1>Code Test</h1>\n",
+        "<header><h1>Code Test</h1>\n</header>",
         "<section><article>",
         "<p>First paragraph</p>\n",
         '</article><aside aria-label="AVR Example">',
@@ -298,6 +291,6 @@ Deno.test("An code aside at the bottom of the text has a normal section closing"
         "</aside></section>"
     ].join("");
     const markdownIt = testMarkdownIt(pipeline, [markdownItAttrs]);
-    const resultingHtml = markdownIt.render(testMarkdown);
+    const resultingHtml = markdownIt.render(testMarkdown, environment);
     assertEquals(resultingHtml, expectedHtml);
 });

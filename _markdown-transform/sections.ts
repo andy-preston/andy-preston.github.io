@@ -70,7 +70,7 @@ export const sections = (state: MarkdownItState) => {
             if (newSectionRequired(token)) {
                 yield* sectionClose();
             }
-            if (token.type == "heading_close" && token.tag == "h1") {
+            if (token.type == "header_close") {
                 sectionStatus = "currentlyClosed";
             }
         }
