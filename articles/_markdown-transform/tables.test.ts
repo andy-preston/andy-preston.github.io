@@ -1,5 +1,5 @@
 import { assertStringIncludes } from "assert";
-import type { MarkdownItState } from "./markdownItTypes.ts";
+import type { MarkdownItState } from "./markdownIt.ts";
 import { scopeOnHeadings } from "./tables.ts";
 import { markdownItWithTestPlugin } from "./testing.ts";
 import { tokenPipeline } from "./tokenPipeline.ts";

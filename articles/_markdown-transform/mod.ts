@@ -2,7 +2,7 @@ import type { markdownIt as MarkdownIt } from "lume/deps/markdown_it.ts";
 import { finder } from "./articleTitle.ts";
 import { figure, rules as figureRules } from "./figure.ts";
 import { giveDataToLume } from "./lumeData.ts";
-import type { MarkdownItState } from "./markdownItTypes.ts";
+import type { MarkdownItState } from "./markdownIt.ts";
 import { sections } from "./sections.ts";
 import { scopeOnHeadings } from "./tables.ts";
 import { tokenPipeline } from "./tokenPipeline.ts";

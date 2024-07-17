@@ -4,7 +4,7 @@ import type {
     MarkdownItEnvironment,
     MarkdownItState,
     Token
-} from "./markdownItTypes.ts";
+} from "./markdownIt.ts";
 import type { Pipe } from "./tokenPipeline.ts";
 
 export const figure = (state: MarkdownItState) => {

@@ -1,4 +1,4 @@
-import type { RenderFunctions, Token } from "./markdownItTypes.ts";
+import type { RenderFunctions, Token } from "./markdownIt.ts";
 
 export type Pipe = IterableIterator<Token>;
 

@@ -1,6 +1,6 @@
 import { assertEquals, assertThrows } from "assert";
 import { finder } from "./articleTitle.ts";
-import type { MarkdownItState } from "./markdownItTypes.ts";
+import type { MarkdownItState } from "./markdownIt.ts";
 import { markdownItWithTestPlugin, testEnvironment } from "./testing.ts";
 import { tokenPipeline } from "./tokenPipeline.ts";
 

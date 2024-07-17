@@ -1,5 +1,5 @@
 import { markdownIt as MarkdownIt } from "lume/deps/markdown_it.ts";
-import type { MarkdownItPlugin, MarkdownItState } from "./markdownItTypes.ts";
+import type { MarkdownItPlugin, MarkdownItState } from "./markdownIt.ts";
 
 type EnvironmentItem = Record<string, string | boolean>;
 

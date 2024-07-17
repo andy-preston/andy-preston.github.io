@@ -1,7 +1,7 @@
 import { assertEquals, assertThrows } from "assert";
 import { markdownItAttrs } from "lume/deps/markdown_it.ts";
 import { figure, rules } from "./figure.ts";
-import type { MarkdownItState } from "./markdownItTypes.ts";
+import type { MarkdownItState } from "./markdownIt.ts";
 import { markdownItWithTestPlugin, testEnvironment } from "./testing.ts";
 import { tokenPipeline } from "./tokenPipeline.ts";
 
