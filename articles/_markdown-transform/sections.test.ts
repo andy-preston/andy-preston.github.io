@@ -1,6 +1,6 @@
 import { assertEquals, assertThrows } from "assert";
 import { markdownItAttrs } from "lume/deps/markdown_it.ts";
-import { figure, rules as figureRules } from "./figure.ts";
+import { figure } from "./figure.ts";
 import type { MarkdownItState } from "./markdownIt.ts";
 import { sections } from "./sections.ts";
 import { markdownItWithTestPlugin, testEnvironment } from "./testing.ts";
@@ -83,7 +83,7 @@ Deno.test("Figures tagged aside go in an aside tag followed by a new section", (
     ].join("");
     const specialPipeline = (state: MarkdownItState) => {
         state.tokens = tokenPipeline(state.tokens, markdownIt.renderer.rules)
-            .andThen(figure(state), figureRules)
+            .andThen(figure(state), null)
             .andThen(sections(state), null)
             .result();
     };
@@ -116,7 +116,7 @@ Deno.test("A figure aside at the bottom of the text has a normal section closing
     ].join("");
     const specialPipeline = (state: MarkdownItState) => {
         state.tokens = tokenPipeline(state.tokens, markdownIt.renderer.rules)
-            .andThen(figure(state), figureRules)
+            .andThen(figure(state), null)
             .andThen(sections(state), null)
             .result();
     };

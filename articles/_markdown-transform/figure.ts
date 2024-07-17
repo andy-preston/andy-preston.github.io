@@ -1,10 +1,4 @@
-import type { MarkdownItOptions } from "lume/deps/markdown_it.ts";
-import type { markdownIt as MarkdownIt } from "lume/deps/markdown_it.ts";
-import type {
-    MarkdownItEnvironment,
-    MarkdownItState,
-    Token
-} from "./markdownIt.ts";
+import { type MarkdownItState, type Token, attrRemove } from "./markdownIt.ts";
 import type { Pipe } from "./tokenPipeline.ts";
 
 export const figure = (state: MarkdownItState) => {
@@ -27,6 +21,25 @@ export const figure = (state: MarkdownItState) => {
         token.type = token.type.replace("paragraph", "figure");
     };
 
+    const captionTokens = (text: string) => {
+        if (!text) {
+            throw new Error(message("No caption"));
+        }
+        threeTokens.splice(
+            2,
+            0,
+            new state.Token("figcaption_open", "figcaption", 1)
+        );
+        const bodyToken = new state.Token("text", "", 0);
+        bodyToken.content = text;
+        threeTokens.splice(3, 0, bodyToken);
+        threeTokens.splice(
+            4,
+            0,
+            new state.Token("figcaption_close", "figcaption", -1)
+        );
+    };
+
     const transform = () => {
         const middleChildren = threeTokens[1]!.children;
         if (middleChildren.length > 1) {
@@ -35,17 +48,15 @@ export const figure = (state: MarkdownItState) => {
             );
         }
         const imageToken = middleChildren[0]!;
-        if (!imageToken.content) {
-            throw new Error(message("No caption"));
-        }
         if (!imageToken.attrGet("src")) {
             throw new Error(message("No source"));
         }
-        if (imageToken.attrGet("aside") !== null) {
+        if (attrRemove(imageToken, "aside") !== null) {
             threeTokens[0]!.attrSet("aside", imageToken.content);
         }
         paragraphToFigure(threeTokens[0]!);
         paragraphToFigure(threeTokens[2]!);
+        captionTokens(imageToken.content);
     };
 
     const message = (text: string) => {
@@ -60,7 +71,9 @@ export const figure = (state: MarkdownItState) => {
             if (threeTokens.length < 3) {
                 continue;
             }
-            if (threeTokens.length > 3) {
+            // It's "supposed" to be only 3 tokens.
+            // But after the transformation, there's extra for the caption.
+            while (threeTokens.length > 3) {
                 yield threeTokens.shift()!;
             }
             if (isImage(threeTokens[1]!)) {
@@ -71,22 +84,4 @@ export const figure = (state: MarkdownItState) => {
             yield straggler;
         }
     };
-};
-
-export const rules = {
-    "image": (
-        tokens: Array<Token>,
-        index: number,
-        _options: MarkdownItOptions,
-        _env: MarkdownItEnvironment,
-        _self: MarkdownIt
-    ) => {
-        const token = tokens[index]!;
-        const caption = token.content;
-        const source = token.attrGet("src")!;
-        return (
-            `<img src="${source}" alt="${caption}">` +
-            `<figcaption>${caption}</figcaption>`
-        );
-    }
 };

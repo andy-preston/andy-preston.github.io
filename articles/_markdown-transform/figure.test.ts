@@ -1,13 +1,13 @@
 import { assertEquals, assertThrows } from "assert";
 import { markdownItAttrs } from "lume/deps/markdown_it.ts";
-import { figure, rules } from "./figure.ts";
+import { figure } from "./figure.ts";
 import type { MarkdownItState } from "./markdownIt.ts";
 import { markdownItWithTestPlugin, testEnvironment } from "./testing.ts";
 import { tokenPipeline } from "./tokenPipeline.ts";
 
 const pipeline = (state: MarkdownItState) => {
     state.tokens = tokenPipeline(state.tokens, state.md.renderer.rules)
-        .andThen(figure(state), rules)
+        .andThen(figure(state), null)
         .result();
 };
 
