@@ -1,5 +1,5 @@
 import type { MarkdownItState, Token } from "./markdownItTypes.ts";
-import type { Pipe } from "./pipeline.ts";
+import type { Pipe } from "./tokenPipeline.ts";
 
 type ArticleOrAside = "article" | "aside";
 

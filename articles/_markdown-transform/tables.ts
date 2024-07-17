@@ -1,4 +1,4 @@
-import type { Pipe } from "./pipeline.ts";
+import type { Pipe } from "./tokenPipeline.ts";
 
 export const scopeOnHeadings = function* (tokens: Pipe) {
     for (const token of tokens) {

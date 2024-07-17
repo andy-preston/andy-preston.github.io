@@ -2,7 +2,7 @@ import type { RenderFunctions, Token } from "./markdownItTypes.ts";
 
 export type Pipe = IterableIterator<Token>;
 
-export const pipeline = (
+export const tokenPipeline = (
     initialValues: Array<Token>,
     rendererRules: RenderFunctions | null
 ) => {

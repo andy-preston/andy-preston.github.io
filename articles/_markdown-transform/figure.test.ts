@@ -3,10 +3,10 @@ import { markdownItAttrs } from "lume/deps/markdown_it.ts";
 import { figure, rules } from "./figure.ts";
 import type { MarkdownItState } from "./markdownItTypes.ts";
 import { markdownItWithTestPlugin, testEnvironment } from "./testing.ts";
-import { pipeline } from "./pipeline.ts";
+import { tokenPipeline } from "./tokenPipeline.ts";
 
-const pipelineHandler = (state: MarkdownItState) => {
-    state.tokens = pipeline(state.tokens, state.md.renderer.rules)
+const pipeline = (state: MarkdownItState) => {
+    state.tokens = tokenPipeline(state.tokens, state.md.renderer.rules)
         .andThen(figure(state), rules)
         .result();
 };
@@ -29,14 +29,14 @@ Deno.test("It transforms an image in a paragraph into a figure", () => {
         "<p>Another paragraph</p>\n"
     ].join("");
 
-    const markdownIt = markdownItWithTestPlugin(pipelineHandler, []);
+    const markdownIt = markdownItWithTestPlugin(pipeline, []);
     const resultingHtml = markdownIt.render(testMarkdown);
     assertEquals(resultingHtml, expectedHtml);
 });
 
 Deno.test("If no caption is given it throws 'no caption'", () => {
     const testMarkdown = "![](test.jpg)";
-    const markdownIt = markdownItWithTestPlugin(pipelineHandler, []);
+    const markdownIt = markdownItWithTestPlugin(pipeline, []);
     assertThrows(
         () => markdownIt.render(testMarkdown, testEnvironment()),
         Error,
@@ -46,7 +46,7 @@ Deno.test("If no caption is given it throws 'no caption'", () => {
 
 Deno.test("If no source is given it throws 'no source'", () => {
     const testMarkdown = "![Caption]()";
-    const markdownIt = markdownItWithTestPlugin(pipelineHandler, []);
+    const markdownIt = markdownItWithTestPlugin(pipeline, []);
     assertThrows(
         () => markdownIt.render(testMarkdown, testEnvironment()),
         Error,
@@ -56,7 +56,7 @@ Deno.test("If no source is given it throws 'no source'", () => {
 
 Deno.test("If more than an image is in a paragraph it throws", () => {
     const testMarkdown = "![caption](test.jpg) Irrelevant text!";
-    const markdownIt = markdownItWithTestPlugin(pipelineHandler, []);
+    const markdownIt = markdownItWithTestPlugin(pipeline, []);
     assertThrows(
         () => markdownIt.render(testMarkdown, testEnvironment()),
         Error,
@@ -72,9 +72,7 @@ Deno.test("An aside attribute on the image is transferred to the figure", () => 
         "<figcaption>Test caption</figcaption>",
         "</figure>\n"
     ].join("");
-    const markdownIt = markdownItWithTestPlugin(pipelineHandler, [
-        markdownItAttrs
-    ]);
+    const markdownIt = markdownItWithTestPlugin(pipeline, [markdownItAttrs]);
     const resultingHtml = markdownIt.render(testMarkdown);
     assertEquals(resultingHtml, expectedHtml);
 });
