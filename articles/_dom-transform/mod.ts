@@ -1,26 +1,14 @@
-import type { DomRewriter } from "./functionTypes.ts";
 import { hljsWorkaround } from "./hljsWorkaround.ts";
-
-type DomOperation = {
-    "method": DomRewriter;
-    "querySelector": string;
-};
 
 export const articleDomTransform = (
     filteredPages: Array<Lume.Page>,
     _allPages: Array<Lume.Page>
 ) => {
-    const operations: Array<DomOperation> = [
-        { "method": hljsWorkaround, "querySelector": "" }
-    ];
-
     for (const page of filteredPages) {
         const document = page.document!;
         if (!["front-page", "legacyLinks"].includes(page.data.basename)) {
-            for (const { method, querySelector } of operations) {
-                // biome-ignore lint/style/useBlockStatements:
-                while (method(document, querySelector, page.data.basename));
-            }
+            // biome-ignore lint/style/useBlockStatements:
+            while (hljsWorkaround(document));
         }
     }
 };

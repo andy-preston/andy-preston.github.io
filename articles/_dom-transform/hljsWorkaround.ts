@@ -1,11 +1,8 @@
 import { NodeType } from "lume/deps/dom.ts";
-import type { DomChanged, DomRewriter } from "./functionTypes.ts";
 
-export const hljsWorkaround: DomRewriter = (
-    document: Document,
-    _querySelector: string,
-    _basename: string
-): DomChanged => {
+export type DomChanged = boolean;
+
+export const hljsWorkaround = (document: Document): DomChanged => {
     const precededByDash = (span: Node): boolean => {
         const previous = span.previousSibling;
         return (
