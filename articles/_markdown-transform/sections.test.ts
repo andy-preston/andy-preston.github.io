@@ -3,7 +3,7 @@ import { markdownItAttrs } from "lume/deps/markdown_it.ts";
 import { figure } from "./figure.ts";
 import type { MarkdownItState } from "./markdownIt.ts";
 import { sections } from "./sections.ts";
-import { markdownItWithTestPlugin, testEnvironment } from "./testing.ts";
+import { testEnvironment, testMarkdownIt } from "./testing.ts";
 import { tokenPipeline } from "./tokenPipeline.ts";
 
 const pipeline = (state: MarkdownItState) => {
@@ -27,7 +27,7 @@ Deno.test("A level 1 heading is followed by a section with an article", () => {
         "<p>Some more text</p>\n",
         "</article></section>"
     ].join("");
-    const markdownIt = markdownItWithTestPlugin(pipeline, []);
+    const markdownIt = testMarkdownIt(pipeline, []);
     const actualHtml = markdownIt.render(testMarkdown.join("\n"));
     assertEquals(actualHtml, expectedHtml);
 });
@@ -51,7 +51,7 @@ Deno.test("A horizontal rule splits a section in two", () => {
         "<p>Some more text</p>\n",
         "</article></section>"
     ].join("");
-    const markdownIt = markdownItWithTestPlugin(pipeline, []);
+    const markdownIt = testMarkdownIt(pipeline, []);
     const actualHtml = markdownIt.render(testMarkdown.join("\n"));
     assertEquals(actualHtml, expectedHtml);
 });
@@ -87,9 +87,7 @@ Deno.test("Figures tagged aside go in an aside tag followed by a new section", (
             .andThen(sections(state))
             .result();
     };
-    const markdownIt = markdownItWithTestPlugin(specialPipeline, [
-        markdownItAttrs
-    ]);
+    const markdownIt = testMarkdownIt(specialPipeline, [markdownItAttrs]);
     const actualHtml = markdownIt.render(testMarkdown.join("\n"));
     assertEquals(actualHtml, expectedHtml);
 });
@@ -120,9 +118,7 @@ Deno.test("A figure aside at the bottom of the text has a normal section closing
             .andThen(sections(state))
             .result();
     };
-    const markdownIt = markdownItWithTestPlugin(specialPipeline, [
-        markdownItAttrs
-    ]);
+    const markdownIt = testMarkdownIt(specialPipeline, [markdownItAttrs]);
     const actualHtml = markdownIt.render(testMarkdown.join("\n"));
     assertEquals(actualHtml, expectedHtml);
 });
@@ -159,7 +155,7 @@ Deno.test("Tables tagged aside go in an aside tag followed by a new section", ()
         "<p>Next section</p>\n",
         "</article></section>"
     ].join("");
-    const markdownIt = markdownItWithTestPlugin(pipeline, [markdownItAttrs]);
+    const markdownIt = testMarkdownIt(pipeline, [markdownItAttrs]);
     const resultingHtml = markdownIt.render(testMarkdown);
     assertEquals(resultingHtml, expectedHtml);
 });
@@ -179,7 +175,7 @@ Deno.test("An aside table with no label throws an error", () => {
         "",
         "Next section"
     ].join("\n");
-    const markdownIt = markdownItWithTestPlugin(pipeline, [markdownItAttrs]);
+    const markdownIt = testMarkdownIt(pipeline, [markdownItAttrs]);
     assertThrows(
         () => markdownIt.render(testMarkdown, testEnvironment()),
         Error,
@@ -214,7 +210,7 @@ Deno.test("A table aside at the bottom of the text has a normal section closing"
         "</tbody>\n</table>\n",
         "</aside></section>"
     ].join("");
-    const markdownIt = markdownItWithTestPlugin(pipeline, [markdownItAttrs]);
+    const markdownIt = testMarkdownIt(pipeline, [markdownItAttrs]);
     const resultingHtml = markdownIt.render(testMarkdown);
     assertEquals(resultingHtml, expectedHtml);
 });
@@ -250,7 +246,7 @@ Deno.test("Code blocks tagged aside go in an aside followed by a new section", (
         "<p>Next section</p>\n",
         "</article></section>"
     ].join("");
-    const markdownIt = markdownItWithTestPlugin(pipeline, [markdownItAttrs]);
+    const markdownIt = testMarkdownIt(pipeline, [markdownItAttrs]);
     const resultingHtml = markdownIt.render(testMarkdown);
     assertEquals(resultingHtml, expectedHtml);
 });
@@ -269,7 +265,7 @@ Deno.test("An aside code block with no label throws an error", () => {
         "",
         "Next section"
     ].join("\n");
-    const markdownIt = markdownItWithTestPlugin(pipeline, [markdownItAttrs]);
+    const markdownIt = testMarkdownIt(pipeline, [markdownItAttrs]);
     assertThrows(
         () => markdownIt.render(testMarkdown, testEnvironment()),
         Error,
@@ -301,7 +297,7 @@ Deno.test("An code aside at the bottom of the text has a normal section closing"
         "</code></pre>\n",
         "</aside></section>"
     ].join("");
-    const markdownIt = markdownItWithTestPlugin(pipeline, [markdownItAttrs]);
+    const markdownIt = testMarkdownIt(pipeline, [markdownItAttrs]);
     const resultingHtml = markdownIt.render(testMarkdown);
     assertEquals(resultingHtml, expectedHtml);
 });

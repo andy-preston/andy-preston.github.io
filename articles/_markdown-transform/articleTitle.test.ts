@@ -1,7 +1,7 @@
 import { assertEquals, assertThrows } from "assert";
 import { finder } from "./articleTitle.ts";
 import type { MarkdownItState } from "./markdownIt.ts";
-import { markdownItWithTestPlugin, testEnvironment } from "./testing.ts";
+import { testEnvironment, testMarkdownIt } from "./testing.ts";
 import { tokenPipeline } from "./tokenPipeline.ts";
 
 let extractedTitle = "";
@@ -23,7 +23,7 @@ Deno.test("It extracts title from markdown", () => {
         "The second paragraph"
     ].join("\n");
 
-    const markdownIt = markdownItWithTestPlugin(pipeline, []);
+    const markdownIt = testMarkdownIt(pipeline, []);
     markdownIt.render(testMarkdown, testEnvironment());
     assertEquals(extractedTitle, "The Title");
 });
@@ -47,7 +47,7 @@ Deno.test("It puts the title & date in a header", () => {
         "<p>The second paragraph</p>\n"
     ].join("");
 
-    const markdownIt = markdownItWithTestPlugin(pipeline, []);
+    const markdownIt = testMarkdownIt(pipeline, []);
     const resultingHtml = markdownIt.render(
         testMarkdown,
         testEnvironment({ "date": "1966/04/01" })
@@ -72,7 +72,7 @@ Deno.test("If the noDate flag is set, it skips the date in a header", () => {
         "<p>The second paragraph</p>\n"
     ].join("");
 
-    const markdownIt = markdownItWithTestPlugin(pipeline, []);
+    const markdownIt = testMarkdownIt(pipeline, []);
     const resultingHtml = markdownIt.render(
         testMarkdown,
         testEnvironment({ "noDate": true })
@@ -87,7 +87,7 @@ Deno.test("If there is no title, an exception is thrown", () => {
         "The second paragraph"
     ].join();
 
-    const markdownIt = markdownItWithTestPlugin(pipeline, []);
+    const markdownIt = testMarkdownIt(pipeline, []);
     assertThrows(
         () => markdownIt.render(testMarkdown, testEnvironment()),
         Error,

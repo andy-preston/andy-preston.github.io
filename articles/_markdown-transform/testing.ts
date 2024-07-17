@@ -18,7 +18,7 @@ export const testEnvironment = (extraFields?: EnvironmentItem) => {
     };
 };
 
-export const markdownItWithTestPlugin = (
+export const testMarkdownIt = (
     pipeline: (state: MarkdownItState) => void,
     otherPlugins: Array<MarkdownItPlugin>
 ) => {

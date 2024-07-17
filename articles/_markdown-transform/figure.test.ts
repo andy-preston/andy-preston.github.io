@@ -2,7 +2,7 @@ import { assertEquals, assertThrows } from "assert";
 import { markdownItAttrs } from "lume/deps/markdown_it.ts";
 import { figure } from "./figure.ts";
 import type { MarkdownItState } from "./markdownIt.ts";
-import { markdownItWithTestPlugin, testEnvironment } from "./testing.ts";
+import { testEnvironment, testMarkdownIt } from "./testing.ts";
 import { tokenPipeline } from "./tokenPipeline.ts";
 
 const pipeline = (state: MarkdownItState) => {
@@ -27,14 +27,14 @@ Deno.test("It transforms an image in a paragraph into a figure", () => {
         "<p>Another paragraph</p>\n"
     ].join("");
 
-    const markdownIt = markdownItWithTestPlugin(pipeline, []);
+    const markdownIt = testMarkdownIt(pipeline, []);
     const resultingHtml = markdownIt.render(testMarkdown);
     assertEquals(resultingHtml, expectedHtml);
 });
 
 Deno.test("If no caption is given it throws 'no caption'", () => {
     const testMarkdown = "![](test.jpg)";
-    const markdownIt = markdownItWithTestPlugin(pipeline, []);
+    const markdownIt = testMarkdownIt(pipeline, []);
     assertThrows(
         () => markdownIt.render(testMarkdown, testEnvironment()),
         Error,
@@ -44,7 +44,7 @@ Deno.test("If no caption is given it throws 'no caption'", () => {
 
 Deno.test("If no source is given it throws 'no source'", () => {
     const testMarkdown = "![Caption]()";
-    const markdownIt = markdownItWithTestPlugin(pipeline, []);
+    const markdownIt = testMarkdownIt(pipeline, []);
     assertThrows(
         () => markdownIt.render(testMarkdown, testEnvironment()),
         Error,
@@ -54,7 +54,7 @@ Deno.test("If no source is given it throws 'no source'", () => {
 
 Deno.test("If more than an image is in a paragraph it throws", () => {
     const testMarkdown = "![caption](test.jpg) Irrelevant text!";
-    const markdownIt = markdownItWithTestPlugin(pipeline, []);
+    const markdownIt = testMarkdownIt(pipeline, []);
     assertThrows(
         () => markdownIt.render(testMarkdown, testEnvironment()),
         Error,
@@ -70,7 +70,7 @@ Deno.test("An aside attribute on the image is transferred to the figure", () => 
         "<figcaption>Test caption</figcaption>",
         "</figure>\n"
     ].join("");
-    const markdownIt = markdownItWithTestPlugin(pipeline, [markdownItAttrs]);
+    const markdownIt = testMarkdownIt(pipeline, [markdownItAttrs]);
     const resultingHtml = markdownIt.render(testMarkdown);
     assertEquals(resultingHtml, expectedHtml);
 });
