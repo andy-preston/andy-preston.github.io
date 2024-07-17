@@ -1,5 +1,5 @@
 import { markdownIt as MarkdownIt } from "lume/deps/markdown_it.ts";
-import type { MarkdownItPlugin, MarkdownItState } from "./markdownIt.ts";
+import type { MarkdownItState } from "./markdownIt.ts";
 
 type EnvironmentItem = Record<string, string | boolean>;
 
@@ -17,6 +17,8 @@ export const testEnvironment = (extraFields?: EnvironmentItem) => {
         }
     };
 };
+
+type MarkdownItPlugin = (markdownIt: MarkdownIt) => void;
 
 export const testMarkdownIt = (
     pipeline: (state: MarkdownItState) => void,

@@ -39,11 +39,6 @@ export type MarkdownItState = {
     ) => Token;
 };
 
-// deno-lint-ignore no-explicit-any
-export type MarkdownItEnvironment = Record<string, any>;
-
-export type MarkdownItPlugin = (markdownIt: MarkdownIt) => void;
-
 export const attrRemove = (token: Token, attrName: string): string | null => {
     const index = token.attrIndex(attrName);
     if (index == -1) {
