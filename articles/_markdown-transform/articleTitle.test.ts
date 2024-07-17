@@ -1,7 +1,7 @@
 import { assertEquals, assertThrows } from "assert";
 import { finder, rules } from "./articleTitle.ts";
 import type { MarkdownItState } from "./markdownItTypes.ts";
-import { markdownItWithTestPlugin, mockEnvironment } from "./mocks.ts";
+import { markdownItWithTestPlugin, testEnvironment } from "./testing.ts";
 import { pipeline } from "./pipeline.ts";
 
 let extractedTitle = "";
@@ -24,7 +24,7 @@ Deno.test("It extracts title from markdown", () => {
     ].join("\n");
 
     const markdownIt = markdownItWithTestPlugin(pipelineHandler, []);
-    markdownIt.render(testMarkdown, mockEnvironment());
+    markdownIt.render(testMarkdown, testEnvironment());
     assertEquals(extractedTitle, "The Title");
 });
 
@@ -50,7 +50,7 @@ Deno.test("It puts the title in a header", () => {
     const markdownIt = markdownItWithTestPlugin(pipelineHandler, []);
     const resultingHtml = markdownIt.render(
         testMarkdown,
-        mockEnvironment({ "date": "1966/04/01" })
+        testEnvironment({ "date": "1966/04/01" })
     );
     assertEquals(resultingHtml, expectedHtml);
 });
@@ -64,8 +64,8 @@ Deno.test("If there is no title, an exception is thrown", () => {
 
     const markdownIt = markdownItWithTestPlugin(pipelineHandler, []);
     assertThrows(
-        () => markdownIt.render(testMarkdown, mockEnvironment()),
+        () => markdownIt.render(testMarkdown, testEnvironment()),
         Error,
-        "Mock Document - no title found"
+        "Test Document - no title found"
     );
 });

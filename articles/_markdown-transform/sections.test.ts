@@ -2,9 +2,9 @@ import { assertEquals, assertThrows } from "assert";
 import { markdownItAttrs } from "lume/deps/markdown_it.ts";
 import { figure, rules as figureRules } from "./figure.ts";
 import type { MarkdownItState } from "./markdownItTypes.ts";
-import { markdownItWithTestPlugin, mockEnvironment } from "./mocks.ts";
 import { pipeline } from "./pipeline.ts";
 import { sections } from "./sections.ts";
+import { markdownItWithTestPlugin, testEnvironment } from "./testing.ts";
 
 const pipelineHandler = (state: MarkdownItState) => {
     state.tokens = pipeline(state.tokens, null)
@@ -185,9 +185,9 @@ Deno.test("An aside table with no label throws an error", () => {
         markdownItAttrs
     ]);
     assertThrows(
-        () => markdownIt.render(testMarkdown, mockEnvironment()),
+        () => markdownIt.render(testMarkdown, testEnvironment()),
         Error,
-        "No label on aside at 4-8 in Mock Document"
+        "No label on aside at 4-8 in Test Document"
     );
 });
 
@@ -281,9 +281,9 @@ Deno.test("An aside code block with no label throws an error", () => {
         markdownItAttrs
     ]);
     assertThrows(
-        () => markdownIt.render(testMarkdown, mockEnvironment()),
+        () => markdownIt.render(testMarkdown, testEnvironment()),
         Error,
-        "No label on aside at 4-9 in Mock Document"
+        "No label on aside at 4-9 in Test Document"
     );
 });
 

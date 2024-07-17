@@ -1,8 +1,8 @@
 import { assertStringIncludes } from "assert";
 import type { MarkdownItState } from "./markdownItTypes.ts";
-import { markdownItWithTestPlugin } from "./mocks.ts";
 import { pipeline } from "./pipeline.ts";
 import { scopeOnHeadings } from "./tables.ts";
+import { markdownItWithTestPlugin } from "./testing.ts";
 
 const pipelineHandler = (state: MarkdownItState) => {
     state.tokens = pipeline(state.tokens, null)

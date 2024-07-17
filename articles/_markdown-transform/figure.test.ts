@@ -2,7 +2,7 @@ import { assertEquals, assertThrows } from "assert";
 import { markdownItAttrs } from "lume/deps/markdown_it.ts";
 import { figure, rules } from "./figure.ts";
 import type { MarkdownItState } from "./markdownItTypes.ts";
-import { markdownItWithTestPlugin, mockEnvironment } from "./mocks.ts";
+import { markdownItWithTestPlugin, testEnvironment } from "./testing.ts";
 import { pipeline } from "./pipeline.ts";
 
 const pipelineHandler = (state: MarkdownItState) => {
@@ -38,9 +38,9 @@ Deno.test("If no caption is given it throws 'no caption'", () => {
     const testMarkdown = "![](test.jpg)";
     const markdownIt = markdownItWithTestPlugin(pipelineHandler, []);
     assertThrows(
-        () => markdownIt.render(testMarkdown, mockEnvironment()),
+        () => markdownIt.render(testMarkdown, testEnvironment()),
         Error,
-        "No caption at 0-1 in Mock Document"
+        "No caption at 0-1 in Test Document"
     );
 });
 
@@ -48,9 +48,9 @@ Deno.test("If no source is given it throws 'no source'", () => {
     const testMarkdown = "![Caption]()";
     const markdownIt = markdownItWithTestPlugin(pipelineHandler, []);
     assertThrows(
-        () => markdownIt.render(testMarkdown, mockEnvironment()),
+        () => markdownIt.render(testMarkdown, testEnvironment()),
         Error,
-        "No source at 0-1 in Mock Document"
+        "No source at 0-1 in Test Document"
     );
 });
 
@@ -58,9 +58,9 @@ Deno.test("If more than an image is in a paragraph it throws", () => {
     const testMarkdown = "![caption](test.jpg) Irrelevant text!";
     const markdownIt = markdownItWithTestPlugin(pipelineHandler, []);
     assertThrows(
-        () => markdownIt.render(testMarkdown, mockEnvironment()),
+        () => markdownIt.render(testMarkdown, testEnvironment()),
         Error,
-        "Unwanted extra content in image paragraph at 0-1 in Mock Document"
+        "Unwanted extra content in image paragraph at 0-1 in Test Document"
     );
 });
 
