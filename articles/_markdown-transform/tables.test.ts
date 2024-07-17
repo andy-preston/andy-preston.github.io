@@ -5,8 +5,8 @@ import { markdownItWithTestPlugin } from "./testing.ts";
 import { tokenPipeline } from "./tokenPipeline.ts";
 
 const pipeline = (state: MarkdownItState) => {
-    state.tokens = tokenPipeline(state.tokens, null)
-        .andThen(scopeOnHeadings, null)
+    state.tokens = tokenPipeline(state.tokens)
+        .andThen(scopeOnHeadings)
         .result();
 };
 

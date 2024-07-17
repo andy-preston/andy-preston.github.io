@@ -6,9 +6,7 @@ import { markdownItWithTestPlugin, testEnvironment } from "./testing.ts";
 import { tokenPipeline } from "./tokenPipeline.ts";
 
 const pipeline = (state: MarkdownItState) => {
-    state.tokens = tokenPipeline(state.tokens, state.md.renderer.rules)
-        .andThen(figure(state), null)
-        .result();
+    state.tokens = tokenPipeline(state.tokens).andThen(figure(state)).result();
 };
 
 Deno.test("It transforms an image in a paragraph into a figure", () => {

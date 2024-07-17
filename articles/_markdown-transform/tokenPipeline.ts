@@ -1,26 +1,17 @@
-import type { RenderFunctions, Token } from "./markdownIt.ts";
+import type { Token } from "./markdownIt.ts";
 
 export type Pipe = IterableIterator<Token>;
 
-export const tokenPipeline = (
-    initialValues: Array<Token>,
-    rendererRules: RenderFunctions | null
-) => {
+type PipelineFunction = (pipe: Pipe) => Pipe;
+
+export const tokenPipeline = (initialValues: Array<Token>) => {
     let transformerPile: Pipe = initialValues.values();
 
     const result = () => Array.from(transformerPile);
 
-    const andThen = (
-        transformer: (pipe: Pipe) => Pipe,
-        newRendererRules: RenderFunctions | null,
-        condition?: boolean
-    ) => {
+    const andThen = (transformer: PipelineFunction, condition?: boolean) => {
         if (condition === undefined || condition === true) {
             transformerPile = transformer(transformerPile);
-            if (newRendererRules !== null && rendererRules !== null) {
-                // biome-ignore lint/style/noParameterAssign:
-                rendererRules = Object.assign(rendererRules, newRendererRules);
-            }
         }
         return {
             "result": result,

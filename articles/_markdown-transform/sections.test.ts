@@ -7,8 +7,8 @@ import { markdownItWithTestPlugin, testEnvironment } from "./testing.ts";
 import { tokenPipeline } from "./tokenPipeline.ts";
 
 const pipeline = (state: MarkdownItState) => {
-    state.tokens = tokenPipeline(state.tokens, null)
-        .andThen(sections(state), null)
+    state.tokens = tokenPipeline(state.tokens)
+        .andThen(sections(state))
         .result();
 };
 
@@ -82,9 +82,9 @@ Deno.test("Figures tagged aside go in an aside tag followed by a new section", (
         "</article></section>"
     ].join("");
     const specialPipeline = (state: MarkdownItState) => {
-        state.tokens = tokenPipeline(state.tokens, markdownIt.renderer.rules)
-            .andThen(figure(state), null)
-            .andThen(sections(state), null)
+        state.tokens = tokenPipeline(state.tokens)
+            .andThen(figure(state))
+            .andThen(sections(state))
             .result();
     };
     const markdownIt = markdownItWithTestPlugin(specialPipeline, [
@@ -115,9 +115,9 @@ Deno.test("A figure aside at the bottom of the text has a normal section closing
         "</aside></section>"
     ].join("");
     const specialPipeline = (state: MarkdownItState) => {
-        state.tokens = tokenPipeline(state.tokens, markdownIt.renderer.rules)
-            .andThen(figure(state), null)
-            .andThen(sections(state), null)
+        state.tokens = tokenPipeline(state.tokens)
+            .andThen(figure(state))
+            .andThen(sections(state))
             .result();
     };
     const markdownIt = markdownItWithTestPlugin(specialPipeline, [

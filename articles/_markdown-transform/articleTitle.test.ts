@@ -8,8 +8,8 @@ let extractedTitle = "";
 
 const pipeline = (state: MarkdownItState) => {
     const titleFinder = finder(state);
-    state.tokens = tokenPipeline(state.tokens, state.md.renderer.rules)
-        .andThen(titleFinder.find, null)
+    state.tokens = tokenPipeline(state.tokens)
+        .andThen(titleFinder.find)
         .result();
     extractedTitle = titleFinder.title();
 };

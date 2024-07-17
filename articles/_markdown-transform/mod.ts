@@ -12,11 +12,11 @@ export const transformer = (markdownIt: MarkdownIt) => {
         const notFrontPage =
             state.env.data!.page!.data!.basename != "front-page";
         const titleFinder = finder(state);
-        state.tokens = tokenPipeline(state.tokens, markdownIt.renderer.rules)
-            .andThen(scopeOnHeadings, null)
-            .andThen(figure(state), null)
-            .andThen(titleFinder.find, null, notFrontPage)
-            .andThen(sections(state), null, notFrontPage)
+        state.tokens = tokenPipeline(state.tokens)
+            .andThen(scopeOnHeadings)
+            .andThen(figure(state))
+            .andThen(titleFinder.find, notFrontPage)
+            .andThen(sections(state), notFrontPage)
             .result();
         giveDataToLume(state.env, titleFinder.title());
     });
