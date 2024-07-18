@@ -2,15 +2,13 @@ import type { Token } from "./markdownIt.ts";
 
 export type Pipe = IterableIterator<Token>;
 
-type PipelineFunction = (pipe: Pipe) => Pipe;
-
 export const tokenPipeline = (initialValues: Array<Token>) => {
-    let transformerPile: Pipe = initialValues.values();
+    let pipeline: Pipe = initialValues.values();
 
-    const result = () => Array.from(transformerPile);
+    const result = () => Array.from(pipeline);
 
-    const andThen = (transformer: PipelineFunction) => {
-        transformerPile = transformer(transformerPile);
+    const andThen = (transformer: (pipe: Pipe) => Pipe) => {
+        pipeline = transformer(pipeline);
         return {
             "result": result,
             "andThen": andThen
