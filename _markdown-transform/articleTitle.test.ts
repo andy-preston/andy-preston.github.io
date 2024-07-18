@@ -91,6 +91,6 @@ Deno.test("If there is no title, an exception is thrown", () => {
     assertThrows(
         () => markdownIt.render(testMarkdown, testEnvironment()),
         Error,
-        "Test Document - no title found"
+        "No title found in Test Document"
     );
 });

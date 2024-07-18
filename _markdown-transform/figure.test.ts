@@ -28,7 +28,7 @@ Deno.test("It transforms an image in a paragraph into a figure", () => {
     ].join("");
 
     const markdownIt = testMarkdownIt(pipeline, []);
-    const resultingHtml = markdownIt.render(testMarkdown);
+    const resultingHtml = markdownIt.render(testMarkdown, testEnvironment());
     assertEquals(resultingHtml, expectedHtml);
 });
 
@@ -71,6 +71,6 @@ Deno.test("An aside attribute on the image is transferred to the figure", () => 
         "</figure>\n"
     ].join("");
     const markdownIt = testMarkdownIt(pipeline, [markdownItAttrs]);
-    const resultingHtml = markdownIt.render(testMarkdown);
+    const resultingHtml = markdownIt.render(testMarkdown, testEnvironment());
     assertEquals(resultingHtml, expectedHtml);
 });

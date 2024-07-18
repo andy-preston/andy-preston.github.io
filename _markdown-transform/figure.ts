@@ -1,8 +1,13 @@
+import { error } from "./error.ts";
 import { type MarkdownItState, type Token, attrRemove } from "./markdownIt.ts";
 import type { Pipe } from "./tokenPipeline.ts";
 
 export const figure = (state: MarkdownItState) => {
+    const basename = state.env.data!.page!.data!.basename;
+
     const threeTokens: Array<Token> = [];
+
+    const errorMap = () => threeTokens[1]!.map;
 
     const isImage = (token: Token): boolean => {
         if (token.type != "inline") {
@@ -23,7 +28,7 @@ export const figure = (state: MarkdownItState) => {
 
     const captionTokens = (text: string) => {
         if (!text) {
-            throw new Error(message("No caption"));
+            error("No caption", basename, errorMap());
         }
         threeTokens.splice(
             2,
@@ -43,13 +48,15 @@ export const figure = (state: MarkdownItState) => {
     const transform = () => {
         const middleChildren = threeTokens[1]!.children;
         if (middleChildren.length > 1) {
-            throw new Error(
-                message("Unwanted extra content in image paragraph")
+            error(
+                "Unwanted extra content in image paragraph",
+                basename,
+                errorMap()
             );
         }
         const imageToken = middleChildren[0]!;
         if (!imageToken.attrGet("src")) {
-            throw new Error(message("No source"));
+            error("No source", basename, errorMap());
         }
         if (attrRemove(imageToken, "aside") !== null) {
             threeTokens[0]!.attrSet("aside", imageToken.content);
@@ -57,12 +64,6 @@ export const figure = (state: MarkdownItState) => {
         paragraphToFigure(threeTokens[0]!);
         paragraphToFigure(threeTokens[2]!);
         captionTokens(imageToken.content);
-    };
-
-    const message = (text: string) => {
-        const basename = state.env.data!.page!.data!.basename;
-        const map = threeTokens[1]!.map.join("-");
-        return `${text} at ${map} in ${basename}`;
     };
 
     return function* (tokens: Pipe) {

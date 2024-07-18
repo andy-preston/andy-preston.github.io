@@ -1,8 +1,10 @@
+import { error } from "./error.ts";
 import type { PageData } from "./lumeData.ts";
 import type { MarkdownItState, Token } from "./markdownIt.ts";
 import type { Pipe } from "./tokenPipeline.ts";
 
 export const finder = (state: MarkdownItState) => {
+    const basename: string = state.env.data!.page!.data!.basename;
     let articleTitle = "";
 
     const dates = (): Array<Token> => {
@@ -52,8 +54,7 @@ export const finder = (state: MarkdownItState) => {
             }
         }
         if (articleTitle == "") {
-            const basename: string = state.env.data!.page!.data!.basename;
-            throw new Error(`${basename} - no title found`);
+            error("No title found", basename, []);
         }
     };
 

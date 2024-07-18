@@ -1,3 +1,4 @@
+import { error } from "./error.ts";
 import { type MarkdownItState, type Token, attrRemove } from "./markdownIt.ts";
 import type { Pipe } from "./tokenPipeline.ts";
 
@@ -6,14 +7,11 @@ type ArticleOrAside = "article" | "aside";
 type SectionStatus = "unconcerned" | "currentlyOpen" | "currentlyClosed";
 
 export const sections = (state: MarkdownItState) => {
-    let articleOrAside: ArticleOrAside = "article";
-    let sectionStatus: SectionStatus = "unconcerned";
+    const basename: string = state.env.data!.page!.data!.basename;
 
-    const error = (message: string, token: Token) => {
-        const basename: string = state.env.data!.page!.data!.basename;
-        const map = token.map.join("-");
-        throw new Error(`${message} at ${map} in ${basename}`);
-    };
+    let articleOrAside: ArticleOrAside = "article";
+
+    let sectionStatus: SectionStatus = "unconcerned";
 
     const asideOpen = (label: string): Array<Token> => {
         const articleToken = new state.Token("article_close", "article", -1);
@@ -57,7 +55,7 @@ export const sections = (state: MarkdownItState) => {
             const aside = attrRemove(token, "aside");
             if (aside !== null) {
                 if (!aside) {
-                    error("No label on aside", token);
+                    error("No label on aside", basename, token.map);
                 }
                 yield* asideOpen(aside);
             }
