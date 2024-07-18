@@ -1,3 +1,4 @@
+import type { PageData } from "./lumeData.ts";
 import type { MarkdownItState, Token } from "./markdownIt.ts";
 import type { Pipe } from "./tokenPipeline.ts";
 
@@ -6,7 +7,7 @@ export const finder = (state: MarkdownItState) => {
 
     const dates = (): Array<Token> => {
         // cSpell:words datetime
-        const pageData = state.env.data!.page!.data!;
+        const pageData: PageData = state.env.data!.page!.data!;
         if (pageData.noDate) {
             return [];
         }
