@@ -1,6 +1,6 @@
 import { assert } from "assert";
 import { HtmlValidate, formatterFactory } from "htmlValidate";
-import { siteFiles } from "./siteFiles.ts";
+import { siteFiles } from "./testing.ts";
 
 Deno.test("Output HTML files are valid", async () => {
     const htmlValidate = new HtmlValidate();

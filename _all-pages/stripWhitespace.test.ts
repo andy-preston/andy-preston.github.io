@@ -1,6 +1,6 @@
 import { assertEquals } from "assert";
-import { documentFromHtml, documentToHtml } from "testDom";
 import { stripWhitespace } from "./stripWhitespace.ts";
+import { documentFromHtml, documentToHtml } from "./testing.ts";
 
 Deno.test("It removes all whitespace", () => {
     const document = documentFromHtml([
