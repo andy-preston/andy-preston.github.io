@@ -1,7 +1,6 @@
 import { assertEquals } from "assert";
 import { documentFromHtml, documentToHtml } from "testDom";
 import { stripWhitespace } from "./stripWhitespace.ts";
-import { traverseDocument } from "./traverse.ts";
 
 Deno.test("It removes all whitespace", () => {
     const document = documentFromHtml([
@@ -27,8 +26,7 @@ Deno.test("It removes all whitespace", () => {
         "</section>",
         "</body></html>"
     ].join("");
-
-    traverseDocument(document, stripWhitespace);
+    stripWhitespace(document);
     assertEquals(documentToHtml(document), expectedHtml);
 });
 
@@ -45,9 +43,6 @@ Deno.test("It ignores whitespace inside <pre> elements", () => {
         "</code></pre></article></section>",
         "</body></html>"
     ];
-
-    const document = documentFromHtml(sampleHtml);
-
     const expectedHtml = [
         "<html><head><title>Test</title></head><body>",
         "<section><article><pre><code>\n",
@@ -57,7 +52,7 @@ Deno.test("It ignores whitespace inside <pre> elements", () => {
         "}\n",
         "</code></pre></article></section></body></html>"
     ].join("");
-
-    traverseDocument(document, stripWhitespace);
+    const document = documentFromHtml(sampleHtml);
+    stripWhitespace(document);
     assertEquals(documentToHtml(document), expectedHtml);
 });

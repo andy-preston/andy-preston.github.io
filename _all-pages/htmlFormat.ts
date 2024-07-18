@@ -1,6 +1,5 @@
 import { hljsWorkaround } from "./hljsWorkaround.ts";
 import { stripWhitespace } from "./stripWhitespace.ts";
-import { traverseDocument } from "./traverse.ts";
 
 export const htmlFormat = (
     filteredPages: Array<Lume.Page>,
@@ -11,6 +10,6 @@ export const htmlFormat = (
         if (!["front-page", "legacyLinks"].includes(page.data.basename)) {
             hljsWorkaround(page.document!);
         }
-        traverseDocument(document, stripWhitespace);
+        stripWhitespace(document);
     }
 };

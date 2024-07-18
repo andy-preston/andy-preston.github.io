@@ -1,5 +1,4 @@
 import { NodeType } from "lume/deps/dom.ts";
-import type { DomChanged, TraversalCallback } from "./traverse.ts";
 
 const isTextNode = (node: Node) => node.nodeType == NodeType.TEXT_NODE;
 
@@ -25,25 +24,29 @@ const isInline = (node: Node | null): boolean =>
 const withReducedSpaces = (text: string | null): string =>
     text === null ? "" : text.replace(/\s+/g, " ");
 
-export const stripWhitespace: TraversalCallback = (node: Node): DomChanged => {
+const visitNode = (node: Node): void => {
     if (isTextNode(node) && !hasPreParent(node)) {
         let text: string = withReducedSpaces(node.nodeValue);
-
         if (!isInline(node.nextSibling)) {
             text = text.trimEnd();
         }
         if (!isInline(node.previousSibling)) {
             text = text.trimStart();
         }
-
-        if (text == "") {
-            node.parentNode!.removeChild(node);
-            return true;
-        }
-
         if (text != node.nodeValue) {
             node.nodeValue = text;
         }
     }
-    return false;
+};
+
+export const stripWhitespace = (document: Document) => {
+    const visitChildrenOf = (node: Node) => {
+        for (const child of node.childNodes) {
+            visitNode(child);
+            if (child.hasChildNodes()) {
+                visitChildrenOf(child);
+            }
+        }
+    };
+    visitChildrenOf(document);
 };
