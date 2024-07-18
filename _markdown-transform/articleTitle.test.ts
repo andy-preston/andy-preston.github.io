@@ -22,7 +22,6 @@ Deno.test("It extracts title from markdown", () => {
         "",
         "The second paragraph"
     ].join("\n");
-
     const markdownIt = testMarkdownIt(pipeline, []);
     markdownIt.render(testMarkdown, testEnvironment());
     assertEquals(extractedTitle, "The Title");
@@ -36,7 +35,6 @@ Deno.test("It puts the title & date in a header", () => {
         "",
         "The second paragraph"
     ].join("\n");
-
     const expectedHtml = [
         "<header>",
         "<h1>The Title</h1>\n",
@@ -46,7 +44,6 @@ Deno.test("It puts the title & date in a header", () => {
         "<p>The first paragraph</p>\n",
         "<p>The second paragraph</p>\n"
     ].join("");
-
     const markdownIt = testMarkdownIt(pipeline, []);
     const resultingHtml = markdownIt.render(
         testMarkdown,
@@ -63,7 +60,6 @@ Deno.test("If the noDate flag is set, it skips the date in a header", () => {
         "",
         "The second paragraph"
     ].join("\n");
-
     const expectedHtml = [
         "<header>",
         "<h1>The Title</h1>\n",
@@ -71,7 +67,6 @@ Deno.test("If the noDate flag is set, it skips the date in a header", () => {
         "<p>The first paragraph</p>\n",
         "<p>The second paragraph</p>\n"
     ].join("");
-
     const markdownIt = testMarkdownIt(pipeline, []);
     const resultingHtml = markdownIt.render(
         testMarkdown,
@@ -85,12 +80,30 @@ Deno.test("If there is no title, an exception is thrown", () => {
         "The first paragraph",
         "",
         "The second paragraph"
-    ].join();
+    ].join("\n");
 
     const markdownIt = testMarkdownIt(pipeline, []);
     assertThrows(
         () => markdownIt.render(testMarkdown, testEnvironment()),
         Error,
         "No title found in Test Document"
+    );
+});
+
+Deno.test("If there are multiple titles, an exception is thrown", () => {
+    const testMarkdown = [
+        "# A title",
+        "",
+        "Some text",
+        "",
+        "# Another title",
+        "",
+        "Some more text"
+    ].join("\n");
+    const markdownIt = testMarkdownIt(pipeline, []);
+    assertThrows(
+        () => markdownIt.render(testMarkdown, testEnvironment()),
+        Error,
+        "Multiple titles at 4-5 in Test Document"
     );
 });

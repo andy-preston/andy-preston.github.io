@@ -5,7 +5,15 @@ import type { Pipe } from "./tokenPipeline.ts";
 
 export const finder = (state: MarkdownItState) => {
     const basename: string = state.env.data!.page!.data!.basename;
+
     let articleTitle = "";
+
+    const saveTitle = (token: Token) => {
+        if (articleTitle != "") {
+            error("Multiple titles", basename, token.map);
+        }
+        articleTitle = token.content;
+    };
 
     const dates = (): Array<Token> => {
         // cSpell:words datetime
@@ -40,7 +48,7 @@ export const finder = (state: MarkdownItState) => {
         let nextIsTitle = false;
         for (const token of tokens) {
             if (nextIsTitle) {
-                articleTitle = token.content;
+                saveTitle(token);
                 nextIsTitle = false;
             }
             if (token.type == "heading_open" && token.tag == "h1") {
