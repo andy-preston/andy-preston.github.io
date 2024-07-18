@@ -1,6 +1,6 @@
 import type { markdownIt as MarkdownIt } from "lume/deps/markdown_it.ts";
 import { finder } from "./articleTitle.ts";
-import { figure } from "./figure.ts";
+import { figureCaption, paragraphToFigure } from "./figure.ts";
 import { type PageData, htmlTitle } from "./lumeData.ts";
 import type { MarkdownItState } from "./markdownIt.ts";
 import { sections } from "./sections.ts";
@@ -14,7 +14,8 @@ export const transformer = (markdownIt: MarkdownIt) => {
             const titleFinder = finder(state);
             state.tokens = tokenPipeline(state.tokens)
                 .andThen(scopeOnHeadings)
-                .andThen(figure(state))
+                .andThen(paragraphToFigure(state))
+                .andThen(figureCaption(state))
                 .andThen(titleFinder.find)
                 .andThen(sections(state))
                 .result();

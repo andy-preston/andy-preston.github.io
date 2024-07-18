@@ -9,7 +9,7 @@ export const assetProcess = async (pages: Array<Lume.Page>) => {
             page.data.url
         );
     }
-}
+};
 
 export const htmlRewrite = (pages: Array<Lume.Page>) => {
     for (const page of pages) {

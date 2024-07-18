@@ -1,48 +1,29 @@
 import { error } from "./error.ts";
 import { type MarkdownItState, type Token, attrRemove } from "./markdownIt.ts";
-import type { Pipe } from "./tokenPipeline.ts";
+import type { Pipe, PipelineFunction } from "./tokenPipeline.ts";
 
-export const figure = (state: MarkdownItState) => {
+const isImage = (token: Token): boolean => {
+    if (token.type != "inline") {
+        return false;
+    }
+    for (const child of token.children) {
+        if (child.type == "image") {
+            return true;
+        }
+    }
+    return false;
+};
+
+export const paragraphToFigure = (state: MarkdownItState) => {
     const basename = state.env.data!.page!.data!.basename;
 
     const threeTokens: Array<Token> = [];
 
     const errorMap = () => threeTokens[1]!.map;
 
-    const isImage = (token: Token): boolean => {
-        if (token.type != "inline") {
-            return false;
-        }
-        for (const child of token.children) {
-            if (child.type == "image") {
-                return true;
-            }
-        }
-        return false;
-    };
-
-    const paragraphToFigure = (token: Token) => {
+    const replaceTag = (token: Token) => {
         token.tag = "figure";
         token.type = token.type.replace("paragraph", "figure");
-    };
-
-    const captionTokens = (text: string) => {
-        if (!text) {
-            error("No caption", basename, errorMap());
-        }
-        threeTokens.splice(
-            2,
-            0,
-            new state.Token("figcaption_open", "figcaption", 1)
-        );
-        const bodyToken = new state.Token("text", "", 0);
-        bodyToken.content = text;
-        threeTokens.splice(3, 0, bodyToken);
-        threeTokens.splice(
-            4,
-            0,
-            new state.Token("figcaption_close", "figcaption", -1)
-        );
     };
 
     const transform = () => {
@@ -55,15 +36,17 @@ export const figure = (state: MarkdownItState) => {
             );
         }
         const imageToken = middleChildren[0]!;
+        if (!imageToken.content) {
+            error("No caption", basename, errorMap());
+        }
         if (!imageToken.attrGet("src")) {
             error("No source", basename, errorMap());
         }
         if (attrRemove(imageToken, "aside") !== null) {
             threeTokens[0]!.attrSet("aside", imageToken.content);
         }
-        paragraphToFigure(threeTokens[0]!);
-        paragraphToFigure(threeTokens[2]!);
-        captionTokens(imageToken.content);
+        replaceTag(threeTokens[0]!);
+        replaceTag(threeTokens[2]!);
     };
 
     return function* (tokens: Pipe) {
@@ -72,9 +55,7 @@ export const figure = (state: MarkdownItState) => {
             if (threeTokens.length < 3) {
                 continue;
             }
-            // It's "supposed" to be only 3 tokens.
-            // But after the transformation, there's extra for the caption.
-            while (threeTokens.length > 3) {
+            if (threeTokens.length > 3) {
                 yield threeTokens.shift()!;
             }
             if (isImage(threeTokens[1]!)) {
@@ -86,3 +67,19 @@ export const figure = (state: MarkdownItState) => {
         }
     };
 };
+
+export const figureCaption = (state: MarkdownItState): PipelineFunction =>
+    function* (tokens: Pipe) {
+        for (const token of tokens) {
+            yield token;
+            if (isImage(token)) {
+                yield new state.Token("figcaption_open", "figcaption", 1);
+
+                const bodyToken = new state.Token("text", "", 0);
+                bodyToken.content = token.children[0]!.content;
+                yield bodyToken;
+
+                yield new state.Token("figcaption_close", "figcaption", -1);
+            }
+        }
+    };
