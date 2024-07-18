@@ -6,9 +6,9 @@ import { testEnvironment, testMarkdownIt } from "./testing.ts";
 import { tokenPipeline } from "./tokenPipeline.ts";
 
 const pipeline = (state: MarkdownItState) => {
-    state.tokens = tokenPipeline(state.tokens)
-        .andThen(paragraphToFigure(state))
-        .andThen(figureCaption(state))
+    state.tokens = tokenPipeline(state)
+        .andThen(paragraphToFigure)
+        .andThen(figureCaption)
         .result();
 };
 

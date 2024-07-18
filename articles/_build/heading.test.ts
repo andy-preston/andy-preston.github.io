@@ -7,9 +7,9 @@ import { tokenPipeline } from "./tokenPipeline.ts";
 let testTitle = "";
 
 const pipeline = (state: MarkdownItState) => {
-    state.tokens = tokenPipeline(state.tokens)
-        .andThen(headingTitle(state))
-        .andThen(headingDate(state))
+    state.tokens = tokenPipeline(state)
+        .andThen(headingTitle)
+        .andThen(headingDate)
         .result();
     testTitle = extractedTitle();
 };

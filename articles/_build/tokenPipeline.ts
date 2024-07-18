@@ -1,16 +1,16 @@
-import type { Token } from "./markdownIt.ts";
+import type { MarkdownItState, Token } from "./markdownIt.ts";
 
 export type Pipe = IterableIterator<Token>;
 
-export type PipelineFunction = (pipe: Pipe) => Pipe;
+export type PipelineFunction = (pipe: Pipe, state: MarkdownItState) => Pipe;
 
-export const tokenPipeline = (initialValues: Array<Token>) => {
-    let pipeline: Pipe = initialValues.values();
+export const tokenPipeline = (state: MarkdownItState) => {
+    let pipeline: Pipe = state.tokens.values();
 
     const result = () => Array.from(pipeline);
 
     const andThen = (transformer: PipelineFunction) => {
-        pipeline = transformer(pipeline);
+        pipeline = transformer(pipeline, state);
         return {
             "result": result,
             "andThen": andThen
