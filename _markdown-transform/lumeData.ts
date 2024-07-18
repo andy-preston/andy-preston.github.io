@@ -15,14 +15,3 @@ export const htmlTitle = (pageTitle: string): string => {
     const fullTitle = `Andy Preston - ${pageTitle}`;
     return fullTitle.length <= 70 ? fullTitle : `${fullTitle.slice(0, 67)}...`;
 };
-
-export const giveDataToLume = (lumeData: Lume.Data, extractedTitle: string) => {
-    const pageData: PageData = lumeData.data!.page!.data!;
-    if (pageData.basename == "front-page") {
-    } else {
-        pageData.title = extractedTitle;
-        pageData.htmlTitle = htmlTitle(extractedTitle);
-        pageData.layout = "../_layout.vto";
-        pageData.url = `/${pageData.basename}/`;
-    }
-};
