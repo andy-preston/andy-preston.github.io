@@ -28,11 +28,9 @@ export const hljsWorkaround = (document: Document) => {
         return null;
     };
 
-    let badSpan: Node | null;
-    do {
+    let badSpan: Node | null = somethingRotten();
+    while (badSpan !== null) {
+        badSpan.parentNode!.replaceChild(badSpan.childNodes[0]!, badSpan);
         badSpan = somethingRotten();
-        if (badSpan !== null) {
-            badSpan.parentNode!.replaceChild(badSpan.childNodes[0]!, badSpan);
-        }
-    } while (badSpan !== null);
+    }
 };

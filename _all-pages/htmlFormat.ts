@@ -7,9 +7,7 @@ export const htmlFormat = (
 ) => {
     for (const page of filteredPages) {
         const document = page.document!;
-        if (!["front-page", "legacyLinks"].includes(page.data.basename)) {
-            hljsWorkaround(page.document!);
-        }
+        hljsWorkaround(document);
         stripWhitespace(document);
     }
 };
