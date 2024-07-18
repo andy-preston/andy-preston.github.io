@@ -1,0 +1,42 @@
+#!/bin/bash
+
+# cSpell:words deno biomejs
+
+################################################################################
+#
+# This is a weird order to do things in... but it puts the most important
+# errors near the bottom of the screen, and that works for me.
+#
+################################################################################
+
+rm -rf _site
+
+export DENO_DIR="$(pwd)/_deno"
+mkdir -p "${DENO_DIR}"
+
+TASK="${1:-build}"
+
+if [[ "${TASK}" != "build" && "${TASK}" != "serve" ]]
+then
+    echo "./local-build [build|serve]"
+    exit 1
+fi
+
+deno task "${TASK}"
+
+if [[ "${TASK}" == "build" ]]
+then
+    deno test --allow-read
+
+    deno check -q $(
+        find -name \*.ts | \
+        grep -v -e ./_deno/ -e ./cover-pic/choose.ts
+    )
+
+    deno lint
+
+    deno run --allow-read --allow-env \
+        npm:typescript/tsc --project cover-pic --noEmit
+
+    deno run -A npm:@biomejs/biome check
+fi

@@ -2,17 +2,10 @@
     "cSpell.languageSettings": [
         { "languageId": "Vento", "dictionaries": ["html", "javascript"] }
     ],
-    "cSpell.words": [
-        "Lume"
-    ],
+    "cSpell.words": ["Lume"],
     "deno.cache": "./_deno/",
-    "deno.disablePaths": [
-        "assets/front-illustration.ts",
-        "assets/tsconfig.json",
-    ],
     "deno.enable": true,
     "deno.lint": true,
-    "deno.path": "./bin/deno",
     "[javascript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },

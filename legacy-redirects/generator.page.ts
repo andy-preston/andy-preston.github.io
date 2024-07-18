@@ -1,13 +1,13 @@
 // cSpell:words ebtables
 
-const redirector = (basename: string, legacy: string, redirectTo:string) => {
+const redirector = (basename: string, legacy: string, redirectTo: string) => {
     return {
         "url": legacy,
         "redirectTo": redirectTo,
         "title": basename,
         "layout": "./_redirect.vto"
     };
-}
+};
 
 const legacyPages = [
     "accessing-doctrine-models-as-arrays",
@@ -25,12 +25,18 @@ const legacyPages = [
     "tab-indent"
 ];
 
+// biome-ignore lint/style/noDefaultExport: Required by Lume API
 export default function* (_: Lume.Data) {
-    for(const page of legacyPages) {
+    for (const page of legacyPages) {
         yield redirector(page, `/${page}.html`, `/${page}/`);
     }
     // This one is spelled incorrectly as well as being "old style"
-    yield redirector("ffmpeg-recipes", "/ffmpeg-recipies.html", "/ffmpeg-recipes/");
-    // And this one was discarded because I was talking out of my (expletive deleted)
+    yield redirector(
+        "ffmpeg-recipes",
+        "/ffmpeg-recipies.html",
+        "/ffmpeg-recipes/"
+    );
+    // And this one was discarded
+    // because I was talking out of my (expletive deleted)
     yield redirector("ebtables", "/ebtables.html", "/");
 }

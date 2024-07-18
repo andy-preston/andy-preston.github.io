@@ -1,0 +1,47 @@
+{{ layout "../_all-pages/layout.vto" { htmlTitle: titles.join(' ') } }}
+    <section class="front-page">
+        <article>
+            <hgroup>
+                <h1>
+                    {{ for piece of titles }}
+                        <span>{{ piece }}</span>
+                    {{ /for }}
+                </h1>
+                <p class="tag-line">
+                    {{ for piece of tagLine }}
+                        <span>{{ piece }}</span>
+                    {{ /for }}
+                </p>
+            </hgroup>
+
+            {{ for link of externalLinks }}
+                <p><a href="https://{{ link }}">{{ link }}</a></p>
+            {{ /for }}
+
+            {{ include "../cover-pic/_layout.vto" }}
+
+            {{ content }}
+        </article>
+
+        <nav class="article-index">
+            {{ for tag, section of index }}
+                <h2>{{ section.title }}</h2>
+                {{ for article of search.pages(tag) }}
+                    <p>
+                        <a href="{{ article.url }}">{{ article.title }}</a>
+                        {{ if article.publishAsDraft }}
+                            (Draft)
+                        {{ /if }}
+                    </p>
+                {{ /for }}
+                {{ for article of section.offSite }}
+                    <p>
+                        <a href="{{ article.url }}">{{ article.title }}</a>
+                        (Off Site)
+                    </p>
+                {{ /for }}
+            {{ /for }}
+        </nav>
+
+    </section>
+{{ /layout }}

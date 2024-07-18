@@ -1,24 +1,18 @@
 section {
     display: grid;
     gap: 1em;
+    grid-template-columns: repeat(auto-fit, minmax(max(45vw, 30em), 1fr));
+
+    & article {
+        max-width: max(45vw, 30em)
+    }
 
     &.front-page {
-        grid-template-columns: repeat(
-            auto-fit,
-            minmax(max(45vw, 23em), 1fr)
-        );
+        row-gap: 5lh;
     }
 
     &:not(.front-page) {
-        grid-template-columns: repeat(
-            auto-fit,
-            minmax(max(45vw, 30em), 1fr)
-        );
         margin-bottom: 2lh;
-
-        > article {
-            max-width: max(45vw, 30em);
-        }
     }
 }
 

@@ -1,6 +1,15 @@
 {
     "imports": {
-        "lume/": "https://deno.land/x/lume@v2.2.0/"
+        "lume/": "https://deno.land/x/lume@v2.2.0/",
+        "combineDuplicatedSelectors": "npm:postcss-combine-duplicated-selectors",
+        "discardComments": "npm:postcss-discard-comments",
+        "nesting": "npm:postcss-nesting",
+        "perfectionist": "npm:perfectionist",
+        "typescript": "npm:typescript@5.4.5",
+        "getFiles": "https://deno.land/x/getfiles@v1.0.0/mod.ts",
+        "assert": "https://deno.land/std@0.224.0/assert/mod.ts",
+        "htmlValidate": "npm:html-validate@8.20.1",
+        "testDom": "./_all-pages/testDom.ts"
     },
     "tasks": {
         "lume": "echo \"import 'lume/cli.ts'\" | deno run -A -",
@@ -8,9 +17,7 @@
         "serve": "deno task lume --serve"
     },
     "compilerOptions": {
-        "types": [
-            "lume/types.ts"
-        ],
+        "types": ["lume/types.ts"],
         "noUncheckedIndexedAccess": true,
         "noImplicitAny": true,
         "noImplicitReturns": true,
@@ -20,8 +27,8 @@
         "_deno",
         "_old-stuff",
         "_site",
-        "front-page/illustration/illustration.ts",
-        "front-page/illustration/tsconfig.json",
+        "cover-pic/choose.ts",
+        "cover-pic/tsconfig.json",
         "bin",
         "fixed"
     ]

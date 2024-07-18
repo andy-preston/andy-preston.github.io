@@ -1,0 +1,79 @@
+import { error } from "./error.ts";
+import { type MarkdownItState, type Token, attrRemove } from "./markdownIt.ts";
+import type { Pipe } from "./tokenPipeline.ts";
+
+type ArticleOrAside = "article" | "aside";
+
+type SectionStatus = "unconcerned" | "currentlyOpen" | "currentlyClosed";
+
+export const sections = (state: MarkdownItState) => {
+    const basename: string = state.env.data!.page!.data!.basename;
+
+    let articleOrAside: ArticleOrAside = "article";
+
+    let sectionStatus: SectionStatus = "unconcerned";
+
+    const asideOpen = (label: string): Array<Token> => {
+        const articleToken = new state.Token("article_close", "article", -1);
+        const asideToken = new state.Token("aside_open", "aside", 1);
+        asideToken.attrSet("aria-label", label);
+        articleOrAside = "aside";
+        return [articleToken, asideToken];
+    };
+
+    const sectionClose = (): Array<Token> => {
+        const outerToken = new state.Token("section_close", "section", -1);
+        const innerToken = new state.Token(
+            `${articleOrAside}_close`,
+            articleOrAside,
+            -1
+        );
+        articleOrAside = "article";
+        sectionStatus = "currentlyClosed";
+        return [innerToken, outerToken];
+    };
+
+    const sectionOpen = (): Array<Token> => {
+        sectionStatus = "currentlyOpen";
+        return [
+            new state.Token("section_open", "section", 1),
+            new state.Token("article_open", "article", 1)
+        ];
+    };
+
+    const newSectionRequired = (token: Token): boolean => {
+        return (
+            token.type == "hr" ||
+            (articleOrAside == "aside" &&
+                ["figure_close", "table_close", "fence"].includes(token.type))
+        );
+    };
+
+    // biome-ignore lint/complexity/noExcessiveCognitiveComplexity:
+    return function* (tokens: Pipe) {
+        for (const token of tokens) {
+            const aside = attrRemove(token, "aside");
+            if (aside !== null) {
+                if (!aside) {
+                    error("No label on aside", basename, token.map);
+                }
+                yield* asideOpen(aside);
+            }
+            if (token.type != "hr") {
+                if (sectionStatus == "currentlyClosed") {
+                    yield* sectionOpen();
+                }
+                yield token;
+            }
+            if (newSectionRequired(token)) {
+                yield* sectionClose();
+            }
+            if (token.type == "header_close") {
+                sectionStatus = "currentlyClosed";
+            }
+        }
+        if (sectionStatus == "currentlyOpen") {
+            yield* sectionClose();
+        }
+    };
+};
