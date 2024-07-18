@@ -9,15 +9,15 @@ import { tokenPipeline } from "./tokenPipeline.ts";
 
 export const transformer = (markdownIt: MarkdownIt) => {
     markdownIt.core.ruler.push("transformer", (state: MarkdownItState) => {
-        const notFrontPage =
-            state.env.data!.page!.data!.basename != "front-page";
-        const titleFinder = finder(state);
-        state.tokens = tokenPipeline(state.tokens)
-            .andThen(scopeOnHeadings)
-            .andThen(figure(state))
-            .andThen(titleFinder.find, notFrontPage)
-            .andThen(sections(state), notFrontPage)
-            .result();
-        giveDataToLume(state.env, titleFinder.title());
+        const basename = state.env.data!.page!.data!.basename;
+        if (basename != "front-page") {
+            const titleFinder = finder(state);
+            state.tokens = tokenPipeline(state.tokens)
+                .andThen(scopeOnHeadings)
+                .andThen(figure(state))
+                .andThen(titleFinder.find)
+                .andThen(sections(state))
+                .result();
+            giveDataToLume(state.env, titleFinder.title());
     });
 };

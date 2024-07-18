@@ -9,10 +9,8 @@ export const tokenPipeline = (initialValues: Array<Token>) => {
 
     const result = () => Array.from(transformerPile);
 
-    const andThen = (transformer: PipelineFunction, condition?: boolean) => {
-        if (condition === undefined || condition === true) {
-            transformerPile = transformer(transformerPile);
-        }
+    const andThen = (transformer: PipelineFunction) => {
+        transformerPile = transformer(transformerPile);
         return {
             "result": result,
             "andThen": andThen
