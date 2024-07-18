@@ -2,37 +2,31 @@ import { encodeHex } from "lume/deps/hex.ts";
 
 const urlMap: { [k: string]: string } = {};
 
-export const cacheBusterAssets = async (pages: Array<Lume.Page>) => {
-    for (const page of pages) {
-        const buffer = new TextEncoder().encode(page.content! as string);
-        const hash = encodeHex(await crypto.subtle.digest("SHA-1", buffer));
-        const oldUrl = page.data.url;
-        const extension = oldUrl.split(".").pop();
-        page.data.url = `/${hash}.${extension}`;
-        urlMap[oldUrl] = page.data.url;
-    }
+export const cacheBusterUrl = async (
+    content: string,
+    url: string
+): Promise<string> => {
+    const buffer = new TextEncoder().encode(content);
+    const hash = encodeHex(await crypto.subtle.digest("SHA-1", buffer));
+    const extension = url.split(".").pop();
+    const newUrl = `/${hash}.${extension}`;
+    urlMap[url] = newUrl;
+    return newUrl;
 };
 
-export const cacheBusterLinks = (pages: Array<Lume.Page>) => {
-    let basename = "";
-    let document: Document | undefined;
-
+export const cacheBusterLinks = (document: Document, basename: string) => {
     const domModify = (querySelector: string, urlAttribute: string) => {
         const links = document!.querySelectorAll(querySelector);
         for (const link of links) {
             const oldUrl = link.getAttribute(urlAttribute)!;
             const newUrl = urlMap[oldUrl];
-            if (typeof newUrl == "undefined") {
+            if (newUrl == undefined) {
                 throw new Error(`Can't find ${oldUrl} from ${basename}`);
             }
             link.setAttribute(urlAttribute, newUrl);
         }
     };
 
-    for (const page of pages) {
-        basename = page.data.basename;
-        document = page.document;
-        domModify('link[rel="stylesheet"]', "href");
-        domModify("script", "src");
-    }
+    domModify('link[rel="stylesheet"]', "href");
+    domModify("script", "src");
 };
