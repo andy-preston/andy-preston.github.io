@@ -1,7 +1,7 @@
 import { assertEquals, assertThrows } from "assert";
 import { markdownItAttrs } from "lume/deps/markdown_it.ts";
-import { finder } from "./articleTitle.ts";
 import { figureCaption, paragraphToFigure } from "./figure.ts";
+import { headingDate, headingTitle } from "./heading.ts";
 import type { MarkdownItState } from "./markdownIt.ts";
 import { sections } from "./sections.ts";
 import { testEnvironment, testMarkdownIt } from "./testing.ts";
@@ -11,7 +11,8 @@ const pipeline = (state: MarkdownItState) => {
     state.tokens = tokenPipeline(state.tokens)
         .andThen(paragraphToFigure(state))
         .andThen(figureCaption(state))
-        .andThen(finder(state).find)
+        .andThen(headingTitle(state))
+        .andThen(headingDate(state))
         .andThen(sections(state))
         .result();
 };
