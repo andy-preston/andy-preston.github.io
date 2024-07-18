@@ -1,6 +1,5 @@
-{{ layout "../_all-pages/layout.vto" }}
+{{ layout "../_all-pages/layout.vto" { htmlTitle: titles.join(' ') } }}
     <section class="front-page">
-
         <article>
             <hgroup>
                 <h1>
@@ -19,7 +18,7 @@
                 <p><a href="https://{{ link }}">{{ link }}</a></p>
             {{ /for }}
 
-            {{ include "../cover-pic/_template.vto" }}
+            {{ include "../cover-pic/_layout.vto" }}
 
             {{ content }}
         </article>
