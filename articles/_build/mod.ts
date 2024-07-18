@@ -20,7 +20,7 @@ export const transformer = (markdownIt: MarkdownIt) => {
                 .result();
             pageData.title = titleFinder.title();
             pageData.htmlTitle = htmlTitle(titleFinder.title());
-            pageData.layout = "../_layout.vto";
+            pageData.layout = "../_build/layout.vto";
             pageData.url = `/${pageData.basename}/`;
         }
     });
