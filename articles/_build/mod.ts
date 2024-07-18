@@ -10,8 +10,7 @@ import { tokenPipeline } from "./tokenPipeline.ts";
 export const transformer = (markdownIt: MarkdownIt) => {
     markdownIt.core.ruler.push("transformer", (state: MarkdownItState) => {
         const pageData: PageData = state.env.data!.page!.data!;
-        const basename = state.env.data!.page!.data!.basename;
-        if (basename != "front-page") {
+        if (pageData.basename != "front-page") {
             const titleFinder = finder(state);
             state.tokens = tokenPipeline(state.tokens)
                 .andThen(scopeOnHeadings)
