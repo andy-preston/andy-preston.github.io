@@ -4,14 +4,11 @@ import type { MarkdownItState } from "./markdownIt.ts";
 import { testEnvironment, testMarkdownIt } from "./testing.ts";
 import { tokenPipeline } from "./tokenPipeline.ts";
 
-let testTitle = "";
-
 const pipeline = (state: MarkdownItState) => {
     state.tokens = tokenPipeline(state)
         .andThen(headingTitle)
         .andThen(headingDate)
         .result();
-    testTitle = extractedTitle();
 };
 
 Deno.test("It extracts title from markdown", () => {
@@ -24,7 +21,7 @@ Deno.test("It extracts title from markdown", () => {
     ].join("\n");
     const markdownIt = testMarkdownIt(pipeline, []);
     markdownIt.render(testMarkdown, testEnvironment());
-    assertEquals(testTitle, "The Title");
+    assertEquals(extractedTitle(), "The Title");
 });
 
 Deno.test("It puts the title & date in a header", () => {
