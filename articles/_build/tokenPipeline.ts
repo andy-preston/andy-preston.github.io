@@ -11,14 +11,13 @@ export const tokenPipeline = (state: MarkdownItState) => {
 
     const andThen = (transformer: PipelineFunction) => {
         pipeline = transformer(pipeline, state);
-        return {
-            "result": result,
-            "andThen": andThen
-        };
+        return publicInterface;
     };
 
-    return {
+    const publicInterface = {
         "result": result,
         "andThen": andThen
     };
+
+    return publicInterface;
 };
