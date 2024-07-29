@@ -118,7 +118,7 @@ quit
 ## Flashing script
 
 We can use the BMP to flash an STM-32 dev board with
-[this script](https://github.com/andy-preston/avrnude/blob/master/scripts/bmp-flash)
+[this script](https://github.com/andy-preston/avrnude/blob/master/avrnude/scripts/bmp-flash)
 
 ## We're done
 
