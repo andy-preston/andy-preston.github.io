@@ -2,7 +2,6 @@ import { error } from "./error.ts";
 import { type MarkdownItState, attrRemove } from "./markdownIt.ts";
 import type { Pipe } from "./tokenPipeline.ts";
 
-
 export const asides = function* (tokens: Pipe, state: MarkdownItState) {
     let asideBlock = "";
     for (const token of tokens) {
