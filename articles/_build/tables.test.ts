@@ -5,9 +5,7 @@ import { testMarkdownIt } from "./testing.ts";
 import { tokenPipeline } from "./tokenPipeline.ts";
 
 const pipeline = (state: MarkdownItState) => {
-    state.tokens = tokenPipeline(state.tokens)
-        .andThen(scopeOnHeadings)
-        .result();
+    state.tokens = tokenPipeline(state).andThen(scopeOnHeadings).result();
 };
 
 Deno.test("all TH tokens have scope=col attribute", () => {

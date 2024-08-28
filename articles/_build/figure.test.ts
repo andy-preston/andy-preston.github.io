@@ -1,12 +1,15 @@
 import { assertEquals, assertThrows } from "assert";
 import { markdownItAttrs } from "lume/deps/markdown_it.ts";
-import { figure } from "./figure.ts";
+import { figureCaption, paragraphToFigure } from "./figure.ts";
 import type { MarkdownItState } from "./markdownIt.ts";
 import { testEnvironment, testMarkdownIt } from "./testing.ts";
 import { tokenPipeline } from "./tokenPipeline.ts";
 
 const pipeline = (state: MarkdownItState) => {
-    state.tokens = tokenPipeline(state.tokens).andThen(figure(state)).result();
+    state.tokens = tokenPipeline(state)
+        .andThen(paragraphToFigure)
+        .andThen(figureCaption)
+        .result();
 };
 
 Deno.test("It transforms an image in a paragraph into a figure", () => {

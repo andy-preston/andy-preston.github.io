@@ -2,87 +2,90 @@ import { error } from "./error.ts";
 import { type MarkdownItState, type Token, attrRemove } from "./markdownIt.ts";
 import type { Pipe } from "./tokenPipeline.ts";
 
-export const figure = (state: MarkdownItState) => {
-    const basename = state.env.data!.page!.data!.basename;
+const isImage = (token: Token): boolean => {
+    if (token.type != "inline") {
+        return false;
+    }
+    for (const child of token.children) {
+        if (child.type == "image") {
+            return true;
+        }
+    }
+    return false;
+};
 
+export const paragraphToFigure = function* (
+    tokens: Pipe,
+    state: MarkdownItState
+) {
     const threeTokens: Array<Token> = [];
 
     const errorMap = () => threeTokens[1]!.map;
 
-    const isImage = (token: Token): boolean => {
-        if (token.type != "inline") {
-            return false;
+    const middleChildren = () => {
+        const children = threeTokens[1]!.children;
+        if (children.length > 1) {
+            error(
+                "Unwanted extra content in image paragraph",
+                state,
+                errorMap()
+            );
         }
-        for (const child of token.children) {
-            if (child.type == "image") {
-                return true;
-            }
-        }
-        return false;
+        return children;
     };
 
-    const paragraphToFigure = (token: Token) => {
+    const imageToken = (): Token => {
+        const token = middleChildren()[0]!;
+        if (!token.content) {
+            error("No caption", state, errorMap());
+        }
+        if (!token.attrGet("src")) {
+            error("No source", state, errorMap());
+        }
+        return token;
+    };
+
+    const moveAsideAttrFrom = (imageToken: Token) => {
+        if (attrRemove(imageToken, "aside") !== null) {
+            threeTokens[0]!.attrSet("aside", imageToken.content);
+        }
+    };
+
+    const replaceTag = (token: Token) => {
         token.tag = "figure";
         token.type = token.type.replace("paragraph", "figure");
     };
 
-    const captionTokens = (text: string) => {
-        if (!text) {
-            error("No caption", basename, errorMap());
+    for (const token of tokens) {
+        threeTokens.push(token);
+        if (threeTokens.length < 3) {
+            continue;
         }
-        threeTokens.splice(
-            2,
-            0,
-            new state.Token("figcaption_open", "figcaption", 1)
-        );
-        const bodyToken = new state.Token("text", "", 0);
-        bodyToken.content = text;
-        threeTokens.splice(3, 0, bodyToken);
-        threeTokens.splice(
-            4,
-            0,
-            new state.Token("figcaption_close", "figcaption", -1)
-        );
-    };
+        if (threeTokens.length > 3) {
+            yield threeTokens.shift()!;
+        }
+        if (isImage(threeTokens[1]!)) {
+            moveAsideAttrFrom(imageToken());
+            replaceTag(threeTokens[0]!);
+            replaceTag(threeTokens[2]!);
+        }
+    }
+    for (const straggler of threeTokens) {
+        yield straggler;
+    }
+};
 
-    const transform = () => {
-        const middleChildren = threeTokens[1]!.children;
-        if (middleChildren.length > 1) {
-            error(
-                "Unwanted extra content in image paragraph",
-                basename,
-                errorMap()
-            );
-        }
-        const imageToken = middleChildren[0]!;
-        if (!imageToken.attrGet("src")) {
-            error("No source", basename, errorMap());
-        }
-        if (attrRemove(imageToken, "aside") !== null) {
-            threeTokens[0]!.attrSet("aside", imageToken.content);
-        }
-        paragraphToFigure(threeTokens[0]!);
-        paragraphToFigure(threeTokens[2]!);
-        captionTokens(imageToken.content);
-    };
+export const figureCaption = function* (tokens: Pipe, state: MarkdownItState) {
+    for (const token of tokens) {
+        yield token;
+        if (isImage(token)) {
+            yield new state.Token("figcaption_open", "figcaption", 1);
 
-    return function* (tokens: Pipe) {
-        for (const token of tokens) {
-            threeTokens.push(token);
-            if (threeTokens.length < 3) {
-                continue;
-            }
-            // It's "supposed" to be only 3 tokens.
-            // But after the transformation, there's extra for the caption.
-            while (threeTokens.length > 3) {
-                yield threeTokens.shift()!;
-            }
-            if (isImage(threeTokens[1]!)) {
-                transform();
-            }
+            const bodyToken = new state.Token("text", "", 0);
+            bodyToken.content = token.children[0]!.content;
+            yield bodyToken;
+
+            yield new state.Token("figcaption_close", "figcaption", -1);
         }
-        for (const straggler of threeTokens) {
-            yield straggler;
-        }
-    };
+    }
 };

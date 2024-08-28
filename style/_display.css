@@ -21,12 +21,12 @@ table {
     border-collapse: collapse;
 }
 
-hr, td, th, pre code, figure, p.boxed {
+hr, td, th, pre code, figure, p.update {
     border-width: 1px;
     border-style: solid;
 }
 
-td, th, pre code, figure, p.boxed {
+td, th, pre code, figure, p.update {
     padding: 1em;
     margin: 0;
 }
