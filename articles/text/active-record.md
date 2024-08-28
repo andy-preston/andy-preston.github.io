@@ -22,6 +22,8 @@ Let's return to my fixing memory usage bugs by doing the mapping
 
 ## Further Reading
 
+https://en.wikipedia.org/wiki/Active_record_pattern#Criticism
+
 Cal Paterson - The Troublesome Active Record Pattern (March 2020)
 https://medium.com/r/?url=https%3A%2F%2Fcalpaterson.com%2Factiverecord.html
 
