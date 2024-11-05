@@ -22,5 +22,4 @@ siteBuilder
     .process([".html"], htmlRewrite)
     .copy("fixed", ".");
 
-// biome-ignore lint/style/noDefaultExport: required by Lume API
 export default siteBuilder;

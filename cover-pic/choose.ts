@@ -1,5 +1,7 @@
 import picturesAndCaptions from "./pictures.json";
 
+// https://www.val.town/v/edgeeffect/imgurGallery
+
 window.addEventListener("load", () => {
     const figure = document.getElementById("cover-pic");
     if (figure === null) {

@@ -1,15 +1,14 @@
 {{ layout "../../_all-pages/layout.vto" }}
     {{ content }}
     <hr>
-    <article>
-        <a href="/">
-            More stuff to read
-        </a>
-    </article>
-    <article>
-        {{ set git = "https://github.com/andy-preston/andy-preston.github.io" }}
-        <a href="{{ git }}/blob/main/articles/text/{{ basename }}.md">
-            Original Markdown
-        </a>
-    </article>
+    <footer>
+        <div>
+            <a href="/">More stuff to read</a>
+            -
+            {{ set git = "https://github.com/andy-preston/andy-preston.github.io" }}
+            <a href="{{ git }}/blob/main/articles/text/{{ basename }}.md">
+                Original Markdown
+            </a>
+        </div>
+    </footer>
 {{ /layout }}

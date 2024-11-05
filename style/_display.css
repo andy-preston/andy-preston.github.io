@@ -3,13 +3,21 @@ body {
     margin-inline: auto;
 }
 
-p {
+p, time {
     margin-top: 1ex;
 }
 
 h1, h2, h3, h4 {
     margin-top: 0;
     margin-bottom: 0;
+}
+
+header {
+    margin-bottom: 2lh;
+}
+
+footer {
+    margin-top: 3lh;
 }
 
 p + h2 {
@@ -31,7 +39,7 @@ td, th, pre code, figure, p.boxed {
     margin: 0;
 }
 
-p, table, header {
+p, table {
     margin-bottom: 1ex;
 }
 

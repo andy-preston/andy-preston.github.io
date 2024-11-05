@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# cSpell:words deno biomejs
+# cSpell:words deno
 
 ################################################################################
 #
@@ -37,6 +37,4 @@ then
 
     deno run --allow-read --allow-env \
         npm:typescript/tsc --project cover-pic --noEmit
-
-    deno run -A npm:@biomejs/biome check
 fi

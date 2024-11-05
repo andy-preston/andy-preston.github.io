@@ -1,12 +1,15 @@
-section {
+section, header, footer {
     display: grid;
-    gap: 1em;
-    grid-template-columns: repeat(auto-fit, minmax(max(45vw, 30em), 1fr));
+    column-gap: 5em;
+    grid-template-columns: repeat(2, min(45vw, 70ch));
+    justify-self: center;
 
-    & article {
-        max-width: max(45vw, 30em)
+    & h1, & time {
+        grid-column: span 2;
     }
+}
 
+section {
     &.front-page {
         row-gap: 5lh;
     }
