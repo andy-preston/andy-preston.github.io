@@ -11,7 +11,7 @@ body {
 hr, td, th,
 pre code,
 figure,
-p.boxed {
+p.update {
     border-color: #035;
 }
 

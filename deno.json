@@ -29,7 +29,6 @@
         "_site",
         "cover-pic/choose.ts",
         "cover-pic/tsconfig.json",
-        "bin",
         "fixed"
     ]
 }
