@@ -1,6 +1,6 @@
 ---
 # cSpell:words culting
-tags: engineering
+tags: philosophy
 date: "2024-02-18"
 ---
 # Coding Katas Vs Real Life

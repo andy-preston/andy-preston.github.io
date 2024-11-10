@@ -11,9 +11,6 @@
     "arch": {
         "title": "Architecture"
     },
-    "engineering": {
-        "title": "Software Engineering"
-    },
     "docker": {
         "title": "Docker"
     },
@@ -39,6 +36,9 @@
     },
     "shell": {
         "title": "Shell Miscellany"
+    },
+    "diary": {
+        "title": "The Diary of an Aged Hacker"
     },
     "philosophy": {
         "title": "\"Philosophy\""
