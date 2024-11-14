@@ -28,6 +28,7 @@
         "_old-stuff",
         "_site",
         "cover-pic/choose.ts",
+        "cover-pic/_val-town.ts",
         "cover-pic/tsconfig.json",
         "fixed"
     ]

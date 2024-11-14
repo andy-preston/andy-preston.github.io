@@ -1,5 +1,5 @@
 ---
-# cSpell:words blacksphere blackmagic stlink swlink imgur
+# cSpell:words blacksphere blackmagic stlink swlink
 # cSpell:words JTAG GPIO libnewlib multiarch eabi swdp
 tags: micro
 date: "2023-06-26"
@@ -70,7 +70,7 @@ Connect a USB/serial adaptor to the Blue Pill:
 
 Insert the USB/serial adapter in your computer.
 
-![Blue Pill serial upload](https://i.imgur.com/dKSzLko.jpg){aside}
+![Blue Pill serial upload](https://i.ibb.co/Wy35BpH/Blue-Pill-serial-upload.jpg){aside}
 
 ## Upload the firmware
 
@@ -113,7 +113,7 @@ info registers
 quit
 ```
 
-![Blue Pill BMP SWD](https://i.imgur.com/D0Xk3ND.jpg){aside}
+![Blue Pill BMP SWD](https://i.ibb.co/tPCj0XX/Blue-Pill-BMP-SWD.jpg){aside}
 
 ## Flashing script
 
@@ -132,4 +132,4 @@ whatever it is you need to do... See you soon, maybe.
 Well, I'm not quite ready for JTAG just yet. But, with an extra header for the
 other 3 JTAG pins, it shouldn't be a problem.
 
-![Blue Pill BMP JTAG](https://i.imgur.com/c0yRLfN.jpg){aside}
+![Blue Pill BMP JTAG](https://i.ibb.co/jGRRmSy/Blue-Pill-BMP-JTAG.jpg){aside}

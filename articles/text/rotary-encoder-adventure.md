@@ -31,7 +31,7 @@ And the particular rotary encoder that Korg chose to use way back when if now
 kinda rare. I've been searching for something similar on E. Bay for a long time
 now.
 
-![The Unfortunate Hole in My Electribe](https://i.imgur.com/ssnOFJq.jpeg){aside}
+![The Unfortunate Hole in My Electribe](https://i.ibb.co/d2PK5VC/Unfortunate-Hole.jpg){aside}
 
 ## Small Sellers on E. Bay and Negative-Feedback-Phobia
 
@@ -52,6 +52,8 @@ encoders as soon as humanly possible which he duly did.
 
 But, I was trying to make do, and I couldn't really make these encoders fit
 in the Electribe in any sensible way.
+
+![Rotary Encoders (or not)](https://i.ibb.co/SRpjdbf/Encoders-and-Not.jpg){aside}
 
 ## Escape From Brexit Island
 
@@ -76,6 +78,8 @@ eventually bit the bullet and clicked on the shopping cart icons.
 And the correct rotary encoders arrived in the post a week later, with no
 sign of the dreaded E. mail from Customs and Excise. **Hoorah!**
 
+![The Right Ones](https://i.ibb.co/t32RKrz/The-Right-One.jpg){aside}
+
 ## But The Story Wouldn't Be Worth Telling Without a Dose of Irony
 
 Just a couple of days later, I was out for a walk with my girlfriend.
@@ -93,3 +97,5 @@ trying to get hold of... available from "my regular components supplier" at my
 favourite price!
 
 ... well, I suppose another spare will come in handy!
+
+![The Final irony](https://i.ibb.co/ySN2FMJ/The-Final-Irony.jpg){aside}
