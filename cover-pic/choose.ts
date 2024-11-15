@@ -17,14 +17,20 @@ window.addEventListener("load", () => {
     const pictures = (picturesAndCaptions: Array<[string, string]>) => {
         const lastPicture = picturesAndCaptions.length - 1;
 
-        let currentPicture = Math.floor(
-            Math.random() * picturesAndCaptions.length
-        );
+        let currentPicture: number;
 
-        const showCurrentPicture = () => {
-            const [url, title] = picturesAndCaptions[currentPicture];
+        const firstPicture = () =>
+            Math.floor(Math.random() * picturesAndCaptions.length);
+
+        const nextPicture = (goBackwards: Boolean) => goBackwards ?
+            (currentPicture == 0 ? lastPicture : currentPicture - 1) :
+            (currentPicture == lastPicture ? 0 : currentPicture + 1);
+
+        const showPicture = (index: number) => {
+            const [url, title] = picturesAndCaptions[index];
             image.setAttribute("src", url);
             image.setAttribute("alt", title);
+            currentPicture = index;
         };
 
         image.addEventListener("load", () => {
@@ -32,17 +38,11 @@ window.addEventListener("load", () => {
             caption.innerHTML = image.getAttribute("alt");
         });
 
-        showCurrentPicture();
+        showPicture(firstPicture());
 
         figure.addEventListener("click", (event) => {
-            if (event.offsetX < image.width / 2) {
-                currentPicture =
-                    currentPicture == 0 ? lastPicture : currentPicture - 1;
-            } else {
-                currentPicture =
-                    currentPicture == lastPicture ? 0 : currentPicture + 1;
-            }
-            showCurrentPicture();
+            const onLeft = event.offsetX < image.width / 2;
+            showPicture(nextPicture(onLeft));
         });
     };
 

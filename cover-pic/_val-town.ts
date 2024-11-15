@@ -1,18 +1,35 @@
 import { fetchText } from "https://esm.town/v/stevekrouse/fetchText?v=6";
-import { load } from "npm:cheerio";
+import { DOMParser, type Element } from "jsr:@b-fuze/deno-dom";
+
+const items = (html: string) => {
+    const parser = new DOMParser();
+    const dom = parser.parseFromString(html, "text/html");
+    return dom.getElementsByClassName("list-item");
+};
+
+const urlAndTitle = (item: Element): [string, string] | null => {
+    const dataObject = item.getAttribute("data-object");
+    if (!dataObject) {
+        return null;
+    }
+    const { url, title } = JSON.parse(decodeURIComponent(dataObject));
+    return url == undefined ? null : [
+        url as string,
+        title == undefined ? "NO TITLE :(" : title as string
+    ];
+};
 
 export default async function(_req: Request): Promise<Response> {
-    const html = await fetchText(
-        `https://ibb.co/album/${Deno.env.get("front_page_album")}`
-    );
-    const $ = load(html);
-    const result = [];
-    for (const item of $(".list-item")) {
-        const dataObject = item.attribs["data-object"];
-        if (dataObject) {
-            const itemData = JSON.parse(decodeURIComponent(dataObject));
-            result.push([itemData.url, itemData.title]);
+    const response: Array<[string, string]> = [];
+    const album = Deno.env.get("front_page_album");
+    const html = await fetchText(`https://ibb.co/album/${album}`);
+    if (html) {
+        for (const item of items(html)) {
+            const values = urlAndTitle(item);
+            if (values) {
+                response.push(values);
+            }
         }
     }
-    return Response.json(result);
-}
+    return Response.json(response);
+};
