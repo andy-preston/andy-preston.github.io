@@ -1,10 +1,23 @@
+body {
+    margin-left: 3vw;
+    margin-right: 3vw;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 section, header, footer {
     display: grid;
-    column-gap: 5em;
-    grid-template-columns: repeat(2, min(45vw, 70ch));
+    column-gap: 6vw;
     justify-self: center;
+    grid-template-columns: min(41vw, 70ch) min(41vw, 70ch);
 
-    & h1, & time {
+    @media (width < 1000px) {
+        grid-template-columns: min(94vw, 70ch);
+    }
+}
+
+@media (width >= 1000px) {
+    h1, time {
         grid-column: span 2;
     }
 }
