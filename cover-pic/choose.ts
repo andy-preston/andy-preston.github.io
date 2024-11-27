@@ -46,7 +46,7 @@ window.addEventListener("load", () => {
         });
     };
 
-    fetch("https://edgeeffect-websitefrontpagealbum.web.val.run").then(
-        response => response.json().then(pictures)
-    );
+    fetch(
+        "https://edgeeffect-websitefrontpagealbum.web.val.run?album=0qThsn"
+    ).then(response => response.json().then(pictures));
 });

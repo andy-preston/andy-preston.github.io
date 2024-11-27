@@ -19,9 +19,12 @@ const urlAndTitle = (item: Element): [string, string] | null => {
     ];
 };
 
-export default async function(_req: Request): Promise<Response> {
+export default async function(req: Request): Promise<Response> {
     const response: Array<[string, string]> = [];
-    const album = Deno.env.get("front_page_album");
+    const params = new URL(req.url).searchParams;
+    const album = params.has("album")
+        ? params.get("album")
+        : Deno.env.get("front_page_album");
     const html = await fetchText(`https://ibb.co/album/${album}`);
     if (html) {
         for (const item of items(html)) {
@@ -31,5 +34,7 @@ export default async function(_req: Request): Promise<Response> {
             }
         }
     }
-    return Response.json(response);
-};
+    return Response.json(response, {
+        "headers": { "cache-control": `max-age=${60 * 60 * 12}` }
+    });
+}
