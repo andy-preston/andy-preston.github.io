@@ -28,7 +28,7 @@ if [[ "${TASK}" == "build" ]]
 then
     deno test --allow-read
 
-    deno check -q $(
+    deno check --allow-import -q $(
         find -name \*.ts | \
         grep -v -e ./_deno/ -e ./cover-pic/choose.ts
     )
