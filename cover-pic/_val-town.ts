@@ -21,16 +21,15 @@ const urlAndTitle = (item: Element): [string, string] | null => {
 
 export default async function(req: Request): Promise<Response> {
     const response: Array<[string, string]> = [];
-    const params = new URL(req.url).searchParams;
-    const album = params.has("album")
-        ? params.get("album")
-        : Deno.env.get("front_page_album");
-    const html = await fetchText(`https://ibb.co/album/${album}`);
-    if (html) {
-        for (const item of items(html)) {
-            const values = urlAndTitle(item);
-            if (values) {
-                response.push(values);
+    const album = new URL(req.url).searchParams.get("album");
+    if (album) {
+        const html = await fetchText(`https://ibb.co/album/${album}`);
+        if (html) {
+            for (const item of items(html)) {
+                const values = urlAndTitle(item);
+                if (values) {
+                    response.push(values);
+                }
             }
         }
     }
