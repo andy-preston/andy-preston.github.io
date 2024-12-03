@@ -55,6 +55,7 @@ objects, without classes and methods, just simple JSON (or a PHP associative
 array or a Python dictionary...):
 
 ```json{aside="Example JSON Object"}
+{
     "orders": [{
         "customer": {
             "name": "Tim Tester",

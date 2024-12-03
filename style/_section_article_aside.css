@@ -17,7 +17,7 @@ section, header, footer {
 }
 
 @media (width >= 1000px) {
-    h1, time {
+    h1, time, footer div {
         grid-column: span 2;
     }
 }
@@ -26,14 +26,13 @@ section {
     &.front-page {
         row-gap: 5lh;
     }
-
-    &:not(.front-page) {
-        margin-bottom: 2lh;
-    }
 }
 
 aside {
     overflow-x: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
 
     > figure, > pre, > table {
         max-width: 100%;
