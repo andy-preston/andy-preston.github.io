@@ -53,8 +53,6 @@ Multiple learning opportunities flood out of this project and at the end of it
 I've got a working application that I want, not just a solution to a puzzle that
 doesn't actually do anything.
 
---------------------------------------------------------------------------------
-
 ## Writing My Own Assembler
 
 My telephone project has an AVR microcontroller in it and I like to program AVRs

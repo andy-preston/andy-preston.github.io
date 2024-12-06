@@ -65,6 +65,34 @@ Deno.test("A horizontal rule splits a section in two", () => {
     assertEquals(actualHtml, expectedHtml);
 });
 
+Deno.test("An H2 splits an existing section", () => {
+    const testMarkdown = [
+        "# The Title  ",
+        "",
+        "## The first section",
+        "",
+        "Some text",
+        "",
+        "## A new section",
+        "",
+        "Some more text"
+    ].join("\n");
+    const expectedHtml = [
+        "<header><h1>The Title</h1>\n</header>",
+        "<section><article>",
+        "<h2>The first section</h2>\n",
+        "<p>Some text</p>\n",
+        "</article></section>",
+        "<section><article>",
+        "<h2>A new section</h2>\n",
+        "<p>Some more text</p>\n",
+        "</article></section>"
+    ].join("");
+    const markdownIt = testMarkdownIt(pipeline, []);
+    const actualHtml = markdownIt.render(testMarkdown, environment);
+    assertEquals(actualHtml, expectedHtml);
+});
+
 Deno.test("Figures tagged aside go in an aside tag followed by a new section", () => {
     const testMarkdown = [
         "# The Title  ",

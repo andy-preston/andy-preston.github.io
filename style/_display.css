@@ -2,11 +2,7 @@ p, time {
     margin-top: 1ex;
 }
 
-h2 {
-    margin-top: 1lh;
-}
-
-h1, nav h2:first-child, h3, h4 {
+h1, h2:first-child, h3, h4 {
     margin-top: 0;
 }
 
@@ -14,12 +10,12 @@ h1, h2, h3, h4 {
     margin-bottom: 0;
 }
 
-footer {
-    margin-top: 1lh;
+header {
+    margin-bottom: 1lh;
 }
 
-header {
-    margin-bottom: 2lh;
+footer {
+    margin-top: 1lh;
 }
 
 table {

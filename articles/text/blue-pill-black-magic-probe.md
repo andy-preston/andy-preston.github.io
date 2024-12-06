@@ -52,8 +52,6 @@ As well as `arm-none-eabi-gcc`, you'll need `libnewlib-arm-none-eabi` installed.
 make clean && make PROBE_HOST=swlink
 ```
 
---------------------------------------------------------------------------------
-
 ## Prepare to Upload
 
 Move the **BOOT0** jumper from **0** to **1** to use the serial flasher boot
@@ -91,8 +89,6 @@ stm32flash -w src/blackmagic.bin -v -S 0x08002000 /dev/ttyUSB0
 I'm not sure if the `stm32flash -o` option is actually required (I'm a newbie
 myself) but it doesn't do any particular harm.
 
---------------------------------------------------------------------------------
-
 ## Try it Out
 
 Unplug and disconnect the USB/serial adaptor, put the **BOOT0** jumper back on
@@ -124,8 +120,6 @@ We can use the BMP to flash an STM-32 dev board with
 
 Right I'm off to try and learn how to debug embedded Zig. And you're off to do
 whatever it is you need to do... See you soon, maybe.
-
---------------------------------------------------------------------------------
 
 ## Hang on, What about JTAG?
 

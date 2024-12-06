@@ -1,5 +1,5 @@
 ---
-tags: engineering
+tags: philosophy
 date: "2024-11-29"
 ---
 # Design Patterns and Computer Science

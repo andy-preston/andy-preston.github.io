@@ -5,7 +5,7 @@ date: "2023-06-26"
 ---
 # A Sceptic's Guide to ORM
 
-**This is an early draft.**
+## This is an early draft
 
 I've started well... but the article peters out and the ending is a massive
 disappointment.
@@ -22,16 +22,12 @@ task at work has "crystallized" my thoughts and I feel I've now replaced most
 of my previously held opinions with something approaching the facts about this
 surprisingly difficult subject.
 
---------------------------------------------------------------------------------
-
 ## What is ORM?
 
 The difficulty starts with the fact that ORM is both a noun and a verb.
 We have a pattern called "Object Relational Mapping" and many software
 libraries known collectively as "Object Relational Mappers". So when we say
 "ORM&"", it's not immediately obvious what we're talking about.
-
---------------------------------------------------------------------------------
 
 ## What is a Mapper, then?
 
@@ -92,8 +88,6 @@ joined in a bigger query as though they were all tables.
 
 {aside="Example SQL Result"}
 
---------------------------------------------------------------------------------
-
 ## But The Formats Don't Match
 
 On receiving this table into our application code, the obvious disparity
@@ -104,8 +98,6 @@ iteration.
 
 But as the complexity of the queried data increases so does the complexity
 of the code required to map it.
-
---------------------------------------------------------------------------------
 
 ## It's not as simple as it seems
 
@@ -120,8 +112,6 @@ out of the other"... or is it?
 The reason why I was doing this fix was to overcome excessive memory usage
 issues our chosen ORM library.
 
---------------------------------------------------------------------------------
-
 ## Your Mileage May Vary
 
 The application I'm working on may be a special case, it's legacy code with
@@ -130,8 +120,6 @@ it's "stuck" on an obsolete version of PHP, and it's using a
 heavily modified version of an equally obsolete ORM. I say it might be a
 special case but I'm sure many of you have also had to work on something very
 similar at some point in your careers.
-
---------------------------------------------------------------------------------
 
 ## Who's Schema Is It Anyway?
 
@@ -148,8 +136,6 @@ may have pivot-tables that also contain data of their own. Sometimes you can
 fix these issues by redesigning the database, sometimes by inserting
 horrible kludges into your ORM code. But neither of these solutions yield
 anything that could be described as "elegant".
-
---------------------------------------------------------------------------------
 
 ## Is There a Punchline?
 

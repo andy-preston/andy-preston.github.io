@@ -23,6 +23,9 @@ section, header, footer {
 }
 
 section {
+    &:not(.front-page) {
+        margin-bottom: 2lh;
+    }
     &.front-page {
         row-gap: 5lh;
     }

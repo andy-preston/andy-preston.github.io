@@ -29,6 +29,10 @@ type SectionStatus = "unconcerned" | "open" | "closed";
 export const sections = function* (tokens: Pipe, state: MarkdownItState) {
     let sectionIs: SectionStatus = "unconcerned";
     for (const token of tokens) {
+        if (sectionIs == "open" && token.type == "heading_open" && token.tag == "h2") {
+            yield new state.Token("section_close", "section", -1);
+            sectionIs = "closed";
+        }
         if (sectionIs == "closed") {
             yield new state.Token("section_open", "section", 1);
             sectionIs = "open";
