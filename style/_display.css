@@ -18,6 +18,10 @@ footer {
     margin-top: 1lh;
 }
 
+header {
+    margin-bottom: 2lh;
+}
+
 table {
     margin-top: 0;
     border-collapse: collapse;

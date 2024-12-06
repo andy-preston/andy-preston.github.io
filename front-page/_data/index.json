@@ -1,12 +1,6 @@
 {
     "micro": {
-        "title": "Microcontroller Programming",
-        "offSite": [
-            {
-                "url": "https://hackaday.io/project/170532/instructions",
-                "title": "Adding Buffering to LCSoft CY7C68013A Mini Board"
-            }
-        ]
+        "title": "Microcontroller Programming"
     },
     "engineering ": {
         "title": "Software Engineering"
