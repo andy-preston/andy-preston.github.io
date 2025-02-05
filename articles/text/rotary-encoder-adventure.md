@@ -87,7 +87,7 @@ And, there, discarded in an alleyway was a bag-for-life (the fly-tippers best
 friend) with a rather tasty looking sound-system in it. My immediate reaction
 would be to pick it up and scuttle off back home with it. But, mindful of my
 girlfriend's probable exclamations of "Oh Good God, What do you want that
-rubbish for?!", I just made a not of it and came back for it later.
+rubbish for?!", I just made a note of it and came back for it later.
 
 Sitting in my office this weekend, I was stripping down my new booty... plenty
 of nice odds and ends inside. And there it was, staring me in the face.
