@@ -47,3 +47,7 @@ hr {
     margin-top: 1lh;
     margin-bottom: 1lh;
 }
+
+code:not(pre code) {
+    white-space: nowrap;
+}
