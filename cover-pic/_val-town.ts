@@ -7,7 +7,9 @@ const items = (html: string) => {
     return dom.getElementsByClassName("list-item");
 };
 
-const urlAndTitle = (item: Element): [string, string] | null => {
+type UrlAndTitle = [string, string];
+
+const urlAndTitle = (item: Element): UrlAndTitle | null => {
     const dataObject = item.getAttribute("data-object");
     if (!dataObject) {
         return null;
@@ -15,12 +17,22 @@ const urlAndTitle = (item: Element): [string, string] | null => {
     const { url, title } = JSON.parse(decodeURIComponent(dataObject));
     return url == undefined ? null : [
         url as string,
-        title == undefined ? "NO TITLE :(" : title as string
+        title == undefined ? "NO TITLE :(" : title as string,
     ];
 };
 
+const comparison = (a: UrlAndTitle, b: UrlAndTitle) => {
+    const aTitle = a[1].toUpperCase();
+    const bTitle = b[1].toUpperCase();
+    return aTitle < bTitle
+        ? -1
+        : aTitle > bTitle
+        ? 1
+        : 0;
+};
+
 export default async function(req: Request): Promise<Response> {
-    const response: Array<[string, string]> = [];
+    const response: Array<UrlAndTitle> = [];
     const album = new URL(req.url).searchParams.get("album");
     if (album) {
         const html = await fetchText(`https://ibb.co/album/${album}`);
@@ -33,7 +45,8 @@ export default async function(req: Request): Promise<Response> {
             }
         }
     }
+    response.sort(comparison);
     return Response.json(response, {
-        "headers": { "cache-control": `max-age=${60 * 60 * 12}` }
+        "headers": { "cache-control": `max-age=${60 * 60 * 12}` },
     });
 }
