@@ -1,5 +1,5 @@
 ---
-# cSpell:words blacksphere blackmagic stlink swlink imgur
+# cSpell:words blacksphere blackmagic stlink swlink
 # cSpell:words JTAG GPIO libnewlib multiarch eabi swdp
 tags: micro
 date: "2023-06-26"
@@ -52,8 +52,6 @@ As well as `arm-none-eabi-gcc`, you'll need `libnewlib-arm-none-eabi` installed.
 make clean && make PROBE_HOST=swlink
 ```
 
---------------------------------------------------------------------------------
-
 ## Prepare to Upload
 
 Move the **BOOT0** jumper from **0** to **1** to use the serial flasher boot
@@ -70,7 +68,7 @@ Connect a USB/serial adaptor to the Blue Pill:
 
 Insert the USB/serial adapter in your computer.
 
-![Blue Pill serial upload](https://i.imgur.com/dKSzLko.jpg){aside}
+![Blue Pill serial upload](https://i.ibb.co/Wy35BpH/Blue-Pill-serial-upload.jpg){aside}
 
 ## Upload the firmware
 
@@ -90,8 +88,6 @@ stm32flash -w src/blackmagic.bin -v -S 0x08002000 /dev/ttyUSB0
 
 I'm not sure if the `stm32flash -o` option is actually required (I'm a newbie
 myself) but it doesn't do any particular harm.
-
---------------------------------------------------------------------------------
 
 ## Try it Out
 
@@ -113,7 +109,7 @@ info registers
 quit
 ```
 
-![Blue Pill BMP SWD](https://i.imgur.com/D0Xk3ND.jpg){aside}
+![Blue Pill BMP SWD](https://i.ibb.co/tPCj0XX/Blue-Pill-BMP-SWD.jpg){aside}
 
 ## Flashing script
 
@@ -125,11 +121,9 @@ We can use the BMP to flash an STM-32 dev board with
 Right I'm off to try and learn how to debug embedded Zig. And you're off to do
 whatever it is you need to do... See you soon, maybe.
 
---------------------------------------------------------------------------------
-
 ## Hang on, What about JTAG?
 
 Well, I'm not quite ready for JTAG just yet. But, with an extra header for the
 other 3 JTAG pins, it shouldn't be a problem.
 
-![Blue Pill BMP JTAG](https://i.imgur.com/c0yRLfN.jpg){aside}
+![Blue Pill BMP JTAG](https://i.ibb.co/jGRRmSy/Blue-Pill-BMP-JTAG.jpg){aside}

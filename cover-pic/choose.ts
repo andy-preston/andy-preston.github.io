@@ -1,5 +1,3 @@
-import picturesAndCaptions from "./pictures.json";
-
 window.addEventListener("load", () => {
     const figure = document.getElementById("cover-pic");
     if (figure === null) {
@@ -16,31 +14,39 @@ window.addEventListener("load", () => {
         throw new Error("Can't find caption element in cover-pic");
     }
 
-    const lastPicture = picturesAndCaptions.length - 1;
+    const pictures = (picturesAndCaptions: Array<[string, string]>) => {
+        const lastPicture = picturesAndCaptions.length - 1;
 
-    let currentPicture = Math.floor(Math.random() * picturesAndCaptions.length);
+        let currentPicture: number;
 
-    const showCurrentPicture = () => {
-        const [tag, title] = picturesAndCaptions[currentPicture];
-        image.setAttribute("src", `https://i.imgur.com/${tag}.jpg`);
-        image.setAttribute("alt", title);
+        const firstPicture = () =>
+            Math.floor(Math.random() * picturesAndCaptions.length);
+
+        const nextPicture = (goBackwards: Boolean) => goBackwards ?
+            (currentPicture == 0 ? lastPicture : currentPicture - 1) :
+            (currentPicture == lastPicture ? 0 : currentPicture + 1);
+
+        const showPicture = (index: number) => {
+            const [url, title] = picturesAndCaptions[index];
+            image.setAttribute("src", url);
+            image.setAttribute("alt", title);
+            currentPicture = index;
+        };
+
+        image.addEventListener("load", () => {
+            figure.removeAttribute("style");
+            caption.innerHTML = image.getAttribute("alt");
+        });
+
+        showPicture(firstPicture());
+
+        figure.addEventListener("click", (event) => {
+            const onLeft = event.offsetX < image.width / 2;
+            showPicture(nextPicture(onLeft));
+        });
     };
 
-    image.addEventListener("load", () => {
-        figure.removeAttribute("style");
-        caption.textContent = image.getAttribute("alt");
-    });
-
-    showCurrentPicture();
-
-    figure.addEventListener("click", (event) => {
-        if (event.offsetX < image.width / 2) {
-            currentPicture =
-                currentPicture == 0 ? lastPicture : currentPicture - 1;
-        } else {
-            currentPicture =
-                currentPicture == lastPicture ? 0 : currentPicture + 1;
-        }
-        showCurrentPicture();
-    });
+    fetch(
+        "https://edgeeffect-websitefrontpagealbum.web.val.run?album=0qThsn"
+    ).then(response => response.json().then(pictures));
 });

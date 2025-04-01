@@ -1,23 +1,41 @@
-section {
+body {
+    margin-left: 3vw;
+    margin-right: 3vw;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+section, header, footer {
     display: grid;
-    gap: 1em;
-    grid-template-columns: repeat(auto-fit, minmax(max(45vw, 30em), 1fr));
+    column-gap: 6vw;
+    justify-self: center;
+    grid-template-columns: min(41vw, 70ch) min(41vw, 70ch);
 
-    & article {
-        max-width: max(45vw, 30em)
+    @media (width < 1000px) {
+        grid-template-columns: min(94vw, 70ch);
     }
+}
 
-    &.front-page {
-        row-gap: 5lh;
+@media (width >= 1000px) {
+    h1, time, footer div {
+        grid-column: span 2;
     }
+}
 
+section {
     &:not(.front-page) {
         margin-bottom: 2lh;
+    }
+    &.front-page {
+        row-gap: 5lh;
     }
 }
 
 aside {
     overflow-x: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
 
     > figure, > pre, > table {
         max-width: 100%;

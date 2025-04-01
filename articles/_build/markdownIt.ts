@@ -31,7 +31,6 @@ export type MarkdownItState = {
     "tokens": Array<Token>;
     "inlineMode": boolean;
     "md": MarkdownIt;
-    // biome-ignore lint/style/useNamingConvention:
     "Token": new (
         tokenType: string,
         tag: string,

@@ -1,117 +1,126 @@
 ---
-# cSpell:words culting
-tags: engineering
-date: "2024-02-18"
+# cSpell:words standup GAVRASM aaasss
+tags: philosophy
+date: "2024-12-02"
 ---
 # Coding Katas Vs Real Life
 
-I was watching Live Overflow the other day and he had made a pair of videos
-about how [CTFs are awesome](https://www.youtube.com/watch?v=L2C8rVO2lAg)
-and, conversely, how
-[CTFs are terrible](https://www.youtube.com/watch?v=lxJpKUoX-6E).
+## Advent of Code
 
-And this got me thinking about how CTFs are the hackers' equivalent of
-coding katas and how I don't particularly "get" the point of coding
-katas.
+It's around this time of year that my colleagues and the development community
+as a whole start going on about Advent of Code and, every year, I have to
+explain that I just don't see the point.
 
-## The Point of Coding Katas
+## Coding Katas
 
-Well, that's not strictly true.
+The whole idea of Advent of Code, and coding katas in general, is that you're
+given a "toy" problem to solve and you want to learn Rust or you want to try out
+TDD (you **should** try out TDD by the way!) So you try and solve the "toy"
+problems using Rust or TDD or whatever you're grasping at.
 
-I see coding katas as something akin to unit tests but for your personal
-development.
+But, at the end of it, what do you have?
 
-You take a small, easily defined problem and attempt to implement it using
-a technique or language you want to master and it's small and concise enough to
-get it done in a reasonable amount of time.
+Fine, you've got a better grasp of Rust or TDD and that's really great... but
+what value can you gain from the actual software you've written?
 
-But, then, when you've done it what do you have. Not a lot. A solution to a
-trivial problem that nobody really needs a solution to. Chuck it in the bin now
-I s'pose
+## Real Life
 
-## An alternative approach
+I've got "a thousand and one" pieces of real software that I actually "need"
+in my life.
 
-So if this is all "so terrible", what's the alternative?
+I air quote "need" because many of these projects are quite pointless hobby
+projects that add no real value to the world, I just want them.
 
-Find yourself a project that at least you will find more or less useful but
-that's also going to offer a challenge or two, that's going to throw you into
-"uncharted territory" or "stormy waters".
+But not always entirely pointless... without my
+[Lume based, static site generator](https://github.com/andy-preston/andy-preston.github.io),
+you wouldn't be reading this guff right now.
 
-## Making Things Hard For Fun & Education.
+## My Telephone
 
-In many of my spare-time projects, I like to muck around
-with microcontrollers and, I've been working on a device to adapt an obsolete
-[GPO-746](https://www.britishtelephones.com/t746.htm) and bring it back to life.
+But for one of my more trivial examples, I've been working for ages on a
+project to
+[connect an obsolete GPO-746 handset to modern mobile networks](https://github.com/andy-preston/gpo-746-android)
+just to have a retro-hipster telephone that I can play with and show off to my
+friends.
 
-I've always though that it's a good idea for personal development to go down
-one stage in abstraction. If, at work, you'd use a library or framework to
-achieve something - instead try to implement that functionality yourself. If
-Python would be a sensible language to use for some project, have a go at doing
-it in Rust instead.
+For this project, I found that I needed an Android App. So here I am learning
+Kotlin, and finding that I need to write multi-threaded code. And then I want
+to easily test my hardware, so I need a native Linux testing application
+that shares code with my Android App and I find myself doing native Kotlin and
+using it's foreign function interface to talk to a Linux USB library.
 
-With my microcontroller projects, I've taken this to the extreme of working
+Multiple learning opportunities flood out of this project and at the end of it
+I've got a working application that I want, not just a solution to a puzzle that
+doesn't actually do anything.
+
+## Writing My Own Assembler
+
+My telephone project has an AVR microcontroller in it and I like to program AVRs
 in assembly language.
 
-But I'm in danger of getting off topic. Keep your eyes peeled for my upcoming
-"Applying Software Engineering Practices to Assembly Language
-Programming" (Catchy title????)
+For my AVR projects, I was using
+[GAVRASM](https://web.archive.org/web/20230918215320/http://www.avr-asm-tutorial.net/gavrasm/index_en.html).
 
-## Go Looking For The Unfamiliar
+But you'll notice that link is to The Wayback Machine... it seems my beloved
+assembler has "died". I have a sad suspicion that it's author, Gerhard Schmidt
+has gone to the big morning standup in the sky.
 
-... or better still "disdained"
+GAVRASM didn't have a fully Open Source compatible license and I want a
+replacement that does. The available options don't quite "float my boat" and
+so I'm now working on my own replacement.
 
-After a while of working on my telephone project, it seemed the best way to
-go about things was to adapt it into an Android handset and to create a
-"simple" Android app to control it. If you want to have a look you
-can find it in on GitHub at
-[andy-preston/gpo-746-android](https://github.com/andy-preston/gpo-746-android).
+What's more, just to troll the "Macho Programming Bros" just a little bit more,
+I'm doing it in Typescript!
 
-If I'm thinking of Android apps, I've got to look at using the JVM
-and Kotlin... I've got a bit of a problem there because, well, I've never really
-got on at all with the whole Java ecosystem. Is it just some personal foible or
-is it as bad as I say it is? I don't know. But I do know that it's certainly
-unexplored territory for me.
+[github.com/andy-preston/aaa](https://github.com/andy-preston/aaa)
 
-And then there's Gradle... Oh Gradle, why are you so over-complex? You're
-only a build system, do you really need to contain multiple turing-complete
-programming languages just to run a few build tasks?
+[github.com/andy-preston/aaasss](https://github.com/andy-preston/aaasss)
 
-So here I am in both "uncharted territory", and "stormy waters"... Purely by
-wanting to get something done, I've accidentally found that "perfect"
-substitute for coding katas that I was going on about in the first place.
+> The AVR community is full of people who can't wait to shout at
+> you and tell you you are wrong the moment you dare to utter "assembler"
+> and "how dare you abandon the one true road that is the glorious C
+> language".
+>
+> If you get the opportunity, I can't recommend having a play-around with
+> an assembly language enough. If you want to learn how computers really
+> work, then assembly language will certainly show you that.
+>
+> And remember "All software is Open Source if you can read assembly!"
+> {aside="Digression"}
 
-## And Let's Make it Even More Difficult on Myself.
+## Coding Katas Vs Real Life
 
-I'm also using the CH340G serial USB chip to handle the communication between
-my microcontroller in the old telephone and the Android device. On Linux or BSD,
-this is just a matter of opening a serial connection to `/dev/ttyUSB0`. But on
-Android you actually need your own drivers for "strange" USB devices in your
-app.
+These are just a couple of examples, I haven't mentioned Zig, real time audio,
+Python, video processing and all those other things on my mile long TODO list.
 
-I could use one of the available Java libraries for driving serial USB chips
-on Android and, if this was a commercial project, I'd probably be stupid not to.
-But, for an exercise like this, that's just way too easy. I'm sure all the
-people at the real-life, non-metaphorical dojo would agree "no pain, no gain!".
-And, for this chip, "pain" is certainly the word for it. The CH340 family of
-chips are probably THE worst documented series of ICs in the entire history of
-electronics.
+But this is my point. There are so many opportunities to learn that leave you
+with a fun or maybe even useful piece of software at the end.
 
-The only documentation I've got is the actual source-code for the Linux
-driver, the NetBSD driver, the FreeBSD driver and those 2 libraries I mentioned
-earlier. But the people who wrote this code also had no real documentation and
-reading their code, it comes over as leaning a little towards "cargo culting".
+Why use up your valuable coding time solving puzzles for the sake of solving
+puzzles when you could be building stuff?
 
-## Walking Out Of The Dojo
+## Or Just Carry On With Your Katas If You Like
 
-Now, if you're trying to "Do your 10,000 hours", you need Deliberate Practice.
-And you can spend that time taking exercises with no goal beyond development
-itself or you can find a useful (or, at least, useful to you) project to
-complete. But make sure that project has some challenges that will make your
-skill-set grow.
+I can't criticise the "Programmings Bros" for telling us that we're doing
+everything wrong... and then come along and do the very same thing.
 
-Be obsessed with software quality and refine your project again and again
-until the code isn't just "not bad" but as close to perfect that you can get
-without quasi-divine superpowers... this is a spare time project - there's no
-manager here, fretting over deadlines.
+If coding katas work for you, if you can't wait for December to come along so
+you can start this year's Advent of Code - then, please, ignore me and carry on.
 
-And now you are free to walk out of the dojo!
+There aren't any imps who are going to poke you in the nether regions with
+pitchforks for eternity if you don't follow my one true way.
+
+Although... I'm still obviously right and you're obviously wrong. ;)
+
+## CTFs Too
+
+The original version of this article was just a rambling stream of conciousness
+and you don't want to read it... honestly you don't.
+
+But it was inspired by a couple of excellent videos on Live Overflow:
+
+[CTFs are awesome](https://www.youtube.com/watch?v=L2C8rVO2lAg) and
+[CTFs are terrible](https://www.youtube.com/watch?v=lxJpKUoX-6E).
+
+I'd still highly recommend these as a similar perspective on CTFs which are,
+more or less, the same thing as coding katas but for security people

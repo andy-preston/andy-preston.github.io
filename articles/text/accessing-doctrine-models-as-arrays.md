@@ -32,7 +32,7 @@ came to my rescue.
 
 Each of out Doctrine models could inherit from this base class:
 
-```php
+```php{aside="objectOrArray"}
 abstract class objectOrArray implements \ArrayAccess {
     private static function getter(string $offset) {
         return 'get' . ucfirst($offset);
@@ -61,7 +61,7 @@ abstract class objectOrArray implements \ArrayAccess {
 
 And our actual objects didn't need to change any more than that.
 
-```php
+```php{aside="orderLine"}
 class orderLine extends objectOrArray {
     private $price;
 

@@ -157,3 +157,49 @@ do
         -y $( echo $a | sed -e 's/webm/mp4/g' )
 done
 ```
+
+DVD Ripping
+
+This one isn't `ffmpeg`, it's `HandBrakeCLI`. I don't want to do any cropping,
+rescaling and de-interlacing directly from the DVD. I want to just get the
+video onto my filesystem so I can do all the processing without the
+inconvienience of an optical disc going "Viiirt, viiirt, vit vit vit, viiiiir".
+
+So this is the quickest and easiest way I can get a (far too big) copy off of
+the disc.
+
+If you want a smaller (or even bigger) working copy, you may want to tweak the
+`--quality` value.
+
+```bash{aside="DVD Ripping"}
+DVD="/dev/sr0"
+DISC_TITLE=$(
+    lsdvd ${DVD} | \
+    grep "Disc Title" | \
+    sed 's/Disc Title: //g'
+)
+TITLES=$(
+    lsdvd ${DVD} | \
+    grep Chapters: | \
+    awk '{ print $2 }' | \
+    sed 's/,//g'
+)
+for TITLE in $TITLES
+do
+    OUTPUT_FILE=${DISC_TITLE}_${TITLE}.mp4
+    if [ ! -f ${OUTPUT_FILE} ]
+    then
+        HandBrakeCLI --input ${DVD} \
+            --title $TITLE \
+            --encoder x264 \
+            --quality 15 \
+            --no-markers \
+            --no-multi-pass \
+            --cfr \
+            --first-audio \
+            --subtitle none \
+            --output ${OUTPUT_FILE}
+    fi
+done
+eject
+```

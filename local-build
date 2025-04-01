@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# cSpell:words deno biomejs
+# cSpell:words deno
 
 ################################################################################
 #
@@ -28,7 +28,7 @@ if [[ "${TASK}" == "build" ]]
 then
     deno test --allow-read
 
-    deno check -q $(
+    deno check --allow-import -q $(
         find -name \*.ts | \
         grep -v -e ./_deno/ -e ./cover-pic/choose.ts
     )
@@ -37,6 +37,4 @@ then
 
     deno run --allow-read --allow-env \
         npm:typescript/tsc --project cover-pic --noEmit
-
-    deno run -A npm:@biomejs/biome check
 fi

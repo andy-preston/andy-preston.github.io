@@ -25,9 +25,9 @@ MAILER_URL=null://null
 
 And then edit
 `vendor/symfony/mailer/Transport/NullTransport.php`
-and paste the following code into the `doSend` method:
+and paste this code into the `doSend` method:
 
-```php
+```php{aside="doSend"}
 protected function doSend(SentMessage $message): void {
     $now = new \DateTime();
     $envelope = $message->getEnvelope();

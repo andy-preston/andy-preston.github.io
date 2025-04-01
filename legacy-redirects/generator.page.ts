@@ -25,7 +25,6 @@ const legacyPages = [
     "tab-indent"
 ];
 
-// biome-ignore lint/style/noDefaultExport: Required by Lume API
 export default function* (_: Lume.Data) {
     for (const page of legacyPages) {
         yield redirector(page, `/${page}.html`, `/${page}/`);
@@ -37,6 +36,6 @@ export default function* (_: Lume.Data) {
         "/ffmpeg-recipes/"
     );
     // And this one was discarded
-    // because I was talking out of my (expletive deleted)
+    // because I was talking out of my... erm... hat
     yield redirector("ebtables", "/ebtables.html", "/");
 }

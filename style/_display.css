@@ -1,19 +1,21 @@
-body {
-    width: 95%;
-    margin-inline: auto;
-}
-
-p {
+p, time {
     margin-top: 1ex;
 }
 
-h1, h2, h3, h4 {
+h1, h2:first-child, h3, h4 {
     margin-top: 0;
+}
+
+h1, h2, h3, h4 {
     margin-bottom: 0;
 }
 
-p + h2 {
-    margin-top: 2ex;
+header {
+    margin-bottom: 1lh;
+}
+
+footer {
+    margin-top: 1lh;
 }
 
 table {
@@ -31,7 +33,7 @@ td, th, pre code, figure, p.update {
     margin: 0;
 }
 
-p, table, header {
+p, table {
     margin-bottom: 1ex;
 }
 
@@ -44,4 +46,8 @@ img {
 hr {
     margin-top: 1lh;
     margin-bottom: 1lh;
+}
+
+code:not(pre code) {
+    white-space: nowrap;
 }
