@@ -34,7 +34,7 @@ importantly here, this issue is dependent on an external mechanical switch and,
 the moment I drop into single-step, the external device will have finished it's
 cycle and my time for spotting the bug will have long gone.
 
-## Time Dependent Debugging
+### Time Dependent Debugging
 
 Where I have no control of the operating speed of the external device that my
 bug is dependent on, I literally don't have the time to venture into "proper"
@@ -48,7 +48,7 @@ constrained environment where sending output to a serial port for display on my
 development machine will almost certainly will take far too much time
 (I haven't measured but I am as sure as I can be without adequate data).
 
-## Logfiles!?! ... on a Microcontroller?!?
+### Logfiles!?! ... on a Microcontroller?!?
 
 Translating the basic idea of a logfile into something that can be achieved on
 a μC, we've got basically two options.
@@ -72,7 +72,7 @@ cycle that is "wasted" by debugging is a chance that it'll alter the program
 state enough to hide the bug (we're back to Jacob Sorber's arguments against
 this methodology in the first place).
 
-## Option 1 - Store and Dump
+### Option 1 - Store and Dump
 
 Hopefully we can reduce the state we need to examine into one byte and store
 this in SRAM and, after the device has been sufficiently exercised, dump this
@@ -83,7 +83,7 @@ now that all our precious data is stashed away safely in SRAM. But, whilst I
 don't have any idea what the problem is, The fact that a store operating takes
 2 cycles rather than the 1 cycle of option 2 is "bothersome".
 
-## Option 2 - Status Port
+### Option 2 - Status Port
 
 An alternative would be to write the a byte or two to IO Ports and log it on
 an external device.
@@ -92,7 +92,7 @@ The problem here is that now there's yet another device that has to match the
 speed of the CPU. According to the datasheet, an IO operation only takes 1 clock
 cycle so that's good.
 
-## Logic Analyser
+### Logic Analyser
 
 In both cases it'd really help to have the "log entry" be just a single byte.
 Writing two bytes to SRAM takes twice as long. Outputting two bytes need to
@@ -118,6 +118,8 @@ Cypress EZ-USB chips have a nice firmware bundle that can drag data off of an
 
 Again, even here, we're trying to constrain the debug information "record" to
 one byte as the EZ-USB can do 8-bits much faster than it can do 16-bits.
+
+![The Debug-a-Tron](https://i.ibb.co/WNCyQBkn/the-debug-a-tron.jpg){aside}
 
 ## No Answer - But at Least I've Defined The Questions
 
