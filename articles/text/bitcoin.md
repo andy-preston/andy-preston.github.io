@@ -1,6 +1,6 @@
 ---
 tags: engineering
-date: "2025-4-11"
+date: "2025-04-11"
 ---
 # How To Explain Bitcoin To Someone Who Doesn't "Do Computers"?
 
