@@ -26,7 +26,9 @@
         <nav class="article-index">
             {{ for tag, section of index }}
                 <h2>{{ section.title }}</h2>
-                {{ for article of search.pages(tag) }}
+                {{ for article of search.pages(tag).sort(
+                    (a, b) => a.title.localeCompare(b.title)
+                ) }}
                     <p>
                         <a href="{{ article.url }}">{{ article.title }}</a>
                         {{ if article.publishAsDraft }}
@@ -34,12 +36,17 @@
                         {{ /if }}
                     </p>
                 {{ /for }}
-                {{ for article of section.offSite }}
-                    <p>
-                        <a href="{{ article.url }}">{{ article.title }}</a>
-                        (Off Site)
-                    </p>
-                {{ /for }}
+                {{ if section.offSite }}
+                    <hr class="feint">
+                    {{ for article of section.offSite.sort(
+                        (a, b) => a.title.localeCompare(b.title)
+                    ) }}
+                        <p>
+                            <a href="{{ article.url }}">{{ article.title }}</a>
+                            (Off Site)
+                        </p>
+                    {{ /for }}
+                {{ /if }}
             {{ /for }}
         </nav>
 
