@@ -11,7 +11,7 @@ This was just a quick experiment to see if I could do this using some ideas
 [StackOverflow](https://stackoverflow.com/questions/8403108/calling-eval-in-particular-context#25859853).
 Since then, I actually started to implement the code for my use case and
 there's a better solution
-[On my Github](https://github.com/andy-preston/aaa/tree/main/src/context)
+[On my Github](https://github.com/andy-preston/aaa/tree/main/src/javascript)
 and this article will be updated to match that in "the near future".
 {class="update"}
 
