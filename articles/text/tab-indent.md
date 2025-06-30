@@ -11,8 +11,8 @@ But I've decoded to cut it down just to essentials and keep it very short and
 equally sweet.
 
 Since working on a PHP codebase with an in-house style-guide that specifies
-TAB, I've come across this little frustration that drives me a mad every single
-day.
+TAB, I've come across this little frustration that drives me a little mad every
+single day.
 
 Let's say you've got a REPL or two in your development environment. There's a
 strong possibility that that REPL will use TAB completion.
@@ -25,3 +25,9 @@ line and throws a fit.
 So you need to cut and paste your code from one editor into another editor
 that still permits space indenting, edit all the code indenting, and then,
 finally, you get to paste it into your REPL.
+
+---
+
+And don't even get me started on trying to type TAB-indented code into our
+bug tracker at work... In our web browsers TAB means "jump on to the next
+box" and now I'm trying code into a numeric selector and... Gaaaaah!
