@@ -74,8 +74,6 @@ I'm doing it in Typescript!
 
 [github.com/andy-preston/aaa](https://github.com/andy-preston/aaa)
 
-[github.com/andy-preston/aaasss](https://github.com/andy-preston/aaasss)
-
 > The AVR community is full of people who can't wait to shout at
 > you and tell you you are wrong the moment you dare to utter "assembler"
 > and "how dare you abandon the one true road that is the glorious C
