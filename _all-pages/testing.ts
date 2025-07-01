@@ -13,6 +13,8 @@ export const documentToHtml = (document: Document): string =>
     document.documentElement.outerHTML;
 
 export const siteFiles = (extension: string): Array<string> =>
-    getFiles({ "root": "./_site" })
-        .filter((file: FileInfo): boolean => file.ext == extension)
-        .map((file: FileInfo): string => file.path);
+    getFiles({ "root": "./_site" }).filter(
+        (file: FileInfo): boolean => file.ext == extension
+    ).map(
+        (file: FileInfo): string => file.path
+    );

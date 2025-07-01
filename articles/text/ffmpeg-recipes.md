@@ -127,13 +127,13 @@ do
     LIST_FILE=list_${CHUNK_NUMBER}.txt
     ls ${CHUNK}/*.mp4 | \
         grep mp4 | \
-        awk "${AWK}" &gt;${LIST_FILE}
+        awk "${AWK}" >${LIST_FILE}
     NEXT_CHUNK=./$((CHUNK_NUMBER + 1))
     if [ -d ${NEXT_CHUNK} ]
     then
         ls ${NEXT_CHUNK}/*.mp4 | \
             head --lines 1 | \
-            awk "${AWK}" &gt;${LIST_FILE}
+            awk "${AWK}" >${LIST_FILE}
     fi
     ffmpeg -f concat -safe 0 -i ${LIST_FILE} \
         -c copy -y chunk_${CHUNK_NUMBER}.mp4

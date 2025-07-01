@@ -26,7 +26,7 @@ deno task "${TASK}"
 
 if [[ "${TASK}" == "build" ]]
 then
-    deno test --allow-read
+    deno test --allow-read --allow-env
 
     deno check --allow-import -q $(
         find -name \*.ts | \
