@@ -88,8 +88,8 @@ I'm doing it in Typescript!
 
 ## Coding Katas Vs Real Life
 
-These are just a couple of examples, I haven't mentioned Zig, real time audio,
-Python, video processing and all those other things on my mile long TODO list.
+These are just a couple of examples, I haven't mentioned Zig real time audio,
+Python video processing and all those other things on my mile long TODO list.
 
 But this is my point. There are so many opportunities to learn that leave you
 with a fun or maybe even useful piece of software at the end.
