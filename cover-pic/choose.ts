@@ -33,9 +33,15 @@ window.addEventListener("load", () => {
             currentPicture = index;
         };
 
+        const preloadPicture = (index: number) => {
+            (new Image()).src = picturesAndCaptions[index][0];
+        };
+
         image.addEventListener("load", () => {
             figure.removeAttribute("style");
             caption.innerHTML = image.getAttribute("alt");
+            preloadPicture(nextPicture(false));
+            preloadPicture(nextPicture(true));
         });
 
         showPicture(firstPicture());
