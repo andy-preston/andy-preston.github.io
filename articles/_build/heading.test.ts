@@ -1,4 +1,4 @@
-import { assertEquals, assertThrows } from "assert";
+import { assertEquals, assertThrows } from "@std/assert";
 import { extractedTitle, headingDate, headingTitle } from "./heading.ts";
 import type { MarkdownItState } from "./markdownIt.ts";
 import { testEnvironment, testMarkdownIt } from "./testing.ts";

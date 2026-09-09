@@ -1,4 +1,4 @@
-import { assertEquals, assertGreaterOrEqual, assertLessOrEqual } from "assert";
+import { assertEquals, assertGreaterOrEqual, assertLessOrEqual } from "@std/assert";
 import { htmlTitle } from "./lumeData.ts";
 
 Deno.test("It's prepended with my name", () => {

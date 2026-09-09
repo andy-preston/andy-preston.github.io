@@ -1,5 +1,6 @@
 {
     "imports": {
+        "@std/assert": "jsr:@std/assert@^1.0.19",
         "lume/": "https://deno.land/x/lume@v2.2.0/",
         "combineDuplicatedSelectors": "npm:postcss-combine-duplicated-selectors",
         "discardComments": "npm:postcss-discard-comments",

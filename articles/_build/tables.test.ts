@@ -1,4 +1,4 @@
-import { assertStringIncludes } from "assert";
+import { assertStringIncludes } from "@std/assert";
 import type { MarkdownItState } from "./markdownIt.ts";
 import { scopeOnHeadings } from "./tables.ts";
 import { testMarkdownIt } from "./testing.ts";

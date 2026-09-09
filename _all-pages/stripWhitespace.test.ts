@@ -1,4 +1,4 @@
-import { assertEquals } from "assert";
+import { assertEquals } from "@std/assert";
 import { stripWhitespace } from "./stripWhitespace.ts";
 import { documentFromHtml, documentToHtml } from "./testing.ts";
 

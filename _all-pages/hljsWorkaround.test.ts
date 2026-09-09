@@ -1,6 +1,6 @@
 /* cSpell:words hljs */
 
-import { assertEquals } from "assert";
+import { assertEquals } from "@std/assert";
 import { hljsWorkaround } from "./hljsWorkaround.ts";
 import { documentFromHtml, documentToHtml } from "./testing.ts";
 

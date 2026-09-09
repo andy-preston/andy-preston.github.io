@@ -1,4 +1,4 @@
-import { assert } from "assert";
+import { assert } from "@std/assert";
 import { HtmlValidate, formatterFactory } from "htmlValidate";
 import { siteFiles } from "./testing.ts";
 

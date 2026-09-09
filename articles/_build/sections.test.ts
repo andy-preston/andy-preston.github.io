@@ -1,4 +1,4 @@
-import { assertEquals, assertThrows } from "assert";
+import { assertEquals, assertThrows } from "@std/assert";
 import { markdownItAttrs } from "lume/deps/markdown_it.ts";
 import { figureCaption, paragraphToFigure } from "./figure.ts";
 import { headingDate, headingTitle } from "./heading.ts";

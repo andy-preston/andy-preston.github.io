@@ -1,4 +1,4 @@
-import { assertArrayIncludes } from "assert";
+import { assertArrayIncludes } from "@std/assert";
 import { siteFiles } from "./testing.ts";
 
 const hljsClassesIn = (path: string): IterableIterator<RegExpExecArray> =>
