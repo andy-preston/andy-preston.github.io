@@ -4,7 +4,7 @@ titles:
     - "(Edge Effect)"
 tagLine:
     - "Polyglot computer programmer,"
-    - "failed digital artist"
+    - "electronic music composer"
     - "& barely competent electronics engineer"
     - "from Swindon, UK"
 aliases:
