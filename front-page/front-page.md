@@ -7,6 +7,10 @@ tagLine:
     - "failed digital artist"
     - "& barely competent electronics engineer"
     - "from Swindon, UK"
+aliases:
+    - "Yetti"
+    - "Eden 180"
+    - "Press T"
 ---
 ## Curate's Egg
 

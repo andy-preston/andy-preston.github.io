@@ -7,6 +7,17 @@
                         <span>{{ piece }}</span>
                     {{ /for }}
                 </h1>
+                <p class="aliases">
+                    <span>You may remember me as:</span>
+                    {{ for idx, piece of aliases }}
+                        <span>&quot;{{ piece }}&quot;{{
+                            if idx == aliases.length - 2 }} or{{
+                            else if idx == aliases.length - 1 }}.{{
+                            else }},{{
+                            /if
+                        }}</span>
+                    {{ /for }}
+                </p>
                 <p class="tag-line">
                     {{ for piece of tagLine }}
                         <span>{{ piece }}</span>

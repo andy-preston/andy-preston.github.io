@@ -1,4 +1,4 @@
-h1 span, p.tag-line span {
+h1 span, p.tag-line span, p.aliases span {
     display: inline-block;
 }
 
