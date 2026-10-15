@@ -35,7 +35,8 @@ export default function* (_: Lume.Data) {
         "/ffmpeg-recipies.html",
         "/ffmpeg-recipes/"
     );
-    // And this one was discarded
+    // These were discarded
     // because I was talking out of my... erm... hat
     yield redirector("ebtables", "/ebtables.html", "/");
+    yield redirector("bitcoin", "/bitcoin", "/");
 }

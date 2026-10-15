@@ -80,7 +80,7 @@ out.
 
 This dump can be done over a UART as we no longer care that much about speed
 now that all our precious data is stashed away safely in SRAM. But, whilst I
-don't have any idea what the problem is, The fact that a store operating takes
+don't have any idea what the problem is, the fact that a store operation takes
 2 cycles rather than the 1 cycle of option 2 is "bothersome".
 
 ### Option 2 - Status Port
